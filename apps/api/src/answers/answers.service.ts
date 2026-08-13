@@ -76,6 +76,7 @@ export class AnswersService {
         source: input.source,
         level: input.level,
         category: input.category,
+        reviewed: input.reviewed,
       },
     });
     if (input.translations) {

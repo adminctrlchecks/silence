@@ -73,7 +73,10 @@ export const createAnswerSchema = z.object({
   source: answerSourceSchema.default('admin'),
   translations: translationsSchema.optional(),
 });
-export const updateAnswerSchema = createAnswerSchema.partial();
+export const reviewAnswerSchema = z.object({
+  reviewed: z.boolean(),
+});
+export const updateAnswerSchema = createAnswerSchema.extend({ reviewed: z.boolean().optional() }).partial();
 
 export const aiGenerateAnswerSchema = z.object({
   questionId: z.string().min(1),

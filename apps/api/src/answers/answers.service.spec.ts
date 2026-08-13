@@ -33,6 +33,13 @@ describe('AnswersService', () => {
     expect(prisma.answer.create.mock.calls[0][0].data.reviewed).toBe(true);
   });
 
+  it('update() can approve an AI answer', async () => {
+    prisma.answer.count.mockResolvedValue(1);
+    prisma.answer.update.mockResolvedValue({ id: 'a1', questionId: 'q1', level: 'level1', category: 'male', text: 't', source: 'ai', reviewed: true });
+    await service.update('a1', { reviewed: true });
+    expect(prisma.answer.update.mock.calls[0][0].data.reviewed).toBe(true);
+  });
+
   it('aiGenerate() calls Gemini and saves an unreviewed AI answer', async () => {
     prisma.question.findUnique.mockResolvedValue({ id: 'q1', text: 'Question?' });
     prisma.answer.create.mockResolvedValue({ id: 'a2', text: 'AI answer text' });
