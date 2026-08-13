@@ -66,5 +66,22 @@
   "Chart": {
     "eyebrow": "Mapa de exemplo",
     "title": "Prévia do mapa natal"
+  },
+  "Questions": {
+    "eyebrow": "Fluxo de perguntas",
+    "title": "Responda às perguntas",
+    "answered": "{count} respostas em rascunho",
+    "questionNumber": "Pergunta {number}",
+    "answerPlaceholder": "Digite sua resposta",
+    "empty": "Ainda não há perguntas para esta etapa.",
+    "continue": "Salvar e continuar",
+    "finish": "Salvar respostas",
+    "viewChart": "Ver mapa",
+    "saveError": "Não foi possível salvar as respostas. Tente novamente.",
+    "levels": {
+      "common": "Comum",
+      "level1": "Nível 1",
+      "level2": "Nível 2"
+    }
   }
 }

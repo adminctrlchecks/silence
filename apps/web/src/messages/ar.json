@@ -66,5 +66,22 @@
   "Chart": {
     "eyebrow": "خريطة تجريبية",
     "title": "معاينة خريطة الميلاد"
+  },
+  "Questions": {
+    "eyebrow": "مسار الأسئلة",
+    "title": "أجب عن أسئلتك",
+    "answered": "{count} إجابات مسودة",
+    "questionNumber": "السؤال {number}",
+    "answerPlaceholder": "اكتب إجابتك",
+    "empty": "لا توجد أسئلة لهذا المستوى بعد.",
+    "continue": "حفظ ومتابعة",
+    "finish": "حفظ الإجابات",
+    "viewChart": "عرض الخريطة",
+    "saveError": "تعذر حفظ الإجابات. حاول مرة أخرى.",
+    "levels": {
+      "common": "عام",
+      "level1": "المستوى 1",
+      "level2": "المستوى 2"
+    }
   }
 }

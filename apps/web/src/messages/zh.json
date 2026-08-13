@@ -66,5 +66,22 @@
   "Chart": {
     "eyebrow": "示例星盘",
     "title": "出生星盘预览"
+  },
+  "Questions": {
+    "eyebrow": "问题流程",
+    "title": "回答你的问题",
+    "answered": "{count} 个草稿答案",
+    "questionNumber": "问题 {number}",
+    "answerPlaceholder": "输入你的回答",
+    "empty": "此步骤暂无问题。",
+    "continue": "保存并继续",
+    "finish": "保存回答",
+    "viewChart": "查看星盘",
+    "saveError": "无法保存回答。请重试。",
+    "levels": {
+      "common": "通用",
+      "level1": "第 1 级",
+      "level2": "第 2 级"
+    }
   }
 }

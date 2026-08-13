@@ -75,6 +75,8 @@ export const publicApi = {
   languages: () => request<{ data: { code: string; name: string; rtl: boolean }[] }>('/languages'),
   questions: (q: { level?: Level; category?: Category; lang?: string }) =>
     request<Paginated<Question>>('/questions', { query: q }),
+  submitResponses: (body: unknown, token: string) =>
+    request<{ saved: number }>('/responses', { method: 'POST', body, token }),
   answer: (q: { questionId: string; level: Level; category: Category; lang?: string }) =>
     request<Answer>('/answers', { query: q }),
   chart: (userId: string, lang: string, token: string) =>

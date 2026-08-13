@@ -66,5 +66,22 @@
   "Chart": {
     "eyebrow": "Carta de muestra",
     "title": "Vista previa de carta natal"
+  },
+  "Questions": {
+    "eyebrow": "Flujo de preguntas",
+    "title": "Responde tus preguntas",
+    "answered": "{count} respuestas en borrador",
+    "questionNumber": "Pregunta {number}",
+    "answerPlaceholder": "Escribe tu respuesta",
+    "empty": "Aún no hay preguntas para este paso.",
+    "continue": "Guardar y continuar",
+    "finish": "Guardar respuestas",
+    "viewChart": "Ver carta",
+    "saveError": "No se pudieron guardar las respuestas. Inténtalo de nuevo.",
+    "levels": {
+      "common": "Común",
+      "level1": "Nivel 1",
+      "level2": "Nivel 2"
+    }
   }
 }
