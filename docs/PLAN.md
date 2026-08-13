@@ -104,7 +104,7 @@ as it goes. See [LOOP_PROMPT.md](LOOP_PROMPT.md) for the prompt that drives it.
 - [x] **P4-1** Bump `apps/web` to **Next 16**; add **Tailwind v4 + PostCSS + shadcn/radix**; base theme, dark mode, **RTL** direction handling. *Verify:* `pnpm --filter @silence/web build`. — upgraded to Next 16.3 + Tailwind v4/PostCSS; added shadcn/radix button primitives, theme provider/toggle, and cookie-driven `lang`/`dir`; web/root build gates green.
 - [x] **P4-2** Adapt **TailAdmin** shell (sidebar/header/content) into `(admin)` layout. *Verify:* `/admin` renders themed. — TailAdmin-style collapsible/mobile sidebar, header, backdrop, and content frame adapted for Silence admin modules; `/admin` builds under the themed shell.
 - [x] **P4-3** Adapt **SaaS-starter** landing + auth UI + route-protection middleware into `(user)`; remove Drizzle/Stripe. *Verify:* `/` renders themed; middleware guards user routes. — added user shell links, login/register UI, protected `/app`, and Next 16 proxy guard around `silence_user_token` with no Drizzle/Stripe code.
-- [ ] **P4-4** Integrate **@roxyapi/ui** (chart + card components) as a dependency/registry copy. *Verify:* a sample chart renders from mock data.
+- [x] **P4-4** Integrate **@roxyapi/ui** (chart + card components) as a dependency/registry copy. *Verify:* a sample chart renders from mock data. — added `@roxyapi/ui-react`, local typed chart/card wrappers, Roxy theme variables, mock birth-chart/dosha data, and `/app/chart`; web/root lint, typecheck, test, and build green. **Phase 4 complete.**
 
 ## PHASE 5 — User web app (features)
 
@@ -200,3 +200,4 @@ _(the loop appends dated one-liners here as phases complete)_
 - 2026-08-13 — P4-1 done (Next 16.3 + Tailwind v4/PostCSS + shadcn/radix foundation, theme toggle, RTL root direction; web/root lint/typecheck/build green).
 - 2026-08-13 — P4-2 done (TailAdmin-style admin shell with collapsible/mobile sidebar, header, backdrop, content frame; web/root lint/typecheck/build green).
 - 2026-08-13 — P4-3 done (SaaS-starter-inspired user/auth shell, login/register UI, protected `/app`, Next 16 proxy guard; web/root lint/typecheck/build green).
+- 2026-08-13 — P4-4 done (`@roxyapi/ui-react` chart/card wrappers + themed mock Kundli/dosha preview at `/app/chart`; web/root lint, typecheck, test, and build green). **Phase 4 complete.**
