@@ -1,0 +1,68 @@
+{
+  "Common": {
+    "appName": "Silence",
+    "signIn": "登录",
+    "createProfile": "创建档案",
+    "adminWorkspace": "管理工作区",
+    "mySession": "我的会话"
+  },
+  "Home": {
+    "eyebrow": "占星问答",
+    "title": "Silence",
+    "languageLabel": "语言",
+    "languageValue": "11",
+    "chartLabel": "星盘",
+    "chartValue": "占星",
+    "savedProfileLabel": "已保存档案",
+    "savedProfileValue": "JWT"
+  },
+  "SessionPicker": {
+    "language": "语言",
+    "category": "类别",
+    "categories": {
+      "male": "男性",
+      "female": "女性",
+      "other": "其他"
+    }
+  },
+  "Auth": {
+    "createTitle": "创建你的档案",
+    "welcomeBack": "欢迎回来",
+    "name": "姓名",
+    "category": "类别",
+    "categories": {
+      "male": "男性",
+      "female": "女性",
+      "other": "其他"
+    },
+    "language": "语言",
+    "dob": "出生日期",
+    "timeOfBirth": "出生时间",
+    "city": "出生城市",
+    "country": "国家",
+    "contact": "电子邮件或电话",
+    "password": "密码",
+    "consent": "我同意保存我的档案、出生信息、答案、星盘和补救建议。",
+    "createSubmit": "创建档案",
+    "signInSubmit": "登录",
+    "alreadyHaveProfile": "已有档案？",
+    "newToSilence": "第一次使用 Silence？",
+    "createOne": "创建一个"
+  },
+  "UserLayout": {
+    "mySession": "我的会话",
+    "signIn": "登录"
+  },
+  "UserApp": {
+    "eyebrow": "用户工作区",
+    "title": "你的 Silence 会话",
+    "questions": "问题流程",
+    "chart": "已保存星盘",
+    "profile": "档案",
+    "history": "历史"
+  },
+  "Chart": {
+    "eyebrow": "示例星盘",
+    "title": "出生星盘预览"
+  }
+}

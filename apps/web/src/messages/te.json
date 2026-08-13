@@ -1,0 +1,68 @@
+{
+  "Common": {
+    "appName": "Silence",
+    "signIn": "సైన్ ఇన్",
+    "createProfile": "ప్రొఫైల్ సృష్టించండి",
+    "adminWorkspace": "అడ్మిన్ వర్క్‌స్పేస్",
+    "mySession": "నా సెషన్"
+  },
+  "Home": {
+    "eyebrow": "జ్యోతిష్య ప్రశ్నలు",
+    "title": "Silence",
+    "languageLabel": "భాష",
+    "languageValue": "11",
+    "chartLabel": "చార్ట్",
+    "chartValue": "జ్యోతిష్యం",
+    "savedProfileLabel": "సేవ్ చేసిన ప్రొఫైల్",
+    "savedProfileValue": "JWT"
+  },
+  "SessionPicker": {
+    "language": "భాష",
+    "category": "వర్గం",
+    "categories": {
+      "male": "పురుషుడు",
+      "female": "స్త్రీ",
+      "other": "ఇతర"
+    }
+  },
+  "Auth": {
+    "createTitle": "మీ ప్రొఫైల్ సృష్టించండి",
+    "welcomeBack": "మళ్లీ స్వాగతం",
+    "name": "పేరు",
+    "category": "వర్గం",
+    "categories": {
+      "male": "పురుషుడు",
+      "female": "స్త్రీ",
+      "other": "ఇతర"
+    },
+    "language": "భాష",
+    "dob": "పుట్టిన తేదీ",
+    "timeOfBirth": "పుట్టిన సమయం",
+    "city": "పుట్టిన నగరం",
+    "country": "దేశం",
+    "contact": "ఇమెయిల్ లేదా ఫోన్",
+    "password": "పాస్‌వర్డ్",
+    "consent": "నా ప్రొఫైల్, జనన వివరాలు, సమాధానాలు, చార్ట్ మరియు పరిహారం సేవ్ చేయడానికి నేను సమ్మతిస్తున్నాను.",
+    "createSubmit": "ప్రొఫైల్ సృష్టించండి",
+    "signInSubmit": "సైన్ ఇన్",
+    "alreadyHaveProfile": "ఇప్పటికే ప్రొఫైల్ ఉందా?",
+    "newToSilence": "Silenceకి కొత్తవారా?",
+    "createOne": "ఒకటి సృష్టించండి"
+  },
+  "UserLayout": {
+    "mySession": "నా సెషన్",
+    "signIn": "సైన్ ఇన్"
+  },
+  "UserApp": {
+    "eyebrow": "వినియోగదారు వర్క్‌స్పేస్",
+    "title": "మీ Silence సెషన్",
+    "questions": "ప్రశ్నల ప్రవాహం",
+    "chart": "సేవ్ చేసిన చార్ట్",
+    "profile": "ప్రొఫైల్",
+    "history": "చరిత్ర"
+  },
+  "Chart": {
+    "eyebrow": "నమూనా చార్ట్",
+    "title": "జనన చార్ట్ ప్రివ్యూ"
+  }
+}

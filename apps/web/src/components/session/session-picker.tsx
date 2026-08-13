@@ -3,13 +3,13 @@
 import type { Category } from '@silence/shared';
 import { CATEGORIES } from '@silence/shared';
 import { Check, Languages, UsersRound } from 'lucide-react';
-import { useRouter } from 'next/navigation';
+import { useTranslations } from 'next-intl';
+import { usePathname, useRouter } from 'next/navigation';
 import { useState } from 'react';
 import { Button } from '@/components/ui/button';
-import { dirFor, LANGUAGES } from '@/lib/i18n';
+import { dirFor, LANGUAGES, LANGUAGE_CODES } from '@/lib/i18n';
 import {
   CATEGORY_COOKIE,
-  CATEGORY_LABELS,
   LANGUAGE_COOKIE,
   normalizeCategory,
   normalizeSessionLanguage,
@@ -17,6 +17,13 @@ import {
 
 function writeSessionCookie(name: string, value: string) {
   document.cookie = `${name}=${encodeURIComponent(value)}; path=/; SameSite=Lax`;
+}
+
+function pathnameWithLocale(pathname: string, locale: string) {
+  const [, maybeLocale, ...rest] = pathname.split('/');
+  const suffix = LANGUAGE_CODES.includes(maybeLocale) ? rest.join('/') : pathname.replace(/^\//, '');
+
+  return `/${locale}${suffix ? `/${suffix}` : ''}`;
 }
 
 export function SessionPicker({
@@ -27,6 +34,8 @@ export function SessionPicker({
   initialCategory: Category | null;
 }) {
   const router = useRouter();
+  const pathname = usePathname();
+  const t = useTranslations('SessionPicker');
   const [language, setLanguage] = useState(() => normalizeSessionLanguage(initialLanguage));
   const [category, setCategory] = useState<Category | null>(() => normalizeCategory(initialCategory));
 
@@ -36,7 +45,7 @@ export function SessionPicker({
     writeSessionCookie(LANGUAGE_COOKIE, normalized);
     document.documentElement.lang = normalized;
     document.documentElement.dir = dirFor(normalized);
-    router.refresh();
+    router.push(pathnameWithLocale(pathname, normalized));
   }
 
   function chooseCategory(nextCategory: Category) {
@@ -50,7 +59,7 @@ export function SessionPicker({
       <section className="rounded-md border border-border bg-card p-4">
         <div className="flex items-center gap-2">
           <Languages className="size-4 text-primary" />
-          <h2 className="text-sm font-semibold">Language</h2>
+          <h2 className="text-sm font-semibold">{t('language')}</h2>
         </div>
         <div className="mt-4 grid grid-cols-2 gap-2 sm:grid-cols-3">
           {LANGUAGES.map((item) => {
@@ -78,7 +87,7 @@ export function SessionPicker({
       <section className="rounded-md border border-border bg-card p-4">
         <div className="flex items-center gap-2">
           <UsersRound className="size-4 text-primary" />
-          <h2 className="text-sm font-semibold">Category</h2>
+          <h2 className="text-sm font-semibold">{t('category')}</h2>
         </div>
         <div className="mt-4 grid grid-cols-3 gap-2">
           {CATEGORIES.map((item) => {
@@ -94,7 +103,7 @@ export function SessionPicker({
                 aria-pressed={selected}
                 onClick={() => chooseCategory(item)}
               >
-                <span>{CATEGORY_LABELS[item]}</span>
+                <span>{t(`categories.${item}`)}</span>
                 {selected ? <Check className="size-4 shrink-0" /> : null}
               </Button>
             );

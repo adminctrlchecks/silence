@@ -3,6 +3,7 @@
 import Link from 'next/link';
 import { CATEGORIES, type Category } from '@silence/shared';
 import { Loader2, MoonStar } from 'lucide-react';
+import { useTranslations } from 'next-intl';
 import { useState } from 'react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
@@ -21,6 +22,7 @@ export function AuthCard({
   initialLanguage?: string;
   initialCategory?: Category;
 }) {
+  const t = useTranslations('Auth');
   const [pending, setPending] = useState(false);
   const registering = mode === 'register';
 
@@ -33,7 +35,7 @@ export function AuthCard({
           </span>
           <div>
             <h1 className="text-xl font-semibold tracking-normal">
-              {registering ? 'Create your profile' : 'Welcome back'}
+              {registering ? t('createTitle') : t('welcomeBack')}
             </h1>
             <p className="text-sm text-muted-foreground">Silence</p>
           </div>
@@ -50,12 +52,12 @@ export function AuthCard({
           {registering ? (
             <>
               <div className="space-y-2">
-                <Label htmlFor="name">Name</Label>
+                <Label htmlFor="name">{t('name')}</Label>
                 <Input id="name" name="name" autoComplete="name" required />
               </div>
               <div className="grid gap-4 sm:grid-cols-2">
                 <div className="space-y-2">
-                  <Label htmlFor="category">Category</Label>
+                  <Label htmlFor="category">{t('category')}</Label>
                   <select
                     id="category"
                     name="category"
@@ -65,13 +67,13 @@ export function AuthCard({
                   >
                     {CATEGORIES.map((category) => (
                       <option key={category} value={category}>
-                        {category}
+                        {t(`categories.${category}`)}
                       </option>
                     ))}
                   </select>
                 </div>
                 <div className="space-y-2">
-                  <Label htmlFor="lang">Language</Label>
+                  <Label htmlFor="lang">{t('language')}</Label>
                   <select
                     id="lang"
                     name="lang"
@@ -88,21 +90,21 @@ export function AuthCard({
               </div>
               <div className="grid gap-4 sm:grid-cols-2">
                 <div className="space-y-2">
-                  <Label htmlFor="dob">Date of birth</Label>
+                  <Label htmlFor="dob">{t('dob')}</Label>
                   <Input id="dob" name="dob" type="date" required />
                 </div>
                 <div className="space-y-2">
-                  <Label htmlFor="timeOfBirth">Time of birth</Label>
+                  <Label htmlFor="timeOfBirth">{t('timeOfBirth')}</Label>
                   <Input id="timeOfBirth" name="timeOfBirth" type="time" required />
                 </div>
               </div>
               <div className="grid gap-4 sm:grid-cols-2">
                 <div className="space-y-2">
-                  <Label htmlFor="city">Birth city</Label>
+                  <Label htmlFor="city">{t('city')}</Label>
                   <Input id="city" name="city" required />
                 </div>
                 <div className="space-y-2">
-                  <Label htmlFor="country">Country</Label>
+                  <Label htmlFor="country">{t('country')}</Label>
                   <Input id="country" name="country" required />
                 </div>
               </div>
@@ -110,31 +112,31 @@ export function AuthCard({
           ) : null}
 
           <div className="space-y-2">
-            <Label htmlFor="contact">Email or phone</Label>
+            <Label htmlFor="contact">{t('contact')}</Label>
             <Input id="contact" name="contact" autoComplete="email" required />
           </div>
           <div className="space-y-2">
-            <Label htmlFor="password">Password</Label>
+            <Label htmlFor="password">{t('password')}</Label>
             <Input id="password" name="password" type="password" autoComplete={registering ? 'new-password' : 'current-password'} required />
           </div>
 
           {registering ? (
             <label className="flex items-start gap-2 text-sm text-muted-foreground">
               <input name="consent" type="checkbox" className="mt-1 size-4 rounded border-border" required />
-              <span>I consent to saving my profile, birth details, answers, chart, and remedy.</span>
+              <span>{t('consent')}</span>
             </label>
           ) : null}
 
           <Button type="submit" className="w-full" disabled={pending}>
             {pending ? <Loader2 className="animate-spin" /> : null}
-            {registering ? 'Create profile' : 'Sign in'}
+            {registering ? t('createSubmit') : t('signInSubmit')}
           </Button>
         </form>
 
         <div className="mt-5 border-t border-border pt-5 text-center text-sm text-muted-foreground">
-          {registering ? 'Already have a profile?' : 'New to Silence?'}{' '}
+          {registering ? t('alreadyHaveProfile') : t('newToSilence')}{' '}
           <Link href={registering ? '/login' : '/register'} className="font-medium text-primary">
-            {registering ? 'Sign in' : 'Create one'}
+            {registering ? t('signInSubmit') : t('createOne')}
           </Link>
         </div>
       </div>

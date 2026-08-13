@@ -1,0 +1,68 @@
+{
+  "Common": {
+    "appName": "Silence",
+    "signIn": "साइन इन",
+    "createProfile": "प्रोफाइल बनाएं",
+    "adminWorkspace": "एडमिन कार्यक्षेत्र",
+    "mySession": "मेरा सत्र"
+  },
+  "Home": {
+    "eyebrow": "ज्योतिष प्रश्नोत्तर",
+    "title": "Silence",
+    "languageLabel": "भाषा",
+    "languageValue": "11",
+    "chartLabel": "कुंडली",
+    "chartValue": "ज्योतिष",
+    "savedProfileLabel": "सहेजी गई प्रोफाइल",
+    "savedProfileValue": "JWT"
+  },
+  "SessionPicker": {
+    "language": "भाषा",
+    "category": "श्रेणी",
+    "categories": {
+      "male": "पुरुष",
+      "female": "महिला",
+      "other": "अन्य"
+    }
+  },
+  "Auth": {
+    "createTitle": "अपनी प्रोफाइल बनाएं",
+    "welcomeBack": "वापसी पर स्वागत है",
+    "name": "नाम",
+    "category": "श्रेणी",
+    "categories": {
+      "male": "पुरुष",
+      "female": "महिला",
+      "other": "अन्य"
+    },
+    "language": "भाषा",
+    "dob": "जन्म तिथि",
+    "timeOfBirth": "जन्म समय",
+    "city": "जन्म शहर",
+    "country": "देश",
+    "contact": "ईमेल या फोन",
+    "password": "पासवर्ड",
+    "consent": "मैं अपनी प्रोफाइल, जन्म विवरण, उत्तर, कुंडली और उपाय सहेजने की सहमति देता/देती हूं।",
+    "createSubmit": "प्रोफाइल बनाएं",
+    "signInSubmit": "साइन इन",
+    "alreadyHaveProfile": "पहले से प्रोफाइल है?",
+    "newToSilence": "Silence पर नए हैं?",
+    "createOne": "एक बनाएं"
+  },
+  "UserLayout": {
+    "mySession": "मेरा सत्र",
+    "signIn": "साइन इन"
+  },
+  "UserApp": {
+    "eyebrow": "उपयोगकर्ता कार्यक्षेत्र",
+    "title": "आपका Silence सत्र",
+    "questions": "प्रश्न प्रवाह",
+    "chart": "सहेजी गई कुंडली",
+    "profile": "प्रोफाइल",
+    "history": "इतिहास"
+  },
+  "Chart": {
+    "eyebrow": "नमूना कुंडली",
+    "title": "जन्म कुंडली पूर्वावलोकन"
+  }
+}

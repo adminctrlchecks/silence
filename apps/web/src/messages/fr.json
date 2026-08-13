@@ -1,0 +1,68 @@
+{
+  "Common": {
+    "appName": "Silence",
+    "signIn": "Se connecter",
+    "createProfile": "Créer un profil",
+    "adminWorkspace": "Espace admin",
+    "mySession": "Ma session"
+  },
+  "Home": {
+    "eyebrow": "Questions d'astrologie",
+    "title": "Silence",
+    "languageLabel": "Langue",
+    "languageValue": "11",
+    "chartLabel": "Carte",
+    "chartValue": "Astrologie",
+    "savedProfileLabel": "Profil enregistré",
+    "savedProfileValue": "JWT"
+  },
+  "SessionPicker": {
+    "language": "Langue",
+    "category": "Catégorie",
+    "categories": {
+      "male": "Homme",
+      "female": "Femme",
+      "other": "Autre"
+    }
+  },
+  "Auth": {
+    "createTitle": "Créez votre profil",
+    "welcomeBack": "Bon retour",
+    "name": "Nom",
+    "category": "Catégorie",
+    "categories": {
+      "male": "Homme",
+      "female": "Femme",
+      "other": "Autre"
+    },
+    "language": "Langue",
+    "dob": "Date de naissance",
+    "timeOfBirth": "Heure de naissance",
+    "city": "Ville de naissance",
+    "country": "Pays",
+    "contact": "E-mail ou téléphone",
+    "password": "Mot de passe",
+    "consent": "J'accepte d'enregistrer mon profil, mes détails de naissance, mes réponses, ma carte et mon remède.",
+    "createSubmit": "Créer un profil",
+    "signInSubmit": "Se connecter",
+    "alreadyHaveProfile": "Vous avez déjà un profil ?",
+    "newToSilence": "Nouveau sur Silence ?",
+    "createOne": "En créer un"
+  },
+  "UserLayout": {
+    "mySession": "Ma session",
+    "signIn": "Se connecter"
+  },
+  "UserApp": {
+    "eyebrow": "Espace utilisateur",
+    "title": "Votre session Silence",
+    "questions": "Parcours de questions",
+    "chart": "Carte enregistrée",
+    "profile": "Profil",
+    "history": "Historique"
+  },
+  "Chart": {
+    "eyebrow": "Carte exemple",
+    "title": "Aperçu de la carte natale"
+  }
+}

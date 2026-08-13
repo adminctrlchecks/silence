@@ -1,0 +1,68 @@
+{
+  "Common": {
+    "appName": "Silence",
+    "signIn": "সাইন ইন",
+    "createProfile": "প্রোফাইল তৈরি করুন",
+    "adminWorkspace": "অ্যাডমিন কর্মক্ষেত্র",
+    "mySession": "আমার সেশন"
+  },
+  "Home": {
+    "eyebrow": "জ্যোতিষ প্রশ্নোত্তর",
+    "title": "Silence",
+    "languageLabel": "ভাষা",
+    "languageValue": "11",
+    "chartLabel": "ছক",
+    "chartValue": "জ্যোতিষ",
+    "savedProfileLabel": "সংরক্ষিত প্রোফাইল",
+    "savedProfileValue": "JWT"
+  },
+  "SessionPicker": {
+    "language": "ভাষা",
+    "category": "বিভাগ",
+    "categories": {
+      "male": "পুরুষ",
+      "female": "মহিলা",
+      "other": "অন্যান্য"
+    }
+  },
+  "Auth": {
+    "createTitle": "আপনার প্রোফাইল তৈরি করুন",
+    "welcomeBack": "ফিরে আসায় স্বাগতম",
+    "name": "নাম",
+    "category": "বিভাগ",
+    "categories": {
+      "male": "পুরুষ",
+      "female": "মহিলা",
+      "other": "অন্যান্য"
+    },
+    "language": "ভাষা",
+    "dob": "জন্ম তারিখ",
+    "timeOfBirth": "জন্ম সময়",
+    "city": "জন্ম শহর",
+    "country": "দেশ",
+    "contact": "ইমেল বা ফোন",
+    "password": "পাসওয়ার্ড",
+    "consent": "আমি আমার প্রোফাইল, জন্মতথ্য, উত্তর, ছক এবং প্রতিকার সংরক্ষণে সম্মতি দিচ্ছি।",
+    "createSubmit": "প্রোফাইল তৈরি করুন",
+    "signInSubmit": "সাইন ইন",
+    "alreadyHaveProfile": "ইতিমধ্যে প্রোফাইল আছে?",
+    "newToSilence": "Silence-এ নতুন?",
+    "createOne": "একটি তৈরি করুন"
+  },
+  "UserLayout": {
+    "mySession": "আমার সেশন",
+    "signIn": "সাইন ইন"
+  },
+  "UserApp": {
+    "eyebrow": "ব্যবহারকারী কর্মক্ষেত্র",
+    "title": "আপনার Silence সেশন",
+    "questions": "প্রশ্ন প্রবাহ",
+    "chart": "সংরক্ষিত ছক",
+    "profile": "প্রোফাইল",
+    "history": "ইতিহাস"
+  },
+  "Chart": {
+    "eyebrow": "নমুনা ছক",
+    "title": "জন্মছক পূর্বরূপ"
+  }
+}

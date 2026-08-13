@@ -109,7 +109,7 @@ as it goes. See [LOOP_PROMPT.md](LOOP_PROMPT.md) for the prompt that drives it.
 ## PHASE 5 — User web app (features)
 
 - [x] **P5-1** **Language + category picker** (11 langs incl. RTL) persisted to session. *Verify:* switching sets `dir`/locale. — added a cookie-backed session picker on `/`, centralized `silence_lang`/`silence_category`, immediate `html lang/dir` updates, and register-form defaults from the saved session; web lint/typecheck/build green.
-- [ ] **P5-2** **`next-intl`** wired; message catalogs for all 11 languages (UI strings). *Verify:* locale routes render.
+- [x] **P5-2** **`next-intl`** wired; message catalogs for all 11 languages (UI strings). *Verify:* locale routes render. — added `next-intl` App Router config, `[locale]` user/auth route wrappers, 11 JSON catalogs, localized current user-shell UI, and locale-aware picker navigation; web/root lint, typecheck, test, and build green.
 - [ ] **P5-3** **Registration** form (name, category, dob, time, place, contact, password, consent) → `POST /auth/user/register`. *Verify:* creates user, stores JWT.
 - [ ] **P5-4** **Login** → `POST /auth/user/login`; JWT in httpOnly cookie; auth context. *Verify:* protected pages gated.
 - [ ] **P5-5** **Question flow** common→level1→level2 via `GET /questions` + `POST /responses`. *Verify:* answers persist.
@@ -202,3 +202,4 @@ _(the loop appends dated one-liners here as phases complete)_
 - 2026-08-13 — P4-3 done (SaaS-starter-inspired user/auth shell, login/register UI, protected `/app`, Next 16 proxy guard; web/root lint/typecheck/build green).
 - 2026-08-13 — P4-4 done (`@roxyapi/ui-react` chart/card wrappers + themed mock Kundli/dosha preview at `/app/chart`; web/root lint, typecheck, test, and build green). **Phase 4 complete.**
 - 2026-08-13 — P5-1 done (session cookie language/category picker with immediate `html lang/dir` updates and register defaults; web lint/typecheck/build green).
+- 2026-08-13 — P5-2 done (`next-intl` routing/request config, 11 UI catalogs, localized user/auth route wrappers; locale routes listed in Next build; web/root gates green).

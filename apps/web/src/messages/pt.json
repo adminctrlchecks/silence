@@ -1,0 +1,68 @@
+{
+  "Common": {
+    "appName": "Silence",
+    "signIn": "Entrar",
+    "createProfile": "Criar perfil",
+    "adminWorkspace": "Área administrativa",
+    "mySession": "Minha sessão"
+  },
+  "Home": {
+    "eyebrow": "Perguntas de astrologia",
+    "title": "Silence",
+    "languageLabel": "Idioma",
+    "languageValue": "11",
+    "chartLabel": "Mapa",
+    "chartValue": "Astrologia",
+    "savedProfileLabel": "Perfil salvo",
+    "savedProfileValue": "JWT"
+  },
+  "SessionPicker": {
+    "language": "Idioma",
+    "category": "Categoria",
+    "categories": {
+      "male": "Masculino",
+      "female": "Feminino",
+      "other": "Outro"
+    }
+  },
+  "Auth": {
+    "createTitle": "Crie seu perfil",
+    "welcomeBack": "Bem-vindo de volta",
+    "name": "Nome",
+    "category": "Categoria",
+    "categories": {
+      "male": "Masculino",
+      "female": "Feminino",
+      "other": "Outro"
+    },
+    "language": "Idioma",
+    "dob": "Data de nascimento",
+    "timeOfBirth": "Hora de nascimento",
+    "city": "Cidade de nascimento",
+    "country": "País",
+    "contact": "E-mail ou telefone",
+    "password": "Senha",
+    "consent": "Concordo em salvar meu perfil, dados de nascimento, respostas, mapa e remédio.",
+    "createSubmit": "Criar perfil",
+    "signInSubmit": "Entrar",
+    "alreadyHaveProfile": "Já tem um perfil?",
+    "newToSilence": "Novo no Silence?",
+    "createOne": "Criar um"
+  },
+  "UserLayout": {
+    "mySession": "Minha sessão",
+    "signIn": "Entrar"
+  },
+  "UserApp": {
+    "eyebrow": "Área do usuário",
+    "title": "Sua sessão Silence",
+    "questions": "Fluxo de perguntas",
+    "chart": "Mapa salvo",
+    "profile": "Perfil",
+    "history": "Histórico"
+  },
+  "Chart": {
+    "eyebrow": "Mapa de exemplo",
+    "title": "Prévia do mapa natal"
+  }
+}
