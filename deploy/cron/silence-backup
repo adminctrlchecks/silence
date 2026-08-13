@@ -1,0 +1,12 @@
+# Silence scheduled jobs — install as /etc/cron.d/silence-backup
+#   sudo cp deploy/cron/silence-backup /etc/cron.d/silence-backup
+#   sudo chmod 644 /etc/cron.d/silence-backup
+# Logs go to /var/log/silence/ (create it: sudo mkdir -p /var/log/silence).
+SHELL=/bin/bash
+PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
+
+# Nightly Silence DB dump at 02:30.
+30 2 * * * root /opt/silence/deploy/backup-silence-db.sh >> /var/log/silence/backup.log 2>&1
+
+# Health check every 5 minutes (observability; systemd handles restarts).
+*/5 * * * * root /opt/silence/deploy/healthcheck.sh >> /var/log/silence/health.log 2>&1
