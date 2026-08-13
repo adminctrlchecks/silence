@@ -92,7 +92,7 @@ export const publicApi = {
 /** Auth endpoints — docs/API.md §1. */
 export const authApi = {
   adminLogin: (body: { email: string; password: string }) =>
-    request<{ token: string; admin: { id: string; name: string } }>('/auth/admin/login', {
+    request<{ token: string; refreshToken: string; admin: { id: string; name: string } }>('/auth/admin/login', {
       method: 'POST',
       body,
     }),
