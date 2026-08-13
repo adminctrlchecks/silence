@@ -82,7 +82,7 @@ as it goes. See [LOOP_PROMPT.md](LOOP_PROMPT.md) for the prompt that drives it.
 
 - [x] **P1-1** `prisma migrate dev --name init` against Docker Postgres; commit `prisma/migrations`. *Verify:* migration applies clean. — migration `20260813110356_init` applied; 13 tables created in silence_db.
 - [x] **P1-2** Run `db:seed`; confirm admin + 11 languages present. *Verify:* row counts. — seed OK: 11 languages (ar rtl=true) + 1 admin.
-- [ ] **P1-3** `/health` returns `{ db: "up" }`; write a smoke script hitting one endpoint per module. *Verify:* smoke script all 2xx.
+- [x] **P1-3** `/health` returns `{ db: "up" }`; write a smoke script hitting one endpoint per module. *Verify:* smoke script all 2xx. — `scripts/smoke.mjs` (11/11 modules 2xx). Fixed two runtime blockers: `@silence/shared` now compiles to CJS `dist/` (was raw TS, unloadable by Nest) and api `start` path corrected to `dist/src/main.js`.
 
 ## PHASE 2 — Backend feature completion
 
@@ -187,3 +187,4 @@ _(the loop appends dated one-liners here as phases complete)_
 - 2026-08-13 — P0-7 done (GitHub Actions CI; PR #1 green & squash-merged). **Phase 0 complete.**
 - 2026-08-13 — P1-1 done (prisma init migration; 13 tables live in local silence_db).
 - 2026-08-13 — P1-2 done (db:seed; 11 languages + 1 admin verified by row counts).
+- 2026-08-13 — P1-3 done (smoke script 11/11 2xx; fixed @silence/shared CJS build + api start path). **Phase 1 complete.**

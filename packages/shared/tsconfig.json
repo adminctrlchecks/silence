@@ -3,6 +3,10 @@
   "compilerOptions": {
     "rootDir": "./src",
     "outDir": "./dist",
+    // Emit CommonJS so the CommonJS NestJS runtime can require this package,
+    // while the Next.js bundler consumes the same compiled output fine.
+    "module": "CommonJS",
+    "moduleResolution": "Node",
     "composite": true
   },
   "include": ["src/**/*.ts"]
