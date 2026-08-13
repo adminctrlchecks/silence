@@ -96,7 +96,7 @@ sudo systemctl list-units --type=service > /opt/backups/$(date +%F)/services-bef
 | Field | Value |
 |-------|-------|
 | New app name | **Silence** |
-| Domain / subdomain | *None yet — to be decided later* (e.g. `silence.<domain>`) |
+| Domain / subdomain | **silence.ctrlchecks.ai** (live, TLS via certbot) |
 | Backend framework | **NestJS** (Node.js) |
 | Frontend framework | **Next.js** (React) |
 | Database name | `silence_db` |
@@ -120,3 +120,58 @@ sudo systemctl list-units --type=service > /opt/backups/$(date +%F)/services-bef
 - **Frontend:** Next.js. Can run as its own Node service (e.g. port 3011) behind
   Nginx, or be exported as static files — to confirm at build stage.
 - Both proxied by a **new** Nginx config; CtrlChecks vhosts untouched.
+
+---
+
+## 9. Deployment record — LIVE (handover)
+
+> Deployed 2026-08-14, fully isolated alongside CtrlChecks. Real secret **values**
+> are NOT in this doc — they live only in `deploy/.secrets.env` (gitignored) and in
+> `/opt/silence/apps/api/.env` on the server (mode 600).
+
+### What & where
+| Item | Value |
+|------|-------|
+| Public URL | **https://silence.ctrlchecks.ai** (HTTP → HTTPS) |
+| VPS | `187.127.185.105` (host `orixs`, Ubuntu 24.04), SSH `root@…:22` (key auth) |
+| App dir | `/opt/silence` (git clone of `main`), owned by user `silence` |
+| API | NestJS, `127.0.0.1`-reachable on **:3010** (`/api/v1`), systemd `silence-api` |
+| Web | Next.js standalone on **127.0.0.1:3011**, systemd `silence-web` |
+| DB | Postgres `silence_db` / role `silence_user` (localhost:5432); password in secrets |
+| Redis | `redis://localhost:6379/3` (own logical index) |
+| Nginx | `/etc/nginx/sites-available/silence.conf` → `/api/v1`→3010, `/`→3011 |
+| TLS | Let's Encrypt (certbot `--nginx`), auto-renew; first cert expires 2026-11-11 |
+| Backups | nightly `pg_dump` → `/opt/backups/silence-db/` (14-day rotation), `/etc/cron.d/silence-backup` |
+| Baseline snapshot | `/opt/backups/2026-08-13/` (pre-deploy nginx + service/port/DB lists) |
+| Gemini | model `gemini-2.5-flash`; API key in secrets (AI answers + translation) |
+| First admin | `admin@example.com` — **change the seeded password on first login** |
+
+### Firewall / isolation
+- `ufw` active: only 22/80/443 open. Ports 3010/3011 are **not** publicly reachable
+  (internal only, behind Nginx). Postgres stays `127.0.0.1` only.
+- CtrlChecks (services on 3001–3007, DB `ctrlchecks`, its vhosts) untouched and verified active.
+
+### Operate
+```bash
+# logs
+journalctl -u silence-api -f
+journalctl -u silence-web -f
+# restart
+systemctl restart silence-api silence-web
+# manual DB backup + live smoke
+/opt/silence/deploy/backup-silence-db.sh
+BASE=https://silence.ctrlchecks.ai/api/v1 ADMIN_PASSWORD='<admin pw>' /opt/silence/deploy/smoke.sh
+```
+
+### Redeploy (new version)
+```bash
+cd /opt/silence
+git fetch origin main && git reset --hard origin/main
+sudo bash deploy/deploy.sh          # install+build, migrate deploy, seed, systemd, nginx, health
+chown -R silence:silence /opt/silence
+systemctl restart silence-api silence-web
+```
+(Or run the stages manually; see `deploy/deploy.sh --dry-run` for the exact steps.)
+
+### DNS
+- `silence.ctrlchecks.ai` A record → `187.127.185.105` (added at the domain's DNS host).
