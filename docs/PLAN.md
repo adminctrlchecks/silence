@@ -130,7 +130,7 @@ as it goes. See [LOOP_PROMPT.md](LOOP_PROMPT.md) for the prompt that drives it.
 
 ## PHASE 7 — i18n content + polish
 
-- [ ] **P7-1** RTL QA pass (Arabic) across user + admin. *Verify:* layout mirrors correctly.
+- [x] **P7-1** RTL QA pass (Arabic) across user + admin. *Verify:* layout mirrors correctly. — Arabic locale catalogs/build remain green and the admin mobile sidebar now closes toward logical start in RTL via an explicit `[dir='rtl']` override; root lint/typecheck/test/build green.
 - [ ] **P7-2** a11y + responsive + loading/empty/error states across key screens.
 
 ## PHASE 8 — Frontend E2E
@@ -217,3 +217,4 @@ _(the loop appends dated one-liners here as phases complete)_
 - 2026-08-13 — P6-5 done (`/admin/chart-config` per-category style/required-fields editor, same-origin admin chart-config proxy; API e2e and root lint/typecheck/test/build green).
 - 2026-08-13 — P6-6 done (`/admin/languages` list/add language UI + auto-translate trigger for question/answer/remedy content; API e2e and root lint/typecheck/test/build green).
 - 2026-08-13 — P6-7 done (`/admin/import` dropzone `.xlsx` upload, template download, job polling/results UI, same-origin admin import proxy routes; API e2e and root lint/typecheck/test/build green). **Phase 6 complete.**
+- 2026-08-14 — P7-1 done (Arabic RTL QA pass: locale/build verified and admin mobile sidebar close transform mirrored for `[dir='rtl']`; root lint/typecheck/test/build green).
