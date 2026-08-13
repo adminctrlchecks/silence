@@ -87,7 +87,7 @@ as it goes. See [LOOP_PROMPT.md](LOOP_PROMPT.md) for the prompt that drives it.
 ## PHASE 2 — Backend feature completion
 
 - [x] **P2-1** Real **Gemini** integration (`@google/generative-ai`) for AI answers + translation, behind existing `GeminiService`. Fallback to stub when key absent. — real `generateContent` call (lazy-loaded SDK), graceful stub fallback on missing key/error. **Live-verified** with provided key: AI answer generated + auto-translated to hi/es/ar (stored). Default model updated to `gemini-2.5-flash`.
-- [ ] **P2-2** Real **astrology engine** (`swisseph`): compute planetary positions/houses from dob/time/place; replace `AstrologyService.compute`. *Verify:* unit test on a known birth datum.
+- [x] **P2-2** Real **astrology engine** (`swisseph`): compute planetary positions/houses from dob/time/place; replace `AstrologyService.compute`. *Verify:* unit test on a known birth datum. — Swiss Ephemeris via **`sweph`** (same SE C library, ships prebuilt binaries — `swisseph` needs MSVC and won't build on Windows/CI without a toolchain). Moshier mode (no data files). Computes 9 grahas + Placidus houses + ascendant. Jest+ts-jest set up; 5 tests green incl. J2000 Sun≈280.37° known datum.
 - [ ] **P2-3** **Excel import** hardening: per-row validation, error rows, `GET /admin/import/template` real xlsx, job status. *Verify:* import a sample xlsx → created/updated/errors correct.
 - [ ] **P2-4** **Auth hardening**: bcrypt user passwords (decision D), guards on all `/admin/*`, global rate-limit, refresh strategy. *Verify:* e2e — protected routes 401 without token.
 - [ ] **P2-5** **Swagger/OpenAPI** at `/api/v1/docs`; DTOs annotated. *Verify:* docs render, schema matches API.md.
@@ -189,3 +189,4 @@ _(the loop appends dated one-liners here as phases complete)_
 - 2026-08-13 — P1-2 done (db:seed; 11 languages + 1 admin verified by row counts).
 - 2026-08-13 — P1-3 done (smoke script 11/11 2xx; fixed @silence/shared CJS build + api start path). **Phase 1 complete.**
 - 2026-08-13 — P2-1 done (real Gemini integration; live-verified AI answer + hi/es/ar translation; model gemini-2.5-flash). Key provided by user, stored in gitignored .env only.
+- 2026-08-13 — P2-2 done (real Swiss Ephemeris via `sweph`, Moshier; 5 jest tests incl. known J2000 datum). Adapted `swisseph`→`sweph` (prebuilt binaries; native swisseph won't build without MSVC).
