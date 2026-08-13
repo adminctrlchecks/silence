@@ -126,7 +126,7 @@ as it goes. See [LOOP_PROMPT.md](LOOP_PROMPT.md) for the prompt that drives it.
 - [x] **P6-4** **Remedies** CRUD linked to level/question. *Verify:* CRUD round-trips. — `/admin/remedies` supports category filtering, title/text create/edit/delete, and linked level/question selection through same-origin admin remedy proxy routes; API e2e and root lint/typecheck/test/build green.
 - [x] **P6-5** **Chart config** editor per category. *Verify:* PUT persists. — `/admin/chart-config` loads per-category chart config, edits style/required fields, and saves through a same-origin admin chart-config proxy; API e2e and root lint/typecheck/test/build green.
 - [x] **P6-6** **Languages + auto-translate** UI (`/admin/translations/auto`). *Verify:* triggers translation, fills catalog. — `/admin/languages` lists/adds languages and triggers auto-translation for selected questions/answers/remedies through same-origin admin language/translation proxy routes; API e2e and root lint/typecheck/test/build green.
-- [ ] **P6-7** **Excel import** UI: react-dropzone upload, template download, job-status polling. *Verify:* upload → job → results shown.
+- [x] **P6-7** **Excel import** UI: react-dropzone upload, template download, job-status polling. *Verify:* upload → job → results shown. — `/admin/import` uses react-dropzone for `.xlsx` uploads, provides template downloads, and polls/display import job results through same-origin admin import proxy routes; API e2e and root lint/typecheck/test/build green. **Phase 6 complete.**
 
 ## PHASE 7 — i18n content + polish
 
@@ -216,3 +216,4 @@ _(the loop appends dated one-liners here as phases complete)_
 - 2026-08-13 — P6-4 done (`/admin/remedies` CRUD UI with category filters and linked level/question controls, same-origin admin remedy proxy routes; API e2e and root lint/typecheck/test/build green).
 - 2026-08-13 — P6-5 done (`/admin/chart-config` per-category style/required-fields editor, same-origin admin chart-config proxy; API e2e and root lint/typecheck/test/build green).
 - 2026-08-13 — P6-6 done (`/admin/languages` list/add language UI + auto-translate trigger for question/answer/remedy content; API e2e and root lint/typecheck/test/build green).
+- 2026-08-13 — P6-7 done (`/admin/import` dropzone `.xlsx` upload, template download, job polling/results UI, same-origin admin import proxy routes; API e2e and root lint/typecheck/test/build green). **Phase 6 complete.**
