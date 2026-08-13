@@ -13,6 +13,7 @@ import type {
   ImportJob,
   Category,
   Level,
+  ChartConfig,
 } from '@silence/shared';
 
 const BASE_URL =
@@ -138,6 +139,10 @@ export const adminApi = {
     request<Remedy>(`/admin/remedies/${id}`, { method: 'PUT', token, body }),
   deleteRemedy: (token: string, id: string) =>
     request<{ deleted: boolean }>(`/admin/remedies/${id}`, { method: 'DELETE', token }),
+  chartConfig: (token: string, category: Category) =>
+    request<ChartConfig>('/admin/chart-config', { token, query: { category } }),
+  updateChartConfig: (token: string, body: unknown) =>
+    request<ChartConfig>('/admin/chart-config', { method: 'PUT', token, body }),
   importStatus: (token: string, jobId: string) =>
     request<ImportJob>(`/admin/import/${jobId}`, { token }),
 };
