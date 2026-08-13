@@ -60,6 +60,7 @@
     "title": "Votre session Silence",
     "questions": "Parcours de questions",
     "chart": "Carte enregistrée",
+    "remedy": "Remède",
     "profile": "Profil",
     "history": "Historique"
   },
@@ -68,6 +69,11 @@
     "title": "Aperçu de la carte natale",
     "interpretation": "Interprétation",
     "fallbackInterpretation": "La carte est générée à partir de vos détails de naissance et de vos réponses de niveau 2 enregistrées."
+  },
+  "Remedy": {
+    "eyebrow": "Remède personnel",
+    "category": "Catégorie : {category}",
+    "linkedLevel": "Niveau lié : {level}"
   },
   "Questions": {
     "eyebrow": "Parcours de questions",

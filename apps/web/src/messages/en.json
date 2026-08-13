@@ -60,6 +60,7 @@
     "title": "Your Silence session",
     "questions": "Question flow",
     "chart": "Saved chart",
+    "remedy": "Remedy",
     "profile": "Profile",
     "history": "History"
   },
@@ -68,6 +69,11 @@
     "title": "Birth chart preview",
     "interpretation": "Interpretation",
     "fallbackInterpretation": "The chart is generated from your birth details and saved Level 2 answers."
+  },
+  "Remedy": {
+    "eyebrow": "Personal remedy",
+    "category": "Category: {category}",
+    "linkedLevel": "Linked level: {level}"
   },
   "Questions": {
     "eyebrow": "Question flow",

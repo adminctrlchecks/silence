@@ -60,6 +60,7 @@
     "title": "你的 Silence 会话",
     "questions": "问题流程",
     "chart": "已保存星盘",
+    "remedy": "补救建议",
     "profile": "档案",
     "history": "历史"
   },
@@ -68,6 +69,11 @@
     "title": "出生星盘预览",
     "interpretation": "解读",
     "fallbackInterpretation": "星盘根据你的出生信息和已保存的第 2 级答案生成。"
+  },
+  "Remedy": {
+    "eyebrow": "个人补救建议",
+    "category": "类别：{category}",
+    "linkedLevel": "关联级别：{level}"
   },
   "Questions": {
     "eyebrow": "问题流程",

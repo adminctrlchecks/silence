@@ -60,6 +60,7 @@
     "title": "आपका Silence सत्र",
     "questions": "प्रश्न प्रवाह",
     "chart": "सहेजी गई कुंडली",
+    "remedy": "उपाय",
     "profile": "प्रोफाइल",
     "history": "इतिहास"
   },
@@ -68,6 +69,11 @@
     "title": "जन्म कुंडली पूर्वावलोकन",
     "interpretation": "व्याख्या",
     "fallbackInterpretation": "कुंडली आपके जन्म विवरण और सहेजे गए स्तर 2 उत्तरों से बनाई गई है।"
+  },
+  "Remedy": {
+    "eyebrow": "व्यक्तिगत उपाय",
+    "category": "श्रेणी: {category}",
+    "linkedLevel": "लिंक स्तर: {level}"
   },
   "Questions": {
     "eyebrow": "प्रश्न प्रवाह",

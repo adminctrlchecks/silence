@@ -60,6 +60,7 @@
     "title": "Ваша сессия Silence",
     "questions": "Вопросы",
     "chart": "Сохраненная карта",
+    "remedy": "Рекомендации",
     "profile": "Профиль",
     "history": "История"
   },
@@ -68,6 +69,11 @@
     "title": "Предпросмотр натальной карты",
     "interpretation": "Толкование",
     "fallbackInterpretation": "Карта создается из ваших данных рождения и сохраненных ответов уровня 2."
+  },
+  "Remedy": {
+    "eyebrow": "Личная рекомендация",
+    "category": "Категория: {category}",
+    "linkedLevel": "Связанный уровень: {level}"
   },
   "Questions": {
     "eyebrow": "Вопросы",

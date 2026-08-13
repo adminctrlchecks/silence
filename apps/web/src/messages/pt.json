@@ -60,6 +60,7 @@
     "title": "Sua sessão Silence",
     "questions": "Fluxo de perguntas",
     "chart": "Mapa salvo",
+    "remedy": "Remédio",
     "profile": "Perfil",
     "history": "Histórico"
   },
@@ -68,6 +69,11 @@
     "title": "Prévia do mapa natal",
     "interpretation": "Interpretação",
     "fallbackInterpretation": "O mapa é gerado com seus dados de nascimento e respostas salvas do nível 2."
+  },
+  "Remedy": {
+    "eyebrow": "Remédio pessoal",
+    "category": "Categoria: {category}",
+    "linkedLevel": "Nível vinculado: {level}"
   },
   "Questions": {
     "eyebrow": "Fluxo de perguntas",

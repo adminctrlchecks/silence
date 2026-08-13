@@ -60,6 +60,7 @@
     "title": "جلسة Silence الخاصة بك",
     "questions": "مسار الأسئلة",
     "chart": "الخريطة المحفوظة",
+    "remedy": "العلاج",
     "profile": "الملف",
     "history": "السجل"
   },
@@ -68,6 +69,11 @@
     "title": "معاينة خريطة الميلاد",
     "interpretation": "التفسير",
     "fallbackInterpretation": "يتم إنشاء الخريطة من تفاصيل ميلادك وإجابات المستوى الثاني المحفوظة."
+  },
+  "Remedy": {
+    "eyebrow": "العلاج الشخصي",
+    "category": "الفئة: {category}",
+    "linkedLevel": "المستوى المرتبط: {level}"
   },
   "Questions": {
     "eyebrow": "مسار الأسئلة",

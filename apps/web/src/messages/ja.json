@@ -60,6 +60,7 @@
     "title": "あなたのSilenceセッション",
     "questions": "質問フロー",
     "chart": "保存済みチャート",
+    "remedy": "レメディ",
     "profile": "プロフィール",
     "history": "履歴"
   },
@@ -68,6 +69,11 @@
     "title": "出生チャートプレビュー",
     "interpretation": "解釈",
     "fallbackInterpretation": "チャートは出生情報と保存済みのレベル2回答から生成されます。"
+  },
+  "Remedy": {
+    "eyebrow": "個人レメディ",
+    "category": "カテゴリ: {category}",
+    "linkedLevel": "関連レベル: {level}"
   },
   "Questions": {
     "eyebrow": "質問フロー",
