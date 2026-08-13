@@ -10,6 +10,8 @@ allowBuilds:
   sharp: true
   sweph: true
   unrs-resolver: true
+minimumReleaseAgeExclude:
+  - '@roxyapi/ui-react@0.27.5'
 onlyBuiltDependencies:
   - '@prisma/client'
   - '@prisma/engines'
