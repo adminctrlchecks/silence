@@ -11,6 +11,7 @@ import {
   BadRequestException,
 } from '@nestjs/common';
 import { FileInterceptor } from '@nestjs/platform-express';
+import { ApiTags, ApiBearerAuth } from '@nestjs/swagger';
 import * as XLSX from 'xlsx';
 import type { Response } from 'express';
 import { IMPORT_TYPES, type ImportType } from '@silence/shared';
@@ -18,6 +19,8 @@ import { AdminJwtGuard } from '../auth/guards/admin-jwt.guard';
 import { ImportService } from './import.service';
 
 /** Excel import (Import Mode) — docs/API.md §6. */
+@ApiTags('admin: import')
+@ApiBearerAuth('admin')
 @Controller('admin/import')
 @UseGuards(AdminJwtGuard)
 export class ImportController {

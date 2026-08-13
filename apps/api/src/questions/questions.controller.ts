@@ -9,19 +9,21 @@ import {
   Query,
   UseGuards,
 } from '@nestjs/common';
+import { ApiTags, ApiBearerAuth } from '@nestjs/swagger';
 import {
   createQuestionSchema,
   updateQuestionSchema,
   type Category,
   type Level,
-  type CreateQuestionInput,
-  type UpdateQuestionInput,
 } from '@silence/shared';
 import { ZodValidationPipe } from '../common/zod-validation.pipe';
+import { CreateQuestionDto, UpdateQuestionDto } from '../common/dto';
 import { AdminJwtGuard } from '../auth/guards/admin-jwt.guard';
 import { QuestionsService } from './questions.service';
 
 /** Admin question management — docs/API.md §2. */
+@ApiTags('admin: questions')
+@ApiBearerAuth('admin')
 @Controller('admin/questions')
 @UseGuards(AdminJwtGuard)
 export class AdminQuestionsController {
@@ -50,14 +52,14 @@ export class AdminQuestionsController {
   }
 
   @Post()
-  create(@Body(new ZodValidationPipe(createQuestionSchema)) body: CreateQuestionInput) {
+  create(@Body(new ZodValidationPipe(createQuestionSchema)) body: CreateQuestionDto) {
     return this.questions.create(body);
   }
 
   @Put(':id')
   update(
     @Param('id') id: string,
-    @Body(new ZodValidationPipe(updateQuestionSchema)) body: UpdateQuestionInput,
+    @Body(new ZodValidationPipe(updateQuestionSchema)) body: UpdateQuestionDto,
   ) {
     return this.questions.update(id, body);
   }

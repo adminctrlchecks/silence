@@ -1,16 +1,14 @@
 import { Body, Controller, Get, Post, Query, UseGuards } from '@nestjs/common';
-import {
-  submitResponsesSchema,
-  type Category,
-  type Level,
-  type SubmitResponsesInput,
-} from '@silence/shared';
+import { ApiTags, ApiBearerAuth } from '@nestjs/swagger';
+import { submitResponsesSchema, type Category, type Level } from '@silence/shared';
 import { ZodValidationPipe } from '../common/zod-validation.pipe';
+import { SubmitResponsesDto } from '../common/dto';
 import { UserJwtGuard } from '../auth/guards/user-jwt.guard';
 import { ResponsesService } from './responses.service';
 import { QuestionsService } from '../questions/questions.service';
 
 /** User flow — docs/API.md §8. */
+@ApiTags('user: flow')
 @Controller()
 export class ResponsesController {
   constructor(
@@ -29,9 +27,10 @@ export class ResponsesController {
   }
 
   /** Submit the user's answers to questions. */
+  @ApiBearerAuth('user')
   @Post('responses')
   @UseGuards(UserJwtGuard)
-  submit(@Body(new ZodValidationPipe(submitResponsesSchema)) body: SubmitResponsesInput) {
+  submit(@Body(new ZodValidationPipe(submitResponsesSchema)) body: SubmitResponsesDto) {
     return this.responses.submit(body);
   }
 }

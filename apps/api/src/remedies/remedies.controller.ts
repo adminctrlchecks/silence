@@ -9,18 +9,16 @@ import {
   Query,
   UseGuards,
 } from '@nestjs/common';
-import {
-  createRemedySchema,
-  updateRemedySchema,
-  type Category,
-  type CreateRemedyInput,
-  type UpdateRemedyInput,
-} from '@silence/shared';
+import { ApiTags, ApiBearerAuth } from '@nestjs/swagger';
+import { createRemedySchema, updateRemedySchema, type Category } from '@silence/shared';
 import { ZodValidationPipe } from '../common/zod-validation.pipe';
+import { CreateRemedyDto, UpdateRemedyDto } from '../common/dto';
 import { AdminJwtGuard } from '../auth/guards/admin-jwt.guard';
 import { RemediesService } from './remedies.service';
 
 /** Admin remedies — docs/API.md §4. */
+@ApiTags('admin: remedies')
+@ApiBearerAuth('admin')
 @Controller('admin/remedies')
 @UseGuards(AdminJwtGuard)
 export class AdminRemediesController {
@@ -32,14 +30,14 @@ export class AdminRemediesController {
   }
 
   @Post()
-  create(@Body(new ZodValidationPipe(createRemedySchema)) body: CreateRemedyInput) {
+  create(@Body(new ZodValidationPipe(createRemedySchema)) body: CreateRemedyDto) {
     return this.remedies.create(body);
   }
 
   @Put(':id')
   update(
     @Param('id') id: string,
-    @Body(new ZodValidationPipe(updateRemedySchema)) body: UpdateRemedyInput,
+    @Body(new ZodValidationPipe(updateRemedySchema)) body: UpdateRemedyDto,
   ) {
     return this.remedies.update(id, body);
   }
