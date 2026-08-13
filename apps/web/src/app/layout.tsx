@@ -3,6 +3,7 @@ import { cookies } from 'next/headers';
 import type { ReactNode } from 'react';
 import { ThemeProvider } from '@/components/theme-provider';
 import { dirFor, normalizeLanguage } from '@/lib/i18n';
+import { LANGUAGE_COOKIE } from '@/lib/session-preferences';
 import './globals.css';
 
 export const metadata: Metadata = {
@@ -12,7 +13,7 @@ export const metadata: Metadata = {
 
 export default async function RootLayout({ children }: { children: ReactNode }) {
   const cookieStore = await cookies();
-  const lang = normalizeLanguage(cookieStore.get('silence_lang')?.value);
+  const lang = normalizeLanguage(cookieStore.get(LANGUAGE_COOKIE)?.value);
 
   return (
     <html lang={lang} dir={dirFor(lang)} suppressHydrationWarning>
