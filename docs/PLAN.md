@@ -101,7 +101,7 @@ as it goes. See [LOOP_PROMPT.md](LOOP_PROMPT.md) for the prompt that drives it.
 
 ## PHASE 4 — Design-system adoption (web)
 
-- [ ] **P4-1** Bump `apps/web` to **Next 16**; add **Tailwind v4 + PostCSS + shadcn/radix**; base theme, dark mode, **RTL** direction handling. *Verify:* `pnpm --filter @silence/web build`.
+- [x] **P4-1** Bump `apps/web` to **Next 16**; add **Tailwind v4 + PostCSS + shadcn/radix**; base theme, dark mode, **RTL** direction handling. *Verify:* `pnpm --filter @silence/web build`. — upgraded to Next 16.3 + Tailwind v4/PostCSS; added shadcn/radix button primitives, theme provider/toggle, and cookie-driven `lang`/`dir`; web/root build gates green.
 - [ ] **P4-2** Adapt **TailAdmin** shell (sidebar/header/content) into `(admin)` layout. *Verify:* `/admin` renders themed.
 - [ ] **P4-3** Adapt **SaaS-starter** landing + auth UI + route-protection middleware into `(user)`; remove Drizzle/Stripe. *Verify:* `/` renders themed; middleware guards user routes.
 - [ ] **P4-4** Integrate **@roxyapi/ui** (chart + card components) as a dependency/registry copy. *Verify:* a sample chart renders from mock data.
@@ -197,3 +197,4 @@ _(the loop appends dated one-liners here as phases complete)_
 - 2026-08-13 — P3-1 done (service unit specs across questions, answers, remedies, chart, languages, users, responses, import, auth; API tests 57/57 + lint/typecheck green).
 - 2026-08-13 — P3-2 done (Supertest e2e suite against isolated `silence_e2e` schema; API lint/typecheck/build + test 58/58 green).
 - 2026-08-13 — P3-3 done (API coverage gate >=70% lines wired into Jest + CI; local coverage 87.96% lines). **Phase 3 complete.**
+- 2026-08-13 — P4-1 done (Next 16.3 + Tailwind v4/PostCSS + shadcn/radix foundation, theme toggle, RTL root direction; web/root lint/typecheck/build green).
