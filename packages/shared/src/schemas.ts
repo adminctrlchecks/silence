@@ -39,13 +39,19 @@ export const userRegisterSchema = z.object({
   timeOfBirth: z.string().regex(/^\d{2}:\d{2}$/, 'Expected HH:MM'),
   placeOfBirth: placeOfBirthSchema,
   contact: z.string().min(1), // phone or email
+  password: z.string().min(8, 'Password must be at least 8 characters'), // decision D: email/phone + password
   lang: langSchema.default('en'),
   consent: z.literal(true, { errorMap: () => ({ message: 'Consent is required' }) }),
 });
 
 export const userLoginSchema = z.object({
   contact: z.string().min(1),
-  password: z.string().min(1).optional(),
+  password: z.string().min(1),
+});
+
+/** Exchange a refresh token for a fresh access token (admin or user). */
+export const refreshTokenSchema = z.object({
+  refreshToken: z.string().min(1),
 });
 
 // ── Questions ─────────────────────────────────────────────────────────────
@@ -118,6 +124,7 @@ export const submitResponsesSchema = z.object({
 export type AdminLoginInput = z.infer<typeof adminLoginSchema>;
 export type UserRegisterInput = z.infer<typeof userRegisterSchema>;
 export type UserLoginInput = z.infer<typeof userLoginSchema>;
+export type RefreshTokenInput = z.infer<typeof refreshTokenSchema>;
 export type CreateQuestionInput = z.infer<typeof createQuestionSchema>;
 export type UpdateQuestionInput = z.infer<typeof updateQuestionSchema>;
 export type CreateAnswerInput = z.infer<typeof createAnswerSchema>;

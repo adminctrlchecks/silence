@@ -1,5 +1,7 @@
 import { Module } from '@nestjs/common';
 import { ConfigModule } from '@nestjs/config';
+import { APP_GUARD } from '@nestjs/core';
+import { ThrottlerModule, ThrottlerGuard } from '@nestjs/throttler';
 import { PrismaModule } from './prisma/prisma.module';
 import { HealthModule } from './health/health.module';
 import { AuthModule } from './auth/auth.module';
@@ -17,6 +19,8 @@ import { AstrologyModule } from './integrations/astrology/astrology.module';
 @Module({
   imports: [
     ConfigModule.forRoot({ isGlobal: true }),
+    // Global rate limit: 100 requests / minute per IP (auth routes are stricter).
+    ThrottlerModule.forRoot([{ ttl: 60_000, limit: 100 }]),
     PrismaModule,
     HealthModule,
     AuthModule,
@@ -30,6 +34,10 @@ import { AstrologyModule } from './integrations/astrology/astrology.module';
     ImportModule,
     GeminiModule,
     AstrologyModule,
+  ],
+  providers: [
+    // Apply rate limiting globally.
+    { provide: APP_GUARD, useClass: ThrottlerGuard },
   ],
 })
 export class AppModule {}
