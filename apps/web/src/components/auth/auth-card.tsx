@@ -1,17 +1,26 @@
 'use client';
 
 import Link from 'next/link';
-import { CATEGORIES } from '@silence/shared';
+import { CATEGORIES, type Category } from '@silence/shared';
 import { Loader2, MoonStar } from 'lucide-react';
 import { useState } from 'react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
-import { LANGUAGES } from '@/lib/i18n';
+import { DEFAULT_LANGUAGE, LANGUAGES } from '@/lib/i18n';
+import { DEFAULT_CATEGORY } from '@/lib/session-preferences';
 
 type Mode = 'login' | 'register';
 
-export function AuthCard({ mode }: { mode: Mode }) {
+export function AuthCard({
+  mode,
+  initialLanguage = DEFAULT_LANGUAGE,
+  initialCategory = DEFAULT_CATEGORY,
+}: {
+  mode: Mode;
+  initialLanguage?: string;
+  initialCategory?: Category;
+}) {
   const [pending, setPending] = useState(false);
   const registering = mode === 'register';
 
@@ -51,6 +60,7 @@ export function AuthCard({ mode }: { mode: Mode }) {
                     id="category"
                     name="category"
                     className="h-10 w-full rounded-md border border-border bg-background px-3 text-sm capitalize outline-none focus-visible:ring-2 focus-visible:ring-ring"
+                    defaultValue={initialCategory}
                     required
                   >
                     {CATEGORIES.map((category) => (
@@ -66,7 +76,7 @@ export function AuthCard({ mode }: { mode: Mode }) {
                     id="lang"
                     name="lang"
                     className="h-10 w-full rounded-md border border-border bg-background px-3 text-sm outline-none focus-visible:ring-2 focus-visible:ring-ring"
-                    defaultValue="en"
+                    defaultValue={initialLanguage}
                   >
                     {LANGUAGES.map((language) => (
                       <option key={language.code} value={language.code}>

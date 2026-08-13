@@ -1,8 +1,14 @@
 import Link from 'next/link';
+import { cookies } from 'next/headers';
 import { ArrowRight, Languages, MoonStar, ShieldCheck } from 'lucide-react';
+import { SessionPicker } from '@/components/session/session-picker';
 import { Button } from '@/components/ui/button';
-import { LANGUAGES } from '@/lib/i18n';
-import { CATEGORIES } from '@silence/shared';
+import {
+  CATEGORY_COOKIE,
+  LANGUAGE_COOKIE,
+  normalizeCategory,
+  normalizeSessionLanguage,
+} from '@/lib/session-preferences';
 
 const highlights = [
   { label: 'Language', value: '11', icon: Languages },
@@ -10,7 +16,11 @@ const highlights = [
   { label: 'Saved profile', value: 'JWT', icon: ShieldCheck },
 ];
 
-export default function HomePage() {
+export default async function HomePage() {
+  const cookieStore = await cookies();
+  const language = normalizeSessionLanguage(cookieStore.get(LANGUAGE_COOKIE)?.value);
+  const category = normalizeCategory(cookieStore.get(CATEGORY_COOKIE)?.value);
+
   return (
     <main className="mx-auto grid w-full max-w-6xl gap-10 px-4 py-10 sm:px-6 lg:grid-cols-[1fr_22rem]">
       <section className="flex min-h-[calc(100vh-9rem)] flex-col justify-center gap-8">
@@ -32,29 +42,7 @@ export default function HomePage() {
           </div>
         </div>
 
-        <div className="grid gap-6 md:grid-cols-2">
-          <section className="rounded-md border border-border bg-card p-4">
-            <h2 className="text-sm font-semibold">Language</h2>
-            <div className="mt-4 flex flex-wrap gap-2">
-              {LANGUAGES.map((language) => (
-                <Button key={language.code} type="button" variant="outline" size="sm" dir={language.dir}>
-                  {language.nativeName}
-                </Button>
-              ))}
-            </div>
-          </section>
-
-          <section className="rounded-md border border-border bg-card p-4">
-            <h2 className="text-sm font-semibold">Category</h2>
-            <div className="mt-4 flex flex-wrap gap-2">
-              {CATEGORIES.map((category) => (
-                <Button key={category} type="button" variant="secondary" size="sm" className="capitalize">
-                  {category}
-                </Button>
-              ))}
-            </div>
-          </section>
-        </div>
+        <SessionPicker initialLanguage={language} initialCategory={category} />
       </section>
 
       <aside className="flex items-center">
