@@ -142,7 +142,7 @@ as it goes. See [LOOP_PROMPT.md](LOOP_PROMPT.md) for the prompt that drives it.
 ## PHASE 9 — CI/CD complete
 
 - [x] **P9-1** CI runs lint+typecheck+test+build for all packages on every PR. *Verify:* required checks pass. — CI already runs `pnpm lint`/`typecheck`/`build` (turbo, all 3 packages) + API Jest with the ≥70% coverage gate + the `playwright e2e` job; added a single `ci` aggregation gate (needs build+e2e) for a repo admin to mark required. (Branch protection itself needs repo-admin rights the deploy token lacks — manual step.)
-- [ ] **P9-2** Build **Docker images** for api + web (multi-stage). *Verify:* images build & run locally.
+- [x] **P9-2** Build **Docker images** for api + web (multi-stage). *Verify:* images build & run locally. — multi-stage `apps/api/Dockerfile` + `apps/web/Dockerfile` (node:22-bookworm-slim, root build context, pnpm, openssl+ca-certs for Prisma/HTTPS) + `.dockerignore`. Verified locally: `silence-api` → `/health` db:up; `silence-web` → `/`→`/en`→200 Silence page. **Phase 9 complete.**
 
 ## PHASE 10 — Deployment prep
 
@@ -223,3 +223,4 @@ _(the loop appends dated one-liners here as phases complete)_
 - 2026-08-14 — P8-2 done (Playwright admin content-building journey: login→question→answer→remedy through the admin UI; category-isolated from the user journey; `workers: 1`; suite 2/2 green, web+root gates green).
 - 2026-08-14 — P8-3 done (CI `playwright e2e` job: Postgres service, prisma deploy + seed, chromium install, boots API+web and runs the suite, uploads report). **Phase 8 complete.**
 - 2026-08-14 — P9-1 done (confirmed CI covers lint/typecheck/build for all packages + API coverage gate + e2e; added `ci` aggregation gate job; branch protection left as an admin step).
+- 2026-08-14 — P9-2 done (multi-stage Docker images for api + web; built & ran locally — api /health db:up, web home 200). **Phase 9 complete.**
