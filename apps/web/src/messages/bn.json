@@ -73,6 +73,7 @@
     "answered": "{count}টি খসড়া উত্তর",
     "questionNumber": "প্রশ্ন {number}",
     "answerPlaceholder": "আপনার উত্তর লিখুন",
+    "answerLabel": "উত্তর",
     "empty": "এই ধাপের জন্য এখনও কোনো প্রশ্ন নেই।",
     "continue": "সংরক্ষণ করে এগিয়ে যান",
     "finish": "উত্তর সংরক্ষণ করুন",

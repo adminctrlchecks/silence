@@ -73,6 +73,7 @@
     "answered": "{count} إجابات مسودة",
     "questionNumber": "السؤال {number}",
     "answerPlaceholder": "اكتب إجابتك",
+    "answerLabel": "الإجابة",
     "empty": "لا توجد أسئلة لهذا المستوى بعد.",
     "continue": "حفظ ومتابعة",
     "finish": "حفظ الإجابات",

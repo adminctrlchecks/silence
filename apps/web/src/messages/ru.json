@@ -73,6 +73,7 @@
     "answered": "{count} черновых ответов",
     "questionNumber": "Вопрос {number}",
     "answerPlaceholder": "Введите ответ",
+    "answerLabel": "Ответ",
     "empty": "Для этого шага пока нет вопросов.",
     "continue": "Сохранить и продолжить",
     "finish": "Сохранить ответы",

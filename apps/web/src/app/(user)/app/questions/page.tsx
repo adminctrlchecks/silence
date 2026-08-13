@@ -40,6 +40,7 @@ export default async function QuestionsPage() {
       <QuestionFlow
         userId={profile.id}
         category={profile.category}
+        lang={lang}
         questions={{
           common: questionLists[0].data,
           level1: questionLists[1].data,

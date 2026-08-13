@@ -73,6 +73,7 @@
     "answered": "{count} డ్రాఫ్ట్ సమాధానాలు",
     "questionNumber": "ప్రశ్న {number}",
     "answerPlaceholder": "మీ సమాధానం టైప్ చేయండి",
+    "answerLabel": "సమాధానం",
     "empty": "ఈ దశకు ఇంకా ప్రశ్నలు లేవు.",
     "continue": "సేవ్ చేసి కొనసాగండి",
     "finish": "సమాధానాలు సేవ్ చేయండి",

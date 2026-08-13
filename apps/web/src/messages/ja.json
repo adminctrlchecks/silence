@@ -73,6 +73,7 @@
     "answered": "{count} 件の下書き回答",
     "questionNumber": "質問 {number}",
     "answerPlaceholder": "回答を入力",
+    "answerLabel": "回答",
     "empty": "このステップの質問はまだありません。",
     "continue": "保存して続行",
     "finish": "回答を保存",

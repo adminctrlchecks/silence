@@ -73,6 +73,7 @@
     "answered": "{count} respostas em rascunho",
     "questionNumber": "Pergunta {number}",
     "answerPlaceholder": "Digite sua resposta",
+    "answerLabel": "Resposta",
     "empty": "Ainda não há perguntas para esta etapa.",
     "continue": "Salvar e continuar",
     "finish": "Salvar respostas",
