@@ -96,7 +96,7 @@ as it goes. See [LOOP_PROMPT.md](LOOP_PROMPT.md) for the prompt that drives it.
 ## PHASE 3 — Backend tests
 
 - [x] **P3-1** Jest **unit tests** for each service (questions, answers, remedies, chart, languages, users, responses, import, auth). *Verify:* `pnpm --filter @silence/api test`. — service unit coverage added/expanded across all named modules; API tests 57/57, lint, and typecheck green.
-- [ ] **P3-2** **e2e (supertest)** covering each endpoint group against a test DB. *Verify:* e2e suite green.
+- [x] **P3-2** **e2e (supertest)** covering each endpoint group against a test DB. *Verify:* e2e suite green. — Supertest suite covers health, auth, admin content/import/translations, public Q&A flow, and user chart/remedy/history against isolated `silence_e2e` schema.
 - [ ] **P3-3** Coverage gate ≥ 70% lines on API; wire into CI.
 
 ## PHASE 4 — Design-system adoption (web)
@@ -195,3 +195,4 @@ _(the loop appends dated one-liners here as phases complete)_
 - 2026-08-13 — P2-5 done (Swagger UI at /api/v1/docs; 27 paths from zod DTOs; removed conflicting class-validator global pipe).
 - 2026-08-13 — P2-6 done (uniform pagination envelope on answers/remedies/questions; error envelope verified). **Phase 2 complete.**
 - 2026-08-13 — P3-1 done (service unit specs across questions, answers, remedies, chart, languages, users, responses, import, auth; API tests 57/57 + lint/typecheck green).
+- 2026-08-13 — P3-2 done (Supertest e2e suite against isolated `silence_e2e` schema; API lint/typecheck/build + test 58/58 green).
