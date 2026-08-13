@@ -47,7 +47,8 @@
     "signInSubmit": "Войти",
     "alreadyHaveProfile": "Уже есть профиль?",
     "newToSilence": "Впервые в Silence?",
-    "createOne": "Создать"
+    "createOne": "Создать",
+    "registerError": "Регистрация не удалась. Проверьте данные и попробуйте снова."
   },
   "UserLayout": {
     "mySession": "Моя сессия",

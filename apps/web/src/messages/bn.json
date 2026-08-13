@@ -47,7 +47,8 @@
     "signInSubmit": "সাইন ইন",
     "alreadyHaveProfile": "ইতিমধ্যে প্রোফাইল আছে?",
     "newToSilence": "Silence-এ নতুন?",
-    "createOne": "একটি তৈরি করুন"
+    "createOne": "একটি তৈরি করুন",
+    "registerError": "নিবন্ধন ব্যর্থ হয়েছে। তথ্য যাচাই করে আবার চেষ্টা করুন।"
   },
   "UserLayout": {
     "mySession": "আমার সেশন",

@@ -47,7 +47,8 @@
     "signInSubmit": "సైన్ ఇన్",
     "alreadyHaveProfile": "ఇప్పటికే ప్రొఫైల్ ఉందా?",
     "newToSilence": "Silenceకి కొత్తవారా?",
-    "createOne": "ఒకటి సృష్టించండి"
+    "createOne": "ఒకటి సృష్టించండి",
+    "registerError": "నమోదు విఫలమైంది. వివరాలు తనిఖీ చేసి మళ్లీ ప్రయత్నించండి."
   },
   "UserLayout": {
     "mySession": "నా సెషన్",

@@ -47,7 +47,8 @@
     "signInSubmit": "登录",
     "alreadyHaveProfile": "已有档案？",
     "newToSilence": "第一次使用 Silence？",
-    "createOne": "创建一个"
+    "createOne": "创建一个",
+    "registerError": "注册失败。请检查信息后重试。"
   },
   "UserLayout": {
     "mySession": "我的会话",

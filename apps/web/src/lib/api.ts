@@ -92,7 +92,7 @@ export const authApi = {
       body,
     }),
   userRegister: (body: unknown) =>
-    request<{ token: string; user: { id: string; name: string; category: Category } }>(
+    request<{ token: string; refreshToken: string; user: { id: string; name: string; category: Category } }>(
       '/auth/user/register',
       { method: 'POST', body },
     ),

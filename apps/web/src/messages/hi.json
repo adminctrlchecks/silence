@@ -47,7 +47,8 @@
     "signInSubmit": "साइन इन",
     "alreadyHaveProfile": "पहले से प्रोफाइल है?",
     "newToSilence": "Silence पर नए हैं?",
-    "createOne": "एक बनाएं"
+    "createOne": "एक बनाएं",
+    "registerError": "पंजीकरण विफल रहा। कृपया विवरण जांचें और फिर प्रयास करें।"
   },
   "UserLayout": {
     "mySession": "मेरा सत्र",

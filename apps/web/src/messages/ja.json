@@ -47,7 +47,8 @@
     "signInSubmit": "サインイン",
     "alreadyHaveProfile": "すでにプロフィールがありますか？",
     "newToSilence": "Silenceは初めてですか？",
-    "createOne": "作成する"
+    "createOne": "作成する",
+    "registerError": "登録に失敗しました。内容を確認してもう一度お試しください。"
   },
   "UserLayout": {
     "mySession": "マイセッション",

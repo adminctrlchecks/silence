@@ -4,6 +4,7 @@ import Link from 'next/link';
 import { CATEGORIES, type Category } from '@silence/shared';
 import { Loader2, MoonStar } from 'lucide-react';
 import { useTranslations } from 'next-intl';
+import { usePathname, useRouter } from 'next/navigation';
 import { useState } from 'react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
@@ -12,6 +13,11 @@ import { DEFAULT_LANGUAGE, LANGUAGES } from '@/lib/i18n';
 import { DEFAULT_CATEGORY } from '@/lib/session-preferences';
 
 type Mode = 'login' | 'register';
+
+function localizedAppPath(pathname: string) {
+  const [, maybeLocale] = pathname.split('/');
+  return maybeLocale && maybeLocale.length === 2 ? `/${maybeLocale}/app` : '/app';
+}
 
 export function AuthCard({
   mode,
@@ -22,9 +28,38 @@ export function AuthCard({
   initialLanguage?: string;
   initialCategory?: Category;
 }) {
+  const router = useRouter();
+  const pathname = usePathname();
   const t = useTranslations('Auth');
   const [pending, setPending] = useState(false);
+  const [error, setError] = useState<string | null>(null);
   const registering = mode === 'register';
+
+  async function submitRegister(formData: FormData) {
+    const response = await fetch('/api/auth/register', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        name: String(formData.get('name') ?? ''),
+        category: formData.get('category'),
+        dob: String(formData.get('dob') ?? ''),
+        timeOfBirth: String(formData.get('timeOfBirth') ?? ''),
+        placeOfBirth: {
+          city: String(formData.get('city') ?? ''),
+          country: String(formData.get('country') ?? ''),
+        },
+        contact: String(formData.get('contact') ?? ''),
+        password: String(formData.get('password') ?? ''),
+        lang: String(formData.get('lang') ?? initialLanguage),
+        consent: formData.get('consent') === 'on',
+      }),
+    });
+
+    if (!response.ok) {
+      const data = await response.json().catch(() => null);
+      throw new Error(data?.error?.message ?? t('registerError'));
+    }
+  }
 
   return (
     <div className="mx-auto flex min-h-[calc(100vh-4rem)] w-full max-w-md flex-col justify-center px-4 py-10">
@@ -43,10 +78,23 @@ export function AuthCard({
 
         <form
           className="mt-6 space-y-4"
-          onSubmit={(event) => {
+          onSubmit={async (event) => {
             event.preventDefault();
             setPending(true);
-            window.setTimeout(() => setPending(false), 600);
+            setError(null);
+
+            try {
+              if (registering) {
+                await submitRegister(new FormData(event.currentTarget));
+                router.push(localizedAppPath(pathname));
+                router.refresh();
+              } else {
+                window.setTimeout(() => setPending(false), 600);
+              }
+            } catch (err) {
+              setError(err instanceof Error ? err.message : t('registerError'));
+              setPending(false);
+            }
           }}
         >
           {registering ? (
@@ -125,6 +173,12 @@ export function AuthCard({
               <input name="consent" type="checkbox" className="mt-1 size-4 rounded border-border" required />
               <span>{t('consent')}</span>
             </label>
+          ) : null}
+
+          {error ? (
+            <p role="alert" className="rounded-md border border-destructive/30 bg-destructive/10 px-3 py-2 text-sm text-destructive">
+              {error}
+            </p>
           ) : null}
 
           <Button type="submit" className="w-full" disabled={pending}>
