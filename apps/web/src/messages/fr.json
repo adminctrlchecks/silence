@@ -65,7 +65,9 @@
   },
   "Chart": {
     "eyebrow": "Carte exemple",
-    "title": "Aperçu de la carte natale"
+    "title": "Aperçu de la carte natale",
+    "interpretation": "Interprétation",
+    "fallbackInterpretation": "La carte est générée à partir de vos détails de naissance et de vos réponses de niveau 2 enregistrées."
   },
   "Questions": {
     "eyebrow": "Parcours de questions",

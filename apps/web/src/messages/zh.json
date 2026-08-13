@@ -65,7 +65,9 @@
   },
   "Chart": {
     "eyebrow": "示例星盘",
-    "title": "出生星盘预览"
+    "title": "出生星盘预览",
+    "interpretation": "解读",
+    "fallbackInterpretation": "星盘根据你的出生信息和已保存的第 2 级答案生成。"
   },
   "Questions": {
     "eyebrow": "问题流程",

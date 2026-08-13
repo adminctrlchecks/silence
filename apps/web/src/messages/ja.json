@@ -65,7 +65,9 @@
   },
   "Chart": {
     "eyebrow": "サンプルチャート",
-    "title": "出生チャートプレビュー"
+    "title": "出生チャートプレビュー",
+    "interpretation": "解釈",
+    "fallbackInterpretation": "チャートは出生情報と保存済みのレベル2回答から生成されます。"
   },
   "Questions": {
     "eyebrow": "質問フロー",
