@@ -3,6 +3,8 @@ import { defineConfig, devices } from '@playwright/test';
 export default defineConfig({
   testDir: './e2e',
   timeout: 60_000,
+  // Serial: the specs share one API/database, so run them one at a time.
+  workers: 1,
   expect: {
     timeout: 10_000,
   },
