@@ -157,7 +157,7 @@ Requires `deploy/.secrets.env` with VPS host/user/SSH key + DB password.
 **If that file is absent, tag every P11 task `(blocked: needs Hostinger credentials)`
 and STOP with a request for them.**
 
-- [ ] **P11-1** *(blocked: needs Hostinger credentials)* SSH read-only inspection (ports, nginx, systemd, `psql \du`/`\l`, confirm 5432 localhost-only). Record baseline.
+- [x] **P11-1** SSH read-only inspection (ports, nginx, systemd, `psql \du`/`\l`, confirm 5432 localhost-only). Record baseline. — connected as root (key auth); baseline in `deploy/BASELINE.md`. 3010/3011 free, Postgres localhost-only, no silence_user/db/vhost, node v22 present, pnpm missing (corepack), 7 CtrlChecks services active.
 - [ ] **P11-2** *(blocked: needs Hostinger credentials)* Backups: `/etc/nginx` + service list to `/opt/backups/<date>`.
 - [ ] **P11-3** *(blocked: needs Hostinger credentials)* Create Postgres `silence_user` + `silence_db` (localhost). **Do not touch CtrlChecks DB.**
 - [ ] **P11-4** *(blocked: needs Hostinger credentials)* Deploy code to `/opt/silence`; install; `prisma migrate deploy` (**creates all tables**); seed admin + languages.
@@ -228,3 +228,4 @@ _(the loop appends dated one-liners here as phases complete)_
 - 2026-08-14 — P10-2 done (systemd unit templates `silence-api.service` :3010 + `silence-web.service` :3011 in deploy/systemd/, hardened, EnvironmentFile-driven).
 - 2026-08-14 — P10-3 done (Nginx vhost `deploy/nginx/silence.conf` for silence.ctrlchecks.ai; /api/v1→3010, /→3011; isolated by server_name).
 - 2026-08-14 — P10-4 done (`deploy/deploy.sh` with env generation, install/build, migrate deploy + seed, systemd + nginx install, health check; `--dry-run` verified; env templates in deploy/env/). **Phase 10 complete.** P0–P10 all done; only P11 (Hostinger deploy) remains.
+- 2026-08-14 — P11-1 done (SSH read-only inspection of the VPS; baseline recorded in deploy/BASELINE.md; confirmed full isolation from CtrlChecks). SSH via ~/.ssh/id_ed25519 (root).
