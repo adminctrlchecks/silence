@@ -121,7 +121,13 @@ export const adminApi = {
   deleteQuestion: (token: string, id: string) =>
     request<{ deleted: boolean }>(`/admin/questions/${id}`, { method: 'DELETE', token }),
   listAnswers: (token: string, q: Query) =>
-    request<{ data: Answer[] }>('/admin/answers', { token, query: q }),
+    request<Paginated<Answer>>('/admin/answers', { token, query: q }),
+  createAnswer: (token: string, body: unknown) =>
+    request<Answer>('/admin/answers', { method: 'POST', token, body }),
+  updateAnswer: (token: string, id: string, body: unknown) =>
+    request<Answer>(`/admin/answers/${id}`, { method: 'PUT', token, body }),
+  deleteAnswer: (token: string, id: string) =>
+    request<{ deleted: boolean }>(`/admin/answers/${id}`, { method: 'DELETE', token }),
   aiGenerate: (token: string, body: unknown) =>
     request<Answer>('/admin/answers/ai-generate', { method: 'POST', token, body }),
   listRemedies: (token: string, q: Query) =>

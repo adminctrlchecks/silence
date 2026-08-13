@@ -202,6 +202,16 @@ describe('Silence API e2e', () => {
       .send({ questionId, level: 'level2', category: 'female', lang: 'en' })
       .expect(201);
     expect(generatedAnswer.body).toMatchObject({ source: 'ai', saved: true, reviewed: false });
+    const generatedAnswerId = (generatedAnswer.body as { id: string }).id;
+
+    await request(app.getHttpServer())
+      .put(`/api/v1/admin/answers/${generatedAnswerId}`)
+      .set('Authorization', `Bearer ${adminToken}`)
+      .send({ reviewed: true })
+      .expect(200)
+      .expect(({ body }) => {
+        expect(body).toMatchObject({ id: generatedAnswerId, source: 'ai', reviewed: true });
+      });
 
     await request(app.getHttpServer())
       .get(`/api/v1/answers?questionId=${questionId}&level=level1&category=female&lang=hi`)
