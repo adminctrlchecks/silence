@@ -48,7 +48,8 @@
     "alreadyHaveProfile": "Já tem um perfil?",
     "newToSilence": "Novo no Silence?",
     "createOne": "Criar um",
-    "registerError": "Falha no cadastro. Verifique os dados e tente novamente."
+    "registerError": "Falha no cadastro. Verifique os dados e tente novamente.",
+    "loginError": "Falha ao entrar. Verifique o contato e a senha."
   },
   "UserLayout": {
     "mySession": "Minha sessão",

@@ -48,7 +48,8 @@
     "alreadyHaveProfile": "已有档案？",
     "newToSilence": "第一次使用 Silence？",
     "createOne": "创建一个",
-    "registerError": "注册失败。请检查信息后重试。"
+    "registerError": "注册失败。请检查信息后重试。",
+    "loginError": "登录失败。请检查联系方式和密码。"
   },
   "UserLayout": {
     "mySession": "我的会话",

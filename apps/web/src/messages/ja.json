@@ -48,7 +48,8 @@
     "alreadyHaveProfile": "すでにプロフィールがありますか？",
     "newToSilence": "Silenceは初めてですか？",
     "createOne": "作成する",
-    "registerError": "登録に失敗しました。内容を確認してもう一度お試しください。"
+    "registerError": "登録に失敗しました。内容を確認してもう一度お試しください。",
+    "loginError": "サインインに失敗しました。連絡先とパスワードを確認してください。"
   },
   "UserLayout": {
     "mySession": "マイセッション",

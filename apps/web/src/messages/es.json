@@ -48,7 +48,8 @@
     "alreadyHaveProfile": "¿Ya tienes un perfil?",
     "newToSilence": "¿Nuevo en Silence?",
     "createOne": "Crear uno",
-    "registerError": "No se pudo registrar. Revisa los datos e inténtalo de nuevo."
+    "registerError": "No se pudo registrar. Revisa los datos e inténtalo de nuevo.",
+    "loginError": "No se pudo iniciar sesión. Revisa tu contacto y contraseña."
   },
   "UserLayout": {
     "mySession": "Mi sesión",
