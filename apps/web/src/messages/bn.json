@@ -60,6 +60,7 @@
     "title": "আপনার Silence সেশন",
     "questions": "প্রশ্ন প্রবাহ",
     "chart": "সংরক্ষিত ছক",
+    "remedy": "প্রতিকার",
     "profile": "প্রোফাইল",
     "history": "ইতিহাস"
   },
@@ -68,6 +69,11 @@
     "title": "জন্মছক পূর্বরূপ",
     "interpretation": "ব্যাখ্যা",
     "fallbackInterpretation": "ছকটি আপনার জন্মতথ্য এবং সংরক্ষিত স্তর ২ উত্তরের ভিত্তিতে তৈরি।"
+  },
+  "Remedy": {
+    "eyebrow": "ব্যক্তিগত প্রতিকার",
+    "category": "বিভাগ: {category}",
+    "linkedLevel": "সংযুক্ত স্তর: {level}"
   },
   "Questions": {
     "eyebrow": "প্রশ্ন প্রবাহ",

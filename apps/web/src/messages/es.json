@@ -60,6 +60,7 @@
     "title": "Tu sesión de Silence",
     "questions": "Flujo de preguntas",
     "chart": "Carta guardada",
+    "remedy": "Remedio",
     "profile": "Perfil",
     "history": "Historial"
   },
@@ -68,6 +69,11 @@
     "title": "Vista previa de carta natal",
     "interpretation": "Interpretación",
     "fallbackInterpretation": "La carta se genera con tus datos de nacimiento y respuestas guardadas de nivel 2."
+  },
+  "Remedy": {
+    "eyebrow": "Remedio personal",
+    "category": "Categoría: {category}",
+    "linkedLevel": "Nivel vinculado: {level}"
   },
   "Questions": {
     "eyebrow": "Flujo de preguntas",
