@@ -71,7 +71,7 @@ as it goes. See [LOOP_PROMPT.md](LOOP_PROMPT.md) for the prompt that drives it.
 ## PHASE 0 — Foundation & repo hygiene
 
 - [x] **P0-1** Monorepo (pnpm+turbo), `packages/shared`, API skeleton, web shell — builds green.
-- [ ] **P0-2** Shared **ESLint + Prettier** config at root; wire `lint` in each package. *Verify:* `pnpm lint`.
+- [x] **P0-2** Shared **ESLint + Prettier** config at root; wire `lint` in each package. *Verify:* `pnpm lint`. — flat `eslint.config.mjs` (typescript-eslint + prettier), root `.prettierrc`, `.gitattributes`; all 3 packages lint green.
 - [ ] **P0-3** Root **dev README** (`docs/DEVELOPMENT.md`): install, env, run, migrate, seed, test.
 - [ ] **P0-4** **`docker-compose.yml`** (Postgres 16 + Redis 7, isolated volumes/ports) + `.env` wiring. *Verify:* `docker compose up -d` then `pg_isready`.
 - [ ] **P0-5** **`deploy/.secrets.env.example`** documenting required VPS + API secrets (SSH host/user/key path, DB password, JWT secrets, GEMINI_API_KEY). Real file is gitignored.
@@ -179,3 +179,4 @@ and STOP with a request for them.**
 ## Progress log
 _(the loop appends dated one-liners here as phases complete)_
 - 2026-08-13 — P0-1 done (scaffold + green builds).
+- 2026-08-13 — P0-2 done (shared ESLint flat config + Prettier + .gitattributes; `pnpm lint` green).
