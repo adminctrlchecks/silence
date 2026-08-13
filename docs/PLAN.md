@@ -167,7 +167,7 @@ and STOP with a request for them.**
 
 ## PHASE 12 — Post-deploy
 
-- [ ] **P12-1** Smoke tests against the live server.
+- [x] **P12-1** Smoke tests against the live server. — added `deploy/smoke.sh` (read-only, prod-safe); 5/5 green against https://silence.ctrlchecks.ai/api/v1 (health db:up, 11 languages, public questions, Swagger docs, admin login).
 - [ ] **P12-2** Logging + basic monitoring; nightly `pg_dump` cron for `silence_db`.
 - [ ] **P12-3** Handover notes in `docs/DEPLOYMENT.md` (actual values, redacted secrets).
 
@@ -230,3 +230,4 @@ _(the loop appends dated one-liners here as phases complete)_
 - 2026-08-14 — P10-4 done (`deploy/deploy.sh` with env generation, install/build, migrate deploy + seed, systemd + nginx install, health check; `--dry-run` verified; env templates in deploy/env/). **Phase 10 complete.** P0–P10 all done; only P11 (Hostinger deploy) remains.
 - 2026-08-14 — P11-1 done (SSH read-only inspection of the VPS; baseline recorded in deploy/BASELINE.md; confirmed full isolation from CtrlChecks). SSH via ~/.ssh/id_ed25519 (root).
 - 2026-08-14 — P11-2..P11-7 done (deployed to /opt/silence: backups, isolated silence_db/user, install+build, migrate deploy + seed, systemd units :3010/:3011, Nginx vhost, DNS + certbot TLS). **https://silence.ctrlchecks.ai is LIVE** and externally verified; all 7 CtrlChecks services untouched. **Phase 11 complete.**
+- 2026-08-14 — P12-1 done (read-only `deploy/smoke.sh`; 5/5 green against live https://silence.ctrlchecks.ai).
