@@ -36,9 +36,9 @@ export function AdminSidebar() {
   return (
     <aside
       className={cn(
-        'fixed inset-y-0 start-0 z-50 flex flex-col border-e border-border bg-card text-card-foreground shadow-sm transition-all duration-300 ease-in-out',
+        'admin-sidebar-panel fixed inset-y-0 start-0 z-50 flex flex-col border-e border-border bg-card text-card-foreground shadow-sm transition-all duration-300 ease-in-out',
         open ? 'w-72' : 'w-20',
-        mobileOpen ? 'translate-x-0' : '-translate-x-full lg:translate-x-0',
+        mobileOpen ? 'translate-x-0' : 'admin-sidebar-mobile-closed -translate-x-full lg:translate-x-0',
       )}
       onMouseEnter={() => !expanded && setHovered(true)}
       onMouseLeave={() => setHovered(false)}
