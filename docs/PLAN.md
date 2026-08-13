@@ -75,7 +75,7 @@ as it goes. See [LOOP_PROMPT.md](LOOP_PROMPT.md) for the prompt that drives it.
 - [x] **P0-3** Root **dev README** (`docs/DEVELOPMENT.md`): install, env, run, migrate, seed, test. — full dev guide: prereqs, install, env vars, docker infra, migrate/seed, run, quality gates, git workflow.
 - [x] **P0-4** **`docker-compose.yml`** (Postgres 16 + Redis 7, isolated volumes/ports) + `.env` wiring. *Verify:* `docker compose up -d` then `pg_isready`. — project `silence`, named volumes, healthchecks; root `.env.example` wires POSTGRES_*; containers healthy, `pg_isready` OK, redis PONG.
 - [x] **P0-5** **`deploy/.secrets.env.example`** documenting required VPS + API secrets (SSH host/user/key path, DB password, JWT secrets, GEMINI_API_KEY). Real file is gitignored. — template covers SSH/deploy/Postgres/Redis/JWT/Gemini/seed-admin; `deploy/.secrets.env` added to .gitignore (verified ignored).
-- [ ] **P0-6** `git init`, `main` branch, add remote `https://github.com/adminctrlchecks/silence.git`, commit current tree, **push**. *(blocked: needs GitHub auth — `gh auth login` or PAT — if not already configured)*
+- [x] **P0-6** `git init`, `main` branch, add remote `https://github.com/adminctrlchecks/silence.git`, commit current tree, **push**. — repo initialized, P0-1..P0-5 landed on `main` (bootstrap: remote didn't exist before this task), pushed to origin; `gh` installed + auth via stored credential.
 - [ ] **P0-7** **GitHub Actions CI** (`.github/workflows/ci.yml`): install → lint → typecheck → build on PRs. *Verify:* workflow file valid; green on P0-6 branch.
 
 ## PHASE 1 — Database live (local)
@@ -183,3 +183,4 @@ _(the loop appends dated one-liners here as phases complete)_
 - 2026-08-13 — P0-3 done (`docs/DEVELOPMENT.md` dev guide).
 - 2026-08-13 — P0-4 done (docker-compose Postgres 16 + Redis 7; containers healthy, pg_isready OK).
 - 2026-08-13 — P0-5 done (`deploy/.secrets.env.example` template; real secrets file gitignored).
+- 2026-08-13 — P0-6 done (git repo + origin adminctrlchecks/silence; main pushed; gh CLI installed & authed). From P0-7 on: feature branch → PR → squash-merge on GitHub.
