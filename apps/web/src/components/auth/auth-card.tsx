@@ -35,29 +35,36 @@ export function AuthCard({
   const [error, setError] = useState<string | null>(null);
   const registering = mode === 'register';
 
-  async function submitRegister(formData: FormData) {
-    const response = await fetch('/api/auth/register', {
+  async function submitAuth(formData: FormData) {
+    const response = await fetch(registering ? '/api/auth/register' : '/api/auth/login', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({
-        name: String(formData.get('name') ?? ''),
-        category: formData.get('category'),
-        dob: String(formData.get('dob') ?? ''),
-        timeOfBirth: String(formData.get('timeOfBirth') ?? ''),
-        placeOfBirth: {
-          city: String(formData.get('city') ?? ''),
-          country: String(formData.get('country') ?? ''),
-        },
-        contact: String(formData.get('contact') ?? ''),
-        password: String(formData.get('password') ?? ''),
-        lang: String(formData.get('lang') ?? initialLanguage),
-        consent: formData.get('consent') === 'on',
-      }),
+      body: JSON.stringify(
+        registering
+          ? {
+              name: String(formData.get('name') ?? ''),
+              category: formData.get('category'),
+              dob: String(formData.get('dob') ?? ''),
+              timeOfBirth: String(formData.get('timeOfBirth') ?? ''),
+              placeOfBirth: {
+                city: String(formData.get('city') ?? ''),
+                country: String(formData.get('country') ?? ''),
+              },
+              contact: String(formData.get('contact') ?? ''),
+              password: String(formData.get('password') ?? ''),
+              lang: String(formData.get('lang') ?? initialLanguage),
+              consent: formData.get('consent') === 'on',
+            }
+          : {
+              contact: String(formData.get('contact') ?? ''),
+              password: String(formData.get('password') ?? ''),
+            },
+      ),
     });
 
     if (!response.ok) {
       const data = await response.json().catch(() => null);
-      throw new Error(data?.error?.message ?? t('registerError'));
+      throw new Error(data?.error?.message ?? t(registering ? 'registerError' : 'loginError'));
     }
   }
 
@@ -84,15 +91,11 @@ export function AuthCard({
             setError(null);
 
             try {
-              if (registering) {
-                await submitRegister(new FormData(event.currentTarget));
-                router.push(localizedAppPath(pathname));
-                router.refresh();
-              } else {
-                window.setTimeout(() => setPending(false), 600);
-              }
+              await submitAuth(new FormData(event.currentTarget));
+              router.push(localizedAppPath(pathname));
+              router.refresh();
             } catch (err) {
-              setError(err instanceof Error ? err.message : t('registerError'));
+              setError(err instanceof Error ? err.message : t(registering ? 'registerError' : 'loginError'));
               setPending(false);
             }
           }}

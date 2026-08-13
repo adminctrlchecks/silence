@@ -48,7 +48,8 @@
     "alreadyHaveProfile": "Vous avez déjà un profil ?",
     "newToSilence": "Nouveau sur Silence ?",
     "createOne": "En créer un",
-    "registerError": "L'inscription a échoué. Vérifiez les informations puis réessayez."
+    "registerError": "L'inscription a échoué. Vérifiez les informations puis réessayez.",
+    "loginError": "La connexion a échoué. Vérifiez votre contact et votre mot de passe."
   },
   "UserLayout": {
     "mySession": "Ma session",

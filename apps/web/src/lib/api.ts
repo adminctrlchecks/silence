@@ -96,6 +96,11 @@ export const authApi = {
       '/auth/user/register',
       { method: 'POST', body },
     ),
+  userLogin: (body: unknown) =>
+    request<{ token: string; refreshToken: string; user: { id: string; name: string; category: Category } }>(
+      '/auth/user/login',
+      { method: 'POST', body },
+    ),
 };
 
 /** Admin endpoints — docs/API.md §2–7 (all require an admin token). */

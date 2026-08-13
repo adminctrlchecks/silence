@@ -48,7 +48,8 @@
     "alreadyHaveProfile": "هل لديك ملف بالفعل؟",
     "newToSilence": "هل أنت جديد في Silence؟",
     "createOne": "أنشئ واحدًا",
-    "registerError": "فشل التسجيل. تحقق من التفاصيل وحاول مرة أخرى."
+    "registerError": "فشل التسجيل. تحقق من التفاصيل وحاول مرة أخرى.",
+    "loginError": "فشل تسجيل الدخول. تحقق من وسيلة التواصل وكلمة المرور."
   },
   "UserLayout": {
     "mySession": "جلستي",

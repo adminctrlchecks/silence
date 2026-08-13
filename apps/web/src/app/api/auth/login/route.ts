@@ -1,18 +1,18 @@
-import { userRegisterSchema } from '@silence/shared';
+import { userLoginSchema } from '@silence/shared';
 import { NextResponse } from 'next/server';
 import { authApi, ApiError } from '@/lib/api';
 import { setUserAuthCookies } from '@/lib/auth-cookies';
 
 export async function POST(request: Request) {
   const body = await request.json().catch(() => null);
-  const parsed = userRegisterSchema.safeParse(body);
+  const parsed = userLoginSchema.safeParse(body);
 
   if (!parsed.success) {
     return NextResponse.json(
       {
         error: {
           code: 'VALIDATION_ERROR',
-          message: parsed.error.issues[0]?.message ?? 'Invalid registration details',
+          message: parsed.error.issues[0]?.message ?? 'Invalid login details',
         },
       },
       { status: 400 },
@@ -20,13 +20,10 @@ export async function POST(request: Request) {
   }
 
   try {
-    const result = await authApi.userRegister(parsed.data);
+    const result = await authApi.userLogin(parsed.data);
     const response = NextResponse.json({ user: result.user });
 
-    setUserAuthCookies(response, result, {
-      lang: parsed.data.lang,
-      category: parsed.data.category,
-    });
+    setUserAuthCookies(response, result, { category: result.user.category });
 
     return response;
   } catch (error) {
@@ -38,7 +35,7 @@ export async function POST(request: Request) {
     }
 
     return NextResponse.json(
-      { error: { code: 'REGISTER_FAILED', message: 'Registration failed' } },
+      { error: { code: 'LOGIN_FAILED', message: 'Login failed' } },
       { status: 500 },
     );
   }
