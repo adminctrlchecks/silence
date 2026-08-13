@@ -9,6 +9,19 @@ export interface Translated {
   translations?: Record<string, string>;
 }
 
+/** Standard list envelope for every paginated endpoint (docs/API.md §0). */
+export interface Paginated<T> {
+  data: T[];
+  page: number;
+  limit: number;
+  total: number;
+}
+
+/** Standard error envelope (docs/API.md §0). */
+export interface ApiError {
+  error: { code: string; message: string };
+}
+
 export interface Question extends Translated {
   id: string;
   level: Level;

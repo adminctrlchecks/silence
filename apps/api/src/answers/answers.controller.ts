@@ -39,6 +39,8 @@ export class AdminAnswersController {
     @Query('source') source?: AnswerSource,
     @Query('reviewed') reviewed?: string,
     @Query('lang') lang?: string,
+    @Query('page') page?: string,
+    @Query('limit') limit?: string,
   ) {
     return this.answers.list({
       level,
@@ -47,6 +49,8 @@ export class AdminAnswersController {
       source,
       reviewed: reviewed === undefined ? undefined : reviewed === 'true',
       lang,
+      page: page ? Number(page) : undefined,
+      limit: limit ? Number(limit) : undefined,
     });
   }
 
