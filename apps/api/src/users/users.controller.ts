@@ -1,10 +1,13 @@
 import { Body, Controller, Get, Param, Put, Query, UseGuards } from '@nestjs/common';
+import { ApiTags, ApiBearerAuth } from '@nestjs/swagger';
 import { UserJwtGuard } from '../auth/guards/user-jwt.guard';
 import { UsersService } from './users.service';
 import { ChartService } from '../chart/chart.service';
 import { RemediesService } from '../remedies/remedies.service';
 
 /** User profile, chart, remedy, history — docs/API.md §9–10. */
+@ApiTags('user: profile')
+@ApiBearerAuth('user')
 @Controller('users')
 @UseGuards(UserJwtGuard)
 export class UsersController {

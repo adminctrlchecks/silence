@@ -9,6 +9,7 @@ import {
   Query,
   UseGuards,
 } from '@nestjs/common';
+import { ApiTags, ApiBearerAuth } from '@nestjs/swagger';
 import {
   createAnswerSchema,
   updateAnswerSchema,
@@ -16,15 +17,15 @@ import {
   type Category,
   type Level,
   type AnswerSource,
-  type CreateAnswerInput,
-  type UpdateAnswerInput,
-  type AiGenerateAnswerInput,
 } from '@silence/shared';
 import { ZodValidationPipe } from '../common/zod-validation.pipe';
+import { CreateAnswerDto, UpdateAnswerDto, AiGenerateAnswerDto } from '../common/dto';
 import { AdminJwtGuard } from '../auth/guards/admin-jwt.guard';
 import { AnswersService } from './answers.service';
 
 /** Admin answer management + AI Mode — docs/API.md §3. */
+@ApiTags('admin: answers')
+@ApiBearerAuth('admin')
 @Controller('admin/answers')
 @UseGuards(AdminJwtGuard)
 export class AdminAnswersController {
@@ -50,14 +51,14 @@ export class AdminAnswersController {
   }
 
   @Post()
-  create(@Body(new ZodValidationPipe(createAnswerSchema)) body: CreateAnswerInput) {
+  create(@Body(new ZodValidationPipe(createAnswerSchema)) body: CreateAnswerDto) {
     return this.answers.create(body);
   }
 
   @Put(':id')
   update(
     @Param('id') id: string,
-    @Body(new ZodValidationPipe(updateAnswerSchema)) body: UpdateAnswerInput,
+    @Body(new ZodValidationPipe(updateAnswerSchema)) body: UpdateAnswerDto,
   ) {
     return this.answers.update(id, body);
   }
@@ -68,12 +69,13 @@ export class AdminAnswersController {
   }
 
   @Post('ai-generate')
-  aiGenerate(@Body(new ZodValidationPipe(aiGenerateAnswerSchema)) body: AiGenerateAnswerInput) {
+  aiGenerate(@Body(new ZodValidationPipe(aiGenerateAnswerSchema)) body: AiGenerateAnswerDto) {
     return this.answers.aiGenerate(body);
   }
 }
 
 /** Public answer read — docs/API.md §8. */
+@ApiTags('user: answers')
 @Controller('answers')
 export class PublicAnswersController {
   constructor(private readonly answers: AnswersService) {}
