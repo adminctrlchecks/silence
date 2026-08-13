@@ -162,7 +162,14 @@ export function ImportAdmin() {
                 <p className="truncate text-sm font-medium">{file.name}</p>
                 <p className="text-xs text-muted-foreground">{Math.ceil(file.size / 1024)} KB</p>
               </div>
-              <Button type="button" variant="ghost" size="icon" onClick={() => setFile(null)} title="Remove file">
+              <Button
+                type="button"
+                variant="ghost"
+                size="icon"
+                onClick={() => setFile(null)}
+                aria-label="Remove file"
+                title="Remove file"
+              >
                 <X />
               </Button>
             </div>

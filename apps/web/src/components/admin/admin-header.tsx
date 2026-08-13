@@ -20,7 +20,15 @@ export function AdminHeader() {
   return (
     <header className="sticky top-0 z-30 border-b border-border bg-background/90 backdrop-blur">
       <div className="flex h-16 items-center gap-3 px-4 md:px-6">
-        <Button type="button" variant="ghost" size="icon" className="lg:hidden" onClick={toggleMobile} title="Open sidebar">
+        <Button
+          type="button"
+          variant="ghost"
+          size="icon"
+          className="lg:hidden"
+          onClick={toggleMobile}
+          aria-label="Open sidebar"
+          title="Open sidebar"
+        >
           <Menu />
         </Button>
         <Button
@@ -29,6 +37,7 @@ export function AdminHeader() {
           size="icon"
           className="hidden lg:inline-flex"
           onClick={toggleDesktop}
+          aria-label={expanded ? 'Collapse sidebar' : 'Expand sidebar'}
           title={expanded ? 'Collapse sidebar' : 'Expand sidebar'}
         >
           {expanded ? <PanelLeftClose /> : <PanelLeftOpen />}
