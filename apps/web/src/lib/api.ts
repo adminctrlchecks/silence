@@ -131,7 +131,13 @@ export const adminApi = {
   aiGenerate: (token: string, body: unknown) =>
     request<Answer>('/admin/answers/ai-generate', { method: 'POST', token, body }),
   listRemedies: (token: string, q: Query) =>
-    request<{ data: Remedy[] }>('/admin/remedies', { token, query: q }),
+    request<Paginated<Remedy>>('/admin/remedies', { token, query: q }),
+  createRemedy: (token: string, body: unknown) =>
+    request<Remedy>('/admin/remedies', { method: 'POST', token, body }),
+  updateRemedy: (token: string, id: string, body: unknown) =>
+    request<Remedy>(`/admin/remedies/${id}`, { method: 'PUT', token, body }),
+  deleteRemedy: (token: string, id: string) =>
+    request<{ deleted: boolean }>(`/admin/remedies/${id}`, { method: 'DELETE', token }),
   importStatus: (token: string, jobId: string) =>
     request<ImportJob>(`/admin/import/${jobId}`, { token }),
 };
