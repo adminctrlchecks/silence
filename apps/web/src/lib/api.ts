@@ -8,6 +8,7 @@ import type {
   Answer,
   Remedy,
   UserChart,
+  UserHistory,
   UserProfile,
   ImportJob,
   Category,
@@ -84,6 +85,8 @@ export const publicApi = {
   remedy: (userId: string, lang: string, token: string) =>
     request<Remedy>(`/users/${userId}/remedy`, { query: { lang }, token }),
   profile: (userId: string, token: string) => request<UserProfile>(`/users/${userId}`, { token }),
+  history: (userId: string, lang: string, token: string) =>
+    request<UserHistory>(`/users/${userId}/history`, { query: { lang }, token }),
 };
 
 /** Auth endpoints — docs/API.md §1. */

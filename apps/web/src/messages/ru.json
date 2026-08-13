@@ -75,6 +75,29 @@
     "category": "Категория: {category}",
     "linkedLevel": "Связанный уровень: {level}"
   },
+  "Profile": {
+    "eyebrow": "Сохраненный профиль",
+    "title": "Ваши данные",
+    "name": "Имя",
+    "category": "Категория",
+    "language": "Язык",
+    "dob": "Дата рождения",
+    "timeOfBirth": "Время рождения",
+    "placeOfBirth": "Место рождения",
+    "contact": "Контакт",
+    "consent": "Согласие",
+    "yes": "Да",
+    "no": "Нет"
+  },
+  "History": {
+    "eyebrow": "Сохраненные сеансы",
+    "title": "Ваша история",
+    "responses": "Ответы",
+    "charts": "Карты",
+    "count": "{count} сохранено",
+    "emptyResponses": "Ответы пока не сохранены.",
+    "emptyCharts": "Карты пока не сохранены."
+  },
   "Questions": {
     "eyebrow": "Вопросы",
     "title": "Ответьте на вопросы",

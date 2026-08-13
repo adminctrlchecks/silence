@@ -75,6 +75,29 @@
     "category": "श्रेणी: {category}",
     "linkedLevel": "लिंक स्तर: {level}"
   },
+  "Profile": {
+    "eyebrow": "सहेजी गई प्रोफ़ाइल",
+    "title": "आपका विवरण",
+    "name": "नाम",
+    "category": "श्रेणी",
+    "language": "भाषा",
+    "dob": "जन्म तिथि",
+    "timeOfBirth": "जन्म समय",
+    "placeOfBirth": "जन्म स्थान",
+    "contact": "संपर्क",
+    "consent": "सहमति",
+    "yes": "हाँ",
+    "no": "नहीं"
+  },
+  "History": {
+    "eyebrow": "सहेजे गए सत्र",
+    "title": "आपका इतिहास",
+    "responses": "उत्तर",
+    "charts": "चार्ट",
+    "count": "{count} सहेजे गए",
+    "emptyResponses": "अभी तक कोई उत्तर सहेजा नहीं गया है।",
+    "emptyCharts": "अभी तक कोई चार्ट सहेजा नहीं गया है।"
+  },
   "Questions": {
     "eyebrow": "प्रश्न प्रवाह",
     "title": "अपने प्रश्नों के उत्तर दें",

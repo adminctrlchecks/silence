@@ -75,6 +75,29 @@
     "category": "Categoría: {category}",
     "linkedLevel": "Nivel vinculado: {level}"
   },
+  "Profile": {
+    "eyebrow": "Perfil guardado",
+    "title": "Tus datos",
+    "name": "Nombre",
+    "category": "Categoría",
+    "language": "Idioma",
+    "dob": "Fecha de nacimiento",
+    "timeOfBirth": "Hora de nacimiento",
+    "placeOfBirth": "Lugar de nacimiento",
+    "contact": "Contacto",
+    "consent": "Consentimiento",
+    "yes": "Sí",
+    "no": "No"
+  },
+  "History": {
+    "eyebrow": "Sesiones guardadas",
+    "title": "Tu historial",
+    "responses": "Respuestas",
+    "charts": "Cartas",
+    "count": "{count} guardadas",
+    "emptyResponses": "Aún no hay respuestas guardadas.",
+    "emptyCharts": "Aún no hay cartas guardadas."
+  },
   "Questions": {
     "eyebrow": "Flujo de preguntas",
     "title": "Responde tus preguntas",
