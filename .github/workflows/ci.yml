@@ -65,3 +65,73 @@ jobs:
 
       - name: Build
         run: pnpm build
+
+  e2e:
+    name: playwright e2e
+    runs-on: ubuntu-latest
+    services:
+      postgres:
+        image: postgres:16-alpine
+        env:
+          POSTGRES_USER: silence_user
+          POSTGRES_PASSWORD: silence_pass
+          POSTGRES_DB: silence_db
+        ports:
+          - 5432:5432
+        options: >-
+          --health-cmd "pg_isready -U silence_user -d silence_db"
+          --health-interval 5s
+          --health-timeout 5s
+          --health-retries 10
+    env:
+      DATABASE_URL: postgresql://silence_user:silence_pass@localhost:5432/silence_db?schema=public
+      JWT_ADMIN_SECRET: ci-admin-secret
+      JWT_USER_SECRET: ci-user-secret
+      SEED_ADMIN_EMAIL: admin@example.com
+      SEED_ADMIN_PASSWORD: change-me
+      API_PORT: '3010'
+      WEB_ORIGIN: http://localhost:3011
+      API_BASE_URL: http://localhost:3010/api/v1
+      NEXT_PUBLIC_API_BASE_URL: http://localhost:3010/api/v1
+      GEMINI_API_KEY: ''
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: pnpm
+
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+
+      - name: Generate Prisma client
+        run: pnpm --filter @silence/api prisma:generate
+
+      - name: Apply migrations
+        run: pnpm --filter @silence/api prisma:deploy
+
+      - name: Build workspace
+        run: pnpm build
+
+      - name: Install Playwright browser
+        run: pnpm --filter @silence/web exec playwright install --with-deps chromium
+
+      - name: Run Playwright e2e (seeds API, starts API + web)
+        run: pnpm --filter @silence/web test:e2e
+
+      - name: Upload Playwright report
+        if: ${{ !cancelled() }}
+        uses: actions/upload-artifact@v4
+        with:
+          name: playwright-report
+          path: |
+            apps/web/playwright-report/
+            apps/web/test-results/
+          retention-days: 7
+          if-no-files-found: ignore
