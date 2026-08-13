@@ -112,8 +112,14 @@ export const authApi = {
 export const adminApi = {
   listQuestions: (token: string, q: Query) =>
     request<Paginated<Question>>('/admin/questions', { token, query: q }),
+  getQuestion: (token: string, id: string, q: Query = {}) =>
+    request<Question>(`/admin/questions/${id}`, { token, query: q }),
   createQuestion: (token: string, body: unknown) =>
     request<Question>('/admin/questions', { method: 'POST', token, body }),
+  updateQuestion: (token: string, id: string, body: unknown) =>
+    request<Question>(`/admin/questions/${id}`, { method: 'PUT', token, body }),
+  deleteQuestion: (token: string, id: string) =>
+    request<{ deleted: boolean }>(`/admin/questions/${id}`, { method: 'DELETE', token }),
   listAnswers: (token: string, q: Query) =>
     request<{ data: Answer[] }>('/admin/answers', { token, query: q }),
   aiGenerate: (token: string, body: unknown) =>
