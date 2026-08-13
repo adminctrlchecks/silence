@@ -86,7 +86,7 @@ as it goes. See [LOOP_PROMPT.md](LOOP_PROMPT.md) for the prompt that drives it.
 
 ## PHASE 2 — Backend feature completion
 
-- [ ] **P2-1** Real **Gemini** integration (`@google/generative-ai`) for AI answers + translation, behind existing `GeminiService`. Fallback to stub when key absent. *(partial-blocked: needs GEMINI_API_KEY for live verify)*
+- [x] **P2-1** Real **Gemini** integration (`@google/generative-ai`) for AI answers + translation, behind existing `GeminiService`. Fallback to stub when key absent. — real `generateContent` call (lazy-loaded SDK), graceful stub fallback on missing key/error. **Live-verified** with provided key: AI answer generated + auto-translated to hi/es/ar (stored). Default model updated to `gemini-2.5-flash`.
 - [ ] **P2-2** Real **astrology engine** (`swisseph`): compute planetary positions/houses from dob/time/place; replace `AstrologyService.compute`. *Verify:* unit test on a known birth datum.
 - [ ] **P2-3** **Excel import** hardening: per-row validation, error rows, `GET /admin/import/template` real xlsx, job status. *Verify:* import a sample xlsx → created/updated/errors correct.
 - [ ] **P2-4** **Auth hardening**: bcrypt user passwords (decision D), guards on all `/admin/*`, global rate-limit, refresh strategy. *Verify:* e2e — protected routes 401 without token.
@@ -188,3 +188,4 @@ _(the loop appends dated one-liners here as phases complete)_
 - 2026-08-13 — P1-1 done (prisma init migration; 13 tables live in local silence_db).
 - 2026-08-13 — P1-2 done (db:seed; 11 languages + 1 admin verified by row counts).
 - 2026-08-13 — P1-3 done (smoke script 11/11 2xx; fixed @silence/shared CJS build + api start path). **Phase 1 complete.**
+- 2026-08-13 — P2-1 done (real Gemini integration; live-verified AI answer + hi/es/ar translation; model gemini-2.5-flash). Key provided by user, stored in gitignored .env only.
