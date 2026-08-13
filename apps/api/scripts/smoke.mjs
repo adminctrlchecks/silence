@@ -87,6 +87,7 @@ async function main() {
       timeOfBirth: '12:00',
       placeOfBirth: { city: 'Chennai', country: 'IN' },
       contact: `smoke+${Date.now()}@example.com`,
+      password: 'smoke-pass-123',
       lang: 'en',
       consent: true,
     },

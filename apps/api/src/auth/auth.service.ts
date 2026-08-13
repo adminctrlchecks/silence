@@ -4,6 +4,8 @@ import * as bcrypt from 'bcryptjs';
 import type { AdminLoginInput, UserRegisterInput, UserLoginInput } from '@silence/shared';
 import { PrismaService } from '../prisma/prisma.service';
 
+type Role = 'admin' | 'user';
+
 @Injectable()
 export class AuthService {
   constructor(
@@ -16,20 +18,17 @@ export class AuthService {
     if (!admin || !(await bcrypt.compare(input.password, admin.passwordHash))) {
       throw new UnauthorizedException('Invalid credentials');
     }
-    const token = await this.jwt.signAsync(
-      { sub: admin.id, role: 'admin', email: admin.email },
-      {
-        secret: process.env.JWT_ADMIN_SECRET,
-        expiresIn: (process.env.JWT_ADMIN_EXPIRES_IN ?? '12h') as never,
-      },
-    );
-    return { token, admin: { id: admin.id, name: admin.name } };
+    return {
+      ...(await this.issueTokens('admin', admin.id, { email: admin.email })),
+      admin: { id: admin.id, name: admin.name },
+    };
   }
 
   async userRegister(input: UserRegisterInput) {
     const existing = await this.prisma.user.findUnique({ where: { contact: input.contact } });
     if (existing) throw new ConflictException('A user with this contact already exists');
 
+    const passwordHash = await bcrypt.hash(input.password, 10);
     const user = await this.prisma.user.create({
       data: {
         name: input.name,
@@ -41,28 +40,63 @@ export class AuthService {
         placeLat: input.placeOfBirth.lat,
         placeLng: input.placeOfBirth.lng,
         contact: input.contact,
+        passwordHash,
         lang: input.lang,
         consent: input.consent,
       },
     });
-    return { token: await this.signUser(user.id), user: { id: user.id, name: user.name, category: user.category } };
+    return {
+      ...(await this.issueTokens('user', user.id)),
+      user: { id: user.id, name: user.name, category: user.category },
+    };
   }
 
   async userLogin(input: UserLoginInput) {
     const user = await this.prisma.user.findUnique({ where: { contact: input.contact } });
-    if (!user) throw new UnauthorizedException('User not found');
-    // NOTE: passwordless-by-contact for now (see REQUIREMENTS — users provide details,
-    // not necessarily a password). Add password verification here if/when introduced.
-    return { token: await this.signUser(user.id), user: { id: user.id, name: user.name, category: user.category } };
+    // Same generic message whether the contact or the password is wrong (no user enumeration).
+    if (!user || !user.passwordHash || !(await bcrypt.compare(input.password, user.passwordHash))) {
+      throw new UnauthorizedException('Invalid credentials');
+    }
+    return {
+      ...(await this.issueTokens('user', user.id)),
+      user: { id: user.id, name: user.name, category: user.category },
+    };
   }
 
-  private signUser(userId: string) {
-    return this.jwt.signAsync(
-      { sub: userId, role: 'user' },
-      {
-        secret: process.env.JWT_USER_SECRET,
-        expiresIn: (process.env.JWT_USER_EXPIRES_IN ?? '7d') as never,
-      },
-    );
+  /** Exchange a valid refresh token for a fresh access token (+ rotated refresh token). */
+  async refresh(role: Role, refreshToken: string) {
+    const secret = this.secretFor(role);
+    let payload: { sub: string; role: Role; typ?: string };
+    try {
+      payload = await this.jwt.verifyAsync(refreshToken, { secret });
+    } catch {
+      throw new UnauthorizedException('Invalid refresh token');
+    }
+    if (payload.typ !== 'refresh' || payload.role !== role || !payload.sub) {
+      throw new UnauthorizedException('Invalid refresh token');
+    }
+    return this.issueTokens(role, payload.sub);
+  }
+
+  private secretFor(role: Role): string {
+    return (role === 'admin' ? process.env.JWT_ADMIN_SECRET : process.env.JWT_USER_SECRET) as string;
+  }
+
+  private async issueTokens(role: Role, sub: string, extra: Record<string, unknown> = {}) {
+    const secret = this.secretFor(role);
+    const accessExp =
+      role === 'admin'
+        ? (process.env.JWT_ADMIN_EXPIRES_IN ?? '12h')
+        : (process.env.JWT_USER_EXPIRES_IN ?? '7d');
+    const refreshExp =
+      role === 'admin'
+        ? (process.env.JWT_ADMIN_REFRESH_EXPIRES_IN ?? '30d')
+        : (process.env.JWT_USER_REFRESH_EXPIRES_IN ?? '30d');
+
+    const [token, refreshToken] = await Promise.all([
+      this.jwt.signAsync({ sub, role, typ: 'access', ...extra }, { secret, expiresIn: accessExp as never }),
+      this.jwt.signAsync({ sub, role, typ: 'refresh' }, { secret, expiresIn: refreshExp as never }),
+    ]);
+    return { token, refreshToken };
   }
 }
