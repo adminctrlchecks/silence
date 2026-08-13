@@ -1,3 +1,4 @@
+import { NotFoundException } from '@nestjs/common';
 import * as XLSX from 'xlsx';
 import { ImportService } from './import.service';
 
@@ -120,6 +121,28 @@ describe('ImportService', () => {
     expect(prisma._db.questions).toHaveLength(1); // no duplicate
   });
 
+  it('status() returns saved job tallies and errors', async () => {
+    const prisma = makeFakePrisma();
+    const service = new ImportService(prisma as never);
+    const imported = await service.importFile(
+      'questions',
+      xlsxBuffer([
+        ['level', 'category', 'text', 'order'],
+        ['common', 'female', 'Q', 1],
+      ]),
+    );
+
+    const status = await service.status(imported.jobId);
+
+    expect(status).toMatchObject({ jobId: imported.jobId, status: 'done', created: 1, updated: 0 });
+  });
+
+  it('status() throws NotFound for an unknown job', async () => {
+    const prisma = makeFakePrisma();
+    const service = new ImportService(prisma as never);
+    await expect(service.status('missing')).rejects.toBeInstanceOf(NotFoundException);
+  });
+
   it('validates that an answer references an existing question', async () => {
     const prisma = makeFakePrisma({ questions: [{ id: 'q1' }] });
     const service = new ImportService(prisma as never);
@@ -142,6 +165,17 @@ describe('ImportService', () => {
     expect(res.created).toBe(0);
     expect(res.updated).toBe(0);
     expect(res.errors).toHaveLength(0);
+  });
+
+  it('template helpers describe the admin download columns and example rows', () => {
+    const service = new ImportService(makeFakePrisma() as never);
+
+    expect(service.templateColumns('answers-level2')).toEqual(['questionId', 'category', 'text']);
+    expect(service.templateExample('remedies')).toEqual([
+      'female',
+      'Sleep hygiene',
+      'Keep a consistent bedtime and a dark, cool room.',
+    ]);
   });
 
   it('marks the job failed and records a row-0 error when ingest throws', async () => {
