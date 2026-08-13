@@ -158,12 +158,12 @@ Requires `deploy/.secrets.env` with VPS host/user/SSH key + DB password.
 and STOP with a request for them.**
 
 - [x] **P11-1** SSH read-only inspection (ports, nginx, systemd, `psql \du`/`\l`, confirm 5432 localhost-only). Record baseline. — connected as root (key auth); baseline in `deploy/BASELINE.md`. 3010/3011 free, Postgres localhost-only, no silence_user/db/vhost, node v22 present, pnpm missing (corepack), 7 CtrlChecks services active.
-- [ ] **P11-2** *(blocked: needs Hostinger credentials)* Backups: `/etc/nginx` + service list to `/opt/backups/<date>`.
-- [ ] **P11-3** *(blocked: needs Hostinger credentials)* Create Postgres `silence_user` + `silence_db` (localhost). **Do not touch CtrlChecks DB.**
-- [ ] **P11-4** *(blocked: needs Hostinger credentials)* Deploy code to `/opt/silence`; install; `prisma migrate deploy` (**creates all tables**); seed admin + languages.
-- [ ] **P11-5** *(blocked: needs Hostinger credentials)* Install systemd units; `enable --now`; api on 3010, web on 3011.
-- [ ] **P11-6** *(blocked: needs Hostinger credentials)* Add **new** Nginx vhost; `nginx -t`; `systemctl reload nginx` (reload, not restart).
-- [ ] **P11-7** *(blocked: needs Hostinger credentials)* Verify: `curl :3010/api/v1/health` 200; site loads; **CtrlChecks still active & serving.**
+- [x] **P11-2** Backups: `/etc/nginx` + service list to `/opt/backups/<date>`. — `/opt/backups/2026-08-13/`: nginx (116K), services-before/running, listening-ports, pg databases/roles snapshots.
+- [x] **P11-3** Create Postgres `silence_user` + `silence_db` (localhost). **Do not touch CtrlChecks DB.** — role+db created, silence_user owns db+public schema; login verified; `ctrlchecks` DB untouched. (`@` in DATABASE_URL URL-encoded as %40.)
+- [x] **P11-4** Deploy code to `/opt/silence`; install; `prisma migrate deploy` (**creates all tables**); seed admin + languages. — `silence` user + shallow clone; pnpm via corepack; install+build (shared/api/web); env files written; migrate deploy → 13 tables; seed → 11 languages + 1 admin.
+- [x] **P11-5** Install systemd units; `enable --now`; api on 3010, web on 3011. — both units installed + enabled; `silence-api` active on :3010, `silence-web` active on 127.0.0.1:3011; /opt/silence chowned to silence.
+- [x] **P11-6** Add **new** Nginx vhost; `nginx -t`; `systemctl reload nginx` (reload, not restart). — `silence.conf` enabled; `nginx -t` OK; reloaded (not restarted). Routes /api/v1→3010, /→3011 for server_name silence.ctrlchecks.ai.
+- [x] **P11-7** Verify: `curl :3010/api/v1/health` 200; site loads; **CtrlChecks still active & serving.** — health 200 (direct + via nginx); / → /en → 200 Silence page; /api/v1/languages returns 11. DNS A record `silence`→187.127.185.105 live; **TLS issued via certbot** (auto-renew). **https://silence.ctrlchecks.ai verified externally (200).** All 7 CtrlChecks services active; nginx valid; worker vhost untouched. **Phase 11 complete — live in production.**
 
 ## PHASE 12 — Post-deploy
 
@@ -229,3 +229,4 @@ _(the loop appends dated one-liners here as phases complete)_
 - 2026-08-14 — P10-3 done (Nginx vhost `deploy/nginx/silence.conf` for silence.ctrlchecks.ai; /api/v1→3010, /→3011; isolated by server_name).
 - 2026-08-14 — P10-4 done (`deploy/deploy.sh` with env generation, install/build, migrate deploy + seed, systemd + nginx install, health check; `--dry-run` verified; env templates in deploy/env/). **Phase 10 complete.** P0–P10 all done; only P11 (Hostinger deploy) remains.
 - 2026-08-14 — P11-1 done (SSH read-only inspection of the VPS; baseline recorded in deploy/BASELINE.md; confirmed full isolation from CtrlChecks). SSH via ~/.ssh/id_ed25519 (root).
+- 2026-08-14 — P11-2..P11-7 done (deployed to /opt/silence: backups, isolated silence_db/user, install+build, migrate deploy + seed, systemd units :3010/:3011, Nginx vhost, DNS + certbot TLS). **https://silence.ctrlchecks.ai is LIVE** and externally verified; all 7 CtrlChecks services untouched. **Phase 11 complete.**
