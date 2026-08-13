@@ -17,6 +17,9 @@ build/
 .env.local
 .env.*.local
 
+# Deployment secrets — real file is never committed (only the .example template)
+deploy/.secrets.env
+
 # Prisma
 apps/api/prisma/*.db
 
