@@ -12,8 +12,22 @@ concurrency:
 
 jobs:
   build:
-    name: install · lint · typecheck · build
+    name: install, lint, typecheck, test, build
     runs-on: ubuntu-latest
+    services:
+      postgres:
+        image: postgres:16-alpine
+        env:
+          POSTGRES_USER: silence_user
+          POSTGRES_PASSWORD: silence_pass
+          POSTGRES_DB: silence_db
+        ports:
+          - 5432:5432
+        options: >-
+          --health-cmd "pg_isready -U silence_user -d silence_db"
+          --health-interval 5s
+          --health-timeout 5s
+          --health-retries 10
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -39,6 +53,15 @@ jobs:
 
       - name: Typecheck
         run: pnpm typecheck
+
+      - name: API tests with coverage
+        run: pnpm --filter @silence/api test -- --coverage --runInBand
+        env:
+          TEST_DATABASE_URL: postgresql://silence_user:silence_pass@localhost:5432/silence_db?schema=silence_e2e
+          DATABASE_URL: postgresql://silence_user:silence_pass@localhost:5432/silence_db?schema=public
+          JWT_ADMIN_SECRET: ci-admin-secret
+          JWT_USER_SECRET: ci-user-secret
+          GEMINI_API_KEY: ''
 
       - name: Build
         run: pnpm build

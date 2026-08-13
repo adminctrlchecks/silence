@@ -15,6 +15,11 @@ module.exports = {
     '!src/**/*.module.ts',
     '!src/test-utils/**',
   ],
+  coverageThreshold: {
+    global: {
+      lines: 70,
+    },
+  },
   coverageDirectory: '<rootDir>/coverage',
   // Native addons (sweph) can keep the worker alive after tests finish.
   forceExit: true,
