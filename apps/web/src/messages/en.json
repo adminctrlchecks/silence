@@ -47,7 +47,8 @@
     "signInSubmit": "Sign in",
     "alreadyHaveProfile": "Already have a profile?",
     "newToSilence": "New to Silence?",
-    "createOne": "Create one"
+    "createOne": "Create one",
+    "registerError": "Registration failed. Please check the details and try again."
   },
   "UserLayout": {
     "mySession": "My session",

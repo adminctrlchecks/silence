@@ -47,7 +47,8 @@
     "signInSubmit": "تسجيل الدخول",
     "alreadyHaveProfile": "هل لديك ملف بالفعل؟",
     "newToSilence": "هل أنت جديد في Silence؟",
-    "createOne": "أنشئ واحدًا"
+    "createOne": "أنشئ واحدًا",
+    "registerError": "فشل التسجيل. تحقق من التفاصيل وحاول مرة أخرى."
   },
   "UserLayout": {
     "mySession": "جلستي",

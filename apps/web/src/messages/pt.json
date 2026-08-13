@@ -47,7 +47,8 @@
     "signInSubmit": "Entrar",
     "alreadyHaveProfile": "Já tem um perfil?",
     "newToSilence": "Novo no Silence?",
-    "createOne": "Criar um"
+    "createOne": "Criar um",
+    "registerError": "Falha no cadastro. Verifique os dados e tente novamente."
   },
   "UserLayout": {
     "mySession": "Minha sessão",

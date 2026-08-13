@@ -47,7 +47,8 @@
     "signInSubmit": "Se connecter",
     "alreadyHaveProfile": "Vous avez déjà un profil ?",
     "newToSilence": "Nouveau sur Silence ?",
-    "createOne": "En créer un"
+    "createOne": "En créer un",
+    "registerError": "L'inscription a échoué. Vérifiez les informations puis réessayez."
   },
   "UserLayout": {
     "mySession": "Ma session",
