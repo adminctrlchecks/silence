@@ -73,7 +73,7 @@ as it goes. See [LOOP_PROMPT.md](LOOP_PROMPT.md) for the prompt that drives it.
 - [x] **P0-1** Monorepo (pnpm+turbo), `packages/shared`, API skeleton, web shell — builds green.
 - [x] **P0-2** Shared **ESLint + Prettier** config at root; wire `lint` in each package. *Verify:* `pnpm lint`. — flat `eslint.config.mjs` (typescript-eslint + prettier), root `.prettierrc`, `.gitattributes`; all 3 packages lint green.
 - [x] **P0-3** Root **dev README** (`docs/DEVELOPMENT.md`): install, env, run, migrate, seed, test. — full dev guide: prereqs, install, env vars, docker infra, migrate/seed, run, quality gates, git workflow.
-- [ ] **P0-4** **`docker-compose.yml`** (Postgres 16 + Redis 7, isolated volumes/ports) + `.env` wiring. *Verify:* `docker compose up -d` then `pg_isready`.
+- [x] **P0-4** **`docker-compose.yml`** (Postgres 16 + Redis 7, isolated volumes/ports) + `.env` wiring. *Verify:* `docker compose up -d` then `pg_isready`. — project `silence`, named volumes, healthchecks; root `.env.example` wires POSTGRES_*; containers healthy, `pg_isready` OK, redis PONG.
 - [ ] **P0-5** **`deploy/.secrets.env.example`** documenting required VPS + API secrets (SSH host/user/key path, DB password, JWT secrets, GEMINI_API_KEY). Real file is gitignored.
 - [ ] **P0-6** `git init`, `main` branch, add remote `https://github.com/adminctrlchecks/silence.git`, commit current tree, **push**. *(blocked: needs GitHub auth — `gh auth login` or PAT — if not already configured)*
 - [ ] **P0-7** **GitHub Actions CI** (`.github/workflows/ci.yml`): install → lint → typecheck → build on PRs. *Verify:* workflow file valid; green on P0-6 branch.
@@ -181,3 +181,4 @@ _(the loop appends dated one-liners here as phases complete)_
 - 2026-08-13 — P0-1 done (scaffold + green builds).
 - 2026-08-13 — P0-2 done (shared ESLint flat config + Prettier + .gitattributes; `pnpm lint` green).
 - 2026-08-13 — P0-3 done (`docs/DEVELOPMENT.md` dev guide).
+- 2026-08-13 — P0-4 done (docker-compose Postgres 16 + Redis 7; containers healthy, pg_isready OK).

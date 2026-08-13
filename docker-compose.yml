@@ -1,0 +1,50 @@
+# Local development infrastructure for Silence.
+# Postgres 16 + Redis 7, fully isolated from any other project on the machine:
+# dedicated project name, named volumes, and its own DB/user. Ports match the
+# API's default .env (5432 / 6379). Change the host-side port mappings if they
+# collide with another local service.
+#
+#   docker compose up -d          # start
+#   docker compose ps             # health
+#   docker compose down           # stop (add -v to also drop data)
+name: silence
+
+services:
+  postgres:
+    image: postgres:16-alpine
+    container_name: silence-postgres
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: ${POSTGRES_USER:-silence_user}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-silence_pass}
+      POSTGRES_DB: ${POSTGRES_DB:-silence_db}
+    ports:
+      # host:container — override host port via .env if 5432 is taken locally.
+      - '${POSTGRES_PORT:-5432}:5432'
+    volumes:
+      - silence_pgdata:/var/lib/postgresql/data
+    healthcheck:
+      test: ['CMD-SHELL', 'pg_isready -U ${POSTGRES_USER:-silence_user} -d ${POSTGRES_DB:-silence_db}']
+      interval: 5s
+      timeout: 5s
+      retries: 10
+
+  redis:
+    image: redis:7-alpine
+    container_name: silence-redis
+    restart: unless-stopped
+    ports:
+      - '${REDIS_PORT:-6379}:6379'
+    volumes:
+      - silence_redisdata:/data
+    healthcheck:
+      test: ['CMD', 'redis-cli', 'ping']
+      interval: 5s
+      timeout: 5s
+      retries: 10
+
+volumes:
+  silence_pgdata:
+    name: silence_pgdata
+  silence_redisdata:
+    name: silence_redisdata
