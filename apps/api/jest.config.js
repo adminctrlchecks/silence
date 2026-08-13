@@ -9,6 +9,13 @@ module.exports = {
   transform: {
     '^.+\\.ts$': ['ts-jest', { tsconfig: '<rootDir>/tsconfig.json' }],
   },
-  collectCoverageFrom: ['src/**/*.ts', '!src/main.ts', '!src/**/*.module.ts'],
+  collectCoverageFrom: [
+    'src/**/*.ts',
+    '!src/main.ts',
+    '!src/**/*.module.ts',
+    '!src/test-utils/**',
+  ],
   coverageDirectory: '<rootDir>/coverage',
+  // Native addons (sweph) can keep the worker alive after tests finish.
+  forceExit: true,
 };

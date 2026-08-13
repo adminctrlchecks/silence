@@ -43,6 +43,40 @@ describe('AuthService', () => {
   process.env.JWT_USER_SECRET = 'test-user-secret';
   process.env.JWT_ADMIN_SECRET = 'test-admin-secret';
 
+  it('accepts admin login with a bcrypt password and returns admin tokens', async () => {
+    const prisma = makeFakePrisma();
+    prisma._admins.push({
+      id: 'admin_1',
+      email: 'admin@example.com',
+      name: 'Admin',
+      passwordHash: await bcrypt.hash('admin-secret', 10),
+    });
+    const auth = new AuthService(prisma as never, jwt);
+
+    const res = await auth.adminLogin({ email: 'admin@example.com', password: 'admin-secret' });
+
+    expect(res.admin).toEqual({ id: 'admin_1', name: 'Admin' });
+    expect(res.token).toBeTruthy();
+    expect(res.refreshToken).toBeTruthy();
+    const payload: any = jwt.verify(res.token, { secret: process.env.JWT_ADMIN_SECRET });
+    expect(payload).toMatchObject({ sub: 'admin_1', role: 'admin', typ: 'access', email: 'admin@example.com' });
+  });
+
+  it('rejects admin login with invalid credentials', async () => {
+    const prisma = makeFakePrisma();
+    prisma._admins.push({
+      id: 'admin_1',
+      email: 'admin@example.com',
+      name: 'Admin',
+      passwordHash: await bcrypt.hash('admin-secret', 10),
+    });
+    const auth = new AuthService(prisma as never, jwt);
+
+    await expect(
+      auth.adminLogin({ email: 'admin@example.com', password: 'wrong-password' }),
+    ).rejects.toBeInstanceOf(UnauthorizedException);
+  });
+
   it('hashes the password on registration (never stores plaintext)', async () => {
     const prisma = makeFakePrisma();
     const auth = new AuthService(prisma as never, jwt);
