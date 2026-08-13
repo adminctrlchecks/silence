@@ -1,0 +1,68 @@
+{
+  "Common": {
+    "appName": "Silence",
+    "signIn": "تسجيل الدخول",
+    "createProfile": "إنشاء ملف",
+    "adminWorkspace": "مساحة الإدارة",
+    "mySession": "جلستي"
+  },
+  "Home": {
+    "eyebrow": "أسئلة وأجوبة فلكية",
+    "title": "Silence",
+    "languageLabel": "اللغة",
+    "languageValue": "11",
+    "chartLabel": "الخريطة",
+    "chartValue": "الفلك",
+    "savedProfileLabel": "ملف محفوظ",
+    "savedProfileValue": "JWT"
+  },
+  "SessionPicker": {
+    "language": "اللغة",
+    "category": "الفئة",
+    "categories": {
+      "male": "ذكر",
+      "female": "أنثى",
+      "other": "آخر"
+    }
+  },
+  "Auth": {
+    "createTitle": "أنشئ ملفك",
+    "welcomeBack": "مرحبًا بعودتك",
+    "name": "الاسم",
+    "category": "الفئة",
+    "categories": {
+      "male": "ذكر",
+      "female": "أنثى",
+      "other": "آخر"
+    },
+    "language": "اللغة",
+    "dob": "تاريخ الميلاد",
+    "timeOfBirth": "وقت الميلاد",
+    "city": "مدينة الميلاد",
+    "country": "البلد",
+    "contact": "البريد أو الهاتف",
+    "password": "كلمة المرور",
+    "consent": "أوافق على حفظ ملفي وتفاصيل ميلادي وإجاباتي وخريطتي والعلاج المقترح.",
+    "createSubmit": "إنشاء ملف",
+    "signInSubmit": "تسجيل الدخول",
+    "alreadyHaveProfile": "هل لديك ملف بالفعل؟",
+    "newToSilence": "هل أنت جديد في Silence؟",
+    "createOne": "أنشئ واحدًا"
+  },
+  "UserLayout": {
+    "mySession": "جلستي",
+    "signIn": "تسجيل الدخول"
+  },
+  "UserApp": {
+    "eyebrow": "مساحة المستخدم",
+    "title": "جلسة Silence الخاصة بك",
+    "questions": "مسار الأسئلة",
+    "chart": "الخريطة المحفوظة",
+    "profile": "الملف",
+    "history": "السجل"
+  },
+  "Chart": {
+    "eyebrow": "خريطة تجريبية",
+    "title": "معاينة خريطة الميلاد"
+  }
+}

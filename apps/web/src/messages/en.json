@@ -1,0 +1,68 @@
+{
+  "Common": {
+    "appName": "Silence",
+    "signIn": "Sign in",
+    "createProfile": "Create profile",
+    "adminWorkspace": "Admin workspace",
+    "mySession": "My session"
+  },
+  "Home": {
+    "eyebrow": "Astrology Q&A",
+    "title": "Silence",
+    "languageLabel": "Language",
+    "languageValue": "11",
+    "chartLabel": "Chart",
+    "chartValue": "Astrology",
+    "savedProfileLabel": "Saved profile",
+    "savedProfileValue": "JWT"
+  },
+  "SessionPicker": {
+    "language": "Language",
+    "category": "Category",
+    "categories": {
+      "male": "Male",
+      "female": "Female",
+      "other": "Other"
+    }
+  },
+  "Auth": {
+    "createTitle": "Create your profile",
+    "welcomeBack": "Welcome back",
+    "name": "Name",
+    "category": "Category",
+    "categories": {
+      "male": "Male",
+      "female": "Female",
+      "other": "Other"
+    },
+    "language": "Language",
+    "dob": "Date of birth",
+    "timeOfBirth": "Time of birth",
+    "city": "Birth city",
+    "country": "Country",
+    "contact": "Email or phone",
+    "password": "Password",
+    "consent": "I consent to saving my profile, birth details, answers, chart, and remedy.",
+    "createSubmit": "Create profile",
+    "signInSubmit": "Sign in",
+    "alreadyHaveProfile": "Already have a profile?",
+    "newToSilence": "New to Silence?",
+    "createOne": "Create one"
+  },
+  "UserLayout": {
+    "mySession": "My session",
+    "signIn": "Sign in"
+  },
+  "UserApp": {
+    "eyebrow": "User workspace",
+    "title": "Your Silence session",
+    "questions": "Question flow",
+    "chart": "Saved chart",
+    "profile": "Profile",
+    "history": "History"
+  },
+  "Chart": {
+    "eyebrow": "Sample chart",
+    "title": "Birth chart preview"
+  }
+}

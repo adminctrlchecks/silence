@@ -1,0 +1,68 @@
+{
+  "Common": {
+    "appName": "Silence",
+    "signIn": "サインイン",
+    "createProfile": "プロフィール作成",
+    "adminWorkspace": "管理ワークスペース",
+    "mySession": "マイセッション"
+  },
+  "Home": {
+    "eyebrow": "占星術Q&A",
+    "title": "Silence",
+    "languageLabel": "言語",
+    "languageValue": "11",
+    "chartLabel": "チャート",
+    "chartValue": "占星術",
+    "savedProfileLabel": "保存済みプロフィール",
+    "savedProfileValue": "JWT"
+  },
+  "SessionPicker": {
+    "language": "言語",
+    "category": "カテゴリ",
+    "categories": {
+      "male": "男性",
+      "female": "女性",
+      "other": "その他"
+    }
+  },
+  "Auth": {
+    "createTitle": "プロフィールを作成",
+    "welcomeBack": "おかえりなさい",
+    "name": "名前",
+    "category": "カテゴリ",
+    "categories": {
+      "male": "男性",
+      "female": "女性",
+      "other": "その他"
+    },
+    "language": "言語",
+    "dob": "生年月日",
+    "timeOfBirth": "出生時刻",
+    "city": "出生都市",
+    "country": "国",
+    "contact": "メールまたは電話",
+    "password": "パスワード",
+    "consent": "プロフィール、出生情報、回答、チャート、レメディの保存に同意します。",
+    "createSubmit": "プロフィール作成",
+    "signInSubmit": "サインイン",
+    "alreadyHaveProfile": "すでにプロフィールがありますか？",
+    "newToSilence": "Silenceは初めてですか？",
+    "createOne": "作成する"
+  },
+  "UserLayout": {
+    "mySession": "マイセッション",
+    "signIn": "サインイン"
+  },
+  "UserApp": {
+    "eyebrow": "ユーザーワークスペース",
+    "title": "あなたのSilenceセッション",
+    "questions": "質問フロー",
+    "chart": "保存済みチャート",
+    "profile": "プロフィール",
+    "history": "履歴"
+  },
+  "Chart": {
+    "eyebrow": "サンプルチャート",
+    "title": "出生チャートプレビュー"
+  }
+}

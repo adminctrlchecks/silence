@@ -1,0 +1,68 @@
+{
+  "Common": {
+    "appName": "Silence",
+    "signIn": "Войти",
+    "createProfile": "Создать профиль",
+    "adminWorkspace": "Панель администратора",
+    "mySession": "Моя сессия"
+  },
+  "Home": {
+    "eyebrow": "Астрологические вопросы",
+    "title": "Silence",
+    "languageLabel": "Язык",
+    "languageValue": "11",
+    "chartLabel": "Карта",
+    "chartValue": "Астрология",
+    "savedProfileLabel": "Сохраненный профиль",
+    "savedProfileValue": "JWT"
+  },
+  "SessionPicker": {
+    "language": "Язык",
+    "category": "Категория",
+    "categories": {
+      "male": "Мужчина",
+      "female": "Женщина",
+      "other": "Другое"
+    }
+  },
+  "Auth": {
+    "createTitle": "Создайте профиль",
+    "welcomeBack": "С возвращением",
+    "name": "Имя",
+    "category": "Категория",
+    "categories": {
+      "male": "Мужчина",
+      "female": "Женщина",
+      "other": "Другое"
+    },
+    "language": "Язык",
+    "dob": "Дата рождения",
+    "timeOfBirth": "Время рождения",
+    "city": "Город рождения",
+    "country": "Страна",
+    "contact": "Email или телефон",
+    "password": "Пароль",
+    "consent": "Я согласен сохранить профиль, данные рождения, ответы, карту и рекомендации.",
+    "createSubmit": "Создать профиль",
+    "signInSubmit": "Войти",
+    "alreadyHaveProfile": "Уже есть профиль?",
+    "newToSilence": "Впервые в Silence?",
+    "createOne": "Создать"
+  },
+  "UserLayout": {
+    "mySession": "Моя сессия",
+    "signIn": "Войти"
+  },
+  "UserApp": {
+    "eyebrow": "Кабинет пользователя",
+    "title": "Ваша сессия Silence",
+    "questions": "Вопросы",
+    "chart": "Сохраненная карта",
+    "profile": "Профиль",
+    "history": "История"
+  },
+  "Chart": {
+    "eyebrow": "Пример карты",
+    "title": "Предпросмотр натальной карты"
+  }
+}
