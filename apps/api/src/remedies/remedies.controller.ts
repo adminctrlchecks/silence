@@ -25,8 +25,18 @@ export class AdminRemediesController {
   constructor(private readonly remedies: RemediesService) {}
 
   @Get()
-  list(@Query('category') category?: Category, @Query('lang') lang?: string) {
-    return this.remedies.list(category, lang);
+  list(
+    @Query('category') category?: Category,
+    @Query('lang') lang?: string,
+    @Query('page') page?: string,
+    @Query('limit') limit?: string,
+  ) {
+    return this.remedies.list(
+      category,
+      lang,
+      page ? Number(page) : undefined,
+      limit ? Number(limit) : undefined,
+    );
   }
 
   @Post()

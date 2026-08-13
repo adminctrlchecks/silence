@@ -1,17 +1,25 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
 import type { Category, CreateRemedyInput, UpdateRemedyInput } from '@silence/shared';
 import { PrismaService } from '../prisma/prisma.service';
+import { parsePageParams, paginated } from '../common/pagination';
 
 @Injectable()
 export class RemediesService {
   constructor(private readonly prisma: PrismaService) {}
 
-  async list(category?: Category, lang?: string) {
-    const rows = await this.prisma.remedy.findMany({
-      where: { ...(category && { category }) },
-      include: { translations: lang ? { where: { lang } } : false },
-    });
-    return { data: rows.map((r) => this.present(r, lang)) };
+  async list(category?: Category, lang?: string, page?: number, limit?: number) {
+    const where = { ...(category && { category }) };
+    const pp = parsePageParams(page, limit);
+    const [rows, total] = await this.prisma.$transaction([
+      this.prisma.remedy.findMany({
+        where,
+        include: { translations: lang ? { where: { lang } } : false },
+        skip: pp.skip,
+        take: pp.take,
+      }),
+      this.prisma.remedy.count({ where }),
+    ]);
+    return paginated(rows.map((r) => this.present(r, lang)), pp.page, pp.limit, total);
   }
 
   async create(input: CreateRemedyInput) {

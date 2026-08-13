@@ -9,6 +9,7 @@ import type {
 } from '@silence/shared';
 import { PrismaService } from '../prisma/prisma.service';
 import { GeminiService } from '../integrations/gemini/gemini.service';
+import { parsePageParams, paginated } from '../common/pagination';
 
 interface ListFilter {
   level?: Level;
@@ -17,6 +18,8 @@ interface ListFilter {
   source?: AnswerSource;
   reviewed?: boolean;
   lang?: string;
+  page?: number;
+  limit?: number;
 }
 
 @Injectable()
@@ -27,17 +30,24 @@ export class AnswersService {
   ) {}
 
   async list(f: ListFilter) {
-    const rows = await this.prisma.answer.findMany({
-      where: {
-        ...(f.level && { level: f.level }),
-        ...(f.category && { category: f.category }),
-        ...(f.questionId && { questionId: f.questionId }),
-        ...(f.source && { source: f.source }),
-        ...(f.reviewed !== undefined && { reviewed: f.reviewed }),
-      },
-      include: { translations: f.lang ? { where: { lang: f.lang } } : false },
-    });
-    return { data: rows.map((r) => this.present(r, f.lang)) };
+    const where = {
+      ...(f.level && { level: f.level }),
+      ...(f.category && { category: f.category }),
+      ...(f.questionId && { questionId: f.questionId }),
+      ...(f.source && { source: f.source }),
+      ...(f.reviewed !== undefined && { reviewed: f.reviewed }),
+    };
+    const { page, limit, skip, take } = parsePageParams(f.page, f.limit);
+    const [rows, total] = await this.prisma.$transaction([
+      this.prisma.answer.findMany({
+        where,
+        include: { translations: f.lang ? { where: { lang: f.lang } } : false },
+        skip,
+        take,
+      }),
+      this.prisma.answer.count({ where }),
+    ]);
+    return paginated(rows.map((r) => this.present(r, f.lang)), page, limit, total);
   }
 
   async create(input: CreateAnswerInput) {
