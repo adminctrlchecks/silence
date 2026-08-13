@@ -131,7 +131,7 @@ as it goes. See [LOOP_PROMPT.md](LOOP_PROMPT.md) for the prompt that drives it.
 ## PHASE 7 — i18n content + polish
 
 - [x] **P7-1** RTL QA pass (Arabic) across user + admin. *Verify:* layout mirrors correctly. — Arabic locale catalogs/build remain green and the admin mobile sidebar now closes toward logical start in RTL via an explicit `[dir='rtl']` override; root lint/typecheck/test/build green.
-- [ ] **P7-2** a11y + responsive + loading/empty/error states across key screens.
+- [x] **P7-2** a11y + responsive + loading/empty/error states across key screens. — added shared accessible loading/error states, route-level fallbacks for admin and core user screens (including locale wrappers), and explicit aria labels for icon-only admin controls; root lint/typecheck/test/build green. **Phase 7 complete.**
 
 ## PHASE 8 — Frontend E2E
 
@@ -218,3 +218,4 @@ _(the loop appends dated one-liners here as phases complete)_
 - 2026-08-13 — P6-6 done (`/admin/languages` list/add language UI + auto-translate trigger for question/answer/remedy content; API e2e and root lint/typecheck/test/build green).
 - 2026-08-13 — P6-7 done (`/admin/import` dropzone `.xlsx` upload, template download, job polling/results UI, same-origin admin import proxy routes; API e2e and root lint/typecheck/test/build green). **Phase 6 complete.**
 - 2026-08-14 — P7-1 done (Arabic RTL QA pass: locale/build verified and admin mobile sidebar close transform mirrored for `[dir='rtl']`; root lint/typecheck/test/build green).
+- 2026-08-14 — P7-2 done (shared accessible loading/error states, user/admin route fallbacks including locale wrappers, icon-only admin control aria labels; root lint/typecheck/test/build green). **Phase 7 complete.**
