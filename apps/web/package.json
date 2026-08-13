@@ -8,6 +8,7 @@
     "build": "next build",
     "start": "next start -p 3011",
     "lint": "eslint src",
+    "test:e2e": "pnpm --filter @silence/api db:seed && playwright test",
     "typecheck": "tsc --noEmit",
     "clean": "rimraf .next .turbo"
   },
@@ -29,6 +30,7 @@
     "tailwindcss": "^4.3.3"
   },
   "devDependencies": {
+    "@playwright/test": "^1.62.1",
     "@types/node": "^22.10.7",
     "@types/react": "^19.0.7",
     "@types/react-dom": "^19.0.3",

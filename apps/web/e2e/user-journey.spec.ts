@@ -1,0 +1,144 @@
+import { expect, request, test, type APIRequestContext } from '@playwright/test';
+import type { Answer, Category, Level, Question, Remedy } from '@silence/shared';
+import { existsSync, readFileSync } from 'node:fs';
+import { resolve } from 'node:path';
+
+const apiBaseURL = process.env.E2E_API_URL ?? 'http://127.0.0.1:3010/api/v1';
+const apiEnvPath = resolve(__dirname, '../../api/.env');
+const apiEnv = existsSync(apiEnvPath) ? readFileSync(apiEnvPath, 'utf8') : '';
+
+function envValue(name: string) {
+  const match = apiEnv.match(new RegExp(`^${name}=(.*)$`, 'm'));
+  return match?.[1]?.trim().replace(/^"(.*)"$/, '$1');
+}
+
+const adminEmail =
+  process.env.E2E_ADMIN_EMAIL ??
+  process.env.SEED_ADMIN_EMAIL ??
+  envValue('SEED_ADMIN_EMAIL') ??
+  'admin@example.com';
+const adminPassword =
+  process.env.E2E_ADMIN_PASSWORD ??
+  process.env.SEED_ADMIN_PASSWORD ??
+  envValue('SEED_ADMIN_PASSWORD') ??
+  'change-me';
+
+type AdminSeed = {
+  category: Category;
+  questions: Record<Level, Question>;
+  remedy: Remedy;
+};
+
+async function adminToken(api: APIRequestContext) {
+  const response = await api.post(`${apiBaseURL}/auth/admin/login`, {
+    data: { email: adminEmail, password: adminPassword },
+  });
+  if (!response.ok()) {
+    throw new Error(`Admin login failed: ${response.status()} ${await response.text()}`);
+  }
+  const body = (await response.json()) as { token: string };
+  return body.token;
+}
+
+async function apiPost<T>(api: APIRequestContext, token: string, path: string, data: unknown) {
+  const response = await api.post(`${apiBaseURL}${path}`, {
+    headers: { Authorization: `Bearer ${token}` },
+    data,
+  });
+  expect(response.ok()).toBeTruthy();
+  return (await response.json()) as T;
+}
+
+async function seedUserJourneyContent(): Promise<AdminSeed> {
+  const api = await request.newContext({ baseURL: apiBaseURL });
+  const token = await adminToken(api);
+  const runId = Date.now().toString(36);
+  const category: Category = 'female';
+
+  const common = await apiPost<Question>(api, token, '/admin/questions', {
+    level: 'common',
+    category,
+    text: `E2E common sleep check ${runId}`,
+    order: 1,
+  });
+  const level1 = await apiPost<Question>(api, token, '/admin/questions', {
+    level: 'level1',
+    category,
+    text: `E2E level 1 rhythm check ${runId}`,
+    order: 2,
+  });
+  const level2 = await apiPost<Question>(api, token, '/admin/questions', {
+    level: 'level2',
+    category,
+    text: `E2E level 2 reflection ${runId}`,
+    order: 3,
+  });
+
+  for (const question of [common, level1, level2]) {
+    await apiPost<Answer>(api, token, '/admin/answers', {
+      questionId: question.id,
+      level: question.level === 'common' ? 'level1' : question.level,
+      category,
+      text: `E2E reviewed answer for ${question.text}`,
+      source: 'admin',
+    });
+  }
+
+  const remedy = await apiPost<Remedy>(api, token, '/admin/remedies', {
+    category,
+    title: `E2E remedy ${runId}`,
+    text: 'Keep a steady bedtime and review the chart notes calmly.',
+    linkedTo: { level: 'level2', questionId: level2.id },
+  });
+
+  await api.dispose();
+  return { category, questions: { common, level1, level2 }, remedy };
+}
+
+test('full user journey: pick, register, answer, chart, remedy', async ({ page }) => {
+  const seed = await seedUserJourneyContent();
+  const contact = `e2e-${Date.now()}@example.com`;
+
+  // 1. Pick — the SessionPicker uses buttons (native language name + category label).
+  await page.goto('/');
+  await page.getByRole('button', { name: new RegExp(seed.category, 'i') }).click();
+  await page.getByRole('button', { name: 'English', exact: true }).click();
+
+  // 2. Register — form fields are targeted by their stable id/name attributes.
+  await page.getByRole('link', { name: 'Create profile' }).click();
+  await expect(page).toHaveURL(/\/register$/);
+  await page.locator('#name').fill('E2E Asha');
+  await page.locator('#category').selectOption(seed.category);
+  await page.locator('#lang').selectOption('en');
+  await page.locator('#dob').fill('1998-04-21');
+  await page.locator('#timeOfBirth').fill('07:35');
+  await page.locator('#city').fill('Chennai');
+  await page.locator('#country').fill('IN');
+  await page.locator('#contact').fill(contact);
+  await page.locator('#password').fill('password123');
+  await page.locator('input[name="consent"]').check();
+  await page.getByRole('button', { name: 'Create profile' }).click();
+
+  await expect(page).toHaveURL(/\/app$/);
+  await page.getByRole('link', { name: 'Question flow' }).click();
+
+  for (const level of ['common', 'level1', 'level2'] as const) {
+    await expect(page.getByText(seed.questions[level].text)).toBeVisible();
+    const answerFields = page.getByPlaceholder('Type your answer');
+    const fieldCount = await answerFields.count();
+
+    for (let index = 0; index < fieldCount; index++) {
+      await answerFields.nth(index).fill(`E2E ${level} answer ${index + 1}`);
+    }
+
+    await page.getByRole('button', { name: level === 'level2' ? 'Save responses' : 'Save and continue' }).click();
+  }
+
+  await page.getByRole('link', { name: 'View chart' }).click();
+  await expect(page.getByRole('heading', { name: 'Birth chart preview' })).toBeVisible();
+  await expect(page.getByText('Interpretation')).toBeVisible();
+
+  await page.goto('/app/remedy');
+  await expect(page.getByRole('heading', { name: seed.remedy.title })).toBeVisible();
+  await expect(page.getByText(seed.remedy.text)).toBeVisible();
+});

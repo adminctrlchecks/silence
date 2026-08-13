@@ -17,10 +17,11 @@ async function main() {
   // Seed the first admin from env.
   const email = process.env.SEED_ADMIN_EMAIL ?? 'admin@example.com';
   const password = process.env.SEED_ADMIN_PASSWORD ?? 'change-me';
+  const passwordHash = await bcrypt.hash(password, 10);
   await prisma.admin.upsert({
     where: { email },
-    create: { email, name: 'Admin', passwordHash: await bcrypt.hash(password, 10) },
-    update: {},
+    create: { email, name: 'Admin', passwordHash },
+    update: { name: 'Admin', passwordHash },
   });
 
   // eslint-disable-next-line no-console
