@@ -73,6 +73,7 @@
     "answered": "{count} respuestas en borrador",
     "questionNumber": "Pregunta {number}",
     "answerPlaceholder": "Escribe tu respuesta",
+    "answerLabel": "Respuesta",
     "empty": "Aún no hay preguntas para este paso.",
     "continue": "Guardar y continuar",
     "finish": "Guardar respuestas",

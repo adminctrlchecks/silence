@@ -73,6 +73,7 @@
     "answered": "{count} ड्राफ्ट उत्तर",
     "questionNumber": "प्रश्न {number}",
     "answerPlaceholder": "अपना उत्तर लिखें",
+    "answerLabel": "उत्तर",
     "empty": "इस चरण के लिए अभी कोई प्रश्न उपलब्ध नहीं है।",
     "continue": "सहेजें और आगे बढ़ें",
     "finish": "उत्तर सहेजें",

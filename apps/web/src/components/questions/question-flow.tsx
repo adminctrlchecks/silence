@@ -1,6 +1,6 @@
 'use client';
 
-import type { Category, Level, Question } from '@silence/shared';
+import type { Answer, Category, Level, Question } from '@silence/shared';
 import { ArrowRight, Check, Loader2 } from 'lucide-react';
 import { useTranslations } from 'next-intl';
 import Link from 'next/link';
@@ -9,16 +9,19 @@ import { Button } from '@/components/ui/button';
 
 type QuestionsByLevel = Record<Level, Question[]>;
 type AnswersByQuestion = Record<string, string>;
+type DisplayAnswersByQuestion = Record<string, Answer>;
 
 const levels: Level[] = ['common', 'level1', 'level2'];
 
 export function QuestionFlow({
   userId,
   category,
+  lang,
   questions,
 }: {
   userId: string;
   category: Category;
+  lang: string;
   questions: QuestionsByLevel;
 }) {
   const t = useTranslations('Questions');
@@ -26,6 +29,7 @@ export function QuestionFlow({
   const [answers, setAnswers] = useState<AnswersByQuestion>({});
   const [pending, setPending] = useState(false);
   const [saved, setSaved] = useState<Partial<Record<Level, boolean>>>({});
+  const [displayAnswers, setDisplayAnswers] = useState<DisplayAnswersByQuestion>({});
   const [error, setError] = useState<string | null>(null);
 
   const currentQuestions = questions[step];
@@ -66,9 +70,42 @@ export function QuestionFlow({
     }
   }
 
+  async function loadCurrentAnswers() {
+    const results = await Promise.allSettled(
+      currentQuestions.map(async (question) => {
+        const params = new URLSearchParams({
+          questionId: question.id,
+          level: step,
+          category,
+          lang,
+        });
+        const response = await fetch(`/api/answers?${params.toString()}`);
+
+        if (!response.ok) {
+          return null;
+        }
+
+        return (await response.json()) as Answer;
+      }),
+    );
+
+    setDisplayAnswers((current) => {
+      const next = { ...current };
+
+      for (const result of results) {
+        if (result.status === 'fulfilled' && result.value) {
+          next[result.value.questionId] = result.value;
+        }
+      }
+
+      return next;
+    });
+  }
+
   async function continueFlow() {
     try {
       await saveCurrentStep();
+      await loadCurrentAnswers();
       setSaved((current) => ({ ...current, [step]: true }));
 
       if (!isFinalStep) {
@@ -120,6 +157,12 @@ export function QuestionFlow({
                 onChange={(event) => updateAnswer(question.id, event.target.value)}
                 placeholder={t('answerPlaceholder')}
               />
+              {displayAnswers[question.id] ? (
+                <div className="mt-3 rounded-md border border-primary/20 bg-primary/10 px-3 py-2">
+                  <p className="text-xs font-medium text-primary">{t('answerLabel')}</p>
+                  <p className="mt-1 text-sm text-foreground">{displayAnswers[question.id].text}</p>
+                </div>
+              ) : null}
             </label>
           ))
         ) : (

@@ -73,6 +73,7 @@
     "answered": "{count} réponses en brouillon",
     "questionNumber": "Question {number}",
     "answerPlaceholder": "Saisissez votre réponse",
+    "answerLabel": "Réponse",
     "empty": "Aucune question n'est encore disponible pour cette étape.",
     "continue": "Enregistrer et continuer",
     "finish": "Enregistrer les réponses",

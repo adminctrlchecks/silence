@@ -73,6 +73,7 @@
     "answered": "{count} saved draft answers",
     "questionNumber": "Question {number}",
     "answerPlaceholder": "Type your answer",
+    "answerLabel": "Answer",
     "empty": "No questions are available for this step yet.",
     "continue": "Save and continue",
     "finish": "Save responses",
