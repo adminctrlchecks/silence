@@ -66,5 +66,22 @@
   "Chart": {
     "eyebrow": "Carte exemple",
     "title": "Aperçu de la carte natale"
+  },
+  "Questions": {
+    "eyebrow": "Parcours de questions",
+    "title": "Répondez aux questions",
+    "answered": "{count} réponses en brouillon",
+    "questionNumber": "Question {number}",
+    "answerPlaceholder": "Saisissez votre réponse",
+    "empty": "Aucune question n'est encore disponible pour cette étape.",
+    "continue": "Enregistrer et continuer",
+    "finish": "Enregistrer les réponses",
+    "viewChart": "Voir la carte",
+    "saveError": "Impossible d'enregistrer les réponses. Réessayez.",
+    "levels": {
+      "common": "Commun",
+      "level1": "Niveau 1",
+      "level2": "Niveau 2"
+    }
   }
 }

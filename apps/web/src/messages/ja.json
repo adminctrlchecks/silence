@@ -66,5 +66,22 @@
   "Chart": {
     "eyebrow": "サンプルチャート",
     "title": "出生チャートプレビュー"
+  },
+  "Questions": {
+    "eyebrow": "質問フロー",
+    "title": "質問に回答",
+    "answered": "{count} 件の下書き回答",
+    "questionNumber": "質問 {number}",
+    "answerPlaceholder": "回答を入力",
+    "empty": "このステップの質問はまだありません。",
+    "continue": "保存して続行",
+    "finish": "回答を保存",
+    "viewChart": "チャートを見る",
+    "saveError": "回答を保存できませんでした。もう一度お試しください。",
+    "levels": {
+      "common": "共通",
+      "level1": "レベル 1",
+      "level2": "レベル 2"
+    }
   }
 }

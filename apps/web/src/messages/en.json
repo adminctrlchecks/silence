@@ -66,5 +66,22 @@
   "Chart": {
     "eyebrow": "Sample chart",
     "title": "Birth chart preview"
+  },
+  "Questions": {
+    "eyebrow": "Question flow",
+    "title": "Answer your questions",
+    "answered": "{count} saved draft answers",
+    "questionNumber": "Question {number}",
+    "answerPlaceholder": "Type your answer",
+    "empty": "No questions are available for this step yet.",
+    "continue": "Save and continue",
+    "finish": "Save responses",
+    "viewChart": "View chart",
+    "saveError": "Unable to save responses. Please try again.",
+    "levels": {
+      "common": "Common",
+      "level1": "Level 1",
+      "level2": "Level 2"
+    }
   }
 }
