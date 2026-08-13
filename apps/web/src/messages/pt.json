@@ -68,12 +68,22 @@
     "eyebrow": "Mapa de exemplo",
     "title": "Prévia do mapa natal",
     "interpretation": "Interpretação",
-    "fallbackInterpretation": "O mapa é gerado com seus dados de nascimento e respostas salvas do nível 2."
+    "fallbackInterpretation": "O mapa é gerado com seus dados de nascimento e respostas salvas do nível 2.",
+    "chartLabel": "Computed chart",
+    "chartHelp": "Planetary geometry from your saved birth details.",
+    "interpretationHelp": "Personalized from the chart and your Level 2 answers.",
+    "ascendant": "Ascendant",
+    "keyPlacements": "Key placements",
+    "house": "House {house}",
+    "retrograde": "retrograde",
+    "notAvailable": "Not available"
   },
   "Remedy": {
     "eyebrow": "Remédio pessoal",
     "category": "Categoria: {category}",
-    "linkedLevel": "Nível vinculado: {level}"
+    "linkedLevel": "Nível vinculado: {level}",
+    "practice": "Suggested practice",
+    "closing": "Keep the remedy gentle and repeatable. Small consistency is more useful than intensity."
   },
   "Profile": {
     "eyebrow": "Perfil salvo",
@@ -114,6 +124,10 @@
       "common": "Comum",
       "level1": "Nível 1",
       "level2": "Nível 2"
-    }
+    },
+    "intro": "Move through three short layers. Your final chart reading is shaped by your Level 2 reflections, so plain honest answers work best.",
+    "progress": "Step {current} of {total}.",
+    "stepHelp": "Save this layer to reveal the guidance written for each question.",
+    "emptyTitle": "This layer is waiting for content."
   }
 }

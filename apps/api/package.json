@@ -19,6 +19,8 @@
     "prisma:deploy": "prisma migrate deploy",
     "prisma:studio": "prisma studio",
     "db:seed": "tsx prisma/seed.ts",
+    "content:seed": "tsx prisma/seed-content.ts",
+    "test-data:clean": "tsx prisma/clean-test-data.ts",
     "smoke": "node scripts/smoke.mjs"
   },
   "dependencies": {

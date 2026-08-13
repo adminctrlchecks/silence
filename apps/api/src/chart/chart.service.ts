@@ -65,11 +65,23 @@ export class ChartService {
     const level2 = await this.prisma.userResponse.findMany({
       where: { userId, level: 'level2' },
     });
-    const summary = level2.map((r) => r.value).join('; ');
-    const interpretation = await this.gemini.translate(
-      `Astrology reading based on chart and answers: ${summary}`,
+    const geo = geometry as {
+      ascendant?: { signName: string; degree: number } | null;
+      placements?: Array<{
+        planet: string;
+        signName: string;
+        house: number;
+        degree?: number;
+        retrograde: boolean;
+      }>;
+    };
+    const interpretation = await this.gemini.interpretChart({
+      category: user.category as Category,
+      ascendant: geo.ascendant ?? null,
+      placements: geo.placements ?? [],
+      answers: level2.map((r) => r.value),
       lang,
-    );
+    });
 
     const chart = await this.prisma.userChart.create({
       data: {

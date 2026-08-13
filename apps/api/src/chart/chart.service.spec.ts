@@ -5,13 +5,19 @@ import { createPrismaMock, PrismaMock } from '../test-utils/prisma-mock';
 describe('ChartService', () => {
   let prisma: PrismaMock;
   let astrology: { compute: jest.Mock };
-  let gemini: { translate: jest.Mock };
+  let gemini: { interpretChart: jest.Mock };
   let service: ChartService;
 
   beforeEach(() => {
     prisma = createPrismaMock();
-    astrology = { compute: jest.fn().mockReturnValue({ engine: 'test', placements: [] }) };
-    gemini = { translate: jest.fn().mockResolvedValue('interpretation text') };
+    astrology = {
+      compute: jest.fn().mockReturnValue({
+        engine: 'test',
+        ascendant: { signName: 'Cancer', degree: 12.4 },
+        placements: [{ planet: 'Moon', signName: 'Pisces', house: 9, degree: 18.2, retrograde: false }],
+      }),
+    };
+    gemini = { interpretChart: jest.fn().mockResolvedValue('interpretation text') };
     service = new ChartService(prisma as never, astrology as never, gemini as never);
   });
 
@@ -46,7 +52,13 @@ describe('ChartService', () => {
     const res = await service.generateForUser('u1', 'en');
 
     expect(astrology.compute).toHaveBeenCalled();
-    expect(gemini.translate).toHaveBeenCalled();
+    expect(gemini.interpretChart).toHaveBeenCalledWith({
+      category: 'female',
+      ascendant: { signName: 'Cancer', degree: 12.4 },
+      placements: [{ planet: 'Moon', signName: 'Pisces', house: 9, degree: 18.2, retrograde: false }],
+      answers: ['answer A', 'answer B'],
+      lang: 'en',
+    });
     expect(prisma.userChart.create).toHaveBeenCalled();
     expect(res).toMatchObject({ userId: 'u1', category: 'female', type: 'astrology', interpretation: 'interpretation text' });
   });

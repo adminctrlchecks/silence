@@ -56,24 +56,34 @@
     "signIn": "Sign in"
   },
   "UserApp": {
-    "eyebrow": "User workspace",
-    "title": "Your Silence session",
-    "questions": "Question flow",
-    "chart": "Saved chart",
+    "eyebrow": "Your astrology session",
+    "title": "Question, chart, and remedy",
+    "questions": "Answer questions",
+    "chart": "Birth chart",
     "remedy": "Remedy",
     "profile": "Profile",
     "history": "History"
   },
   "Chart": {
-    "eyebrow": "Sample chart",
-    "title": "Birth chart preview",
-    "interpretation": "Interpretation",
-    "fallbackInterpretation": "The chart is generated from your birth details and saved Level 2 answers."
+    "eyebrow": "Birth chart",
+    "title": "Your astrology chart",
+    "interpretation": "Chart reading",
+    "fallbackInterpretation": "Complete the Level 2 questions to make this interpretation more personal.",
+    "chartLabel": "Computed chart",
+    "chartHelp": "Planetary geometry from your saved birth details.",
+    "interpretationHelp": "Personalized from the chart and your Level 2 answers.",
+    "ascendant": "Ascendant",
+    "keyPlacements": "Key placements",
+    "house": "House {house}",
+    "retrograde": "retrograde",
+    "notAvailable": "Not available"
   },
   "Remedy": {
     "eyebrow": "Personal remedy",
     "category": "Category: {category}",
-    "linkedLevel": "Linked level: {level}"
+    "linkedLevel": "Linked level: {level}",
+    "practice": "Suggested practice",
+    "closing": "Keep the remedy gentle and repeatable. Small consistency is more useful than intensity."
   },
   "Profile": {
     "eyebrow": "Saved profile",
@@ -100,20 +110,24 @@
   },
   "Questions": {
     "eyebrow": "Question flow",
-    "title": "Answer your questions",
-    "answered": "{count} saved draft answers",
+    "title": "Share your reflections",
+    "answered": "{count} of {total} draft answers saved locally",
     "questionNumber": "Question {number}",
-    "answerPlaceholder": "Type your answer",
-    "answerLabel": "Answer",
-    "empty": "No questions are available for this step yet.",
+    "answerPlaceholder": "Write a few honest lines...",
+    "answerLabel": "Guidance",
+    "empty": "An admin can add questions for this category and level, then this step will appear here automatically.",
     "continue": "Save and continue",
-    "finish": "Save responses",
-    "viewChart": "View chart",
+    "finish": "Save final layer",
+    "viewChart": "Open your chart",
     "saveError": "Unable to save responses. Please try again.",
     "levels": {
       "common": "Common",
       "level1": "Level 1",
       "level2": "Level 2"
-    }
+    },
+    "intro": "Move through three short layers. Your final chart reading is shaped by your Level 2 reflections, so plain honest answers work best.",
+    "progress": "Step {current} of {total}.",
+    "stepHelp": "Save this layer to reveal the guidance written for each question.",
+    "emptyTitle": "This layer is waiting for content."
   }
 }

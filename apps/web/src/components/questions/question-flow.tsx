@@ -41,6 +41,10 @@ export function QuestionFlow({
     () => levels.reduce((total, level) => total + questions[level].filter((question) => answers[question.id]?.trim()).length, 0),
     [answers, questions],
   );
+  const totalCount = useMemo(
+    () => levels.reduce((total, level) => total + questions[level].length, 0),
+    [questions],
+  );
 
   function updateAnswer(questionId: string, value: string) {
     setAnswers((current) => ({ ...current, [questionId]: value }));
@@ -124,7 +128,10 @@ export function QuestionFlow({
         <div>
           <p className="text-sm font-medium text-primary">{t('eyebrow')}</p>
           <h1 className="mt-2 text-3xl font-semibold tracking-normal">{t('title')}</h1>
-          <p className="mt-2 text-sm text-muted-foreground">{t('answered', { count: answeredCount })}</p>
+          <p className="mt-2 max-w-2xl text-sm leading-6 text-muted-foreground">{t('intro')}</p>
+          <p className="mt-2 text-sm text-muted-foreground">
+            {t('answered', { count: answeredCount, total: totalCount })}
+          </p>
         </div>
         <div className="flex gap-2">
           {levels.map((level) => (
@@ -143,6 +150,13 @@ export function QuestionFlow({
         </div>
       </div>
 
+      <div className="mt-5 rounded-md border border-primary/20 bg-primary/5 px-4 py-3 text-sm text-muted-foreground">
+        <span className="font-medium text-foreground">
+          {t('progress', { current: currentIndex + 1, total: levels.length })}
+        </span>{' '}
+        {t('stepHelp')}
+      </div>
+
       <div className="mt-6 space-y-4">
         {currentQuestions.length ? (
           currentQuestions.map((question, index) => (
@@ -150,24 +164,31 @@ export function QuestionFlow({
               <span className="text-xs font-medium text-muted-foreground">
                 {t('questionNumber', { number: index + 1 })}
               </span>
-              <span className="mt-2 block text-sm font-medium">{question.text}</span>
+              <span className="mt-2 block text-sm font-medium" dir="auto">
+                {question.text}
+              </span>
               <textarea
                 className="mt-3 min-h-24 w-full resize-y rounded-md border border-border bg-card px-3 py-2 text-sm outline-none focus-visible:ring-2 focus-visible:ring-ring"
                 value={answers[question.id] ?? ''}
                 onChange={(event) => updateAnswer(question.id, event.target.value)}
                 placeholder={t('answerPlaceholder')}
+                aria-label={question.text}
+                dir="auto"
               />
               {displayAnswers[question.id] ? (
                 <div className="mt-3 rounded-md border border-primary/20 bg-primary/10 px-3 py-2">
                   <p className="text-xs font-medium text-primary">{t('answerLabel')}</p>
-                  <p className="mt-1 text-sm text-foreground">{displayAnswers[question.id].text}</p>
+                  <p className="mt-1 text-sm leading-6 text-foreground" dir="auto">
+                    {displayAnswers[question.id].text}
+                  </p>
                 </div>
               ) : null}
             </label>
           ))
         ) : (
-          <div className="rounded-md border border-border bg-background p-4 text-sm text-muted-foreground">
-            {t('empty')}
+          <div className="rounded-md border border-dashed border-border bg-background p-5 text-sm text-muted-foreground">
+            <p className="font-medium text-foreground">{t('emptyTitle')}</p>
+            <p className="mt-1">{t('empty')}</p>
           </div>
         )}
       </div>

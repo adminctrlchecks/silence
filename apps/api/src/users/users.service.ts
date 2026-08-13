@@ -1,6 +1,7 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
 import type { Category } from '@silence/shared';
 import { PrismaService } from '../prisma/prisma.service';
+import { paginated, parsePageParams } from '../common/pagination';
 
 @Injectable()
 export class UsersService {
@@ -24,6 +25,59 @@ export class UsersService {
       },
     });
     return this.present(u);
+  }
+
+  async listForAdmin(page?: number, limit?: number) {
+    const pp = parsePageParams(page, limit);
+    const [rows, total] = await this.prisma.$transaction([
+      this.prisma.user.findMany({
+        orderBy: { createdAt: 'desc' },
+        skip: pp.skip,
+        take: pp.take,
+        include: {
+          _count: { select: { responses: true, charts: true } },
+        },
+      }),
+      this.prisma.user.count(),
+    ]);
+
+    return paginated(
+      rows.map((user) => ({
+        ...this.present(user),
+        createdAt: user.createdAt.toISOString(),
+        updatedAt: user.updatedAt.toISOString(),
+        responseCount: user._count.responses,
+        chartCount: user._count.charts,
+      })),
+      pp.page,
+      pp.limit,
+      total,
+    );
+  }
+
+  async getForAdmin(id: string) {
+    const user = await this.prisma.user.findUnique({
+      where: { id },
+      include: {
+        responses: { orderBy: { createdAt: 'asc' } },
+        charts: { orderBy: { createdAt: 'asc' } },
+      },
+    });
+    if (!user) throw new NotFoundException('User not found');
+
+    return {
+      ...this.present(user),
+      createdAt: user.createdAt.toISOString(),
+      updatedAt: user.updatedAt.toISOString(),
+      responses: user.responses.map((response) => ({
+        ...response,
+        createdAt: response.createdAt.toISOString(),
+      })),
+      charts: user.charts.map((chart) => ({
+        ...chart,
+        createdAt: chart.createdAt.toISOString(),
+      })),
+    };
   }
 
   /** Saved Q&A + chart + remedy per session — docs/API.md §10. */

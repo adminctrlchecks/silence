@@ -5,6 +5,8 @@ import { usePathname } from 'next/navigation';
 import { Menu, PanelLeftClose, PanelLeftOpen, Search } from 'lucide-react';
 import { ThemeToggle } from '@/components/theme-toggle';
 import { Button } from '@/components/ui/button';
+import { SignOutButton } from '@/components/auth/sign-out-button';
+import { useAdminAuthSession } from './admin-auth-session-provider';
 import { useAdminSidebar } from './sidebar-context';
 
 function titleForPath(pathname: string) {
@@ -16,6 +18,7 @@ function titleForPath(pathname: string) {
 export function AdminHeader() {
   const pathname = usePathname();
   const { expanded, toggleDesktop, toggleMobile } = useAdminSidebar();
+  const { authenticated } = useAdminAuthSession();
 
   return (
     <header className="sticky top-0 z-30 border-b border-border bg-background/90 backdrop-blur">
@@ -57,6 +60,9 @@ export function AdminHeader() {
         <Button asChild variant="outline" size="sm">
           <Link href="/">User app</Link>
         </Button>
+        {authenticated ? (
+          <SignOutButton endpoint="/api/auth/admin/logout" redirectTo="/admin/login" />
+        ) : null}
       </div>
     </header>
   );

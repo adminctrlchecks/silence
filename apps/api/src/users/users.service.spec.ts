@@ -6,6 +6,8 @@ const DB_USER = {
   id: 'u1', name: 'Asha', category: 'female', dob: '1998-04-21', timeOfBirth: '07:35',
   placeCity: 'Chennai', placeCountry: 'IN', placeLat: 13.08, placeLng: 80.27,
   contact: 'asha@example.com', lang: 'en', consent: true,
+  createdAt: new Date('2026-08-14T00:00:00.000Z'),
+  updatedAt: new Date('2026-08-14T01:00:00.000Z'),
 };
 
 describe('UsersService', () => {
@@ -43,5 +45,34 @@ describe('UsersService', () => {
   it('update() throws NotFound for an unknown id', async () => {
     prisma.user.count.mockResolvedValue(0);
     await expect(service.update('nope', { name: 'x' })).rejects.toBeInstanceOf(NotFoundException);
+  });
+
+  it('listForAdmin() returns paginated users with response/chart counts', async () => {
+    prisma.user.findMany.mockResolvedValue([{ ...DB_USER, _count: { responses: 2, charts: 1 } }]);
+    prisma.user.count.mockResolvedValue(1);
+
+    const res = await service.listForAdmin();
+
+    expect(res).toMatchObject({ page: 1, total: 1 });
+    expect(res.data[0]).toMatchObject({
+      id: 'u1',
+      responseCount: 2,
+      chartCount: 1,
+      createdAt: '2026-08-14T00:00:00.000Z',
+    });
+    expect(res.data[0]).not.toHaveProperty('passwordHash');
+  });
+
+  it('getForAdmin() includes saved responses and charts', async () => {
+    prisma.user.findUnique.mockResolvedValue({
+      ...DB_USER,
+      responses: [{ id: 'r1', createdAt: new Date('2026-08-14T02:00:00.000Z') }],
+      charts: [{ id: 'c1', createdAt: new Date('2026-08-14T03:00:00.000Z') }],
+    });
+
+    const res = await service.getForAdmin('u1');
+
+    expect(res.responses[0].createdAt).toBe('2026-08-14T02:00:00.000Z');
+    expect(res.charts[0].createdAt).toBe('2026-08-14T03:00:00.000Z');
   });
 });

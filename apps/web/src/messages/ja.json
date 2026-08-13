@@ -68,12 +68,22 @@
     "eyebrow": "サンプルチャート",
     "title": "出生チャートプレビュー",
     "interpretation": "解釈",
-    "fallbackInterpretation": "チャートは出生情報と保存済みのレベル2回答から生成されます。"
+    "fallbackInterpretation": "チャートは出生情報と保存済みのレベル2回答から生成されます。",
+    "chartLabel": "Computed chart",
+    "chartHelp": "Planetary geometry from your saved birth details.",
+    "interpretationHelp": "Personalized from the chart and your Level 2 answers.",
+    "ascendant": "Ascendant",
+    "keyPlacements": "Key placements",
+    "house": "House {house}",
+    "retrograde": "retrograde",
+    "notAvailable": "Not available"
   },
   "Remedy": {
     "eyebrow": "個人レメディ",
     "category": "カテゴリ: {category}",
-    "linkedLevel": "関連レベル: {level}"
+    "linkedLevel": "関連レベル: {level}",
+    "practice": "Suggested practice",
+    "closing": "Keep the remedy gentle and repeatable. Small consistency is more useful than intensity."
   },
   "Profile": {
     "eyebrow": "保存済みプロフィール",
@@ -114,6 +124,10 @@
       "common": "共通",
       "level1": "レベル 1",
       "level2": "レベル 2"
-    }
+    },
+    "intro": "Move through three short layers. Your final chart reading is shaped by your Level 2 reflections, so plain honest answers work best.",
+    "progress": "Step {current} of {total}.",
+    "stepHelp": "Save this layer to reveal the guidance written for each question.",
+    "emptyTitle": "This layer is waiting for content."
   }
 }

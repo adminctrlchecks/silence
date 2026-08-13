@@ -68,12 +68,22 @@
     "eyebrow": "नमूना कुंडली",
     "title": "जन्म कुंडली पूर्वावलोकन",
     "interpretation": "व्याख्या",
-    "fallbackInterpretation": "कुंडली आपके जन्म विवरण और सहेजे गए स्तर 2 उत्तरों से बनाई गई है।"
+    "fallbackInterpretation": "कुंडली आपके जन्म विवरण और सहेजे गए स्तर 2 उत्तरों से बनाई गई है।",
+    "chartLabel": "Computed chart",
+    "chartHelp": "Planetary geometry from your saved birth details.",
+    "interpretationHelp": "Personalized from the chart and your Level 2 answers.",
+    "ascendant": "Ascendant",
+    "keyPlacements": "Key placements",
+    "house": "House {house}",
+    "retrograde": "retrograde",
+    "notAvailable": "Not available"
   },
   "Remedy": {
     "eyebrow": "व्यक्तिगत उपाय",
     "category": "श्रेणी: {category}",
-    "linkedLevel": "लिंक स्तर: {level}"
+    "linkedLevel": "लिंक स्तर: {level}",
+    "practice": "Suggested practice",
+    "closing": "Keep the remedy gentle and repeatable. Small consistency is more useful than intensity."
   },
   "Profile": {
     "eyebrow": "सहेजी गई प्रोफ़ाइल",
@@ -114,6 +124,10 @@
       "common": "सामान्य",
       "level1": "स्तर 1",
       "level2": "स्तर 2"
-    }
+    },
+    "intro": "Move through three short layers. Your final chart reading is shaped by your Level 2 reflections, so plain honest answers work best.",
+    "progress": "Step {current} of {total}.",
+    "stepHelp": "Save this layer to reveal the guidance written for each question.",
+    "emptyTitle": "This layer is waiting for content."
   }
 }

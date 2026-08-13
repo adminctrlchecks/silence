@@ -68,12 +68,22 @@
     "eyebrow": "示例星盘",
     "title": "出生星盘预览",
     "interpretation": "解读",
-    "fallbackInterpretation": "星盘根据你的出生信息和已保存的第 2 级答案生成。"
+    "fallbackInterpretation": "星盘根据你的出生信息和已保存的第 2 级答案生成。",
+    "chartLabel": "Computed chart",
+    "chartHelp": "Planetary geometry from your saved birth details.",
+    "interpretationHelp": "Personalized from the chart and your Level 2 answers.",
+    "ascendant": "Ascendant",
+    "keyPlacements": "Key placements",
+    "house": "House {house}",
+    "retrograde": "retrograde",
+    "notAvailable": "Not available"
   },
   "Remedy": {
     "eyebrow": "个人补救建议",
     "category": "类别：{category}",
-    "linkedLevel": "关联级别：{level}"
+    "linkedLevel": "关联级别：{level}",
+    "practice": "Suggested practice",
+    "closing": "Keep the remedy gentle and repeatable. Small consistency is more useful than intensity."
   },
   "Profile": {
     "eyebrow": "已保存资料",
@@ -114,6 +124,10 @@
       "common": "通用",
       "level1": "第 1 级",
       "level2": "第 2 级"
-    }
+    },
+    "intro": "Move through three short layers. Your final chart reading is shaped by your Level 2 reflections, so plain honest answers work best.",
+    "progress": "Step {current} of {total}.",
+    "stepHelp": "Save this layer to reveal the guidance written for each question.",
+    "emptyTitle": "This layer is waiting for content."
   }
 }

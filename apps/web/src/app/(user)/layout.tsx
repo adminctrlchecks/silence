@@ -3,6 +3,7 @@ import { cookies } from 'next/headers';
 import { getTranslations } from 'next-intl/server';
 import type { ReactNode } from 'react';
 import { AuthSessionProvider } from '@/components/auth/auth-session-provider';
+import { SignOutButton } from '@/components/auth/sign-out-button';
 import { ThemeToggle } from '@/components/theme-toggle';
 import { Button } from '@/components/ui/button';
 import { USER_TOKEN_COOKIE } from '@/lib/auth-routing';
@@ -25,9 +26,13 @@ export default async function UserLayout({ children }: { children: ReactNode }) 
               <Button asChild variant="ghost" size="sm">
                 <Link href="/app">{t('mySession')}</Link>
               </Button>
-              <Button asChild variant="outline" size="sm">
-                <Link href="/login">{t('signIn')}</Link>
-              </Button>
+              {authenticated ? (
+                <SignOutButton endpoint="/api/auth/logout" redirectTo="/login" />
+              ) : (
+                <Button asChild variant="outline" size="sm">
+                  <Link href="/login">{t('signIn')}</Link>
+                </Button>
+              )}
               <ThemeToggle />
             </nav>
           </div>

@@ -79,6 +79,7 @@ describe('Silence API e2e', () => {
       .overrideProvider(GeminiService)
       .useValue({
         generateAnswer: jest.fn().mockResolvedValue('Generated answer from e2e Gemini stub'),
+        interpretChart: jest.fn().mockResolvedValue('Generated chart interpretation from e2e Gemini stub'),
         translate: jest.fn((text: string, lang: string) => Promise.resolve(`${lang}:${text}`)),
       })
       .compile();
@@ -138,6 +139,27 @@ describe('Silence API e2e', () => {
       .send({ refreshToken: userBody.refreshToken })
       .expect(201);
     expect((userRefresh.body as { token: string }).token).toBeTruthy();
+
+    const secondUserRegister = await request(app.getHttpServer())
+      .post('/api/v1/auth/user/register')
+      .send({
+        name: 'Dev',
+        category: 'other',
+        dob: '1995-01-10',
+        timeOfBirth: '12:15',
+        placeOfBirth: { city: 'Mumbai', country: 'IN', lat: 19.07, lng: 72.88 },
+        contact: 'dev.e2e@example.com',
+        password: 'user-password',
+        lang: 'en',
+        consent: true,
+      })
+      .expect(201);
+    const secondUserBody = secondUserRegister.body as { token: string; user: { id: string } };
+
+    await request(app.getHttpServer())
+      .get(`/api/v1/users/${userBody.user.id}`)
+      .set('Authorization', `Bearer ${secondUserBody.token}`)
+      .expect(403);
 
     await request(app.getHttpServer()).get('/api/v1/languages').expect(200).expect(({ body }) => {
       expect(body.data.length).toBeGreaterThanOrEqual(11);
@@ -325,6 +347,27 @@ describe('Silence API e2e', () => {
         expect(body).toMatchObject({ id: userBody.user.id, name: 'Asha', category: 'female' });
         expect(body.placeOfBirth).toMatchObject({ city: 'Chennai', country: 'IN' });
         expect(body).not.toHaveProperty('passwordHash');
+      });
+
+    await request(app.getHttpServer())
+      .get('/api/v1/admin/users')
+      .set('Authorization', `Bearer ${adminToken}`)
+      .expect(200)
+      .expect(({ body }) => {
+        expect(body.total).toBeGreaterThanOrEqual(2);
+        expect(body.data[0]).not.toHaveProperty('passwordHash');
+        expect(body.data).toEqual(
+          expect.arrayContaining([expect.objectContaining({ id: userBody.user.id, responseCount: 1 })]),
+        );
+      });
+
+    await request(app.getHttpServer())
+      .get(`/api/v1/admin/users/${userBody.user.id}`)
+      .set('Authorization', `Bearer ${adminToken}`)
+      .expect(200)
+      .expect(({ body }) => {
+        expect(body).toMatchObject({ id: userBody.user.id, name: 'Asha' });
+        expect(body.responses).toHaveLength(1);
       });
 
     await request(app.getHttpServer())

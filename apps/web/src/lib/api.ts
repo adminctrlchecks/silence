@@ -16,6 +16,20 @@ import type {
   ChartConfig,
 } from '@silence/shared';
 
+export type AdminUserSummary = UserProfile & {
+  createdAt: string;
+  updatedAt: string;
+  responseCount: number;
+  chartCount: number;
+};
+
+export type AdminUserDetail = UserProfile & {
+  createdAt: string;
+  updatedAt: string;
+  responses: UserHistory['responses'];
+  charts: UserHistory['charts'];
+};
+
 const BASE_URL =
   process.env.NEXT_PUBLIC_API_BASE_URL ??
   process.env.API_BASE_URL ??
@@ -143,6 +157,10 @@ export const adminApi = {
     request<Answer>('/admin/answers/ai-generate', { method: 'POST', token, body }),
   listRemedies: (token: string, q: Query) =>
     request<Paginated<Remedy>>('/admin/remedies', { token, query: q }),
+  listUsers: (token: string, q: Query) =>
+    request<Paginated<AdminUserSummary>>('/admin/users', { token, query: q }),
+  getUser: (token: string, id: string) =>
+    request<AdminUserDetail>(`/admin/users/${id}`, { token }),
   createRemedy: (token: string, body: unknown) =>
     request<Remedy>('/admin/remedies', { method: 'POST', token, body }),
   updateRemedy: (token: string, id: string, body: unknown) =>

@@ -1,11 +1,31 @@
-import { Body, Controller, Get, Param, Put, Query, UseGuards } from '@nestjs/common';
-import { ApiTags, ApiBearerAuth } from '@nestjs/swagger';
+import {
+  Body,
+  Controller,
+  ForbiddenException,
+  Get,
+  Param,
+  Put,
+  Query,
+  Req,
+  UseGuards,
+} from '@nestjs/common';
+import type { Request } from 'express';
+import { ApiBearerAuth, ApiTags } from '@nestjs/swagger';
+import { AdminJwtGuard } from '../auth/guards/admin-jwt.guard';
 import { UserJwtGuard } from '../auth/guards/user-jwt.guard';
-import { UsersService } from './users.service';
 import { ChartService } from '../chart/chart.service';
 import { RemediesService } from '../remedies/remedies.service';
+import { UsersService } from './users.service';
 
-/** User profile, chart, remedy, history — docs/API.md §9–10. */
+type AuthenticatedRequest = Request & { user?: { id?: string; role?: string } };
+
+function assertOwnUser(req: AuthenticatedRequest, id: string) {
+  if (req.user?.id !== id) {
+    throw new ForbiddenException('You can only access your own user record');
+  }
+}
+
+/** User profile, chart, remedy, history - docs/API.md sections 9-10. */
 @ApiTags('user: profile')
 @ApiBearerAuth('user')
 @Controller('users')
@@ -18,30 +38,51 @@ export class UsersController {
   ) {}
 
   @Get(':id')
-  get(@Param('id') id: string) {
+  get(@Param('id') id: string, @Req() req: AuthenticatedRequest) {
+    assertOwnUser(req, id);
     return this.users.get(id);
   }
 
   @Put(':id')
-  update(@Param('id') id: string, @Body() body: Record<string, unknown>) {
+  update(@Param('id') id: string, @Body() body: Record<string, unknown>, @Req() req: AuthenticatedRequest) {
+    assertOwnUser(req, id);
     return this.users.update(id, body);
   }
 
   @Get(':id/history')
-  history(@Param('id') id: string, @Query('lang') lang?: string) {
+  history(@Param('id') id: string, @Req() req: AuthenticatedRequest, @Query('lang') lang?: string) {
+    assertOwnUser(req, id);
     return this.users.history(id, lang);
   }
 
-  // §9 — chart generated from the user's Level 2 data + birth details.
   @Get(':id/chart')
-  chartFor(@Param('id') id: string, @Query('lang') lang?: string) {
+  chartFor(@Param('id') id: string, @Req() req: AuthenticatedRequest, @Query('lang') lang?: string) {
+    assertOwnUser(req, id);
     return this.chart.generateForUser(id, lang ?? 'en');
   }
 
-  // §9 — remedy for the user (resolved by their category).
   @Get(':id/remedy')
-  async remedyFor(@Param('id') id: string, @Query('lang') lang?: string) {
+  async remedyFor(@Param('id') id: string, @Req() req: AuthenticatedRequest, @Query('lang') lang?: string) {
+    assertOwnUser(req, id);
     const user = await this.users.get(id);
     return this.remedies.forCategory(user.category, lang);
+  }
+}
+
+@ApiTags('admin: users')
+@ApiBearerAuth('admin')
+@Controller('admin/users')
+@UseGuards(AdminJwtGuard)
+export class AdminUsersController {
+  constructor(private readonly users: UsersService) {}
+
+  @Get()
+  list(@Query('page') page?: string, @Query('limit') limit?: string) {
+    return this.users.listForAdmin(page ? Number(page) : undefined, limit ? Number(limit) : undefined);
+  }
+
+  @Get(':id')
+  get(@Param('id') id: string) {
+    return this.users.getForAdmin(id);
   }
 }

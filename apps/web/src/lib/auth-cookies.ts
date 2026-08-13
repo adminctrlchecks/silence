@@ -43,3 +43,23 @@ export function setAdminAuthCookies(
   response.cookies.set(ADMIN_TOKEN_COOKIE, auth.token, cookieOptions(accessMaxAge));
   response.cookies.set(ADMIN_REFRESH_COOKIE, auth.refreshToken, cookieOptions(refreshMaxAge));
 }
+
+function clearCookie(response: NextResponse, name: string) {
+  response.cookies.set(name, '', {
+    httpOnly: true,
+    sameSite: 'lax',
+    secure: process.env.NODE_ENV === 'production',
+    path: '/',
+    maxAge: 0,
+  });
+}
+
+export function clearUserAuthCookies(response: NextResponse) {
+  clearCookie(response, USER_TOKEN_COOKIE);
+  clearCookie(response, USER_REFRESH_COOKIE);
+}
+
+export function clearAdminAuthCookies(response: NextResponse) {
+  clearCookie(response, ADMIN_TOKEN_COOKIE);
+  clearCookie(response, ADMIN_REFRESH_COOKIE);
+}

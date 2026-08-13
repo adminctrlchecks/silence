@@ -68,12 +68,22 @@
     "eyebrow": "Carte exemple",
     "title": "Aperçu de la carte natale",
     "interpretation": "Interprétation",
-    "fallbackInterpretation": "La carte est générée à partir de vos détails de naissance et de vos réponses de niveau 2 enregistrées."
+    "fallbackInterpretation": "La carte est générée à partir de vos détails de naissance et de vos réponses de niveau 2 enregistrées.",
+    "chartLabel": "Computed chart",
+    "chartHelp": "Planetary geometry from your saved birth details.",
+    "interpretationHelp": "Personalized from the chart and your Level 2 answers.",
+    "ascendant": "Ascendant",
+    "keyPlacements": "Key placements",
+    "house": "House {house}",
+    "retrograde": "retrograde",
+    "notAvailable": "Not available"
   },
   "Remedy": {
     "eyebrow": "Remède personnel",
     "category": "Catégorie : {category}",
-    "linkedLevel": "Niveau lié : {level}"
+    "linkedLevel": "Niveau lié : {level}",
+    "practice": "Suggested practice",
+    "closing": "Keep the remedy gentle and repeatable. Small consistency is more useful than intensity."
   },
   "Profile": {
     "eyebrow": "Profil enregistré",
@@ -114,6 +124,10 @@
       "common": "Commun",
       "level1": "Niveau 1",
       "level2": "Niveau 2"
-    }
+    },
+    "intro": "Move through three short layers. Your final chart reading is shaped by your Level 2 reflections, so plain honest answers work best.",
+    "progress": "Step {current} of {total}.",
+    "stepHelp": "Save this layer to reveal the guidance written for each question.",
+    "emptyTitle": "This layer is waiting for content."
   }
 }
