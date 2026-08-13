@@ -111,6 +111,16 @@ export const authApi = {
 
 /** Admin endpoints — docs/API.md §2–7 (all require an admin token). */
 export const adminApi = {
+  languages: (token: string) =>
+    request<{ data: { code: string; name: string; rtl: boolean }[] }>('/admin/languages', { token }),
+  addLanguage: (token: string, body: unknown) =>
+    request<{ code: string; name: string; rtl: boolean }>('/admin/languages', { method: 'POST', token, body }),
+  autoTranslate: (token: string, body: unknown) =>
+    request<{ id: string; translated: string[]; provider: string }>('/admin/translations/auto', {
+      method: 'POST',
+      token,
+      body,
+    }),
   listQuestions: (token: string, q: Query) =>
     request<Paginated<Question>>('/admin/questions', { token, query: q }),
   getQuestion: (token: string, id: string, q: Query = {}) =>
