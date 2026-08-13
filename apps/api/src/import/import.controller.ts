@@ -27,7 +27,8 @@ export class ImportController {
   template(@Query('type') type: ImportType, @Res() res: Response) {
     if (!IMPORT_TYPES.includes(type)) throw new BadRequestException('Invalid type');
     const cols = this.imports.templateColumns(type);
-    const ws = XLSX.utils.aoa_to_sheet([cols]);
+    const example = this.imports.templateExample(type);
+    const ws = XLSX.utils.aoa_to_sheet([cols, example]);
     const wb = XLSX.utils.book_new();
     XLSX.utils.book_append_sheet(wb, ws, 'template');
     const buf = XLSX.write(wb, { type: 'buffer', bookType: 'xlsx' });
