@@ -1,0 +1,31 @@
+# Silence API (NestJS) — isolated from CtrlChecks. Port 3010, localhost only.
+# Install:
+#   sudo cp deploy/systemd/silence-api.service /etc/systemd/system/
+#   sudo systemctl daemon-reload && sudo systemctl enable --now silence-api
+# Node path: adjust ExecStart if `which node` differs from /usr/bin/node.
+
+[Unit]
+Description=Silence API (NestJS)
+Documentation=https://github.com/adminctrlchecks/silence
+After=network-online.target postgresql.service
+Wants=network-online.target
+
+[Service]
+Type=simple
+User=silence
+Group=silence
+WorkingDirectory=/opt/silence/apps/api
+# Real secrets live here (gitignored); created on deploy from deploy/.secrets.env.
+EnvironmentFile=/opt/silence/apps/api/.env
+Environment=NODE_ENV=production
+ExecStart=/usr/bin/node dist/src/main.js
+Restart=on-failure
+RestartSec=5
+# Hardening
+NoNewPrivileges=true
+ProtectSystem=full
+ProtectHome=true
+PrivateTmp=true
+
+[Install]
+WantedBy=multi-user.target

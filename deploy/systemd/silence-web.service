@@ -1,0 +1,33 @@
+# Silence Web (Next.js standalone) — isolated from CtrlChecks. Port 3011, localhost only.
+# Install:
+#   sudo cp deploy/systemd/silence-web.service /etc/systemd/system/
+#   sudo systemctl daemon-reload && sudo systemctl enable --now silence-web
+# Runs the standalone server produced by `next build` (output: 'standalone').
+
+[Unit]
+Description=Silence Web (Next.js)
+Documentation=https://github.com/adminctrlchecks/silence
+After=network-online.target silence-api.service
+Wants=network-online.target
+
+[Service]
+Type=simple
+User=silence
+Group=silence
+# Standalone bundle path (monorepo): .next/standalone/apps/web/server.js
+WorkingDirectory=/opt/silence/apps/web/.next/standalone/apps/web
+EnvironmentFile=/opt/silence/apps/web/.env.production
+Environment=NODE_ENV=production
+Environment=PORT=3011
+Environment=HOSTNAME=127.0.0.1
+ExecStart=/usr/bin/node server.js
+Restart=on-failure
+RestartSec=5
+# Hardening
+NoNewPrivileges=true
+ProtectSystem=full
+ProtectHome=true
+PrivateTmp=true
+
+[Install]
+WantedBy=multi-user.target
