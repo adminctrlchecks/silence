@@ -80,7 +80,7 @@ as it goes. See [LOOP_PROMPT.md](LOOP_PROMPT.md) for the prompt that drives it.
 
 ## PHASE 1 — Database live (local)
 
-- [ ] **P1-1** `prisma migrate dev --name init` against Docker Postgres; commit `prisma/migrations`. *Verify:* migration applies clean.
+- [x] **P1-1** `prisma migrate dev --name init` against Docker Postgres; commit `prisma/migrations`. *Verify:* migration applies clean. — migration `20260813110356_init` applied; 13 tables created in silence_db.
 - [ ] **P1-2** Run `db:seed`; confirm admin + 11 languages present. *Verify:* row counts.
 - [ ] **P1-3** `/health` returns `{ db: "up" }`; write a smoke script hitting one endpoint per module. *Verify:* smoke script all 2xx.
 
@@ -185,3 +185,4 @@ _(the loop appends dated one-liners here as phases complete)_
 - 2026-08-13 — P0-5 done (`deploy/.secrets.env.example` template; real secrets file gitignored).
 - 2026-08-13 — P0-6 done (git repo + origin adminctrlchecks/silence; main pushed; gh CLI installed & authed). From P0-7 on: feature branch → PR → squash-merge on GitHub.
 - 2026-08-13 — P0-7 done (GitHub Actions CI; PR #1 green & squash-merged). **Phase 0 complete.**
+- 2026-08-13 — P1-1 done (prisma init migration; 13 tables live in local silence_db).
