@@ -149,7 +149,7 @@ as it goes. See [LOOP_PROMPT.md](LOOP_PROMPT.md) for the prompt that drives it.
 - [x] **P10-1** `apps/web` `output: 'standalone'`; production build verified. *Verify:* `next build` standalone runs. — `output: 'standalone'` + `outputFileTracingRoot` (monorepo) in next.config; build emits `.next/standalone/apps/web/server.js`; ran it (with static/public copied) → home page 200.
 - [x] **P10-2** **systemd units**: `silence-api.service` (:3010), `silence-web.service` (:3011). Templates in `deploy/systemd/`. — both units under `deploy/systemd/` (User=silence, EnvironmentFile, Restart=on-failure, hardening); API runs `node dist/src/main.js`, web runs the standalone `server.js` bound to 127.0.0.1:3011.
 - [x] **P10-3** **Nginx vhost** template (`deploy/nginx/silence.conf`) → proxy 3010/3011; placeholder `server_name` (no domain yet). — vhost for `server_name silence.ctrlchecks.ai` (domain provided): `/api/v1/`→API :3010 (direct backend + Swagger), `/`→web :3011 (pages + its same-origin `/api/*` proxy routes); own upstreams, 15m upload limit, certbot note. Isolated by server_name from CtrlChecks.
-- [ ] **P10-4** `deploy/deploy.sh` + `prisma migrate deploy` step; `.env.production` templates. *Verify:* dry-run script logic.
+- [x] **P10-4** `deploy/deploy.sh` + `prisma migrate deploy` step; `.env.production` templates. *Verify:* dry-run script logic. — `deploy/deploy.sh` (run on VPS): writes api `.env`/web `.env.production` from `deploy/.secrets.env` (auto-generates JWT secrets), install+build, `prisma migrate deploy` + seed, installs systemd units + Nginx vhost (reload), health check. `--dry-run` prints every step; env templates in `deploy/env/`. **Phase 10 complete.**
 
 ## PHASE 11 — VPS deploy (Hostinger, isolated) 🔒
 
@@ -227,3 +227,4 @@ _(the loop appends dated one-liners here as phases complete)_
 - 2026-08-14 — P10-1 done (`apps/web` output: 'standalone' + monorepo tracing root; standalone server verified serving home page 200).
 - 2026-08-14 — P10-2 done (systemd unit templates `silence-api.service` :3010 + `silence-web.service` :3011 in deploy/systemd/, hardened, EnvironmentFile-driven).
 - 2026-08-14 — P10-3 done (Nginx vhost `deploy/nginx/silence.conf` for silence.ctrlchecks.ai; /api/v1→3010, /→3011; isolated by server_name).
+- 2026-08-14 — P10-4 done (`deploy/deploy.sh` with env generation, install/build, migrate deploy + seed, systemd + nginx install, health check; `--dry-run` verified; env templates in deploy/env/). **Phase 10 complete.** P0–P10 all done; only P11 (Hostinger deploy) remains.
