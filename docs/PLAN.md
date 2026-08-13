@@ -120,7 +120,7 @@ as it goes. See [LOOP_PROMPT.md](LOOP_PROMPT.md) for the prompt that drives it.
 
 ## PHASE 6 — Admin panel (features)
 
-- [ ] **P6-1** **Admin login** → `POST /auth/admin/login`; admin auth context/guarding.
+- [x] **P6-1** **Admin login** → `POST /auth/admin/login`; admin auth context/guarding. — `/admin/login` posts through a same-origin admin login route, stores separate httpOnly admin JWT cookies, and proxy-guards `/admin`; root lint/typecheck/test/build green.
 - [ ] **P6-2** **Questions** CRUD (level × category) incl. add-question-level-wise. *Verify:* CRUD round-trips.
 - [ ] **P6-3** **Answers** CRUD + **AI-generate** button + **AI review queue** (`source=ai&reviewed=false`). *Verify:* generate → appears unreviewed → approve.
 - [ ] **P6-4** **Remedies** CRUD linked to level/question. *Verify:* CRUD round-trips.
@@ -210,3 +210,4 @@ _(the loop appends dated one-liners here as phases complete)_
 - 2026-08-13 — P5-7 done (`/app/chart` fetches API user chart and renders it through the Roxy Kundli adapter with interpretation; root lint/typecheck/test/build green).
 - 2026-08-13 — P5-8 done (`/app/remedy` fetches authenticated `GET /users/:id/remedy` and displays the localized title/text; root lint/typecheck/test/build green).
 - 2026-08-13 — P5-9 done (`/profile` + `/history` fetch authenticated `GET /users/:id` and `/history`, showing saved details, responses, and charts; root lint/typecheck/test/build green). **Phase 5 complete.**
+- 2026-08-13 — P6-1 done (`/admin/login` → same-origin admin auth route → Nest `/auth/admin/login`, separate admin JWT cookies, proxy guard for `/admin`; root lint/typecheck/test/build green).

@@ -1,7 +1,12 @@
 import { NextResponse, type NextRequest } from 'next/server';
 import createIntlMiddleware from 'next-intl/middleware';
 import { routing } from '@/i18n/routing';
-import { decideUserRoute, USER_TOKEN_COOKIE } from '@/lib/auth-routing';
+import {
+  ADMIN_TOKEN_COOKIE,
+  decideAdminRoute,
+  decideUserRoute,
+  USER_TOKEN_COOKIE,
+} from '@/lib/auth-routing';
 
 const intlMiddleware = createIntlMiddleware(routing);
 
@@ -17,6 +22,21 @@ function splitLocale(pathname: string) {
 
 export function proxy(request: NextRequest) {
   const { pathname, search } = request.nextUrl;
+  const hasAdminToken = Boolean(request.cookies.get(ADMIN_TOKEN_COOKIE)?.value);
+  const adminDecision = decideAdminRoute(pathname, search, hasAdminToken);
+
+  if (adminDecision.kind === 'redirect') {
+    const redirectUrl = request.nextUrl.clone();
+    redirectUrl.pathname = adminDecision.pathname;
+    redirectUrl.search = '';
+    if (adminDecision.redirectParam) redirectUrl.searchParams.set('redirect', adminDecision.redirectParam);
+    return NextResponse.redirect(redirectUrl);
+  }
+
+  if (pathname === '/admin' || pathname.startsWith('/admin/')) {
+    return NextResponse.next();
+  }
+
   const routed = splitLocale(pathname);
   const hasUserToken = Boolean(request.cookies.get(USER_TOKEN_COOKIE)?.value);
   const decision = decideUserRoute(routed.pathname, search, hasUserToken);
@@ -33,5 +53,5 @@ export function proxy(request: NextRequest) {
 }
 
 export const config = {
-  matcher: ['/((?!api|admin|_next|_vercel|.*\\..*).*)'],
+  matcher: ['/((?!api|_next|_vercel|.*\\..*).*)'],
 };
