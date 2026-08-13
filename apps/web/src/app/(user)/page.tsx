@@ -1,7 +1,14 @@
 import Link from 'next/link';
+import { ArrowRight, Languages, MoonStar, ShieldCheck } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { LANGUAGES } from '@/lib/i18n';
 import { CATEGORIES } from '@silence/shared';
+
+const highlights = [
+  { label: 'Language', value: '11', icon: Languages },
+  { label: 'Chart', value: 'Astrology', icon: MoonStar },
+  { label: 'Saved profile', value: 'JWT', icon: ShieldCheck },
+];
 
 export default function HomePage() {
   return (
@@ -12,9 +19,17 @@ export default function HomePage() {
           <h1 className="mt-3 text-4xl font-semibold tracking-normal text-foreground sm:text-5xl">
             Silence
           </h1>
-          <p className="mt-4 max-w-xl text-base text-muted-foreground">
-            Choose a language and category to begin the guided question flow.
-          </p>
+          <div className="mt-6 flex flex-wrap gap-2">
+            <Button asChild>
+              <Link href="/register">
+                Create profile
+                <ArrowRight />
+              </Link>
+            </Button>
+            <Button asChild variant="outline">
+              <Link href="/login">Sign in</Link>
+            </Button>
+          </div>
         </div>
 
         <div className="grid gap-6 md:grid-cols-2">
@@ -43,13 +58,22 @@ export default function HomePage() {
       </section>
 
       <aside className="flex items-center">
-        <div className="w-full rounded-md border border-border bg-card p-5 shadow-sm">
-          <h2 className="text-base font-semibold">Admin workspace</h2>
-          <p className="mt-2 text-sm text-muted-foreground">
-            Build questions, answers, charts, remedies, imports, and translations.
-          </p>
-          <Button asChild className="mt-5 w-full">
-            <Link href="/admin">Open admin</Link>
+        <div className="w-full space-y-3">
+          {highlights.map(({ label, value, icon: Icon }) => (
+            <div key={label} className="rounded-md border border-border bg-card p-4 shadow-sm">
+              <div className="flex items-center gap-3">
+                <span className="flex size-9 items-center justify-center rounded-md bg-secondary text-secondary-foreground">
+                  <Icon className="size-4" />
+                </span>
+                <div>
+                  <p className="text-sm font-medium">{label}</p>
+                  <p className="text-xs text-muted-foreground">{value}</p>
+                </div>
+              </div>
+            </div>
+          ))}
+          <Button asChild variant="ghost" className="w-full justify-start">
+            <Link href="/admin">Admin workspace</Link>
           </Button>
         </div>
       </aside>
