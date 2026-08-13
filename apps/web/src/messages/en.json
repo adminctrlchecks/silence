@@ -65,7 +65,9 @@
   },
   "Chart": {
     "eyebrow": "Sample chart",
-    "title": "Birth chart preview"
+    "title": "Birth chart preview",
+    "interpretation": "Interpretation",
+    "fallbackInterpretation": "The chart is generated from your birth details and saved Level 2 answers."
   },
   "Questions": {
     "eyebrow": "Question flow",

@@ -65,7 +65,9 @@
   },
   "Chart": {
     "eyebrow": "Mapa de exemplo",
-    "title": "Prévia do mapa natal"
+    "title": "Prévia do mapa natal",
+    "interpretation": "Interpretação",
+    "fallbackInterpretation": "O mapa é gerado com seus dados de nascimento e respostas salvas do nível 2."
   },
   "Questions": {
     "eyebrow": "Fluxo de perguntas",

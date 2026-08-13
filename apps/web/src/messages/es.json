@@ -65,7 +65,9 @@
   },
   "Chart": {
     "eyebrow": "Carta de muestra",
-    "title": "Vista previa de carta natal"
+    "title": "Vista previa de carta natal",
+    "interpretation": "Interpretación",
+    "fallbackInterpretation": "La carta se genera con tus datos de nacimiento y respuestas guardadas de nivel 2."
   },
   "Questions": {
     "eyebrow": "Flujo de preguntas",

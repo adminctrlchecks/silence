@@ -114,7 +114,7 @@ as it goes. See [LOOP_PROMPT.md](LOOP_PROMPT.md) for the prompt that drives it.
 - [x] **P5-4** **Login** → `POST /auth/user/login`; JWT in httpOnly cookie; auth context. *Verify:* protected pages gated. — login form now posts to a same-origin Next route, validates with the shared schema, calls the Nest login endpoint, sets shared httpOnly user auth cookies, redirects to `/app`, and seeds an auth context from the token cookie in the user shell; root lint/typecheck/test/build green.
 - [x] **P5-5** **Question flow** common→level1→level2 via `GET /questions` + `POST /responses`. *Verify:* answers persist. — added authenticated `/app/questions` (and locale route) loading profile + common/level1/level2 questions from the API, a stepper answer UI, and a token-backed same-origin `/api/responses` save route; root lint/typecheck/test/build green.
 - [x] **P5-6** **Answer display** per question (`GET /answers`). *Verify:* correct lang/category answer shows. — question flow now fetches localized reviewed answers per saved question through a same-origin `/api/answers` proxy and displays them inline beneath each response; root lint/typecheck/test/build green.
-- [ ] **P5-7** **Birth chart** render from `GET /users/:id/chart` using roxyapi/ui. *Verify:* chart draws from API data.
+- [x] **P5-7** **Birth chart** render from `GET /users/:id/chart` using roxyapi/ui. *Verify:* chart draws from API data. — `/app/chart` now reads the httpOnly user session, fetches profile + `GET /users/:id/chart`, adapts API astrology geometry for Roxy Kundli rendering, and displays the API interpretation; root lint/typecheck/test/build green.
 - [ ] **P5-8** **Remedy** screen from `GET /users/:id/remedy`. *Verify:* remedy shows.
 - [ ] **P5-9** **Profile + history** from `GET /users/:id` + `/history`. *Verify:* saved sessions list.
 
@@ -207,3 +207,4 @@ _(the loop appends dated one-liners here as phases complete)_
 - 2026-08-13 — P5-4 done (login form → Next route → Nest `/auth/user/login`, shared httpOnly JWT cookies + auth context; root lint/typecheck/test/build green).
 - 2026-08-13 — P5-5 done (`/app/questions` common→level1→level2 UI + same-origin `/api/responses` token-backed save route; root lint/typecheck/test/build green).
 - 2026-08-13 — P5-6 done (localized answer display per saved question via `/api/answers` → Nest `GET /answers`; root lint/typecheck/test/build green).
+- 2026-08-13 — P5-7 done (`/app/chart` fetches API user chart and renders it through the Roxy Kundli adapter with interpretation; root lint/typecheck/test/build green).
