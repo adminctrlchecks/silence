@@ -137,7 +137,7 @@ as it goes. See [LOOP_PROMPT.md](LOOP_PROMPT.md) for the prompt that drives it.
 
 - [x] **P8-1** **Playwright** e2e: full user journey (pick → register → answer → chart → remedy). *Verify:* suite green. — `apps/web/e2e/user-journey.spec.ts` seeds content via the API then drives the real UI (SessionPicker buttons, `#id` register fields, question stepper, chart, remedy). Suite green (1 passed).
 - [x] **P8-2** Playwright e2e: admin content-building journey. *Verify:* suite green. — `apps/web/e2e/admin-journey.spec.ts` drives the admin UI: login → add question → add answer → add remedy (uses `male` category to stay isolated from the user journey's female remedy). Playwright pinned to `workers: 1` (shared DB). Suite green (2 passed).
-- [ ] **P8-3** Wire Playwright into CI (against seeded API + web). *Verify:* CI green.
+- [x] **P8-3** Wire Playwright into CI (against seeded API + web). *Verify:* CI green. — added a `playwright e2e` CI job (Postgres service, prisma deploy + seed, `playwright install chromium`, runs `test:e2e` which boots API+web); uploads the Playwright report artifact. **Phase 8 complete.**
 
 ## PHASE 9 — CI/CD complete
 
@@ -221,3 +221,4 @@ _(the loop appends dated one-liners here as phases complete)_
 - 2026-08-14 — P7-2 done (shared accessible loading/error states, user/admin route fallbacks including locale wrappers, icon-only admin control aria labels; root lint/typecheck/test/build green). **Phase 7 complete.**
 - 2026-08-14 — P8-1 done (Playwright full user journey e2e: pick→register→answer→chart→remedy against the real UI; fixed API base-URL join + Next dev `localhost` origin + seed admin-hash refresh; suite green, web+root lint/typecheck/build green).
 - 2026-08-14 — P8-2 done (Playwright admin content-building journey: login→question→answer→remedy through the admin UI; category-isolated from the user journey; `workers: 1`; suite 2/2 green, web+root gates green).
+- 2026-08-14 — P8-3 done (CI `playwright e2e` job: Postgres service, prisma deploy + seed, chromium install, boots API+web and runs the suite, uploads report). **Phase 8 complete.**
