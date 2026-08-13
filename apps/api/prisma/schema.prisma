@@ -1,0 +1,214 @@
+// Silence data model — mirrors docs/API.md §11.
+// Translations are stored as child rows (one per language) rather than JSON blobs,
+// so the admin translation endpoints and per-language reads stay queryable.
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+enum Category {
+  male
+  female
+  other
+}
+
+enum Level {
+  common
+  level1
+  level2
+}
+
+enum AnswerSource {
+  admin
+  ai
+}
+
+enum ChartStyle {
+  north_indian
+  south_indian
+  western
+}
+
+enum ImportType {
+  questions
+  answers_level1
+  answers_level2
+  remedies
+}
+
+enum ImportStatus {
+  processing
+  done
+  failed
+}
+
+model Admin {
+  id           String   @id @default(cuid())
+  email        String   @unique
+  name         String
+  passwordHash String
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+}
+
+model Language {
+  code      String   @id // e.g. "en", "ar"
+  name      String
+  rtl       Boolean  @default(false)
+  enabled   Boolean  @default(true)
+  createdAt DateTime @default(now())
+}
+
+model Question {
+  id           String                @id @default(cuid())
+  level        Level
+  category     Category
+  text         String // base text (default language)
+  order        Int                   @default(0)
+  createdAt    DateTime              @default(now())
+  updatedAt    DateTime              @updatedAt
+  translations QuestionTranslation[]
+  answers      Answer[]
+  responses    UserResponse[]
+
+  @@index([level, category])
+}
+
+model QuestionTranslation {
+  id         String   @id @default(cuid())
+  questionId String
+  lang       String
+  text       String
+  question   Question @relation(fields: [questionId], references: [id], onDelete: Cascade)
+
+  @@unique([questionId, lang])
+}
+
+model Answer {
+  id           String              @id @default(cuid())
+  questionId   String
+  level        Level
+  category     Category
+  text         String
+  source       AnswerSource        @default(admin)
+  reviewed     Boolean             @default(true) // AI answers start false; admin approves
+  createdAt    DateTime            @default(now())
+  updatedAt    DateTime            @updatedAt
+  question     Question            @relation(fields: [questionId], references: [id], onDelete: Cascade)
+  translations AnswerTranslation[]
+
+  @@index([level, category])
+  @@index([questionId])
+  @@index([source, reviewed])
+}
+
+model AnswerTranslation {
+  id       String @id @default(cuid())
+  answerId String
+  lang     String
+  text     String
+  answer   Answer @relation(fields: [answerId], references: [id], onDelete: Cascade)
+
+  @@unique([answerId, lang])
+}
+
+model Remedy {
+  id               String              @id @default(cuid())
+  category         Category
+  title            String
+  text             String
+  linkedLevel      Level?
+  linkedQuestionId String?
+  createdAt        DateTime            @default(now())
+  updatedAt        DateTime            @updatedAt
+  translations     RemedyTranslation[]
+
+  @@index([category])
+}
+
+model RemedyTranslation {
+  id       String @id @default(cuid())
+  remedyId String
+  lang     String
+  title    String
+  text     String
+  remedy   Remedy @relation(fields: [remedyId], references: [id], onDelete: Cascade)
+
+  @@unique([remedyId, lang])
+}
+
+// One chart configuration per category (how the chart is built).
+model ChartConfig {
+  category  Category   @id
+  type      String     @default("astrology")
+  style     ChartStyle @default(north_indian)
+  source    String     @default("level2")
+  requires  String[]   @default(["dob", "timeOfBirth", "placeOfBirth"])
+  updatedAt DateTime   @updatedAt
+}
+
+model User {
+  id           String         @id @default(cuid())
+  name         String
+  category     Category
+  dob          String // YYYY-MM-DD
+  timeOfBirth  String // HH:MM
+  placeCity    String
+  placeCountry String
+  placeLat     Float?
+  placeLng     Float?
+  contact      String         @unique
+  passwordHash String?
+  lang         String         @default("en")
+  consent      Boolean        @default(false)
+  createdAt    DateTime       @default(now())
+  updatedAt    DateTime       @updatedAt
+  responses    UserResponse[]
+  charts       UserChart[]
+
+  @@index([category])
+}
+
+model UserResponse {
+  id         String   @id @default(cuid())
+  userId     String
+  questionId String
+  level      Level
+  category   Category
+  value      String
+  createdAt  DateTime @default(now())
+  user       User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  question   Question @relation(fields: [questionId], references: [id], onDelete: Cascade)
+
+  @@index([userId, level])
+}
+
+model UserChart {
+  id             String   @id @default(cuid())
+  userId         String
+  category       Category
+  type           String   @default("astrology")
+  style          String   @default("north_indian")
+  data           Json // ephemeris output (planetary positions / houses)
+  interpretation String? // Gemini-written text
+  createdAt      DateTime @default(now())
+  user           User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([userId])
+}
+
+model ImportJob {
+  id        String       @id @default(cuid())
+  type      ImportType
+  status    ImportStatus @default(processing)
+  created   Int          @default(0)
+  updated   Int          @default(0)
+  errors    Json         @default("[]")
+  createdAt DateTime     @default(now())
+  updatedAt DateTime     @updatedAt
+}
