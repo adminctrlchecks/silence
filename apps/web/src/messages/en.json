@@ -75,6 +75,29 @@
     "category": "Category: {category}",
     "linkedLevel": "Linked level: {level}"
   },
+  "Profile": {
+    "eyebrow": "Saved profile",
+    "title": "Your details",
+    "name": "Name",
+    "category": "Category",
+    "language": "Language",
+    "dob": "Date of birth",
+    "timeOfBirth": "Time of birth",
+    "placeOfBirth": "Place of birth",
+    "contact": "Contact",
+    "consent": "Consent",
+    "yes": "Yes",
+    "no": "No"
+  },
+  "History": {
+    "eyebrow": "Saved sessions",
+    "title": "Your history",
+    "responses": "Responses",
+    "charts": "Charts",
+    "count": "{count} saved",
+    "emptyResponses": "No responses have been saved yet.",
+    "emptyCharts": "No charts have been saved yet."
+  },
   "Questions": {
     "eyebrow": "Question flow",
     "title": "Answer your questions",

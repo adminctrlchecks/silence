@@ -75,6 +75,29 @@
     "category": "Catégorie : {category}",
     "linkedLevel": "Niveau lié : {level}"
   },
+  "Profile": {
+    "eyebrow": "Profil enregistré",
+    "title": "Vos informations",
+    "name": "Nom",
+    "category": "Catégorie",
+    "language": "Langue",
+    "dob": "Date de naissance",
+    "timeOfBirth": "Heure de naissance",
+    "placeOfBirth": "Lieu de naissance",
+    "contact": "Contact",
+    "consent": "Consentement",
+    "yes": "Oui",
+    "no": "Non"
+  },
+  "History": {
+    "eyebrow": "Sessions enregistrées",
+    "title": "Votre historique",
+    "responses": "Réponses",
+    "charts": "Cartes",
+    "count": "{count} enregistrées",
+    "emptyResponses": "Aucune réponse n'a encore été enregistrée.",
+    "emptyCharts": "Aucune carte n'a encore été enregistrée."
+  },
   "Questions": {
     "eyebrow": "Parcours de questions",
     "title": "Répondez aux questions",

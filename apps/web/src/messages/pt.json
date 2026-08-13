@@ -75,6 +75,29 @@
     "category": "Categoria: {category}",
     "linkedLevel": "Nível vinculado: {level}"
   },
+  "Profile": {
+    "eyebrow": "Perfil salvo",
+    "title": "Seus dados",
+    "name": "Nome",
+    "category": "Categoria",
+    "language": "Idioma",
+    "dob": "Data de nascimento",
+    "timeOfBirth": "Hora de nascimento",
+    "placeOfBirth": "Local de nascimento",
+    "contact": "Contato",
+    "consent": "Consentimento",
+    "yes": "Sim",
+    "no": "Não"
+  },
+  "History": {
+    "eyebrow": "Sessões salvas",
+    "title": "Seu histórico",
+    "responses": "Respostas",
+    "charts": "Mapas",
+    "count": "{count} salvos",
+    "emptyResponses": "Nenhuma resposta foi salva ainda.",
+    "emptyCharts": "Nenhum mapa foi salvo ainda."
+  },
   "Questions": {
     "eyebrow": "Fluxo de perguntas",
     "title": "Responda às perguntas",

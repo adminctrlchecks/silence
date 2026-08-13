@@ -83,6 +83,35 @@ export interface UserProfile {
   consent: boolean;
 }
 
+export interface SavedUserResponse {
+  id: string;
+  userId: string;
+  questionId: string;
+  level: Level;
+  category: Category;
+  value: string;
+  createdAt: string;
+}
+
+export interface SavedUserChart {
+  id: string;
+  userId: string;
+  category: Category;
+  type: string;
+  style: string;
+  data: unknown;
+  interpretation?: string | null;
+  createdAt: string;
+}
+
+export interface UserHistory {
+  userId: string;
+  category?: Category;
+  lang?: string;
+  responses: SavedUserResponse[];
+  charts: SavedUserChart[];
+}
+
 export interface ImportJob {
   jobId: string;
   type: ImportType;

@@ -75,6 +75,29 @@
     "category": "الفئة: {category}",
     "linkedLevel": "المستوى المرتبط: {level}"
   },
+  "Profile": {
+    "eyebrow": "الملف المحفوظ",
+    "title": "تفاصيلك",
+    "name": "الاسم",
+    "category": "الفئة",
+    "language": "اللغة",
+    "dob": "تاريخ الميلاد",
+    "timeOfBirth": "وقت الميلاد",
+    "placeOfBirth": "مكان الميلاد",
+    "contact": "التواصل",
+    "consent": "الموافقة",
+    "yes": "نعم",
+    "no": "لا"
+  },
+  "History": {
+    "eyebrow": "الجلسات المحفوظة",
+    "title": "سجلك",
+    "responses": "الإجابات",
+    "charts": "الخرائط",
+    "count": "{count} محفوظ",
+    "emptyResponses": "لم يتم حفظ أي إجابات بعد.",
+    "emptyCharts": "لم يتم حفظ أي خرائط بعد."
+  },
   "Questions": {
     "eyebrow": "مسار الأسئلة",
     "title": "أجب عن أسئلتك",

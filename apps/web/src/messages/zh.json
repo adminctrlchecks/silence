@@ -75,6 +75,29 @@
     "category": "类别：{category}",
     "linkedLevel": "关联级别：{level}"
   },
+  "Profile": {
+    "eyebrow": "已保存资料",
+    "title": "你的详细信息",
+    "name": "姓名",
+    "category": "类别",
+    "language": "语言",
+    "dob": "出生日期",
+    "timeOfBirth": "出生时间",
+    "placeOfBirth": "出生地点",
+    "contact": "联系方式",
+    "consent": "同意",
+    "yes": "是",
+    "no": "否"
+  },
+  "History": {
+    "eyebrow": "已保存会话",
+    "title": "你的历史",
+    "responses": "回答",
+    "charts": "图表",
+    "count": "已保存 {count}",
+    "emptyResponses": "还没有保存回答。",
+    "emptyCharts": "还没有保存图表。"
+  },
   "Questions": {
     "eyebrow": "问题流程",
     "title": "回答你的问题",

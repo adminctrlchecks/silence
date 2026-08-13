@@ -75,6 +75,29 @@
     "category": "カテゴリ: {category}",
     "linkedLevel": "関連レベル: {level}"
   },
+  "Profile": {
+    "eyebrow": "保存済みプロフィール",
+    "title": "あなたの詳細",
+    "name": "名前",
+    "category": "カテゴリ",
+    "language": "言語",
+    "dob": "生年月日",
+    "timeOfBirth": "出生時刻",
+    "placeOfBirth": "出生地",
+    "contact": "連絡先",
+    "consent": "同意",
+    "yes": "はい",
+    "no": "いいえ"
+  },
+  "History": {
+    "eyebrow": "保存済みセッション",
+    "title": "あなたの履歴",
+    "responses": "回答",
+    "charts": "チャート",
+    "count": "{count} 件保存済み",
+    "emptyResponses": "保存された回答はまだありません。",
+    "emptyCharts": "保存されたチャートはまだありません。"
+  },
   "Questions": {
     "eyebrow": "質問フロー",
     "title": "質問に回答",

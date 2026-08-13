@@ -116,7 +116,7 @@ as it goes. See [LOOP_PROMPT.md](LOOP_PROMPT.md) for the prompt that drives it.
 - [x] **P5-6** **Answer display** per question (`GET /answers`). *Verify:* correct lang/category answer shows. — question flow now fetches localized reviewed answers per saved question through a same-origin `/api/answers` proxy and displays them inline beneath each response; root lint/typecheck/test/build green.
 - [x] **P5-7** **Birth chart** render from `GET /users/:id/chart` using roxyapi/ui. *Verify:* chart draws from API data. — `/app/chart` now reads the httpOnly user session, fetches profile + `GET /users/:id/chart`, adapts API astrology geometry for Roxy Kundli rendering, and displays the API interpretation; root lint/typecheck/test/build green.
 - [x] **P5-8** **Remedy** screen from `GET /users/:id/remedy`. *Verify:* remedy shows. — `/app/remedy` fetches the authenticated user's localized API remedy and the dashboard links to it; root lint/typecheck/test/build green.
-- [ ] **P5-9** **Profile + history** from `GET /users/:id` + `/history`. *Verify:* saved sessions list.
+- [x] **P5-9** **Profile + history** from `GET /users/:id` + `/history`. *Verify:* saved sessions list. — `/profile` and `/history` now fetch authenticated API profile/history, render saved details/responses/charts, and build in locale routes; root lint/typecheck/test/build green. **Phase 5 complete.**
 
 ## PHASE 6 — Admin panel (features)
 
@@ -209,3 +209,4 @@ _(the loop appends dated one-liners here as phases complete)_
 - 2026-08-13 — P5-6 done (localized answer display per saved question via `/api/answers` → Nest `GET /answers`; root lint/typecheck/test/build green).
 - 2026-08-13 — P5-7 done (`/app/chart` fetches API user chart and renders it through the Roxy Kundli adapter with interpretation; root lint/typecheck/test/build green).
 - 2026-08-13 — P5-8 done (`/app/remedy` fetches authenticated `GET /users/:id/remedy` and displays the localized title/text; root lint/typecheck/test/build green).
+- 2026-08-13 — P5-9 done (`/profile` + `/history` fetch authenticated `GET /users/:id` and `/history`, showing saved details, responses, and charts; root lint/typecheck/test/build green). **Phase 5 complete.**

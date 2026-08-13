@@ -75,6 +75,29 @@
     "category": "বিভাগ: {category}",
     "linkedLevel": "সংযুক্ত স্তর: {level}"
   },
+  "Profile": {
+    "eyebrow": "সংরক্ষিত প্রোফাইল",
+    "title": "আপনার বিবরণ",
+    "name": "নাম",
+    "category": "বিভাগ",
+    "language": "ভাষা",
+    "dob": "জন্মতারিখ",
+    "timeOfBirth": "জন্মসময়",
+    "placeOfBirth": "জন্মস্থান",
+    "contact": "যোগাযোগ",
+    "consent": "সম্মতি",
+    "yes": "হ্যাঁ",
+    "no": "না"
+  },
+  "History": {
+    "eyebrow": "সংরক্ষিত সেশন",
+    "title": "আপনার ইতিহাস",
+    "responses": "উত্তর",
+    "charts": "চার্ট",
+    "count": "{count} সংরক্ষিত",
+    "emptyResponses": "এখনও কোনো উত্তর সংরক্ষিত নেই।",
+    "emptyCharts": "এখনও কোনো চার্ট সংরক্ষিত নেই।"
+  },
   "Questions": {
     "eyebrow": "প্রশ্ন প্রবাহ",
     "title": "আপনার প্রশ্নের উত্তর দিন",
