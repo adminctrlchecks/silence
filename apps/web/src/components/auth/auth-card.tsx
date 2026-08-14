@@ -163,6 +163,7 @@ export function AuthCard({
                 </div>
               </div>
               <PlacesAutocomplete
+                id="city"
                 label={t('birthPlace')}
                 placeholder={t('birthPlacePlaceholder')}
                 onSelect={(p) => setPlace(p)}

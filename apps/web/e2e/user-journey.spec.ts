@@ -113,7 +113,8 @@ test('full reading journey: register, start reading, answer partial, refresh/res
   await page.locator('#dob').fill('1998-04-21');
   await page.locator('#timeOfBirth').fill('07:35');
   await page.locator('#city').fill('Chennai');
-  await page.locator('#country').fill('IN');
+  await page.locator('[role="listbox"]').waitFor({ state: 'visible' });
+  await page.locator('[role="listbox"] li').first().click();
   await page.locator('#contact').fill(contact);
   await page.locator('#password').fill('password123');
   await page.locator('input[name="consent"]').check();

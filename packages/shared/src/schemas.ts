@@ -71,6 +71,11 @@ export const createQuestionSchema = z.object({
   level: levelSchema,
   category: categorySchema,
   text: z.string().min(1),
+  inputType: z.string().default('textarea').optional(),
+  required: z.boolean().default(true).optional(),
+  helpText: z.string().optional(),
+  active: z.boolean().default(true).optional(),
+  branchingTags: z.string().optional(),
   order: z.number().int().nonnegative().optional(),
   translations: translationsSchema.optional(),
 });
