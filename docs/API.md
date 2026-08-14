@@ -152,9 +152,34 @@ can review, edit, and approve it later.
   "title": "Sleep hygiene",
   "text": "Keep a consistent bedtime…",
   "linkedTo": { "level": "level2", "questionId": "q_101" },
+  "priority": 10,
+  "enabled": true,
+  "planetFilter": "Saturn,Mars",
+  "signFilter": "Capricorn",
+  "houseFilter": "6,8,12",
+  "keywordFilter": "burnout,exhausted",
   "translations": { "hi": "…" }
 }
 ```
+
+**Rule fields (Phase 5 — remedy personalization).** All optional; each is a
+comma-separated list. When a remedy declares any of them, *every* declared
+filter must match for that remedy to be eligible for a reading:
+
+- `planetFilter` — a planet present in the session chart's placements.
+- `signFilter` — a sign on the ascendant or any placement.
+- `houseFilter` — a house number occupied by any placement.
+- `keywordFilter` — a keyword found (case-insensitive substring) in the
+  session's response text.
+- `linkedTo` — the linked question must be answered in the session (matching
+  its level too, when `level` is given).
+
+Among eligible remedies for a category, the one with the **most matched
+filters** wins (more specific/personalized beats a generic fallback), then
+higher `priority`, then most recently updated. A remedy with no filters is a
+category-wide fallback and is always eligible. `enabled: false` removes a
+remedy from selection entirely. See `GET /users/{id}/remedy` (§9) for how the
+winner is snapshotted onto the reading, with a human-readable `matchDetail`.
 
 ---
 
@@ -367,12 +392,25 @@ it, both become session-scoped and stable: a chart already generated for that
 session is returned as-is instead of recomputed, and a remedy already shown
 for that session is replayed from its snapshot instead of re-resolved.
 Passing `sessionId` on the chart call also advances the session to
-`chart_ready`; on the remedy call it snapshots a `RemedyResult` and marks the
-session `complete`.
+`chart_ready`; on the remedy call it runs the rule engine (§4) against that
+session's chart + responses, snapshots a `RemedyResult` (including why it was
+picked), and marks the session `complete`.
 
 ```json
 // GET /users/u_1/chart
 { "userId": "u_1", "category": "female", "type": "bar", "data": [ /* … */ ] }
+
+// GET /users/u_1/remedy?sessionId=s_1 — a rule matched
+{
+  "id": "rem_9",
+  "category": "female",
+  "title": "Grounding practice",
+  "text": "…",
+  "source": "rule",
+  "matchDetail": "chart placement: Saturn; response mentions \"burnout\""
+}
+// no rule matched -> the category-wide fallback, with source "category" and
+// matchDetail "category fallback"
 ```
 
 ---
@@ -410,7 +448,8 @@ Question(id, level, category, text, order)
 Answer(id, questionId, level, category, text, source)   // source: admin | ai
   └─ AnswerTranslation(answerId, lang, text)
 
-Remedy(id, category, title, text, linkedLevel, linkedQuestionId)
+Remedy(id, category, title, text, linkedLevel, linkedQuestionId, priority, enabled,
+       planetFilter, signFilter, houseFilter, keywordFilter)   // rule fields, §4
   └─ RemedyTranslation(remedyId, lang, title, text)
 
 ChartConfig(category, type, source, fields)
@@ -421,7 +460,8 @@ UserChart(id, userId, sessionId?, category, type, data, createdAt)
 
 ReadingSession(id, userId, status, category, lang, startedAt, completedAt, updatedAt)
   // status: draft | in_progress | chart_ready | remedy_ready | complete
-  └─ RemedyResult(sessionId, remedyId?, title, text, linkedLevel, linkedQuestionId, source)
+  └─ RemedyResult(sessionId, remedyId?, title, text, linkedLevel, linkedQuestionId, source, matchDetail)
+     // source: category | rule | ai; matchDetail: why the rule engine picked it, §4/§9
 
 ImportJob(id, type, status, created, updated, errors)
 ```

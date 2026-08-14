@@ -134,7 +134,8 @@
     "category": "বিভাগ: {category}",
     "linkedLevel": "সংযুক্ত স্তর: {level}",
     "practice": "Suggested practice",
-    "closing": "Keep the remedy gentle and repeatable. Small consistency is more useful than intensity."
+    "closing": "Keep the remedy gentle and repeatable. Small consistency is more useful than intensity.",
+    "whyThisPractice": "কেন এই অনুশীলন"
   },
   "Profile": {
     "eyebrow": "সংরক্ষিত প্রোফাইল",
@@ -180,6 +181,7 @@
     "remedySection": "প্রতিকার",
     "noChart": "এই রিডিংয়ের জন্য কোনো ছক তৈরি হয়নি।",
     "noRemedy": "এই রিডিংয়ের জন্য কোনো প্রতিকার দেখানো হয়নি।",
+    "whyThisRemedy": "কেন এই প্রতিকার",
     "status": {
       "draft": "শুরু হয়নি",
       "in_progress": "চলমান",

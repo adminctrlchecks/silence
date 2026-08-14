@@ -134,7 +134,8 @@
     "category": "Categoria: {category}",
     "linkedLevel": "Nível vinculado: {level}",
     "practice": "Suggested practice",
-    "closing": "Keep the remedy gentle and repeatable. Small consistency is more useful than intensity."
+    "closing": "Keep the remedy gentle and repeatable. Small consistency is more useful than intensity.",
+    "whyThisPractice": "Por que esta prática"
   },
   "Profile": {
     "eyebrow": "Perfil salvo",
@@ -180,6 +181,7 @@
     "remedySection": "Remédio",
     "noChart": "Nenhum mapa foi gerado para esta leitura.",
     "noRemedy": "Nenhum remédio foi mostrado para esta leitura.",
+    "whyThisRemedy": "Por que este remédio",
     "status": {
       "draft": "Não iniciada",
       "in_progress": "Em andamento",

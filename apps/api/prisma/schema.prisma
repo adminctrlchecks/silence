@@ -134,6 +134,9 @@ model AnswerTranslation {
   @@unique([answerId, lang])
 }
 
+// Rule fields (all optional, all AND-combined when present) let a remedy target
+// a specific chart factor and/or response signal instead of just a category
+// fallback — see RemediesService.selectRemedy for the matching algorithm.
 model Remedy {
   id               String              @id @default(cuid())
   category         Category
@@ -141,11 +144,18 @@ model Remedy {
   text             String
   linkedLevel      Level?
   linkedQuestionId String?
+  priority         Int                 @default(0) // tie-breaker among equally-specific matches; higher wins
+  enabled          Boolean             @default(true)
+  planetFilter     String? // comma-separated planet names, e.g. "Saturn,Mars"
+  signFilter       String? // comma-separated sign names, matched against ascendant + placements
+  houseFilter      String? // comma-separated house numbers, e.g. "6,8,12"
+  keywordFilter    String? // comma-separated keywords matched against the user's response text
   createdAt        DateTime            @default(now())
   updatedAt        DateTime            @updatedAt
   translations     RemedyTranslation[]
 
   @@index([category])
+  @@index([category, enabled])
 }
 
 model RemedyTranslation {
@@ -261,7 +271,8 @@ model RemedyResult {
   text             String
   linkedLevel      Level?
   linkedQuestionId String?
-  source           String         @default("category") // category | rule | ai (rule/ai reserved for a future personalization pass)
+  source           String         @default("category") // category | rule | ai (ai reserved for a future fallback-draft pass)
+  matchDetail      String? // human-readable reason(s) the rule engine picked this remedy — see RemediesService.selectRemedy
   createdAt        DateTime       @default(now())
   session          ReadingSession @relation(fields: [sessionId], references: [id], onDelete: Cascade)
 }

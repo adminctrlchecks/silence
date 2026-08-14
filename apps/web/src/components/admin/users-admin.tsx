@@ -463,8 +463,24 @@ export function UsersAdmin() {
                           </p>
                           {selectedSession.remedy ? (
                             <div className="mt-2 text-xs">
-                              <p className="font-medium">{selectedSession.remedy.title}</p>
+                              <div className="flex items-center gap-2">
+                                <p className="font-medium">{selectedSession.remedy.title}</p>
+                                <span
+                                  className={`rounded-md border px-1.5 py-0.5 text-[10px] font-medium uppercase ${
+                                    selectedSession.remedy.source === 'rule'
+                                      ? 'border-primary/30 bg-primary/10 text-primary'
+                                      : 'border-border bg-background text-muted-foreground'
+                                  }`}
+                                >
+                                  {selectedSession.remedy.source === 'rule' ? 'Rule match' : 'Category fallback'}
+                                </span>
+                              </div>
                               <p className="mt-1 text-muted-foreground">{selectedSession.remedy.text}</p>
+                              {selectedSession.remedy.matchDetail ? (
+                                <p className="mt-1 rounded-sm bg-primary/5 p-1.5 text-primary">
+                                  Why: {selectedSession.remedy.matchDetail}
+                                </p>
+                              ) : null}
                             </div>
                           ) : (
                             <p className="mt-2 text-xs text-muted-foreground">No remedy shown for this session.</p>

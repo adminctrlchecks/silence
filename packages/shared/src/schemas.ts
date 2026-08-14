@@ -110,6 +110,14 @@ export const createRemedySchema = z.object({
   linkedTo: z
     .object({ level: levelSchema, questionId: z.string().min(1) })
     .optional(),
+  // Rule fields — see RemediesService.selectRemedy. All optional and AND-combined.
+  // Nullable so the admin UI can explicitly clear a previously-set filter on update.
+  priority: z.number().int().default(0).optional(),
+  enabled: z.boolean().default(true).optional(),
+  planetFilter: z.string().nullable().optional(),
+  signFilter: z.string().nullable().optional(),
+  houseFilter: z.string().nullable().optional(),
+  keywordFilter: z.string().nullable().optional(),
   translations: translationsSchema.optional(),
 });
 export const updateRemedySchema = createRemedySchema.partial();

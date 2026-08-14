@@ -134,7 +134,8 @@
     "category": "カテゴリ: {category}",
     "linkedLevel": "関連レベル: {level}",
     "practice": "Suggested practice",
-    "closing": "Keep the remedy gentle and repeatable. Small consistency is more useful than intensity."
+    "closing": "Keep the remedy gentle and repeatable. Small consistency is more useful than intensity.",
+    "whyThisPractice": "この習慣をすすめる理由"
   },
   "Profile": {
     "eyebrow": "保存済みプロフィール",
@@ -180,6 +181,7 @@
     "remedySection": "レメディ",
     "noChart": "このリーディングではチャートが生成されませんでした。",
     "noRemedy": "このリーディングではレメディが表示されませんでした。",
+    "whyThisRemedy": "このレメディをすすめる理由",
     "status": {
       "draft": "未開始",
       "in_progress": "進行中",

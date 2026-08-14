@@ -62,6 +62,17 @@ export interface Remedy extends Translated {
   text: string;
   linkedLevel?: Level;
   linkedQuestionId?: string;
+  /** Rule fields — see RemediesService.selectRemedy. Present on admin CRUD responses. */
+  priority?: number;
+  enabled?: boolean;
+  planetFilter?: string | null;
+  signFilter?: string | null;
+  houseFilter?: string | null;
+  keywordFilter?: string | null;
+  /** How this remedy was picked for a specific reading: category fallback, or a matched rule. */
+  source?: 'category' | 'rule' | 'ai';
+  /** Human-readable reason(s) the rule engine picked this remedy — set only when a rule matched. */
+  matchDetail?: string;
 }
 
 export interface ChartConfig {
@@ -136,6 +147,7 @@ export interface SavedRemedyResult {
   title: string;
   text: string;
   source: string;
+  matchDetail?: string;
   createdAt: string;
 }
 

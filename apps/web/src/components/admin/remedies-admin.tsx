@@ -1,7 +1,7 @@
 'use client';
 
 import { CATEGORIES, LEVELS, type Category, type Level, type Paginated, type Question, type Remedy } from '@silence/shared';
-import { Loader2, Pencil, Plus, RefreshCw, Save, Trash2, X } from 'lucide-react';
+import { Ban, Loader2, Pencil, Plus, RefreshCw, Save, Sparkles, Trash2, X } from 'lucide-react';
 import { useCallback, useEffect, useMemo, useState } from 'react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
@@ -17,6 +17,12 @@ type RemedyFormState = {
   text: string;
   linkedLevel: LinkLevel;
   linkedQuestionId: string;
+  priority: number;
+  enabled: boolean;
+  planetFilter: string;
+  signFilter: string;
+  houseFilter: string;
+  keywordFilter: string;
 };
 
 const initialForm: RemedyFormState = {
@@ -25,7 +31,20 @@ const initialForm: RemedyFormState = {
   text: '',
   linkedLevel: 'none',
   linkedQuestionId: '',
+  priority: 0,
+  enabled: true,
+  planetFilter: '',
+  signFilter: '',
+  houseFilter: '',
+  keywordFilter: '',
 };
+
+/** How many rule fields a remedy declares — shown as a "targeting" badge in the list. */
+function ruleFieldCount(remedy: Remedy) {
+  return [remedy.linkedQuestionId, remedy.planetFilter, remedy.signFilter, remedy.houseFilter, remedy.keywordFilter].filter(
+    Boolean,
+  ).length;
+}
 
 const levelLabels: Record<Level, string> = {
   common: 'Common',
@@ -118,6 +137,12 @@ export function RemediesAdmin() {
       text: remedy.text,
       linkedLevel: remedy.linkedLevel ?? 'none',
       linkedQuestionId: remedy.linkedQuestionId ?? '',
+      priority: remedy.priority ?? 0,
+      enabled: remedy.enabled ?? true,
+      planetFilter: remedy.planetFilter ?? '',
+      signFilter: remedy.signFilter ?? '',
+      houseFilter: remedy.houseFilter ?? '',
+      keywordFilter: remedy.keywordFilter ?? '',
     });
     setError(null);
     setNotice(null);
@@ -138,6 +163,13 @@ export function RemediesAdmin() {
         title: form.title.trim(),
         text: form.text.trim(),
         ...(linkedTo ? { linkedTo } : {}),
+        priority: form.priority,
+        enabled: form.enabled,
+        // null (not undefined) so clearing a field on an existing remedy actually clears it.
+        planetFilter: form.planetFilter.trim() || null,
+        signFilter: form.signFilter.trim() || null,
+        houseFilter: form.houseFilter.trim() || null,
+        keywordFilter: form.keywordFilter.trim() || null,
       };
       const url = form.id ? `/api/admin/remedies/${form.id}` : '/api/admin/remedies';
       const method = form.id ? 'PUT' : 'POST';
@@ -304,6 +336,76 @@ export function RemediesAdmin() {
                 ))}
               </select>
             </div>
+
+            <div className="space-y-3 rounded-md border border-dashed border-border p-3">
+              <div className="flex items-center gap-2 text-sm font-medium">
+                <Sparkles className="size-4 text-primary" />
+                Targeting rules
+              </div>
+              <p className="text-xs text-muted-foreground">
+                Optional — every filter set below must match for this remedy to be selected over a plainer one. Leave
+                all blank for a category-wide fallback.
+              </p>
+              <div className="grid gap-3 sm:grid-cols-2">
+                <div className="space-y-2">
+                  <Label htmlFor="planetFilter">Planet(s)</Label>
+                  <Input
+                    id="planetFilter"
+                    placeholder="Saturn, Mars"
+                    value={form.planetFilter}
+                    onChange={(event) => setForm((current) => ({ ...current, planetFilter: event.target.value }))}
+                  />
+                </div>
+                <div className="space-y-2">
+                  <Label htmlFor="signFilter">Sign(s)</Label>
+                  <Input
+                    id="signFilter"
+                    placeholder="Capricorn"
+                    value={form.signFilter}
+                    onChange={(event) => setForm((current) => ({ ...current, signFilter: event.target.value }))}
+                  />
+                </div>
+                <div className="space-y-2">
+                  <Label htmlFor="houseFilter">House(s)</Label>
+                  <Input
+                    id="houseFilter"
+                    placeholder="6, 8, 12"
+                    value={form.houseFilter}
+                    onChange={(event) => setForm((current) => ({ ...current, houseFilter: event.target.value }))}
+                  />
+                </div>
+                <div className="space-y-2">
+                  <Label htmlFor="keywordFilter">Response keyword(s)</Label>
+                  <Input
+                    id="keywordFilter"
+                    placeholder="burnout, exhausted"
+                    value={form.keywordFilter}
+                    onChange={(event) => setForm((current) => ({ ...current, keywordFilter: event.target.value }))}
+                  />
+                </div>
+              </div>
+              <div className="grid gap-3 sm:grid-cols-2">
+                <div className="space-y-2">
+                  <Label htmlFor="priority">Priority</Label>
+                  <Input
+                    id="priority"
+                    type="number"
+                    value={form.priority}
+                    onChange={(event) => setForm((current) => ({ ...current, priority: Number(event.target.value) || 0 }))}
+                  />
+                </div>
+                <label className="flex items-center gap-2 pt-7 text-sm text-muted-foreground">
+                  <input
+                    type="checkbox"
+                    className="size-4 rounded border-border"
+                    checked={form.enabled}
+                    onChange={(event) => setForm((current) => ({ ...current, enabled: event.target.checked }))}
+                  />
+                  Enabled
+                </label>
+              </div>
+            </div>
+
             <Button type="submit" className="w-full" disabled={saving || !form.title.trim() || !form.text.trim()}>
               {saving ? <Loader2 className="animate-spin" /> : form.id ? <Save /> : <Plus />}
               {form.id ? 'Save remedy' : 'Add remedy'}
@@ -351,11 +453,38 @@ export function RemediesAdmin() {
                             {levelLabels[remedy.linkedLevel]}
                           </span>
                         ) : null}
+                        {ruleFieldCount(remedy) > 0 ? (
+                          <span className="inline-flex items-center gap-1 rounded-md border border-primary/30 bg-primary/10 px-2 py-1 text-primary">
+                            <Sparkles className="size-3" />
+                            {ruleFieldCount(remedy)} rule{ruleFieldCount(remedy) === 1 ? '' : 's'}
+                          </span>
+                        ) : null}
+                        {remedy.priority ? (
+                          <span className="rounded-md border border-border bg-background px-2 py-1">priority {remedy.priority}</span>
+                        ) : null}
+                        {remedy.enabled === false ? (
+                          <span className="inline-flex items-center gap-1 rounded-md border border-destructive/30 bg-destructive/10 px-2 py-1 text-destructive">
+                            <Ban className="size-3" />
+                            Disabled
+                          </span>
+                        ) : null}
                       </div>
                       <h3 className="mt-2 text-sm font-semibold tracking-normal">{remedy.title}</h3>
                       <p className="mt-2 break-words text-sm leading-6 text-muted-foreground">{remedy.text}</p>
                       {linkedQuestion ? (
                         <p className="mt-2 truncate text-xs text-muted-foreground">Linked: {linkedQuestion.text}</p>
+                      ) : null}
+                      {remedy.planetFilter || remedy.signFilter || remedy.houseFilter || remedy.keywordFilter ? (
+                        <p className="mt-2 truncate text-xs text-muted-foreground">
+                          {[
+                            remedy.planetFilter && `planet: ${remedy.planetFilter}`,
+                            remedy.signFilter && `sign: ${remedy.signFilter}`,
+                            remedy.houseFilter && `house: ${remedy.houseFilter}`,
+                            remedy.keywordFilter && `keyword: ${remedy.keywordFilter}`,
+                          ]
+                            .filter(Boolean)
+                            .join(' · ')}
+                        </p>
                       ) : null}
                     </div>
                     <div className="flex items-start gap-2">

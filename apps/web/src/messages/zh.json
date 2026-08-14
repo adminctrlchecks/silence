@@ -134,7 +134,8 @@
     "category": "类别：{category}",
     "linkedLevel": "关联级别：{level}",
     "practice": "Suggested practice",
-    "closing": "Keep the remedy gentle and repeatable. Small consistency is more useful than intensity."
+    "closing": "Keep the remedy gentle and repeatable. Small consistency is more useful than intensity.",
+    "whyThisPractice": "为什么推荐这个练习"
   },
   "Profile": {
     "eyebrow": "已保存资料",
@@ -180,6 +181,7 @@
     "remedySection": "补救建议",
     "noChart": "此次解读未生成星盘。",
     "noRemedy": "此次解读未展示补救建议。",
+    "whyThisRemedy": "为什么推荐此建议",
     "status": {
       "draft": "未开始",
       "in_progress": "进行中",
