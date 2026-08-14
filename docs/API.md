@@ -232,6 +232,52 @@ via `POST /admin/languages` with no code change.
 
 ---
 
+## 7a. Admin — Users
+
+| Method | Endpoint | Description |
+|--------|----------|-------------|
+| `GET`  | `/admin/users?search=&category=&sortBy=&sortDir=&page=&limit=` | Search/filter/sort/paginate registered users. |
+| `GET`  | `/admin/users/{id}` | User profile + all-time responses/charts. |
+| `GET`  | `/admin/users/{id}/sessions?page=&limit=` | Admin-scoped equivalent of `GET /users/{id}/sessions` — no ownership check, admin token only. |
+| `GET`  | `/admin/users/{id}/sessions/{sessionId}` | Admin-scoped equivalent of `GET /users/{id}/sessions/{sessionId}` — full reading detail (responses with `answerTextShown`, chart, remedy). |
+
+`search` matches name or contact (case-insensitive). `sortBy` is one of
+`createdAt | name | responseCount | chartCount` (default `createdAt`,
+descending).
+
+---
+
+## 7b. Admin — Dashboard
+
+Live product-health metrics and content completeness — replaces the old
+hardcoded admin overview cards.
+
+| Method | Endpoint | Description |
+|--------|----------|-------------|
+| `GET`  | `/admin/dashboard/metrics` | Users, sessions, question/answer coverage, unreviewed AI answers, remedy gaps, translation completeness, chart AI-fallback rate, import failures. |
+| `GET`  | `/admin/dashboard/content-matrix` | One cell per level × category: question coverage, remedy count, per-language translation coverage. |
+
+**GET `/admin/dashboard/metrics`** (shape)
+```json
+{
+  "users": { "total": 42, "newToday": 1, "newThisWeek": 5, "newThisMonth": 12 },
+  "sessions": { "total": 30, "byStatus": { "draft": 2, "in_progress": 5, "chart_ready": 3, "remedy_ready": 1, "complete": 19 } },
+  "questions": { "total": 40, "active": 40 },
+  "answers": { "total": 55, "unreviewedAi": 3 },
+  "questionCoverage": [{ "level": "level1", "category": "female", "questionsTotal": 10, "questionsWithAnswer": 8, "questionsWithReviewedAnswer": 7 }],
+  "remedies": { "total": 9, "categoriesMissingRemedy": ["other"] },
+  "translations": [{ "lang": "hi", "questionsTranslated": 12, "questionsTotal": 40, "answersTranslated": 10, "answersTotal": 55, "remediesTranslated": 3, "remediesTotal": 9 }],
+  "chart": { "total": 20, "aiFallbackCount": 1 },
+  "imports": { "total": 4, "failed": 1, "recentFailures": [{ "id": "imp_1", "type": "questions", "createdAt": "2026-08-01T00:00:00.000Z" }] }
+}
+```
+`chart.aiFallbackCount` counts charts whose interpretation is Gemini's
+placeholder fallback text — chart generation itself has no persisted error
+log yet (see docs/WORLD_CLASS_PRODUCT_GAP_ANALYSIS.md Phase 10), so this is
+the closest live signal that AI interpretation failed for a chart.
+
+---
+
 ## 8. User — Flow
 
 | Method | Endpoint | Description |
