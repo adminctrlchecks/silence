@@ -18,27 +18,18 @@ function apiError(error: unknown) {
   }
 
   return NextResponse.json(
-    { error: { code: 'USERS_FETCH_FAILED', message: 'Unable to load users' } },
+    { error: { code: 'DASHBOARD_METRICS_FETCH_FAILED', message: 'Unable to load dashboard metrics' } },
     { status: 500 },
   );
 }
 
-export async function GET(request: Request) {
+export async function GET() {
   const token = await getAdminToken();
   if (!token) return unauthorized();
 
-  const url = new URL(request.url);
-
   try {
-    const users = await adminApi.listUsers(token, {
-      page: url.searchParams.get('page') ?? 1,
-      limit: url.searchParams.get('limit') ?? 50,
-      search: url.searchParams.get('search') ?? undefined,
-      category: url.searchParams.get('category') ?? undefined,
-      sortBy: url.searchParams.get('sortBy') ?? undefined,
-      sortDir: url.searchParams.get('sortDir') ?? undefined,
-    });
-    return NextResponse.json(users);
+    const metrics = await adminApi.dashboardMetrics(token);
+    return NextResponse.json(metrics);
   } catch (error) {
     return apiError(error);
   }

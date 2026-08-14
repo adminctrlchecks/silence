@@ -1,5 +1,5 @@
 import { Body, Controller, Get, Param, Post, Put, Query, Req, UseGuards } from '@nestjs/common';
-import { updateUserProfileSchema } from '@silence/shared';
+import { updateUserProfileSchema, type Category } from '@silence/shared';
 import { ApiBearerAuth, ApiTags } from '@nestjs/swagger';
 import { AdminJwtGuard } from '../auth/guards/admin-jwt.guard';
 import { UpdateUserProfileDto } from '../common/dto';
@@ -9,7 +9,7 @@ import { assertOwnUser, type AuthenticatedRequest } from '../common/assert-own-u
 import { ChartService } from '../chart/chart.service';
 import { RemediesService } from '../remedies/remedies.service';
 import { SessionsService } from '../sessions/sessions.service';
-import { UsersService } from './users.service';
+import { UsersService, type AdminUserSortBy } from './users.service';
 
 /** User profile, chart, remedy, history - docs/API.md sections 9-10. */
 @ApiTags('user: profile')
@@ -119,15 +119,44 @@ export class UsersController {
 @Controller('admin/users')
 @UseGuards(AdminJwtGuard)
 export class AdminUsersController {
-  constructor(private readonly users: UsersService) {}
+  constructor(
+    private readonly users: UsersService,
+    private readonly sessions: SessionsService,
+  ) {}
 
   @Get()
-  list(@Query('page') page?: string, @Query('limit') limit?: string) {
-    return this.users.listForAdmin(page ? Number(page) : undefined, limit ? Number(limit) : undefined);
+  list(
+    @Query('page') page?: string,
+    @Query('limit') limit?: string,
+    @Query('search') search?: string,
+    @Query('category') category?: Category,
+    @Query('sortBy') sortBy?: AdminUserSortBy,
+    @Query('sortDir') sortDir?: 'asc' | 'desc',
+  ) {
+    return this.users.listForAdmin({
+      page: page ? Number(page) : undefined,
+      limit: limit ? Number(limit) : undefined,
+      search,
+      category,
+      sortBy,
+      sortDir,
+    });
   }
 
   @Get(':id')
   get(@Param('id') id: string) {
     return this.users.getForAdmin(id);
+  }
+
+  /** Admin-scoped equivalent of GET /users/:id/sessions — no ownership check, admin token only. */
+  @Get(':id/sessions')
+  listSessions(@Param('id') id: string, @Query('page') page?: string, @Query('limit') limit?: string) {
+    return this.sessions.list(id, page ? Number(page) : undefined, limit ? Number(limit) : undefined);
+  }
+
+  /** Admin-scoped equivalent of GET /users/:id/sessions/:sessionId. */
+  @Get(':id/sessions/:sessionId')
+  sessionDetail(@Param('id') id: string, @Param('sessionId') sessionId: string) {
+    return this.sessions.getDetail(id, sessionId);
   }
 }

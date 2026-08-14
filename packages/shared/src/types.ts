@@ -206,3 +206,82 @@ export interface AuthResponse<T> {
   admin?: T;
   user?: T;
 }
+
+// ── Admin command center (docs/API.md §7b) ────────────────────────────────────
+
+export interface AdminUserCounts {
+  total: number;
+  newToday: number;
+  newThisWeek: number;
+  newThisMonth: number;
+}
+
+/** Reading sessions grouped by funnel stage. */
+export type AdminSessionCounts = {
+  total: number;
+  byStatus: Record<ReadingSessionStatus, number>;
+};
+
+/** How many of a level+category's questions have at least one (reviewed) answer. */
+export interface AdminQuestionCoverage {
+  level: Level;
+  category: Category;
+  questionsTotal: number;
+  questionsWithAnswer: number;
+  questionsWithReviewedAnswer: number;
+}
+
+/** How much of each entity type has a translation row for a given language. */
+export interface AdminTranslationCompleteness {
+  lang: string;
+  questionsTranslated: number;
+  questionsTotal: number;
+  answersTranslated: number;
+  answersTotal: number;
+  remediesTranslated: number;
+  remediesTotal: number;
+}
+
+/** Live metrics for the admin overview — replaces hardcoded dashboard cards. */
+export interface AdminDashboardMetrics {
+  users: AdminUserCounts;
+  sessions: AdminSessionCounts;
+  questions: { total: number; active: number };
+  answers: { total: number; unreviewedAi: number };
+  questionCoverage: AdminQuestionCoverage[];
+  remedies: { total: number; categoriesMissingRemedy: Category[] };
+  translations: AdminTranslationCompleteness[];
+  /**
+   * Chart interpretations are never allowed to hard-fail (Gemini errors fall back to a
+   * placeholder string) so there is no persisted error log to count yet — `aiFallbackCount`
+   * is the best available proxy: charts whose interpretation is that placeholder text.
+   */
+  chart: { total: number; aiFallbackCount: number };
+  imports: {
+    total: number;
+    failed: number;
+    recentFailures: Array<{ id: string; type: ImportType; createdAt: string }>;
+  };
+}
+
+export interface ContentMatrixLangCoverage {
+  lang: string;
+  questionsTranslated: number;
+  answersTranslated: number;
+}
+
+export interface ContentMatrixCell {
+  level: Level;
+  category: Category;
+  questionsTotal: number;
+  questionsWithAnswer: number;
+  questionsWithReviewedAnswer: number;
+  remedyCount: number;
+  languages: ContentMatrixLangCoverage[];
+}
+
+/** Levels x categories x questions-with-answers x per-language translations x remedies. */
+export interface ContentMatrix {
+  cells: ContentMatrixCell[];
+  languages: string[];
+}

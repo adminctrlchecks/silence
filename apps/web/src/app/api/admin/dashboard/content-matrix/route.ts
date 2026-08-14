@@ -18,27 +18,18 @@ function apiError(error: unknown) {
   }
 
   return NextResponse.json(
-    { error: { code: 'USERS_FETCH_FAILED', message: 'Unable to load users' } },
+    { error: { code: 'CONTENT_MATRIX_FETCH_FAILED', message: 'Unable to load content matrix' } },
     { status: 500 },
   );
 }
 
-export async function GET(request: Request) {
+export async function GET() {
   const token = await getAdminToken();
   if (!token) return unauthorized();
 
-  const url = new URL(request.url);
-
   try {
-    const users = await adminApi.listUsers(token, {
-      page: url.searchParams.get('page') ?? 1,
-      limit: url.searchParams.get('limit') ?? 50,
-      search: url.searchParams.get('search') ?? undefined,
-      category: url.searchParams.get('category') ?? undefined,
-      sortBy: url.searchParams.get('sortBy') ?? undefined,
-      sortDir: url.searchParams.get('sortDir') ?? undefined,
-    });
-    return NextResponse.json(users);
+    const matrix = await adminApi.contentMatrix(token);
+    return NextResponse.json(matrix);
   } catch (error) {
     return apiError(error);
   }

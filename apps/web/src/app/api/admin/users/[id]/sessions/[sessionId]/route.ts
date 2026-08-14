@@ -2,6 +2,10 @@ import { NextResponse } from 'next/server';
 import { adminApi, ApiError } from '@/lib/api';
 import { getAdminToken } from '@/lib/admin-session';
 
+type RouteContext = {
+  params: Promise<{ id: string; sessionId: string }>;
+};
+
 function unauthorized() {
   return NextResponse.json(
     { error: { code: 'UNAUTHORIZED', message: 'Admin sign in is required' } },
@@ -18,27 +22,20 @@ function apiError(error: unknown) {
   }
 
   return NextResponse.json(
-    { error: { code: 'USERS_FETCH_FAILED', message: 'Unable to load users' } },
+    { error: { code: 'USER_SESSION_FETCH_FAILED', message: 'Unable to load reading session' } },
     { status: 500 },
   );
 }
 
-export async function GET(request: Request) {
+export async function GET(_request: Request, context: RouteContext) {
   const token = await getAdminToken();
   if (!token) return unauthorized();
 
-  const url = new URL(request.url);
+  const { id, sessionId } = await context.params;
 
   try {
-    const users = await adminApi.listUsers(token, {
-      page: url.searchParams.get('page') ?? 1,
-      limit: url.searchParams.get('limit') ?? 50,
-      search: url.searchParams.get('search') ?? undefined,
-      category: url.searchParams.get('category') ?? undefined,
-      sortBy: url.searchParams.get('sortBy') ?? undefined,
-      sortDir: url.searchParams.get('sortDir') ?? undefined,
-    });
-    return NextResponse.json(users);
+    const session = await adminApi.getUserSession(token, id, sessionId);
+    return NextResponse.json(session);
   } catch (error) {
     return apiError(error);
   }
