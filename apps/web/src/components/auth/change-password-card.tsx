@@ -1,6 +1,6 @@
 'use client';
 
-import { KeyRound, Loader2 } from 'lucide-react';
+import { Eye, EyeOff, KeyRound, Loader2 } from 'lucide-react';
 import { useRouter } from 'next/navigation';
 import type { FormEvent } from 'react';
 import { useState } from 'react';
@@ -19,6 +19,51 @@ type Copy = {
   submitting: string;
   success: string;
 };
+
+function PasswordField({
+  id,
+  label,
+  autoComplete,
+  value,
+  onChange,
+}: {
+  id: string;
+  label: string;
+  autoComplete: string;
+  value: string;
+  onChange: (value: string) => void;
+}) {
+  const [visible, setVisible] = useState(false);
+  const visibilityLabel = visible ? `Hide ${label.toLowerCase()}` : `Show ${label.toLowerCase()}`;
+
+  return (
+    <div className="space-y-2">
+      <Label htmlFor={id}>{label}</Label>
+      <div className="relative">
+        <Input
+          id={id}
+          type={visible ? 'text' : 'password'}
+          autoComplete={autoComplete}
+          minLength={autoComplete === 'new-password' ? 8 : undefined}
+          value={value}
+          onChange={(event) => onChange(event.target.value)}
+          className="pe-11"
+          required
+        />
+        <button
+          type="button"
+          className="absolute end-1 top-1/2 inline-flex size-8 -translate-y-1/2 items-center justify-center rounded-md text-muted-foreground transition-colors hover:bg-muted hover:text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
+          onClick={() => setVisible((current) => !current)}
+          aria-label={visibilityLabel}
+          title={visibilityLabel}
+          aria-pressed={visible}
+        >
+          {visible ? <EyeOff className="size-4" /> : <Eye className="size-4" />}
+        </button>
+      </div>
+    </div>
+  );
+}
 
 export function ChangePasswordCard({
   endpoint,
@@ -84,41 +129,27 @@ export function ChangePasswordCard({
       </div>
 
       <form className="mt-5 grid gap-4 sm:grid-cols-3" onSubmit={submit}>
-        <div className="space-y-2">
-          <Label htmlFor={`${endpoint}-current`}>{copy.currentPassword}</Label>
-          <Input
-            id={`${endpoint}-current`}
-            type="password"
-            autoComplete="current-password"
-            value={currentPassword}
-            onChange={(event) => setCurrentPassword(event.target.value)}
-            required
-          />
-        </div>
-        <div className="space-y-2">
-          <Label htmlFor={`${endpoint}-new`}>{copy.newPassword}</Label>
-          <Input
-            id={`${endpoint}-new`}
-            type="password"
-            autoComplete="new-password"
-            minLength={8}
-            value={newPassword}
-            onChange={(event) => setNewPassword(event.target.value)}
-            required
-          />
-        </div>
-        <div className="space-y-2">
-          <Label htmlFor={`${endpoint}-confirm`}>{copy.confirmPassword}</Label>
-          <Input
-            id={`${endpoint}-confirm`}
-            type="password"
-            autoComplete="new-password"
-            minLength={8}
-            value={confirmPassword}
-            onChange={(event) => setConfirmPassword(event.target.value)}
-            required
-          />
-        </div>
+        <PasswordField
+          id={`${endpoint}-current`}
+          label={copy.currentPassword}
+          autoComplete="current-password"
+          value={currentPassword}
+          onChange={setCurrentPassword}
+        />
+        <PasswordField
+          id={`${endpoint}-new`}
+          label={copy.newPassword}
+          autoComplete="new-password"
+          value={newPassword}
+          onChange={setNewPassword}
+        />
+        <PasswordField
+          id={`${endpoint}-confirm`}
+          label={copy.confirmPassword}
+          autoComplete="new-password"
+          value={confirmPassword}
+          onChange={setConfirmPassword}
+        />
 
         {error ? (
           <p role="alert" className="rounded-md border border-destructive/30 bg-destructive/10 px-3 py-2 text-sm text-destructive sm:col-span-3">
