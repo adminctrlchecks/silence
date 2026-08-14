@@ -76,16 +76,21 @@ model Language {
 }
 
 model Question {
-  id           String                @id @default(cuid())
-  level        Level
-  category     Category
-  text         String // base text (default language)
-  order        Int                   @default(0)
-  createdAt    DateTime              @default(now())
-  updatedAt    DateTime              @updatedAt
-  translations QuestionTranslation[]
-  answers      Answer[]
-  responses    UserResponse[]
+  id            String                @id @default(cuid())
+  level         Level
+  category      Category
+  text          String // base text (default language)
+  inputType     String                @default("textarea")
+  required      Boolean               @default(true)
+  helpText      String?
+  active        Boolean               @default(true)
+  branchingTags String?
+  order         Int                   @default(0)
+  createdAt     DateTime              @default(now())
+  updatedAt     DateTime              @updatedAt
+  translations  QuestionTranslation[]
+  answers       Answer[]
+  responses     UserResponse[]
 
   @@index([level, category])
 }
@@ -95,6 +100,7 @@ model QuestionTranslation {
   questionId String
   lang       String
   text       String
+  helpText   String?
   question   Question @relation(fields: [questionId], references: [id], onDelete: Cascade)
 
   @@unique([questionId, lang])
@@ -188,20 +194,23 @@ model User {
 }
 
 model UserResponse {
-  id         String          @id @default(cuid())
-  userId     String
-  sessionId  String?
-  questionId String
-  level      Level
-  category   Category
-  value      String
-  createdAt  DateTime        @default(now())
-  user       User            @relation(fields: [userId], references: [id], onDelete: Cascade)
-  question   Question        @relation(fields: [questionId], references: [id], onDelete: Cascade)
-  session    ReadingSession? @relation(fields: [sessionId], references: [id], onDelete: SetNull)
+  id              String          @id @default(cuid())
+  userId          String
+  sessionId       String?
+  questionId      String
+  level           Level
+  category        Category
+  value           String
+  answerId        String?
+  answerTextShown String?
+  createdAt       DateTime        @default(now())
+  user            User            @relation(fields: [userId], references: [id], onDelete: Cascade)
+  question        Question        @relation(fields: [questionId], references: [id], onDelete: Cascade)
+  session         ReadingSession? @relation(fields: [sessionId], references: [id], onDelete: SetNull)
 
   @@index([userId, level])
   @@index([sessionId])
+  @@index([sessionId, questionId])
 }
 
 model UserChart {

@@ -14,6 +14,7 @@ type PlaceResult = {
 };
 
 type Props = {
+  id?: string;
   label: string;
   placeholder?: string;
   initialValue?: string;
@@ -21,7 +22,7 @@ type Props = {
   onSelect: (place: PlaceResult) => void;
 };
 
-export function PlacesAutocomplete({ label, placeholder, initialValue = '', required, onSelect }: Props) {
+export function PlacesAutocomplete({ id, label, placeholder, initialValue = '', required, onSelect }: Props) {
   const [query, setQuery] = useState(initialValue);
   const [results, setResults] = useState<PlaceResult[]>([]);
   const [loading, setLoading] = useState(false);
@@ -66,6 +67,8 @@ export function PlacesAutocomplete({ label, placeholder, initialValue = '', requ
       <div className="relative">
         <MapPin className="pointer-events-none absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground" />
         <Input
+          id={id}
+          data-testid={id}
           value={query}
           onChange={(e) => handleChange(e.target.value)}
           placeholder={placeholder ?? 'Search for a city…'}

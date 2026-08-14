@@ -36,6 +36,11 @@ export interface Question extends Translated {
   level: Level;
   category: Category;
   text: string;
+  inputType: string;
+  required: boolean;
+  helpText?: string | null;
+  active: boolean;
+  branchingTags?: string | null;
   order: number;
 }
 
@@ -99,6 +104,8 @@ export interface SavedUserResponse {
   level: Level;
   category: Category;
   value: string;
+  answerId?: string | null;
+  answerTextShown?: string | null;
   createdAt: string;
 }
 

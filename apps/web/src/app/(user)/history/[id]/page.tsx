@@ -63,6 +63,14 @@ export default async function HistorySessionPage({ params }: { params: Promise<{
                   <p className="mt-2 break-words text-sm leading-6" dir="auto">
                     {response.value}
                   </p>
+                  {response.answerTextShown ? (
+                    <div className="mt-3 rounded-md border border-primary/20 bg-primary/5 px-3 py-2 text-xs">
+                      <p className="font-medium text-primary">{levels('answerLabel')}</p>
+                      <p className="mt-1 text-muted-foreground leading-5" dir="auto">
+                        {response.answerTextShown}
+                      </p>
+                    </div>
+                  ) : null}
                 </article>
               ))
             ) : (

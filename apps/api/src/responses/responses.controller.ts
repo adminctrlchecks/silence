@@ -1,9 +1,10 @@
-import { Body, Controller, Get, Post, Query, UseGuards } from '@nestjs/common';
+import { Body, Controller, Get, Post, Query, Req, UseGuards } from '@nestjs/common';
 import { ApiTags, ApiBearerAuth } from '@nestjs/swagger';
 import { submitResponsesSchema, type Category, type Level } from '@silence/shared';
 import { ZodValidationPipe } from '../common/zod-validation.pipe';
 import { SubmitResponsesDto } from '../common/dto';
 import { UserJwtGuard } from '../auth/guards/user-jwt.guard';
+import { assertOwnUser, type AuthenticatedRequest } from '../common/assert-own-user';
 import { ResponsesService } from './responses.service';
 import { QuestionsService } from '../questions/questions.service';
 
@@ -30,7 +31,11 @@ export class ResponsesController {
   @ApiBearerAuth('user')
   @Post('responses')
   @UseGuards(UserJwtGuard)
-  submit(@Body(new ZodValidationPipe(submitResponsesSchema)) body: SubmitResponsesDto) {
+  submit(
+    @Body(new ZodValidationPipe(submitResponsesSchema)) body: SubmitResponsesDto,
+    @Req() req: AuthenticatedRequest,
+  ) {
+    assertOwnUser(req, body.userId);
     return this.responses.submit(body);
   }
 }

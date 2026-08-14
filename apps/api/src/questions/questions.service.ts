@@ -46,6 +46,11 @@ export class QuestionsService {
         level: input.level,
         category: input.category,
         text: input.text,
+        inputType: input.inputType ?? 'textarea',
+        required: input.required ?? true,
+        helpText: input.helpText,
+        active: input.active ?? true,
+        branchingTags: input.branchingTags,
         order: input.order ?? 0,
         translations: input.translations
           ? { create: Object.entries(input.translations).map(([l, text]) => ({ lang: l, text })) }
@@ -63,6 +68,11 @@ export class QuestionsService {
         level: input.level,
         category: input.category,
         text: input.text,
+        inputType: input.inputType,
+        required: input.required,
+        helpText: input.helpText,
+        active: input.active,
+        branchingTags: input.branchingTags,
         order: input.order,
       },
     });
@@ -95,15 +105,32 @@ export class QuestionsService {
 
   /** Resolves the display text for the requested language, falling back to base text. */
   private present(
-    q: { id: string; level: Level; category: Category; text: string; order: number; translations?: { lang: string; text: string }[] },
+    q: {
+      id: string;
+      level: Level;
+      category: Category;
+      text: string;
+      inputType: string;
+      required: boolean;
+      helpText?: string | null;
+      active: boolean;
+      branchingTags?: string | null;
+      order: number;
+      translations?: { lang: string; text: string; helpText?: string | null }[];
+    },
     lang?: string,
   ) {
-    const t = lang ? q.translations?.find((x) => x.lang === lang)?.text : undefined;
+    const t = lang ? q.translations?.find((x) => x.lang === lang) : undefined;
     return {
       id: q.id,
       level: q.level,
       category: q.category,
-      text: t ?? q.text,
+      text: t?.text ?? q.text,
+      inputType: q.inputType,
+      required: q.required,
+      helpText: t?.helpText ?? q.helpText,
+      active: q.active,
+      branchingTags: q.branchingTags,
       order: q.order,
     };
   }

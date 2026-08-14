@@ -1,4 +1,4 @@
-import type { Level } from '@silence/shared';
+import type { Category, Level } from '@silence/shared';
 import { redirect } from 'next/navigation';
 import { QuestionFlow } from '@/components/questions/question-flow';
 import { publicApi } from '@/lib/api';
@@ -22,6 +22,24 @@ export default async function QuestionsPage() {
   ]);
   const existingResponses = await publicApi.sessionDetail(profile.id, activeSession.id, session.token);
 
+  const initialDisplayAnswers = {} as Record<
+    string,
+    { id: string; questionId: string; level: Level; category: Category; text: string; source: 'admin' | 'ai'; reviewed: boolean }
+  >;
+  for (const r of existingResponses.responses) {
+    if (r.answerTextShown) {
+      initialDisplayAnswers[r.questionId] = {
+        id: r.answerId || r.questionId,
+        questionId: r.questionId,
+        level: r.level,
+        category: r.category,
+        text: r.answerTextShown,
+        source: 'admin',
+        reviewed: true,
+      };
+    }
+  }
+
   return (
     <main className="mx-auto w-full max-w-5xl px-4 py-8 sm:px-6">
       <QuestionFlow
@@ -35,6 +53,7 @@ export default async function QuestionsPage() {
           level2: questionLists[2].data,
         }}
         savedAnswers={Object.fromEntries(existingResponses.responses.map((r) => [r.questionId, r.value]))}
+        initialDisplayAnswers={initialDisplayAnswers}
       />
     </main>
   );

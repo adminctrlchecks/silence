@@ -20,6 +20,7 @@ export function QuestionFlow({
   lang,
   questions,
   savedAnswers = {},
+  initialDisplayAnswers = {},
 }: {
   userId: string;
   sessionId: string;
@@ -27,37 +28,83 @@ export function QuestionFlow({
   lang: string;
   questions: QuestionsByLevel;
   savedAnswers?: AnswersByQuestion;
+  initialDisplayAnswers?: DisplayAnswersByQuestion;
 }) {
   const t = useTranslations('Questions');
+
+  // Filter questions for active ones
+  const filteredQuestions = useMemo(() => {
+    const res = {} as QuestionsByLevel;
+    for (const level of levels) {
+      res[level] = (questions[level] ?? []).filter((q) => q.active !== false);
+    }
+    return res;
+  }, [questions]);
+
   const levelComplete = (level: Level) =>
-    questions[level].length > 0 && questions[level].every((q) => savedAnswers[q.id]?.trim());
+    filteredQuestions[level].length > 0 &&
+    filteredQuestions[level].every((q) => {
+      const val = savedAnswers[q.id]?.trim();
+      return q.required === false ? true : Boolean(val);
+    });
+
   const [step, setStep] = useState<Level>(
     () => levels.find((level) => !levelComplete(level)) ?? levels[levels.length - 1],
   );
-  const [answers, setAnswers] = useState<AnswersByQuestion>(savedAnswers);
+
+  const [answers, setAnswers] = useState<AnswersByQuestion>(() => {
+    const initial = { ...savedAnswers };
+    if (typeof window !== 'undefined') {
+      try {
+        const draftStr = localStorage.getItem(`silence_draft_${sessionId}`);
+        if (draftStr) {
+          const drafts = JSON.parse(draftStr) as AnswersByQuestion;
+          Object.assign(initial, drafts);
+        }
+      } catch {
+        // ignore
+      }
+    }
+    return initial;
+  });
+
   const [pending, setPending] = useState(false);
   const [saved, setSaved] = useState<Partial<Record<Level, boolean>>>(() =>
     Object.fromEntries(levels.map((level) => [level, levelComplete(level)])),
   );
-  const [displayAnswers, setDisplayAnswers] = useState<DisplayAnswersByQuestion>({});
+  const [displayAnswers, setDisplayAnswers] = useState<DisplayAnswersByQuestion>(initialDisplayAnswers);
   const [error, setError] = useState<string | null>(null);
 
-  const currentQuestions = questions[step];
-  const currentComplete = currentQuestions.every((question) => answers[question.id]?.trim());
+  const currentQuestions = filteredQuestions[step];
+  const currentComplete = currentQuestions.every((question) => {
+    const val = answers[question.id]?.trim();
+    return question.required === false ? true : Boolean(val);
+  });
   const currentIndex = levels.indexOf(step);
   const isFinalStep = currentIndex === levels.length - 1;
 
   const answeredCount = useMemo(
-    () => levels.reduce((total, level) => total + questions[level].filter((question) => answers[question.id]?.trim()).length, 0),
-    [answers, questions],
+    () =>
+      levels.reduce(
+        (total, level) =>
+          total + filteredQuestions[level].filter((question) => answers[question.id]?.trim()).length,
+        0,
+      ),
+    [answers, filteredQuestions],
   );
   const totalCount = useMemo(
-    () => levels.reduce((total, level) => total + questions[level].length, 0),
-    [questions],
+    () => levels.reduce((total, level) => total + filteredQuestions[level].length, 0),
+    [filteredQuestions],
   );
 
   function updateAnswer(questionId: string, value: string) {
-    setAnswers((current) => ({ ...current, [questionId]: value }));
+    setAnswers((current) => {
+      const next = { ...current, [questionId]: value };
+      if (typeof window !== 'undefined') {
+        localStorage.setItem(`silence_draft_${sessionId}`, JSON.stringify(next));
+      }
+      return next;
+    });
   }
 
   async function saveCurrentStep() {
@@ -123,6 +170,22 @@ export function QuestionFlow({
       await loadCurrentAnswers();
       setSaved((current) => ({ ...current, [step]: true }));
 
+      // Clear local drafts for this step
+      if (typeof window !== 'undefined') {
+        try {
+          const draftStr = localStorage.getItem(`silence_draft_${sessionId}`);
+          if (draftStr) {
+            const drafts = JSON.parse(draftStr) as AnswersByQuestion;
+            for (const q of currentQuestions) {
+              delete drafts[q.id];
+            }
+            localStorage.setItem(`silence_draft_${sessionId}`, JSON.stringify(drafts));
+          }
+        } catch {
+          // ignore
+        }
+      }
+
       if (!isFinalStep) {
         setStep(levels[currentIndex + 1]);
       }
@@ -178,14 +241,33 @@ export function QuestionFlow({
               <span className="mt-2 block text-sm font-medium" dir="auto">
                 {question.text}
               </span>
-              <textarea
-                className="mt-3 min-h-24 w-full resize-y rounded-md border border-border bg-card px-3 py-2 text-sm outline-none focus-visible:ring-2 focus-visible:ring-ring"
-                value={answers[question.id] ?? ''}
-                onChange={(event) => updateAnswer(question.id, event.target.value)}
-                placeholder={t('answerPlaceholder')}
-                aria-label={question.text}
-                dir="auto"
-              />
+              {question.helpText ? (
+                <span className="mt-1 block text-xs text-muted-foreground" dir="auto">
+                  {question.helpText}
+                </span>
+              ) : null}
+              {question.inputType === 'text' ? (
+                <input
+                  type="text"
+                  className="mt-3 h-10 w-full rounded-md border border-border bg-card px-3 text-sm outline-none focus-visible:ring-2 focus-visible:ring-ring"
+                  value={answers[question.id] ?? ''}
+                  onChange={(event) => updateAnswer(question.id, event.target.value)}
+                  placeholder={t('answerPlaceholder')}
+                  aria-label={question.text}
+                  required={question.required !== false}
+                  dir="auto"
+                />
+              ) : (
+                <textarea
+                  className="mt-3 min-h-24 w-full resize-y rounded-md border border-border bg-card px-3 py-2 text-sm outline-none focus-visible:ring-2 focus-visible:ring-ring"
+                  value={answers[question.id] ?? ''}
+                  onChange={(event) => updateAnswer(question.id, event.target.value)}
+                  placeholder={t('answerPlaceholder')}
+                  aria-label={question.text}
+                  required={question.required !== false}
+                  dir="auto"
+                />
+              )}
               {displayAnswers[question.id] ? (
                 <div className="mt-3 rounded-md border border-primary/20 bg-primary/10 px-3 py-2">
                   <p className="text-xs font-medium text-primary">{t('answerLabel')}</p>

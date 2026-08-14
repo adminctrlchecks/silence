@@ -113,6 +113,8 @@ export class SessionsService {
           level: r.level,
           category: r.category,
           value: r.value,
+          answerId: r.answerId ?? undefined,
+          answerTextShown: r.answerTextShown ?? undefined,
           createdAt: r.createdAt.toISOString(),
         })),
       chart: chart
