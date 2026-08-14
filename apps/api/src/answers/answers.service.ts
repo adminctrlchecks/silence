@@ -1,4 +1,5 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
+import type { Prisma } from '@prisma/client';
 import type {
   Category,
   Level,
@@ -15,6 +16,7 @@ interface ListFilter {
   level?: Level;
   category?: Category;
   questionId?: string;
+  q?: string;
   source?: AnswerSource;
   reviewed?: boolean;
   lang?: string;
@@ -30,12 +32,20 @@ export class AnswersService {
   ) {}
 
   async list(f: ListFilter) {
-    const where = {
+    const search = f.q?.trim();
+    const where: Prisma.AnswerWhereInput = {
       ...(f.level && { level: f.level }),
       ...(f.category && { category: f.category }),
       ...(f.questionId && { questionId: f.questionId }),
       ...(f.source && { source: f.source }),
       ...(f.reviewed !== undefined && { reviewed: f.reviewed }),
+      ...(search && {
+        OR: [
+          { text: { contains: search, mode: 'insensitive' } },
+          { translations: { some: { text: { contains: search, mode: 'insensitive' } } } },
+          { question: { text: { contains: search, mode: 'insensitive' } } },
+        ],
+      }),
     };
     const { page, limit, skip, take } = parsePageParams(f.page, f.limit);
     const [rows, total] = await this.prisma.$transaction([

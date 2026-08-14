@@ -18,6 +18,35 @@ describe('RemediesService', () => {
     expect(res).toEqual({ data: [], page: 1, limit: 5, total: 0 });
   });
 
+  it('list() searches remedy content and rule fields', async () => {
+    prisma.remedy.findMany.mockResolvedValue([]);
+    prisma.remedy.count.mockResolvedValue(0);
+
+    await service.list(undefined, undefined, 1, 20, 'saturn');
+
+    const where = prisma.remedy.findMany.mock.calls[0][0].where;
+    expect(where.OR).toEqual(
+      expect.arrayContaining([
+        { title: { contains: 'saturn', mode: 'insensitive' } },
+        { text: { contains: 'saturn', mode: 'insensitive' } },
+        { planetFilter: { contains: 'saturn', mode: 'insensitive' } },
+        { signFilter: { contains: 'saturn', mode: 'insensitive' } },
+        { houseFilter: { contains: 'saturn', mode: 'insensitive' } },
+        { keywordFilter: { contains: 'saturn', mode: 'insensitive' } },
+      ]),
+    );
+    expect(where.OR).toContainEqual({
+      translations: {
+        some: {
+          OR: [
+            { title: { contains: 'saturn', mode: 'insensitive' } },
+            { text: { contains: 'saturn', mode: 'insensitive' } },
+          ],
+        },
+      },
+    });
+  });
+
   it('create() maps linkedTo to linkedLevel/linkedQuestionId', async () => {
     prisma.remedy.create.mockResolvedValue({ id: 'r1', category: 'female', title: 'T', text: 'X' });
     await service.create({ category: 'female', title: 'T', text: 'X', linkedTo: { level: 'level2', questionId: 'q1' } });

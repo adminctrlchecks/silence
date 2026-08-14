@@ -2,6 +2,7 @@
 
 import { CATEGORIES, LEVELS, type Category, type Level, type Paginated, type Question, type Remedy } from '@silence/shared';
 import { Ban, Loader2, Pencil, Plus, RefreshCw, Save, Sparkles, Trash2, X } from 'lucide-react';
+import { useSearchParams } from 'next/navigation';
 import { useCallback, useEffect, useMemo, useState } from 'react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
@@ -67,6 +68,8 @@ async function parseJson<T>(response: Response): Promise<T> {
 }
 
 export function RemediesAdmin() {
+  const searchParams = useSearchParams();
+  const search = searchParams.get('q')?.trim() ?? '';
   const [categoryFilter, setCategoryFilter] = useState<CategoryFilter>('all');
   const [questions, setQuestions] = useState<Question[]>([]);
   const [remedies, setRemedies] = useState<Remedy[]>([]);
@@ -80,9 +83,10 @@ export function RemediesAdmin() {
 
   const query = useMemo(() => {
     const params = new URLSearchParams({ limit: '100' });
+    if (search) params.set('q', search);
     if (categoryFilter !== 'all') params.set('category', categoryFilter);
     return params.toString();
-  }, [categoryFilter]);
+  }, [categoryFilter, search]);
 
   const questionById = useMemo(() => new Map(questions.map((question) => [question.id, question])), [questions]);
   const linkedQuestions = useMemo(

@@ -27,6 +27,7 @@ export class AdminRemediesController {
   @Get()
   list(
     @Query('category') category?: Category,
+    @Query('q') q?: string,
     @Query('lang') lang?: string,
     @Query('page') page?: string,
     @Query('limit') limit?: string,
@@ -36,6 +37,7 @@ export class AdminRemediesController {
       lang,
       page ? Number(page) : undefined,
       limit ? Number(limit) : undefined,
+      q,
     );
   }
 

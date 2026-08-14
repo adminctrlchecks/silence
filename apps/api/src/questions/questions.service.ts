@@ -1,4 +1,5 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
+import type { Prisma } from '@prisma/client';
 import type { Category, Level, CreateQuestionInput, UpdateQuestionInput } from '@silence/shared';
 import { PrismaService } from '../prisma/prisma.service';
 import { parsePageParams, paginated } from '../common/pagination';
@@ -6,6 +7,7 @@ import { parsePageParams, paginated } from '../common/pagination';
 interface ListFilter {
   level?: Level;
   category?: Category;
+  q?: string;
   lang?: string;
   page?: number;
   limit?: number;
@@ -15,8 +17,29 @@ interface ListFilter {
 export class QuestionsService {
   constructor(private readonly prisma: PrismaService) {}
 
-  async list({ level, category, lang, page, limit }: ListFilter) {
-    const where = { ...(level && { level }), ...(category && { category }) };
+  async list({ level, category, q, lang, page, limit }: ListFilter) {
+    const search = q?.trim();
+    const where: Prisma.QuestionWhereInput = {
+      ...(level && { level }),
+      ...(category && { category }),
+      ...(search && {
+        OR: [
+          { text: { contains: search, mode: 'insensitive' } },
+          { helpText: { contains: search, mode: 'insensitive' } },
+          { branchingTags: { contains: search, mode: 'insensitive' } },
+          {
+            translations: {
+              some: {
+                OR: [
+                  { text: { contains: search, mode: 'insensitive' } },
+                  { helpText: { contains: search, mode: 'insensitive' } },
+                ],
+              },
+            },
+          },
+        ],
+      }),
+    };
     const pp = parsePageParams(page, limit);
     const [rows, total] = await this.prisma.$transaction([
       this.prisma.question.findMany({

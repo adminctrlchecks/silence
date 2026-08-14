@@ -2,6 +2,7 @@
 
 import { CATEGORIES, LEVELS, type Category, type Level, type Paginated, type Question } from '@silence/shared';
 import { Loader2, Pencil, Plus, RefreshCw, Save, Trash2, X } from 'lucide-react';
+import { useSearchParams } from 'next/navigation';
 import { useCallback, useEffect, useMemo, useState } from 'react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
@@ -45,6 +46,8 @@ async function parseJson<T>(response: Response): Promise<T> {
 }
 
 export function QuestionsAdmin() {
+  const searchParams = useSearchParams();
+  const search = searchParams.get('q')?.trim() ?? '';
   const [levelFilter, setLevelFilter] = useState<FilterValue<Level>>('all');
   const [categoryFilter, setCategoryFilter] = useState<FilterValue<Category>>('all');
   const [questions, setQuestions] = useState<Question[]>([]);
@@ -56,10 +59,11 @@ export function QuestionsAdmin() {
 
   const query = useMemo(() => {
     const params = new URLSearchParams({ limit: '100' });
+    if (search) params.set('q', search);
     if (levelFilter !== 'all') params.set('level', levelFilter);
     if (categoryFilter !== 'all') params.set('category', categoryFilter);
     return params.toString();
-  }, [categoryFilter, levelFilter]);
+  }, [categoryFilter, levelFilter, search]);
 
   const loadQuestions = useCallback(async () => {
     setLoading(true);

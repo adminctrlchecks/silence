@@ -34,6 +34,32 @@ describe('QuestionsService', () => {
     expect(res.data[0].text).toBe('नमस्ते');
   });
 
+  it('list() searches base and translated question content', async () => {
+    prisma.question.findMany.mockResolvedValue([]);
+    prisma.question.count.mockResolvedValue(0);
+
+    await service.list({ q: 'sleep' });
+
+    const where = prisma.question.findMany.mock.calls[0][0].where;
+    expect(where.OR).toEqual(
+      expect.arrayContaining([
+        { text: { contains: 'sleep', mode: 'insensitive' } },
+        { helpText: { contains: 'sleep', mode: 'insensitive' } },
+        { branchingTags: { contains: 'sleep', mode: 'insensitive' } },
+      ]),
+    );
+    expect(where.OR).toContainEqual({
+      translations: {
+        some: {
+          OR: [
+            { text: { contains: 'sleep', mode: 'insensitive' } },
+            { helpText: { contains: 'sleep', mode: 'insensitive' } },
+          ],
+        },
+      },
+    });
+  });
+
   it('get() throws NotFound when the question does not exist', async () => {
     prisma.question.findUnique.mockResolvedValue(null);
     await expect(service.get('missing')).rejects.toBeInstanceOf(NotFoundException);

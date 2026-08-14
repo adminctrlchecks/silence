@@ -41,6 +41,7 @@ export async function GET(request: Request) {
   const category = url.searchParams.get('category') ?? undefined;
   const source = url.searchParams.get('source') ?? undefined;
   const reviewed = url.searchParams.get('reviewed') ?? undefined;
+  const q = url.searchParams.get('q')?.trim() || undefined;
 
   if (level && !LEVELS.includes(level as Level)) {
     return NextResponse.json(
@@ -74,6 +75,7 @@ export async function GET(request: Request) {
     const answers = await adminApi.listAnswers(token, {
       level,
       category,
+      q,
       source,
       reviewed,
       questionId: url.searchParams.get('questionId') ?? undefined,

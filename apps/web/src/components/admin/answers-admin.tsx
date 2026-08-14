@@ -85,6 +85,7 @@ function validReviewed(value: string | null): ReviewedFilter {
 
 export function AnswersAdmin() {
   const searchParams = useSearchParams();
+  const search = searchParams.get('q')?.trim() ?? '';
   const [levelFilter, setLevelFilter] = useState<FilterValue<Level>>('all');
   const [categoryFilter, setCategoryFilter] = useState<FilterValue<Category>>('all');
   const [sourceFilter, setSourceFilter] = useState<FilterValue<AnswerSource>>(() => validSource(searchParams.get('source')));
@@ -105,12 +106,13 @@ export function AnswersAdmin() {
 
   const answerQuery = useMemo(() => {
     const params = new URLSearchParams({ limit: '100' });
+    if (search) params.set('q', search);
     if (levelFilter !== 'all') params.set('level', levelFilter);
     if (categoryFilter !== 'all') params.set('category', categoryFilter);
     if (sourceFilter !== 'all') params.set('source', sourceFilter);
     if (reviewedFilter !== 'all') params.set('reviewed', reviewedFilter);
     return params.toString();
-  }, [categoryFilter, levelFilter, reviewedFilter, sourceFilter]);
+  }, [categoryFilter, levelFilter, reviewedFilter, search, sourceFilter]);
 
   const loadQuestions = useCallback(async () => {
     setQuestionsLoading(true);

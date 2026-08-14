@@ -1,4 +1,5 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
+import type { Prisma } from '@prisma/client';
 import type { Category, Level, CreateRemedyInput, UpdateRemedyInput } from '@silence/shared';
 import { PrismaService } from '../prisma/prisma.service';
 import { parsePageParams, paginated } from '../common/pagination';
@@ -35,8 +36,31 @@ function splitFilter(value: string): string[] {
 export class RemediesService {
   constructor(private readonly prisma: PrismaService) {}
 
-  async list(category?: Category, lang?: string, page?: number, limit?: number) {
-    const where = { ...(category && { category }) };
+  async list(category?: Category, lang?: string, page?: number, limit?: number, q?: string) {
+    const search = q?.trim();
+    const where: Prisma.RemedyWhereInput = {
+      ...(category && { category }),
+      ...(search && {
+        OR: [
+          { title: { contains: search, mode: 'insensitive' } },
+          { text: { contains: search, mode: 'insensitive' } },
+          { planetFilter: { contains: search, mode: 'insensitive' } },
+          { signFilter: { contains: search, mode: 'insensitive' } },
+          { houseFilter: { contains: search, mode: 'insensitive' } },
+          { keywordFilter: { contains: search, mode: 'insensitive' } },
+          {
+            translations: {
+              some: {
+                OR: [
+                  { title: { contains: search, mode: 'insensitive' } },
+                  { text: { contains: search, mode: 'insensitive' } },
+                ],
+              },
+            },
+          },
+        ],
+      }),
+    };
     const pp = parsePageParams(page, limit);
     const [rows, total] = await this.prisma.$transaction([
       this.prisma.remedy.findMany({

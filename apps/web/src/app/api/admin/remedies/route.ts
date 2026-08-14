@@ -30,6 +30,7 @@ export async function GET(request: Request) {
 
   const url = new URL(request.url);
   const category = url.searchParams.get('category') ?? undefined;
+  const q = url.searchParams.get('q')?.trim() || undefined;
 
   if (category && !CATEGORIES.includes(category as Category)) {
     return NextResponse.json(
@@ -41,6 +42,7 @@ export async function GET(request: Request) {
   try {
     const remedies = await adminApi.listRemedies(token, {
       category,
+      q,
       page: url.searchParams.get('page') ?? 1,
       limit: url.searchParams.get('limit') ?? 100,
     });

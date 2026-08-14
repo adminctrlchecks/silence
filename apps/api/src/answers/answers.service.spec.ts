@@ -27,6 +27,20 @@ describe('AnswersService', () => {
     expect(res).toEqual({ data: [], page: 1, limit: 10, total: 0 });
   });
 
+  it('list() searches answer, translation, and question text', async () => {
+    prisma.answer.findMany.mockResolvedValue([]);
+    prisma.answer.count.mockResolvedValue(0);
+
+    await service.list({ q: 'career' });
+
+    const where = prisma.answer.findMany.mock.calls[0][0].where;
+    expect(where.OR).toEqual([
+      { text: { contains: 'career', mode: 'insensitive' } },
+      { translations: { some: { text: { contains: 'career', mode: 'insensitive' } } } },
+      { question: { text: { contains: 'career', mode: 'insensitive' } } },
+    ]);
+  });
+
   it('create() marks admin answers reviewed', async () => {
     prisma.answer.create.mockResolvedValue({ id: 'a1', questionId: 'q1', level: 'level1', category: 'male', text: 't', source: 'admin', reviewed: true });
     await service.create({ questionId: 'q1', level: 'level1', category: 'male', text: 't', source: 'admin' });

@@ -111,7 +111,7 @@ Questions are stored per **level** and per **category**.
 
 | Method | Endpoint | Description |
 |--------|----------|-------------|
-| `GET`  | `/admin/questions?level=&category=&lang=` | List questions (filterable). |
+| `GET`  | `/admin/questions?level=&category=&q=&lang=` | List questions (filterable; `q` searches question text, help text, tags, and translations). |
 | `POST` | `/admin/questions` | Add a question (level-wise). |
 | `GET`  | `/admin/questions/{id}` | Get one question. |
 | `PUT`  | `/admin/questions/{id}` | Update a question. |
@@ -140,7 +140,7 @@ whether it came from Admin or AI Mode.
 
 | Method | Endpoint | Description |
 |--------|----------|-------------|
-| `GET`  | `/admin/answers?level=&category=&questionId=` | List answers. |
+| `GET`  | `/admin/answers?level=&category=&questionId=&source=&reviewed=&q=` | List answers (`q` searches answer text, translations, and source question text). |
 | `POST` | `/admin/answers` | Add/edit an answer for a question. |
 | `PUT`  | `/admin/answers/{id}` | Update an answer. |
 | `DELETE` | `/admin/answers/{id}` | Delete an answer. |
@@ -176,7 +176,7 @@ can review, edit, and approve it later.
 
 | Method | Endpoint | Description |
 |--------|----------|-------------|
-| `GET`  | `/admin/remedies?category=&lang=` | List remedies. |
+| `GET`  | `/admin/remedies?category=&q=&lang=` | List remedies (`q` searches title, text, translations, and rule fields). |
 | `POST` | `/admin/remedies` | Add a remedy. |
 | `PUT`  | `/admin/remedies/{id}` | Update a remedy. |
 | `DELETE` | `/admin/remedies/{id}` | Delete a remedy. |

@@ -1,5 +1,10 @@
+import { Suspense } from 'react';
 import { QuestionsAdmin } from '@/components/admin/questions-admin';
 
 export default function AdminQuestionsPage() {
-  return <QuestionsAdmin />;
+  return (
+    <Suspense>
+      <QuestionsAdmin />
+    </Suspense>
+  );
 }

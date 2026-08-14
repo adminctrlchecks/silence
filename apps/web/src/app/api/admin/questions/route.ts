@@ -31,6 +31,7 @@ export async function GET(request: Request) {
   const url = new URL(request.url);
   const level = url.searchParams.get('level') ?? undefined;
   const category = url.searchParams.get('category') ?? undefined;
+  const q = url.searchParams.get('q')?.trim() || undefined;
 
   if (level && !LEVELS.includes(level as Level)) {
     return NextResponse.json(
@@ -50,6 +51,7 @@ export async function GET(request: Request) {
     const questions = await adminApi.listQuestions(token, {
       level,
       category,
+      q,
       page: url.searchParams.get('page') ?? 1,
       limit: url.searchParams.get('limit') ?? 100,
     });

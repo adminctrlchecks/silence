@@ -36,6 +36,15 @@ test('admin content-building journey: login, question, answer, remedy', async ({
   await page.locator('#text').fill(questionText);
   await page.getByRole('button', { name: 'Add question' }).click();
   await expect(page.getByText(questionText)).toBeVisible();
+  await page.getByRole('textbox', { name: 'Search questions' }).fill(runId);
+  await page.getByRole('textbox', { name: 'Search questions' }).press('Enter');
+  await expect(page.getByText(questionText)).toBeVisible();
+  await page.getByRole('textbox', { name: 'Search questions' }).fill(`missing-${runId}`);
+  await page.getByRole('textbox', { name: 'Search questions' }).press('Enter');
+  await expect(page.getByText(questionText)).not.toBeVisible();
+  await expect(page.getByText('No questions match these filters.')).toBeVisible();
+  await page.getByRole('button', { name: 'Clear search' }).click();
+  await expect(page.getByText(questionText)).toBeVisible();
 
   // 3. Create an admin answer linked to that question.
   await page.goto('/admin/answers');

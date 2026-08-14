@@ -33,6 +33,7 @@ export class AdminQuestionsController {
   list(
     @Query('level') level?: Level,
     @Query('category') category?: Category,
+    @Query('q') q?: string,
     @Query('lang') lang?: string,
     @Query('page') page?: string,
     @Query('limit') limit?: string,
@@ -40,6 +41,7 @@ export class AdminQuestionsController {
     return this.questions.list({
       level,
       category,
+      q,
       lang,
       page: page ? Number(page) : undefined,
       limit: limit ? Number(limit) : undefined,
