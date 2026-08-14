@@ -30,6 +30,7 @@ export const placeOfBirthSchema = z.object({
   country: z.string().min(1), // ISO country code or name
   lat: z.number().optional(),
   lng: z.number().optional(),
+  timezone: z.string().optional(),
 });
 
 export const userRegisterSchema = z.object({

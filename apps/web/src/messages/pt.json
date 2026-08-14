@@ -50,7 +50,9 @@
     "newToSilence": "Novo no Silence?",
     "createOne": "Criar um",
     "registerError": "Falha no cadastro. Verifique os dados e tente novamente.",
-    "loginError": "Falha ao entrar. Verifique o contato e a senha."
+    "loginError": "Falha ao entrar. Verifique o contato e a senha.",
+    "birthPlace": "Local de nascimento",
+    "birthPlacePlaceholder": "Procurar uma cidade…"
   },
   "UserLayout": {
     "mySession": "Minha sessão",
@@ -119,7 +121,13 @@
     "keyPlacements": "Key placements",
     "house": "House {house}",
     "retrograde": "retrograde",
-    "notAvailable": "Not available"
+    "notAvailable": "Not available",
+    "accuracy": {
+      "exact": "Exato ao minuto",
+      "approximate": "Aproximado",
+      "uncertain": "Incerto",
+      "label": "Precisão do cálculo"
+    }
   },
   "Remedy": {
     "eyebrow": "Remédio pessoal",
@@ -148,7 +156,9 @@
     "saved": "Profile updated.",
     "city": "Birth city",
     "country": "Birth country",
-    "adminPortal": "Admin portal"
+    "adminPortal": "Admin portal",
+    "birthPlace": "Local de nascimento",
+    "birthPlacePlaceholder": "Procurar uma cidade…"
   },
   "History": {
     "eyebrow": "Suas leituras",

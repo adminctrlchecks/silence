@@ -12,6 +12,7 @@ const USER = {
   placeCountry: 'IN',
   placeLat: 13.08,
   placeLng: 80.27,
+  placeTimezone: 'Asia/Kolkata',
   contact: 'asha@example.com',
   passwordHash: 'hash',
   lang: 'en',

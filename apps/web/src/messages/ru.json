@@ -50,7 +50,9 @@
     "newToSilence": "Впервые в Silence?",
     "createOne": "Создать",
     "registerError": "Регистрация не удалась. Проверьте данные и попробуйте снова.",
-    "loginError": "Войти не удалось. Проверьте контакт и пароль."
+    "loginError": "Войти не удалось. Проверьте контакт и пароль.",
+    "birthPlace": "Место рождения",
+    "birthPlacePlaceholder": "Искать город…"
   },
   "UserLayout": {
     "mySession": "Моя сессия",
@@ -119,7 +121,13 @@
     "keyPlacements": "Key placements",
     "house": "House {house}",
     "retrograde": "retrograde",
-    "notAvailable": "Not available"
+    "notAvailable": "Not available",
+    "accuracy": {
+      "exact": "Точно до минуты",
+      "approximate": "Приблизительно",
+      "uncertain": "Неизвестно",
+      "label": "Точность расчёта"
+    }
   },
   "Remedy": {
     "eyebrow": "Личная рекомендация",
@@ -148,7 +156,9 @@
     "saved": "Profile updated.",
     "city": "Birth city",
     "country": "Birth country",
-    "adminPortal": "Admin portal"
+    "adminPortal": "Admin portal",
+    "birthPlace": "Место рождения",
+    "birthPlacePlaceholder": "Искать город…"
   },
   "History": {
     "eyebrow": "Ваши чтения",

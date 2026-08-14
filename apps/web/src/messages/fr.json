@@ -50,7 +50,9 @@
     "newToSilence": "Nouveau sur Silence ?",
     "createOne": "En créer un",
     "registerError": "L'inscription a échoué. Vérifiez les informations puis réessayez.",
-    "loginError": "La connexion a échoué. Vérifiez votre contact et votre mot de passe."
+    "loginError": "La connexion a échoué. Vérifiez votre contact et votre mot de passe.",
+    "birthPlace": "Lieu de naissance",
+    "birthPlacePlaceholder": "Chercher une ville…"
   },
   "UserLayout": {
     "mySession": "Ma session",
@@ -119,7 +121,13 @@
     "keyPlacements": "Key placements",
     "house": "House {house}",
     "retrograde": "retrograde",
-    "notAvailable": "Not available"
+    "notAvailable": "Not available",
+    "accuracy": {
+      "exact": "Précis à la minute",
+      "approximate": "Approximatif",
+      "uncertain": "Incertain",
+      "label": "Précision du calcul"
+    }
   },
   "Remedy": {
     "eyebrow": "Remède personnel",
@@ -148,7 +156,9 @@
     "saved": "Profile updated.",
     "city": "Birth city",
     "country": "Birth country",
-    "adminPortal": "Admin portal"
+    "adminPortal": "Admin portal",
+    "birthPlace": "Lieu de naissance",
+    "birthPlacePlaceholder": "Chercher une ville…"
   },
   "History": {
     "eyebrow": "Vos lectures",

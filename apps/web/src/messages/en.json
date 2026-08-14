@@ -41,6 +41,8 @@
     "timeOfBirth": "Time of birth",
     "city": "Birth city",
     "country": "Country",
+    "birthPlace": "Place of birth",
+    "birthPlacePlaceholder": "Search for a city…",
     "contact": "Email or phone",
     "password": "Password",
     "consent": "I consent to saving my profile, birth details, answers, chart, and remedy.",
@@ -119,7 +121,13 @@
     "keyPlacements": "Key placements",
     "house": "House {house}",
     "retrograde": "retrograde",
-    "notAvailable": "Not available"
+    "notAvailable": "Not available",
+    "accuracy": {
+      "exact": "Accurate to the minute — exact coordinates and timezone used",
+      "approximate": "Approximate — ascendant may be off by up to a degree",
+      "uncertain": "Uncertain — birth place not recorded; houses not calculated",
+      "label": "Calculation accuracy"
+    }
   },
   "Remedy": {
     "eyebrow": "Personal remedy",
@@ -148,6 +156,8 @@
     "saved": "Profile updated.",
     "city": "Birth city",
     "country": "Birth country",
+    "birthPlace": "Place of birth",
+    "birthPlacePlaceholder": "Search for a city…",
     "adminPortal": "Admin portal"
   },
   "History": {

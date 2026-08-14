@@ -50,7 +50,9 @@
     "newToSilence": "¿Nuevo en Silence?",
     "createOne": "Crear uno",
     "registerError": "No se pudo registrar. Revisa los datos e inténtalo de nuevo.",
-    "loginError": "No se pudo iniciar sesión. Revisa tu contacto y contraseña."
+    "loginError": "No se pudo iniciar sesión. Revisa tu contacto y contraseña.",
+    "birthPlace": "Lugar de nacimiento",
+    "birthPlacePlaceholder": "Buscar una ciudad…"
   },
   "UserLayout": {
     "mySession": "Mi sesión",
@@ -119,7 +121,13 @@
     "keyPlacements": "Key placements",
     "house": "House {house}",
     "retrograde": "retrograde",
-    "notAvailable": "Not available"
+    "notAvailable": "Not available",
+    "accuracy": {
+      "exact": "Exacto al minuto",
+      "approximate": "Aproximado",
+      "uncertain": "Incierto",
+      "label": "Precisión del cálculo"
+    }
   },
   "Remedy": {
     "eyebrow": "Remedio personal",
@@ -148,7 +156,9 @@
     "saved": "Profile updated.",
     "city": "Birth city",
     "country": "Birth country",
-    "adminPortal": "Admin portal"
+    "adminPortal": "Admin portal",
+    "birthPlace": "Lugar de nacimiento",
+    "birthPlacePlaceholder": "Buscar una ciudad…"
   },
   "History": {
     "eyebrow": "Tus lecturas",

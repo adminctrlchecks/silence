@@ -173,6 +173,7 @@ model User {
   placeCountry String
   placeLat     Float?
   placeLng     Float?
+  placeTimezone String?
   contact      String           @unique
   passwordHash String?
   lang         String           @default("en")

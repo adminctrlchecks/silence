@@ -50,7 +50,9 @@
     "newToSilence": "هل أنت جديد في Silence؟",
     "createOne": "أنشئ واحدًا",
     "registerError": "فشل التسجيل. تحقق من التفاصيل وحاول مرة أخرى.",
-    "loginError": "فشل تسجيل الدخول. تحقق من وسيلة التواصل وكلمة المرور."
+    "loginError": "فشل تسجيل الدخول. تحقق من وسيلة التواصل وكلمة المرور.",
+    "birthPlace": "مكان الولادة",
+    "birthPlacePlaceholder": "ابحث عن مدينة…"
   },
   "UserLayout": {
     "mySession": "جلستي",
@@ -119,7 +121,13 @@
     "keyPlacements": "Key placements",
     "house": "House {house}",
     "retrograde": "retrograde",
-    "notAvailable": "Not available"
+    "notAvailable": "Not available",
+    "accuracy": {
+      "exact": "دقيق للدقيقة",
+      "approximate": "تقريبي",
+      "uncertain": "غير مؤكد",
+      "label": "دقة الحساب"
+    }
   },
   "Remedy": {
     "eyebrow": "العلاج الشخصي",
@@ -148,7 +156,9 @@
     "saved": "Profile updated.",
     "city": "Birth city",
     "country": "Birth country",
-    "adminPortal": "Admin portal"
+    "adminPortal": "Admin portal",
+    "birthPlace": "مكان الولادة",
+    "birthPlacePlaceholder": "ابحث عن مدينة…"
   },
   "History": {
     "eyebrow": "قراءاتك",

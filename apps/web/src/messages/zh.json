@@ -50,7 +50,9 @@
     "newToSilence": "第一次使用 Silence？",
     "createOne": "创建一个",
     "registerError": "注册失败。请检查信息后重试。",
-    "loginError": "登录失败。请检查联系方式和密码。"
+    "loginError": "登录失败。请检查联系方式和密码。",
+    "birthPlace": "出生地",
+    "birthPlacePlaceholder": "搜索城市…"
   },
   "UserLayout": {
     "mySession": "我的会话",
@@ -119,7 +121,13 @@
     "keyPlacements": "Key placements",
     "house": "House {house}",
     "retrograde": "retrograde",
-    "notAvailable": "Not available"
+    "notAvailable": "Not available",
+    "accuracy": {
+      "exact": "精确到分钟",
+      "approximate": "近似",
+      "uncertain": "不确定",
+      "label": "计算精度"
+    }
   },
   "Remedy": {
     "eyebrow": "个人补救建议",
@@ -148,7 +156,9 @@
     "saved": "Profile updated.",
     "city": "Birth city",
     "country": "Birth country",
-    "adminPortal": "Admin portal"
+    "adminPortal": "Admin portal",
+    "birthPlace": "出生地",
+    "birthPlacePlaceholder": "搜索城市…"
   },
   "History": {
     "eyebrow": "你的解读",

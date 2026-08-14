@@ -50,7 +50,9 @@
     "newToSilence": "Silenceకి కొత్తవారా?",
     "createOne": "ఒకటి సృష్టించండి",
     "registerError": "నమోదు విఫలమైంది. వివరాలు తనిఖీ చేసి మళ్లీ ప్రయత్నించండి.",
-    "loginError": "సైన్ ఇన్ విఫలమైంది. మీ సంప్రదింపు వివరాలు మరియు పాస్‌వర్డ్ తనిఖీ చేయండి."
+    "loginError": "సైన్ ఇన్ విఫలమైంది. మీ సంప్రదింపు వివరాలు మరియు పాస్‌వర్డ్ తనిఖీ చేయండి.",
+    "birthPlace": "జన్మ స్థలం",
+    "birthPlacePlaceholder": "నగరాన్ని వెతకండి…"
   },
   "UserLayout": {
     "mySession": "నా సెషన్",
@@ -119,7 +121,13 @@
     "keyPlacements": "Key placements",
     "house": "House {house}",
     "retrograde": "retrograde",
-    "notAvailable": "Not available"
+    "notAvailable": "Not available",
+    "accuracy": {
+      "exact": "నిమిషం-ఖచ్చితమైన",
+      "approximate": "అంచనా",
+      "uncertain": "అనిశ్చితం",
+      "label": "గణన ఖచ్చితత"
+    }
   },
   "Remedy": {
     "eyebrow": "వ్యక్తిగత పరిహారం",
@@ -148,7 +156,9 @@
     "saved": "Profile updated.",
     "city": "Birth city",
     "country": "Birth country",
-    "adminPortal": "Admin portal"
+    "adminPortal": "Admin portal",
+    "birthPlace": "జన్మ స్థలం",
+    "birthPlacePlaceholder": "నగరాన్ని వెతకండి…"
   },
   "History": {
     "eyebrow": "మీ రీడింగ్‌లు",

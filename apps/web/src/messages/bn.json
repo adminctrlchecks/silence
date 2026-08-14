@@ -50,7 +50,9 @@
     "newToSilence": "Silence-এ নতুন?",
     "createOne": "একটি তৈরি করুন",
     "registerError": "নিবন্ধন ব্যর্থ হয়েছে। তথ্য যাচাই করে আবার চেষ্টা করুন।",
-    "loginError": "সাইন ইন ব্যর্থ হয়েছে। যোগাযোগ এবং পাসওয়ার্ড যাচাই করুন।"
+    "loginError": "সাইন ইন ব্যর্থ হয়েছে। যোগাযোগ এবং পাসওয়ার্ড যাচাই করুন।",
+    "birthPlace": "জন্মস্থান",
+    "birthPlacePlaceholder": "একটি শহর খুঁজুন…"
   },
   "UserLayout": {
     "mySession": "আমার সেশন",
@@ -119,7 +121,13 @@
     "keyPlacements": "Key placements",
     "house": "House {house}",
     "retrograde": "retrograde",
-    "notAvailable": "Not available"
+    "notAvailable": "Not available",
+    "accuracy": {
+      "exact": "মিনিট-নির্ভুল",
+      "approximate": "আনুমানিক",
+      "uncertain": "অনিশ্চিত",
+      "label": "গণনার নির্ভুলতা"
+    }
   },
   "Remedy": {
     "eyebrow": "ব্যক্তিগত প্রতিকার",
@@ -148,7 +156,9 @@
     "saved": "Profile updated.",
     "city": "Birth city",
     "country": "Birth country",
-    "adminPortal": "Admin portal"
+    "adminPortal": "Admin portal",
+    "birthPlace": "জন্মস্থান",
+    "birthPlacePlaceholder": "একটি শহর খুঁজুন…"
   },
   "History": {
     "eyebrow": "আপনার রিডিংসমূহ",

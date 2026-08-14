@@ -50,7 +50,9 @@
     "newToSilence": "Silence पर नए हैं?",
     "createOne": "एक बनाएं",
     "registerError": "पंजीकरण विफल रहा। कृपया विवरण जांचें और फिर प्रयास करें।",
-    "loginError": "साइन इन विफल रहा। कृपया संपर्क और पासवर्ड जांचें।"
+    "loginError": "साइन इन विफल रहा। कृपया संपर्क और पासवर्ड जांचें।",
+    "birthPlace": "जन्म स्थान",
+    "birthPlacePlaceholder": "शहर खोजें…"
   },
   "UserLayout": {
     "mySession": "मेरा सत्र",
@@ -119,7 +121,13 @@
     "keyPlacements": "Key placements",
     "house": "House {house}",
     "retrograde": "retrograde",
-    "notAvailable": "Not available"
+    "notAvailable": "Not available",
+    "accuracy": {
+      "exact": "मिनट-सटीक",
+      "approximate": "लगभग",
+      "uncertain": "अनिश्चित",
+      "label": "गणना की सटीकता"
+    }
   },
   "Remedy": {
     "eyebrow": "व्यक्तिगत उपाय",
@@ -148,7 +156,9 @@
     "saved": "Profile updated.",
     "city": "Birth city",
     "country": "Birth country",
-    "adminPortal": "Admin portal"
+    "adminPortal": "Admin portal",
+    "birthPlace": "जन्म स्थान",
+    "birthPlacePlaceholder": "शहर खोजें…"
   },
   "History": {
     "eyebrow": "आपकी रीडिंग",

@@ -92,6 +92,11 @@ async function request<T>(
 /** Public (user-facing) endpoints — docs/API.md §8–10. */
 export const publicApi = {
   languages: () => request<{ data: { code: string; name: string; rtl: boolean }[] }>('/languages'),
+  placesSearch: (q: string) =>
+    request<Array<{ city: string; country: string; lat: number; lng: number; timezone: string }>>(
+      '/places/search',
+      { query: { q } },
+    ),
   questions: (q: { level?: Level; category?: Category; lang?: string }) =>
     request<Paginated<Question>>('/questions', { query: q }),
   submitResponses: (body: unknown, token: string) =>

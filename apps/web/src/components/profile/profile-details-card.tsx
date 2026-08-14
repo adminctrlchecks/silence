@@ -6,6 +6,7 @@ import { useState } from 'react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
+import { PlacesAutocomplete } from '@/components/shared/places-autocomplete';
 
 type Labels = {
   eyebrow: string;
@@ -28,6 +29,8 @@ type Labels = {
   yes: string;
   no: string;
   categories: Record<Category, string>;
+  birthPlace: string;
+  birthPlacePlaceholder: string;
 };
 
 type FormState = {
@@ -38,6 +41,9 @@ type FormState = {
   timeOfBirth: string;
   city: string;
   country: string;
+  lat?: number;
+  lng?: number;
+  timezone?: string;
 };
 
 function formFromProfile(profile: UserProfile): FormState {
@@ -49,6 +55,9 @@ function formFromProfile(profile: UserProfile): FormState {
     timeOfBirth: profile.timeOfBirth,
     city: profile.placeOfBirth.city,
     country: profile.placeOfBirth.country,
+    lat: profile.placeOfBirth.lat,
+    lng: profile.placeOfBirth.lng,
+    timezone: (profile.placeOfBirth as { timezone?: string }).timezone,
   };
 }
 
@@ -86,7 +95,13 @@ export function ProfileDetailsCard({ initialProfile, labels }: { initialProfile:
           lang: form.lang,
           dob: form.dob,
           timeOfBirth: form.timeOfBirth,
-          placeOfBirth: { city: form.city, country: form.country },
+          placeOfBirth: {
+            city: form.city,
+            country: form.country,
+            lat: form.lat,
+            lng: form.lng,
+            timezone: form.timezone,
+          },
         }),
       });
       const data = await response.json().catch(() => null);
@@ -201,21 +216,21 @@ export function ProfileDetailsCard({ initialProfile, labels }: { initialProfile:
               required
             />
           </div>
-          <div className="space-y-2">
-            <Label htmlFor="profile-city">{labels.city}</Label>
-            <Input
-              id="profile-city"
-              value={form.city}
-              onChange={(event) => setForm((current) => ({ ...current, city: event.target.value }))}
-              required
-            />
-          </div>
-          <div className="space-y-2">
-            <Label htmlFor="profile-country">{labels.country}</Label>
-            <Input
-              id="profile-country"
-              value={form.country}
-              onChange={(event) => setForm((current) => ({ ...current, country: event.target.value }))}
+          <div className="sm:col-span-2">
+            <PlacesAutocomplete
+              label={labels.birthPlace}
+              placeholder={labels.birthPlacePlaceholder}
+              initialValue={`${form.city}, ${form.country}`}
+              onSelect={(p) =>
+                setForm((current) => ({
+                  ...current,
+                  city: p.city,
+                  country: p.country,
+                  lat: p.lat,
+                  lng: p.lng,
+                  timezone: p.timezone,
+                }))
+              }
               required
             />
           </div>

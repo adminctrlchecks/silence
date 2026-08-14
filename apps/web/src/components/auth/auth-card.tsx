@@ -11,8 +11,17 @@ import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { DEFAULT_LANGUAGE, LANGUAGES } from '@/lib/i18n';
 import { DEFAULT_CATEGORY } from '@/lib/session-preferences';
+import { PlacesAutocomplete } from '@/components/shared/places-autocomplete';
 
 type Mode = 'login' | 'register';
+
+type PlaceState = {
+  city: string;
+  country: string;
+  lat?: number;
+  lng?: number;
+  timezone?: string;
+};
 
 function localizedAppPath(pathname: string) {
   const [, maybeLocale] = pathname.split('/');
@@ -33,6 +42,7 @@ export function AuthCard({
   const t = useTranslations('Auth');
   const [pending, setPending] = useState(false);
   const [error, setError] = useState<string | null>(null);
+  const [place, setPlace] = useState<PlaceState>({ city: '', country: '' });
   const registering = mode === 'register';
 
   async function submitAuth(formData: FormData) {
@@ -47,8 +57,11 @@ export function AuthCard({
               dob: String(formData.get('dob') ?? ''),
               timeOfBirth: String(formData.get('timeOfBirth') ?? ''),
               placeOfBirth: {
-                city: String(formData.get('city') ?? ''),
-                country: String(formData.get('country') ?? ''),
+                city: place.city || String(formData.get('city') ?? ''),
+                country: place.country || String(formData.get('country') ?? ''),
+                lat: place.lat,
+                lng: place.lng,
+                timezone: place.timezone,
               },
               contact: String(formData.get('contact') ?? ''),
               password: String(formData.get('password') ?? ''),
@@ -149,16 +162,12 @@ export function AuthCard({
                   <Input id="timeOfBirth" name="timeOfBirth" type="time" required />
                 </div>
               </div>
-              <div className="grid gap-4 sm:grid-cols-2">
-                <div className="space-y-2">
-                  <Label htmlFor="city">{t('city')}</Label>
-                  <Input id="city" name="city" required />
-                </div>
-                <div className="space-y-2">
-                  <Label htmlFor="country">{t('country')}</Label>
-                  <Input id="country" name="country" required />
-                </div>
-              </div>
+              <PlacesAutocomplete
+                label={t('birthPlace')}
+                placeholder={t('birthPlacePlaceholder')}
+                onSelect={(p) => setPlace(p)}
+                required
+              />
             </>
           ) : null}
 
