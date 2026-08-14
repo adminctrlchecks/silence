@@ -10,6 +10,7 @@ import {
   userRegisterSchema,
   userLoginSchema,
   refreshTokenSchema,
+  changePasswordSchema,
   createQuestionSchema,
   updateQuestionSchema,
   createAnswerSchema,
@@ -20,12 +21,14 @@ import {
   chartConfigSchema,
   autoTranslateSchema,
   submitResponsesSchema,
+  updateUserProfileSchema,
 } from '@silence/shared';
 
 export class AdminLoginDto extends createZodDto(adminLoginSchema) {}
 export class UserRegisterDto extends createZodDto(userRegisterSchema) {}
 export class UserLoginDto extends createZodDto(userLoginSchema) {}
 export class RefreshTokenDto extends createZodDto(refreshTokenSchema) {}
+export class ChangePasswordDto extends createZodDto(changePasswordSchema) {}
 export class CreateQuestionDto extends createZodDto(createQuestionSchema) {}
 export class UpdateQuestionDto extends createZodDto(updateQuestionSchema) {}
 export class CreateAnswerDto extends createZodDto(createAnswerSchema) {}
@@ -36,3 +39,4 @@ export class UpdateRemedyDto extends createZodDto(updateRemedySchema) {}
 export class ChartConfigDto extends createZodDto(chartConfigSchema) {}
 export class AutoTranslateDto extends createZodDto(autoTranslateSchema) {}
 export class SubmitResponsesDto extends createZodDto(submitResponsesSchema) {}
+export class UpdateUserProfileDto extends createZodDto(updateUserProfileSchema) {}

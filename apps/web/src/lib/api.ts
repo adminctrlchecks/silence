@@ -100,6 +100,8 @@ export const publicApi = {
   remedy: (userId: string, lang: string, token: string) =>
     request<Remedy>(`/users/${userId}/remedy`, { query: { lang }, token }),
   profile: (userId: string, token: string) => request<UserProfile>(`/users/${userId}`, { token }),
+  updateProfile: (userId: string, token: string, body: unknown) =>
+    request<UserProfile>(`/users/${userId}`, { method: 'PUT', token, body }),
   history: (userId: string, lang: string, token: string) =>
     request<UserHistory>(`/users/${userId}/history`, { query: { lang }, token }),
 };
@@ -111,6 +113,13 @@ export const authApi = {
       method: 'POST',
       body,
     }),
+  adminChangePassword: (token: string, body: unknown) =>
+    request<{ changed: boolean }>('/auth/admin/change-password', { method: 'POST', token, body }),
+  adminUserSession: (token: string) =>
+    request<{ token: string; refreshToken: string; user: { id: string; name: string; category: Category } }>(
+      '/auth/admin/user-session',
+      { method: 'POST', token },
+    ),
   userRegister: (body: unknown) =>
     request<{ token: string; refreshToken: string; user: { id: string; name: string; category: Category } }>(
       '/auth/user/register',
@@ -121,6 +130,8 @@ export const authApi = {
       '/auth/user/login',
       { method: 'POST', body },
     ),
+  userChangePassword: (token: string, body: unknown) =>
+    request<{ changed: boolean }>('/auth/user/change-password', { method: 'POST', token, body }),
 };
 
 /** Admin endpoints — docs/API.md §2–7 (all require an admin token). */

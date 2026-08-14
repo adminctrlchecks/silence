@@ -1,5 +1,5 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
-import type { Category } from '@silence/shared';
+import type { Category, UpdateUserProfileInput } from '@silence/shared';
 import { PrismaService } from '../prisma/prisma.service';
 import { paginated, parsePageParams } from '../common/pagination';
 
@@ -13,15 +13,20 @@ export class UsersService {
     return this.present(u);
   }
 
-  async update(id: string, patch: Record<string, unknown>) {
+  async update(id: string, patch: UpdateUserProfileInput) {
     await this.ensureExists(id);
     const u = await this.prisma.user.update({
       where: { id },
       data: {
-        name: patch.name as string | undefined,
-        lang: patch.lang as string | undefined,
-        contact: patch.contact as string | undefined,
-        timeOfBirth: patch.timeOfBirth as string | undefined,
+        name: patch.name,
+        category: patch.category,
+        dob: patch.dob,
+        timeOfBirth: patch.timeOfBirth,
+        placeCity: patch.placeOfBirth?.city,
+        placeCountry: patch.placeOfBirth?.country,
+        placeLat: patch.placeOfBirth?.lat,
+        placeLng: patch.placeOfBirth?.lng,
+        lang: patch.lang,
       },
     });
     return this.present(u);

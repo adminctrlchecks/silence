@@ -54,6 +54,17 @@ export const refreshTokenSchema = z.object({
   refreshToken: z.string().min(1),
 });
 
+export const changePasswordSchema = z
+  .object({
+    currentPassword: z.string().min(1, 'Current password is required'),
+    newPassword: z.string().min(8, 'New password must be at least 8 characters'),
+    confirmPassword: z.string().min(8, 'Confirm password must be at least 8 characters'),
+  })
+  .refine((data) => data.newPassword === data.confirmPassword, {
+    message: 'New passwords do not match',
+    path: ['confirmPassword'],
+  });
+
 // ── Questions ─────────────────────────────────────────────────────────────
 export const createQuestionSchema = z.object({
   level: levelSchema,
@@ -123,11 +134,21 @@ export const submitResponsesSchema = z.object({
     .min(1),
 });
 
+export const updateUserProfileSchema = z.object({
+  name: z.string().min(1).optional(),
+  category: categorySchema.optional(),
+  dob: z.string().regex(/^\d{4}-\d{2}-\d{2}$/, 'Expected YYYY-MM-DD').optional(),
+  timeOfBirth: z.string().regex(/^\d{2}:\d{2}$/, 'Expected HH:MM').optional(),
+  placeOfBirth: placeOfBirthSchema.optional(),
+  lang: langSchema.optional(),
+});
+
 // ── Inferred request types ───────────────────────────────────────────────────
 export type AdminLoginInput = z.infer<typeof adminLoginSchema>;
 export type UserRegisterInput = z.infer<typeof userRegisterSchema>;
 export type UserLoginInput = z.infer<typeof userLoginSchema>;
 export type RefreshTokenInput = z.infer<typeof refreshTokenSchema>;
+export type ChangePasswordInput = z.infer<typeof changePasswordSchema>;
 export type CreateQuestionInput = z.infer<typeof createQuestionSchema>;
 export type UpdateQuestionInput = z.infer<typeof updateQuestionSchema>;
 export type CreateAnswerInput = z.infer<typeof createAnswerSchema>;
@@ -138,4 +159,5 @@ export type UpdateRemedyInput = z.infer<typeof updateRemedySchema>;
 export type ChartConfigInput = z.infer<typeof chartConfigSchema>;
 export type AutoTranslateInput = z.infer<typeof autoTranslateSchema>;
 export type SubmitResponsesInput = z.infer<typeof submitResponsesSchema>;
+export type UpdateUserProfileInput = z.infer<typeof updateUserProfileSchema>;
 export type PlaceOfBirth = z.infer<typeof placeOfBirthSchema>;

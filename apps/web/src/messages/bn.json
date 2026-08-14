@@ -4,7 +4,8 @@
     "signIn": "সাইন ইন",
     "createProfile": "প্রোফাইল তৈরি করুন",
     "adminWorkspace": "অ্যাডমিন কর্মক্ষেত্র",
-    "mySession": "আমার সেশন"
+    "mySession": "আমার সেশন",
+    "signInAsAdmin": "Sign in as admin"
   },
   "Home": {
     "eyebrow": "জ্যোতিষ প্রশ্নোত্তর",
@@ -97,7 +98,15 @@
     "contact": "যোগাযোগ",
     "consent": "সম্মতি",
     "yes": "হ্যাঁ",
-    "no": "না"
+    "no": "না",
+    "edit": "Edit profile",
+    "cancel": "Cancel",
+    "save": "Save profile",
+    "saving": "Saving profile",
+    "saved": "Profile updated.",
+    "city": "Birth city",
+    "country": "Birth country",
+    "adminPortal": "Admin portal"
   },
   "History": {
     "eyebrow": "সংরক্ষিত সেশন",
@@ -129,5 +138,16 @@
     "progress": "Step {current} of {total}.",
     "stepHelp": "Save this layer to reveal the guidance written for each question.",
     "emptyTitle": "This layer is waiting for content."
+  },
+  "Security": {
+    "eyebrow": "Security",
+    "title": "Change password",
+    "description": "Confirm your current password, then choose a new one. You will be signed out after it changes.",
+    "currentPassword": "Current password",
+    "newPassword": "New password",
+    "confirmPassword": "Confirm new password",
+    "submit": "Change password",
+    "submitting": "Changing password",
+    "success": "Password changed. Please sign in again."
   }
 }

@@ -4,7 +4,8 @@
     "signIn": "साइन इन",
     "createProfile": "प्रोफाइल बनाएं",
     "adminWorkspace": "एडमिन कार्यक्षेत्र",
-    "mySession": "मेरा सत्र"
+    "mySession": "मेरा सत्र",
+    "signInAsAdmin": "Sign in as admin"
   },
   "Home": {
     "eyebrow": "ज्योतिष प्रश्नोत्तर",
@@ -97,7 +98,15 @@
     "contact": "संपर्क",
     "consent": "सहमति",
     "yes": "हाँ",
-    "no": "नहीं"
+    "no": "नहीं",
+    "edit": "Edit profile",
+    "cancel": "Cancel",
+    "save": "Save profile",
+    "saving": "Saving profile",
+    "saved": "Profile updated.",
+    "city": "Birth city",
+    "country": "Birth country",
+    "adminPortal": "Admin portal"
   },
   "History": {
     "eyebrow": "सहेजे गए सत्र",
@@ -129,5 +138,16 @@
     "progress": "Step {current} of {total}.",
     "stepHelp": "Save this layer to reveal the guidance written for each question.",
     "emptyTitle": "This layer is waiting for content."
+  },
+  "Security": {
+    "eyebrow": "Security",
+    "title": "Change password",
+    "description": "Confirm your current password, then choose a new one. You will be signed out after it changes.",
+    "currentPassword": "Current password",
+    "newPassword": "New password",
+    "confirmPassword": "Confirm new password",
+    "submit": "Change password",
+    "submitting": "Changing password",
+    "success": "Password changed. Please sign in again."
   }
 }

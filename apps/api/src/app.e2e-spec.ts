@@ -117,6 +117,13 @@ describe('Silence API e2e', () => {
     const adminToken = (adminLogin.body as { token: string }).token;
     expect(adminToken).toBeTruthy();
 
+    const adminUserSession = await request(app.getHttpServer())
+      .post('/api/v1/auth/admin/user-session')
+      .set('Authorization', `Bearer ${adminToken}`)
+      .expect(201);
+    expect(adminUserSession.body.user).toMatchObject({ name: 'Admin', category: 'other' });
+    expect(adminUserSession.body.token).toBeTruthy();
+
     const userRegister = await request(app.getHttpServer())
       .post('/api/v1/auth/user/register')
       .send({

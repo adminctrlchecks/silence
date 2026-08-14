@@ -234,3 +234,4 @@ _(the loop appends dated one-liners here as phases complete)_
 - 2026-08-14 — P12-2 done (journald logging; nightly pg_dump cron + 5-min healthcheck installed on VPS; backup + healthcheck verified).
 - 2026-08-14 — P12-3 done (handover section in docs/DEPLOYMENT.md with actual values, secrets redacted). **Phase 12 complete. 🎉 ALL PHASES P0–P12 DONE — Silence live at https://silence.ctrlchecks.ai.**
 - 2026-08-14 - Content/UX/AI-quality pass added category-specific demo Q&A/remedies, chart-aware Gemini interpretation prompts, dry-run test-data cleanup, and user-flow/chart/remedy polish.
+- 2026-08-14 - Added authenticated password change, editable user profile birth details, admin-as-user session switching, and explicit sign-in-as-admin UI.

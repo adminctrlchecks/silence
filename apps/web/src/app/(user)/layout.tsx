@@ -29,9 +29,14 @@ export default async function UserLayout({ children }: { children: ReactNode }) 
               {authenticated ? (
                 <SignOutButton endpoint="/api/auth/logout" redirectTo="/login" />
               ) : (
-                <Button asChild variant="outline" size="sm">
-                  <Link href="/login">{t('signIn')}</Link>
-                </Button>
+                <>
+                  <Button asChild variant="outline" size="sm">
+                    <Link href="/login">{t('signIn')}</Link>
+                  </Button>
+                  <Button asChild variant="ghost" size="sm">
+                    <Link href="/admin/login">{common('signInAsAdmin')}</Link>
+                  </Button>
+                </>
               )}
               <ThemeToggle />
             </nav>

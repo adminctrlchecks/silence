@@ -41,6 +41,9 @@ export default async function HomePage() {
             <Button asChild variant="outline">
               <Link href="/login">{common('signIn')}</Link>
             </Button>
+            <Button asChild variant="ghost">
+              <Link href="/admin/login">{common('signInAsAdmin')}</Link>
+            </Button>
           </div>
         </div>
 
@@ -63,7 +66,7 @@ export default async function HomePage() {
             </div>
           ))}
           <Button asChild variant="ghost" className="w-full justify-start">
-            <Link href="/admin">{common('adminWorkspace')}</Link>
+            <Link href="/admin/login">{common('signInAsAdmin')}</Link>
           </Button>
         </div>
       </aside>

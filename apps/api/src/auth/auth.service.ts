@@ -1,7 +1,7 @@
 import { Injectable, UnauthorizedException, ConflictException } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
 import * as bcrypt from 'bcryptjs';
-import type { AdminLoginInput, UserRegisterInput, UserLoginInput } from '@silence/shared';
+import type { AdminLoginInput, ChangePasswordInput, UserRegisterInput, UserLoginInput } from '@silence/shared';
 import { PrismaService } from '../prisma/prisma.service';
 
 type Role = 'admin' | 'user';
@@ -53,10 +53,60 @@ export class AuthService {
 
   async userLogin(input: UserLoginInput) {
     const user = await this.prisma.user.findUnique({ where: { contact: input.contact } });
-    // Same generic message whether the contact or the password is wrong (no user enumeration).
-    if (!user || !user.passwordHash || !(await bcrypt.compare(input.password, user.passwordHash))) {
-      throw new UnauthorizedException('Invalid credentials');
+    if (user?.passwordHash && (await bcrypt.compare(input.password, user.passwordHash))) {
+      return {
+        ...(await this.issueTokens('user', user.id)),
+        user: { id: user.id, name: user.name, category: user.category },
+      };
     }
+
+    const admin = await this.prisma.admin.findUnique({ where: { email: input.contact } });
+    if (admin && (await bcrypt.compare(input.password, admin.passwordHash))) {
+      const linkedUser = user ?? (await this.createAdminUserProfile(admin));
+      return {
+        ...(await this.issueTokens('user', linkedUser.id)),
+        user: { id: linkedUser.id, name: linkedUser.name, category: linkedUser.category },
+      };
+    }
+
+    // Same generic message whether the contact or the password is wrong (no user enumeration).
+    throw new UnauthorizedException('Invalid credentials');
+  }
+
+  async changeAdminPassword(adminId: string, input: ChangePasswordInput) {
+    const admin = await this.prisma.admin.findUnique({ where: { id: adminId } });
+    if (!admin || !(await bcrypt.compare(input.currentPassword, admin.passwordHash))) {
+      throw new UnauthorizedException('Current password is incorrect');
+    }
+
+    await this.prisma.admin.update({
+      where: { id: adminId },
+      data: { passwordHash: await bcrypt.hash(input.newPassword, 10) },
+    });
+    return { changed: true };
+  }
+
+  async changeUserPassword(userId: string, input: ChangePasswordInput) {
+    const user = await this.prisma.user.findUnique({ where: { id: userId } });
+    if (!user?.passwordHash || !(await bcrypt.compare(input.currentPassword, user.passwordHash))) {
+      throw new UnauthorizedException('Current password is incorrect');
+    }
+
+    await this.prisma.user.update({
+      where: { id: userId },
+      data: { passwordHash: await bcrypt.hash(input.newPassword, 10) },
+    });
+    return { changed: true };
+  }
+
+  async adminUserSession(adminId: string) {
+    const admin = await this.prisma.admin.findUnique({ where: { id: adminId } });
+    if (!admin) throw new UnauthorizedException('Invalid admin session');
+
+    const user =
+      (await this.prisma.user.findUnique({ where: { contact: admin.email } })) ??
+      (await this.createAdminUserProfile(admin));
+
     return {
       ...(await this.issueTokens('user', user.id)),
       user: { id: user.id, name: user.name, category: user.category },
@@ -80,6 +130,25 @@ export class AuthService {
 
   private secretFor(role: Role): string {
     return (role === 'admin' ? process.env.JWT_ADMIN_SECRET : process.env.JWT_USER_SECRET) as string;
+  }
+
+  private createAdminUserProfile(admin: { email: string; name: string; passwordHash: string }) {
+    return this.prisma.user.create({
+      data: {
+        name: admin.name,
+        category: 'other',
+        dob: '1990-01-01',
+        timeOfBirth: '09:00',
+        placeCity: 'New Delhi',
+        placeCountry: 'IN',
+        placeLat: 28.6139,
+        placeLng: 77.209,
+        contact: admin.email,
+        passwordHash: admin.passwordHash,
+        lang: 'en',
+        consent: true,
+      },
+    });
   }
 
   private async issueTokens(role: Role, sub: string, extra: Record<string, unknown> = {}) {

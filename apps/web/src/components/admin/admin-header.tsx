@@ -1,12 +1,12 @@
 'use client';
 
-import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { Menu, PanelLeftClose, PanelLeftOpen, Search } from 'lucide-react';
 import { ThemeToggle } from '@/components/theme-toggle';
 import { Button } from '@/components/ui/button';
 import { SignOutButton } from '@/components/auth/sign-out-button';
 import { useAdminAuthSession } from './admin-auth-session-provider';
+import { OpenUserAppButton } from './open-user-app-button';
 import { useAdminSidebar } from './sidebar-context';
 
 function titleForPath(pathname: string) {
@@ -57,9 +57,7 @@ export function AdminHeader() {
         </div>
 
         <ThemeToggle />
-        <Button asChild variant="outline" size="sm">
-          <Link href="/">User app</Link>
-        </Button>
+        {authenticated ? <OpenUserAppButton /> : null}
         {authenticated ? (
           <SignOutButton endpoint="/api/auth/admin/logout" redirectTo="/admin/login" />
         ) : null}

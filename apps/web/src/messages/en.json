@@ -4,7 +4,8 @@
     "signIn": "Sign in",
     "createProfile": "Create profile",
     "adminWorkspace": "Admin workspace",
-    "mySession": "My session"
+    "mySession": "My session",
+    "signInAsAdmin": "Sign in as admin"
   },
   "Home": {
     "eyebrow": "Astrology Q&A",
@@ -97,7 +98,15 @@
     "contact": "Contact",
     "consent": "Consent",
     "yes": "Yes",
-    "no": "No"
+    "no": "No",
+    "edit": "Edit profile",
+    "cancel": "Cancel",
+    "save": "Save profile",
+    "saving": "Saving profile",
+    "saved": "Profile updated.",
+    "city": "Birth city",
+    "country": "Birth country",
+    "adminPortal": "Admin portal"
   },
   "History": {
     "eyebrow": "Saved sessions",
@@ -129,5 +138,16 @@
     "progress": "Step {current} of {total}.",
     "stepHelp": "Save this layer to reveal the guidance written for each question.",
     "emptyTitle": "This layer is waiting for content."
+  },
+  "Security": {
+    "eyebrow": "Security",
+    "title": "Change password",
+    "description": "Confirm your current password, then choose a new one. You will be signed out after it changes.",
+    "currentPassword": "Current password",
+    "newPassword": "New password",
+    "confirmPassword": "Confirm new password",
+    "submit": "Change password",
+    "submitting": "Changing password",
+    "success": "Password changed. Please sign in again."
   }
 }

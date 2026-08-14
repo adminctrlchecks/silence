@@ -4,7 +4,8 @@
     "signIn": "登录",
     "createProfile": "创建档案",
     "adminWorkspace": "管理工作区",
-    "mySession": "我的会话"
+    "mySession": "我的会话",
+    "signInAsAdmin": "Sign in as admin"
   },
   "Home": {
     "eyebrow": "占星问答",
@@ -97,7 +98,15 @@
     "contact": "联系方式",
     "consent": "同意",
     "yes": "是",
-    "no": "否"
+    "no": "否",
+    "edit": "Edit profile",
+    "cancel": "Cancel",
+    "save": "Save profile",
+    "saving": "Saving profile",
+    "saved": "Profile updated.",
+    "city": "Birth city",
+    "country": "Birth country",
+    "adminPortal": "Admin portal"
   },
   "History": {
     "eyebrow": "已保存会话",
@@ -129,5 +138,16 @@
     "progress": "Step {current} of {total}.",
     "stepHelp": "Save this layer to reveal the guidance written for each question.",
     "emptyTitle": "This layer is waiting for content."
+  },
+  "Security": {
+    "eyebrow": "Security",
+    "title": "Change password",
+    "description": "Confirm your current password, then choose a new one. You will be signed out after it changes.",
+    "currentPassword": "Current password",
+    "newPassword": "New password",
+    "confirmPassword": "Confirm new password",
+    "submit": "Change password",
+    "submitting": "Changing password",
+    "success": "Password changed. Please sign in again."
   }
 }

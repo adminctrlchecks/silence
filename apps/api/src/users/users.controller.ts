@@ -10,8 +10,11 @@ import {
   UseGuards,
 } from '@nestjs/common';
 import type { Request } from 'express';
+import { updateUserProfileSchema } from '@silence/shared';
 import { ApiBearerAuth, ApiTags } from '@nestjs/swagger';
 import { AdminJwtGuard } from '../auth/guards/admin-jwt.guard';
+import { UpdateUserProfileDto } from '../common/dto';
+import { ZodValidationPipe } from '../common/zod-validation.pipe';
 import { UserJwtGuard } from '../auth/guards/user-jwt.guard';
 import { ChartService } from '../chart/chart.service';
 import { RemediesService } from '../remedies/remedies.service';
@@ -44,7 +47,11 @@ export class UsersController {
   }
 
   @Put(':id')
-  update(@Param('id') id: string, @Body() body: Record<string, unknown>, @Req() req: AuthenticatedRequest) {
+  update(
+    @Param('id') id: string,
+    @Body(new ZodValidationPipe(updateUserProfileSchema)) body: UpdateUserProfileDto,
+    @Req() req: AuthenticatedRequest,
+  ) {
     assertOwnUser(req, id);
     return this.users.update(id, body);
   }
