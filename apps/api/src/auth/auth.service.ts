@@ -1,16 +1,30 @@
+import { randomBytes, createHash } from 'node:crypto';
 import { Injectable, UnauthorizedException, ConflictException } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
 import * as bcrypt from 'bcryptjs';
-import type { AdminLoginInput, ChangePasswordInput, UserRegisterInput, UserLoginInput } from '@silence/shared';
+import type {
+  AdminLoginInput,
+  ChangePasswordInput,
+  UserRegisterInput,
+  UserLoginInput,
+  ResetPasswordInput,
+} from '@silence/shared';
 import { PrismaService } from '../prisma/prisma.service';
+import { EmailService } from '../integrations/email/email.service';
+import { AdminAuditService } from '../admin-audit/admin-audit.service';
 
 type Role = 'admin' | 'user';
+
+/** Reset links are valid for 1 hour. */
+const RESET_TOKEN_TTL_MS = 60 * 60 * 1000;
 
 @Injectable()
 export class AuthService {
   constructor(
     private readonly prisma: PrismaService,
     private readonly jwt: JwtService,
+    private readonly email: EmailService,
+    private readonly audit: AdminAuditService,
   ) {}
 
   async adminLogin(input: AdminLoginInput) {
@@ -18,6 +32,7 @@ export class AuthService {
     if (!admin || !(await bcrypt.compare(input.password, admin.passwordHash))) {
       throw new UnauthorizedException('Invalid credentials');
     }
+    await this.audit.record({ adminId: admin.id, adminEmail: admin.email, action: 'admin_login' });
     return {
       ...(await this.issueTokens('admin', admin.id, { email: admin.email })),
       admin: { id: admin.id, name: admin.name },
@@ -84,6 +99,7 @@ export class AuthService {
       where: { id: adminId },
       data: { passwordHash: await bcrypt.hash(input.newPassword, 10) },
     });
+    await this.audit.record({ adminId: admin.id, adminEmail: admin.email, action: 'admin_password_change' });
     return { changed: true };
   }
 
@@ -100,6 +116,78 @@ export class AuthService {
     return { changed: true };
   }
 
+  /**
+   * Forgot-password requests always resolve the same way whether or not the
+   * contact/email is registered, so callers can never enumerate accounts.
+   */
+  async userForgotPassword(contact: string) {
+    const user = await this.prisma.user.findUnique({ where: { contact } });
+    if (user) await this.issueResetToken('user', user.id, user.contact);
+    return { sent: true };
+  }
+
+  async adminForgotPassword(email: string) {
+    const admin = await this.prisma.admin.findUnique({ where: { email } });
+    if (admin) await this.issueResetToken('admin', admin.id, admin.email);
+    return { sent: true };
+  }
+
+  async userResetPassword(input: ResetPasswordInput) {
+    const targetId = await this.consumeResetToken('user', input.token);
+    await this.prisma.user.update({
+      where: { id: targetId },
+      data: { passwordHash: await bcrypt.hash(input.newPassword, 10) },
+    });
+    return { changed: true };
+  }
+
+  async adminResetPassword(input: ResetPasswordInput) {
+    const targetId = await this.consumeResetToken('admin', input.token);
+    const admin = await this.prisma.admin.update({
+      where: { id: targetId },
+      data: { passwordHash: await bcrypt.hash(input.newPassword, 10) },
+    });
+    await this.audit.record({ adminId: admin.id, adminEmail: admin.email, action: 'admin_password_reset' });
+    return { changed: true };
+  }
+
+  private async issueResetToken(role: Role, targetId: string, to: string) {
+    const token = randomBytes(32).toString('hex');
+    await this.prisma.passwordResetToken.create({
+      data: {
+        role,
+        targetId,
+        tokenHash: this.hashToken(token),
+        expiresAt: new Date(Date.now() + RESET_TOKEN_TTL_MS),
+      },
+    });
+
+    const webOrigin = (process.env.WEB_ORIGIN ?? 'http://localhost:3011').split(',')[0].trim();
+    const path = role === 'admin' ? '/admin/reset-password' : '/reset-password';
+    await this.email.sendPasswordReset({ to, resetUrl: `${webOrigin}${path}?token=${token}`, role });
+  }
+
+  /** Validates + single-use-consumes a reset token, returning the Admin/User id it targets. */
+  private async consumeResetToken(role: Role, token: string): Promise<string> {
+    const record = await this.prisma.passwordResetToken.findUnique({ where: { tokenHash: this.hashToken(token) } });
+    if (!record || record.role !== role || record.usedAt || record.expiresAt < new Date()) {
+      throw new UnauthorizedException('Invalid or expired reset link');
+    }
+
+    await this.prisma.passwordResetToken.update({ where: { id: record.id }, data: { usedAt: new Date() } });
+    // Invalidate any other outstanding tokens for this target so an old email link can't be reused later.
+    await this.prisma.passwordResetToken.updateMany({
+      where: { role, targetId: record.targetId, usedAt: null, id: { not: record.id } },
+      data: { usedAt: new Date() },
+    });
+
+    return record.targetId;
+  }
+
+  private hashToken(token: string): string {
+    return createHash('sha256').update(token).digest('hex');
+  }
+
   async adminUserSession(adminId: string) {
     const admin = await this.prisma.admin.findUnique({ where: { id: adminId } });
     if (!admin) throw new UnauthorizedException('Invalid admin session');
@@ -108,8 +196,17 @@ export class AuthService {
       (await this.prisma.user.findUnique({ where: { contact: admin.email } })) ??
       (await this.createAdminUserProfile(admin));
 
+    await this.audit.record({
+      adminId: admin.id,
+      adminEmail: admin.email,
+      action: 'admin_impersonate_user',
+      targetType: 'user',
+      targetId: user.id,
+    });
+
     return {
-      ...(await this.issueTokens('user', user.id)),
+      // isAdminSession marks the issued token so the user app can show an impersonation banner.
+      ...(await this.issueTokens('user', user.id, { isAdminSession: true })),
       user: { id: user.id, name: user.name, category: user.category },
     };
   }

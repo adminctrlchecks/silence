@@ -7,10 +7,12 @@ import { AuthService } from './auth.service';
 function makeFakePrisma() {
   const users: any[] = [];
   const admins: any[] = [];
+  const resetTokens: any[] = [];
   let seq = 0;
   return {
     _users: users,
     _admins: admins,
+    _resetTokens: resetTokens,
     admin: {
       findUnique: async ({ where }: any) =>
         admins.find((a) => (where.email ? a.email === where.email : a.id === where.id)) ?? null,
@@ -34,7 +36,39 @@ function makeFakePrisma() {
         return user;
       },
     },
+    passwordResetToken: {
+      create: async ({ data }: any) => {
+        const t = { id: `prt_${++seq}`, usedAt: null, ...data };
+        resetTokens.push(t);
+        return t;
+      },
+      findUnique: async ({ where }: any) => resetTokens.find((t) => t.tokenHash === where.tokenHash) ?? null,
+      update: async ({ where, data }: any) => {
+        const t = resetTokens.find((r) => r.id === where.id);
+        Object.assign(t, data);
+        return t;
+      },
+      updateMany: async ({ where, data }: any) => {
+        const matches = resetTokens.filter(
+          (t) =>
+            t.role === where.role &&
+            t.targetId === where.targetId &&
+            t.usedAt === where.usedAt &&
+            t.id !== where.id.not,
+        );
+        for (const t of matches) Object.assign(t, data);
+        return { count: matches.length };
+      },
+    },
   };
+}
+
+function makeFakeEmail() {
+  return { sendPasswordReset: jest.fn().mockResolvedValue(undefined) };
+}
+
+function makeFakeAudit() {
+  return { record: jest.fn().mockResolvedValue(undefined) };
 }
 
 const REGISTER = {
@@ -56,13 +90,15 @@ describe('AuthService', () => {
 
   it('accepts admin login with a bcrypt password and returns admin tokens', async () => {
     const prisma = makeFakePrisma();
+    const email = makeFakeEmail();
+    const audit = makeFakeAudit();
     prisma._admins.push({
       id: 'admin_1',
       email: 'admin@example.com',
       name: 'Admin',
       passwordHash: await bcrypt.hash('admin-secret', 10),
     });
-    const auth = new AuthService(prisma as never, jwt);
+    const auth = new AuthService(prisma as never, jwt, email as never, audit as never);
 
     const res = await auth.adminLogin({ email: 'admin@example.com', password: 'admin-secret' });
 
@@ -75,13 +111,15 @@ describe('AuthService', () => {
 
   it('rejects admin login with invalid credentials', async () => {
     const prisma = makeFakePrisma();
+    const email = makeFakeEmail();
+    const audit = makeFakeAudit();
     prisma._admins.push({
       id: 'admin_1',
       email: 'admin@example.com',
       name: 'Admin',
       passwordHash: await bcrypt.hash('admin-secret', 10),
     });
-    const auth = new AuthService(prisma as never, jwt);
+    const auth = new AuthService(prisma as never, jwt, email as never, audit as never);
 
     await expect(
       auth.adminLogin({ email: 'admin@example.com', password: 'wrong-password' }),
@@ -90,7 +128,9 @@ describe('AuthService', () => {
 
   it('hashes the password on registration (never stores plaintext)', async () => {
     const prisma = makeFakePrisma();
-    const auth = new AuthService(prisma as never, jwt);
+    const email = makeFakeEmail();
+    const audit = makeFakeAudit();
+    const auth = new AuthService(prisma as never, jwt, email as never, audit as never);
     const res = await auth.userRegister(REGISTER);
     expect(res.token).toBeTruthy();
     expect(res.refreshToken).toBeTruthy();
@@ -102,7 +142,9 @@ describe('AuthService', () => {
 
   it('rejects login with a wrong password', async () => {
     const prisma = makeFakePrisma();
-    const auth = new AuthService(prisma as never, jwt);
+    const email = makeFakeEmail();
+    const audit = makeFakeAudit();
+    const auth = new AuthService(prisma as never, jwt, email as never, audit as never);
     await auth.userRegister(REGISTER);
     await expect(
       auth.userLogin({ contact: REGISTER.contact, password: 'wrong-password' }),
@@ -111,7 +153,9 @@ describe('AuthService', () => {
 
   it('accepts login with the correct password and returns tokens', async () => {
     const prisma = makeFakePrisma();
-    const auth = new AuthService(prisma as never, jwt);
+    const email = makeFakeEmail();
+    const audit = makeFakeAudit();
+    const auth = new AuthService(prisma as never, jwt, email as never, audit as never);
     await auth.userRegister(REGISTER);
     const res = await auth.userLogin({ contact: REGISTER.contact, password: REGISTER.password });
     expect(res.token).toBeTruthy();
@@ -123,14 +167,18 @@ describe('AuthService', () => {
 
   it('rejects duplicate registration for the same contact', async () => {
     const prisma = makeFakePrisma();
-    const auth = new AuthService(prisma as never, jwt);
+    const email = makeFakeEmail();
+    const audit = makeFakeAudit();
+    const auth = new AuthService(prisma as never, jwt, email as never, audit as never);
     await auth.userRegister(REGISTER);
     await expect(auth.userRegister(REGISTER)).rejects.toBeInstanceOf(ConflictException);
   });
 
   it('exchanges a valid refresh token for a new access token', async () => {
     const prisma = makeFakePrisma();
-    const auth = new AuthService(prisma as never, jwt);
+    const email = makeFakeEmail();
+    const audit = makeFakeAudit();
+    const auth = new AuthService(prisma as never, jwt, email as never, audit as never);
     const { refreshToken } = await auth.userRegister(REGISTER);
     const refreshed = await auth.refresh('user', refreshToken);
     expect(refreshed.token).toBeTruthy();
@@ -140,14 +188,18 @@ describe('AuthService', () => {
 
   it('rejects an access token used as a refresh token', async () => {
     const prisma = makeFakePrisma();
-    const auth = new AuthService(prisma as never, jwt);
+    const email = makeFakeEmail();
+    const audit = makeFakeAudit();
+    const auth = new AuthService(prisma as never, jwt, email as never, audit as never);
     const { token } = await auth.userRegister(REGISTER);
     await expect(auth.refresh('user', token)).rejects.toBeInstanceOf(UnauthorizedException);
   });
 
   it('changes a user password after verifying the current password', async () => {
     const prisma = makeFakePrisma();
-    const auth = new AuthService(prisma as never, jwt);
+    const email = makeFakeEmail();
+    const audit = makeFakeAudit();
+    const auth = new AuthService(prisma as never, jwt, email as never, audit as never);
     const registered = await auth.userRegister(REGISTER);
     const payload: any = jwt.verify(registered.token, { secret: process.env.JWT_USER_SECRET });
 
@@ -176,13 +228,15 @@ describe('AuthService', () => {
 
   it('changes an admin password after verifying the current password', async () => {
     const prisma = makeFakePrisma();
+    const email = makeFakeEmail();
+    const audit = makeFakeAudit();
     prisma._admins.push({
       id: 'admin_1',
       email: 'admin@example.com',
       name: 'Admin',
       passwordHash: await bcrypt.hash('admin-secret', 10),
     });
-    const auth = new AuthService(prisma as never, jwt);
+    const auth = new AuthService(prisma as never, jwt, email as never, audit as never);
 
     await expect(
       auth.changeAdminPassword('admin_1', {
@@ -209,13 +263,15 @@ describe('AuthService', () => {
 
   it('lets an admin use their admin credentials to enter the user app', async () => {
     const prisma = makeFakePrisma();
+    const email = makeFakeEmail();
+    const audit = makeFakeAudit();
     prisma._admins.push({
       id: 'admin_1',
       email: 'admin@example.com',
       name: 'Admin',
       passwordHash: await bcrypt.hash('admin-secret', 10),
     });
-    const auth = new AuthService(prisma as never, jwt);
+    const auth = new AuthService(prisma as never, jwt, email as never, audit as never);
 
     const firstLogin = await auth.userLogin({ contact: 'admin@example.com', password: 'admin-secret' });
     expect(firstLogin.user).toMatchObject({ name: 'Admin', category: 'other' });
@@ -229,5 +285,139 @@ describe('AuthService', () => {
     const secondLogin = await auth.adminUserSession('admin_1');
     expect(secondLogin.user.id).toBe(firstLogin.user.id);
     expect(prisma._users).toHaveLength(1);
+  });
+
+  it('records an audit entry on admin login and on admin-as-user impersonation', async () => {
+    const prisma = makeFakePrisma();
+    const email = makeFakeEmail();
+    const audit = makeFakeAudit();
+    prisma._admins.push({
+      id: 'admin_1',
+      email: 'admin@example.com',
+      name: 'Admin',
+      passwordHash: await bcrypt.hash('admin-secret', 10),
+    });
+    const auth = new AuthService(prisma as never, jwt, email as never, audit as never);
+
+    await auth.adminLogin({ email: 'admin@example.com', password: 'admin-secret' });
+    expect(audit.record).toHaveBeenCalledWith(
+      expect.objectContaining({ adminId: 'admin_1', action: 'admin_login' }),
+    );
+
+    const session = await auth.adminUserSession('admin_1');
+    expect(audit.record).toHaveBeenCalledWith(
+      expect.objectContaining({ adminId: 'admin_1', action: 'admin_impersonate_user', targetType: 'user' }),
+    );
+    // The issued token carries isAdminSession so the user app can show an impersonation banner.
+    const payload: any = jwt.verify(session.token, { secret: process.env.JWT_USER_SECRET });
+    expect(payload.isAdminSession).toBe(true);
+  });
+
+  describe('forgot / reset password', () => {
+    it('userForgotPassword() always returns { sent: true }, emailing a reset link only when the contact exists', async () => {
+      const prisma = makeFakePrisma();
+      const email = makeFakeEmail();
+      const audit = makeFakeAudit();
+      const auth = new AuthService(prisma as never, jwt, email as never, audit as never);
+      await auth.userRegister(REGISTER);
+
+      await expect(auth.userForgotPassword(REGISTER.contact)).resolves.toEqual({ sent: true });
+      expect(email.sendPasswordReset).toHaveBeenCalledTimes(1);
+      expect(email.sendPasswordReset).toHaveBeenCalledWith(
+        expect.objectContaining({ to: REGISTER.contact, role: 'user' }),
+      );
+
+      await expect(auth.userForgotPassword('nobody@example.com')).resolves.toEqual({ sent: true });
+      // No second email — the unknown contact is silently ignored (no enumeration).
+      expect(email.sendPasswordReset).toHaveBeenCalledTimes(1);
+    });
+
+    it('userResetPassword() consumes a token, updates the password, and rejects reuse', async () => {
+      const prisma = makeFakePrisma();
+      const email = makeFakeEmail();
+      const audit = makeFakeAudit();
+      const auth = new AuthService(prisma as never, jwt, email as never, audit as never);
+      await auth.userRegister(REGISTER);
+
+      await auth.userForgotPassword(REGISTER.contact);
+      const resetUrl: string = email.sendPasswordReset.mock.calls[0][0].resetUrl;
+      const token = new URL(resetUrl).searchParams.get('token')!;
+      expect(token).toBeTruthy();
+
+      await expect(
+        auth.userResetPassword({ token, newPassword: 'brand-new-secret', confirmPassword: 'brand-new-secret' }),
+      ).resolves.toEqual({ changed: true });
+
+      await expect(
+        auth.userLogin({ contact: REGISTER.contact, password: REGISTER.password }),
+      ).rejects.toBeInstanceOf(UnauthorizedException);
+      await expect(
+        auth.userLogin({ contact: REGISTER.contact, password: 'brand-new-secret' }),
+      ).resolves.toHaveProperty('token');
+
+      // The same token cannot be used twice.
+      await expect(
+        auth.userResetPassword({ token, newPassword: 'another-secret', confirmPassword: 'another-secret' }),
+      ).rejects.toBeInstanceOf(UnauthorizedException);
+    });
+
+    it('userResetPassword() rejects an invalid/unknown token', async () => {
+      const prisma = makeFakePrisma();
+      const email = makeFakeEmail();
+      const audit = makeFakeAudit();
+      const auth = new AuthService(prisma as never, jwt, email as never, audit as never);
+
+      await expect(
+        auth.userResetPassword({ token: 'not-a-real-token', newPassword: 'whatever1', confirmPassword: 'whatever1' }),
+      ).rejects.toBeInstanceOf(UnauthorizedException);
+    });
+
+    it('a reset token cannot be used across roles (admin token rejected by userResetPassword)', async () => {
+      const prisma = makeFakePrisma();
+      const email = makeFakeEmail();
+      const audit = makeFakeAudit();
+      const auth = new AuthService(prisma as never, jwt, email as never, audit as never);
+      prisma._admins.push({
+        id: 'admin_1',
+        email: 'admin@example.com',
+        name: 'Admin',
+        passwordHash: await bcrypt.hash('admin-secret', 10),
+      });
+
+      await auth.adminForgotPassword('admin@example.com');
+      const resetUrl: string = email.sendPasswordReset.mock.calls[0][0].resetUrl;
+      const token = new URL(resetUrl).searchParams.get('token')!;
+
+      await expect(
+        auth.userResetPassword({ token, newPassword: 'whatever1', confirmPassword: 'whatever1' }),
+      ).rejects.toBeInstanceOf(UnauthorizedException);
+    });
+
+    it('adminResetPassword() updates the admin password and records an audit entry', async () => {
+      const prisma = makeFakePrisma();
+      const email = makeFakeEmail();
+      const audit = makeFakeAudit();
+      const auth = new AuthService(prisma as never, jwt, email as never, audit as never);
+      prisma._admins.push({
+        id: 'admin_1',
+        email: 'admin@example.com',
+        name: 'Admin',
+        passwordHash: await bcrypt.hash('admin-secret', 10),
+      });
+
+      await auth.adminForgotPassword('admin@example.com');
+      const resetUrl: string = email.sendPasswordReset.mock.calls[0][0].resetUrl;
+      const token = new URL(resetUrl).searchParams.get('token')!;
+
+      await expect(
+        auth.adminResetPassword({ token, newPassword: 'brand-new-admin-secret', confirmPassword: 'brand-new-admin-secret' }),
+      ).resolves.toEqual({ changed: true });
+      expect(audit.record).toHaveBeenCalledWith(
+        expect.objectContaining({ adminId: 'admin_1', action: 'admin_password_reset' }),
+      );
+      await expect(
+        auth.adminLogin({ email: 'admin@example.com', password: 'brand-new-admin-secret' }),
+      ).resolves.toHaveProperty('token');
+    });
   });
 });

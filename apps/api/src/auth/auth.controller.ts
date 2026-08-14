@@ -8,6 +8,9 @@ import {
   userLoginSchema,
   refreshTokenSchema,
   changePasswordSchema,
+  userForgotPasswordSchema,
+  adminForgotPasswordSchema,
+  resetPasswordSchema,
 } from '@silence/shared';
 import { ZodValidationPipe } from '../common/zod-validation.pipe';
 import {
@@ -16,6 +19,9 @@ import {
   UserRegisterDto,
   UserLoginDto,
   RefreshTokenDto,
+  UserForgotPasswordDto,
+  AdminForgotPasswordDto,
+  ResetPasswordDto,
 } from '../common/dto';
 import { AuthService } from './auth.service';
 import { AdminJwtGuard } from './guards/admin-jwt.guard';
@@ -63,6 +69,20 @@ export class AuthController {
     return this.auth.adminUserSession(req.user?.id ?? '');
   }
 
+  @Post('admin/forgot-password')
+  @Throttle(AUTH_THROTTLE)
+  @ApiOperation({ summary: 'Request an admin password reset email — always returns { sent: true }' })
+  adminForgotPassword(@Body(new ZodValidationPipe(adminForgotPasswordSchema)) body: AdminForgotPasswordDto) {
+    return this.auth.adminForgotPassword(body.email);
+  }
+
+  @Post('admin/reset-password')
+  @Throttle(AUTH_THROTTLE)
+  @ApiOperation({ summary: 'Complete an admin password reset using an emailed token' })
+  adminResetPassword(@Body(new ZodValidationPipe(resetPasswordSchema)) body: ResetPasswordDto) {
+    return this.auth.adminResetPassword(body);
+  }
+
   @Post('user/register')
   @Throttle(AUTH_THROTTLE)
   @ApiOperation({ summary: 'Register a user (name, category, birth details, password)' })
@@ -92,5 +112,19 @@ export class AuthController {
     @Body(new ZodValidationPipe(changePasswordSchema)) body: ChangePasswordDto,
   ) {
     return this.auth.changeUserPassword(req.user?.id ?? '', body);
+  }
+
+  @Post('user/forgot-password')
+  @Throttle(AUTH_THROTTLE)
+  @ApiOperation({ summary: 'Request a user password reset email — always returns { sent: true }' })
+  userForgotPassword(@Body(new ZodValidationPipe(userForgotPasswordSchema)) body: UserForgotPasswordDto) {
+    return this.auth.userForgotPassword(body.contact);
+  }
+
+  @Post('user/reset-password')
+  @Throttle(AUTH_THROTTLE)
+  @ApiOperation({ summary: 'Complete a user password reset using an emailed token' })
+  userResetPassword(@Body(new ZodValidationPipe(resetPasswordSchema)) body: ResetPasswordDto) {
+    return this.auth.userResetPassword(body);
   }
 }

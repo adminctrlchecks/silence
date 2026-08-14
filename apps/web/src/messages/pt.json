@@ -43,6 +43,7 @@
     "country": "País",
     "contact": "E-mail ou telefone",
     "password": "Senha",
+    "forgotPassword": "Esqueceu sua senha?",
     "consent": "Concordo em salvar meu perfil, dados de nascimento, respostas, mapa e remédio.",
     "createSubmit": "Criar perfil",
     "signInSubmit": "Entrar",
@@ -54,9 +55,33 @@
     "birthPlace": "Local de nascimento",
     "birthPlacePlaceholder": "Procurar uma cidade…"
   },
+  "ForgotPassword": {
+    "eyebrow": "Recuperação de conta",
+    "title": "Esqueceu sua senha?",
+    "description": "Digite o e-mail ou telefone que você usou para se cadastrar. Se corresponder a uma conta, enviaremos um link de redefinição.",
+    "fieldLabel": "E-mail ou telefone",
+    "fieldPlaceholder": "voce@exemplo.com",
+    "submit": "Enviar link de redefinição",
+    "submitting": "Enviando",
+    "success": "Se esse contato corresponder a uma conta, um link de redefinição está a caminho.",
+    "backToLogin": "Voltar para o login"
+  },
+  "ResetPassword": {
+    "eyebrow": "Recuperação de conta",
+    "title": "Escolha uma nova senha",
+    "description": "Digite uma nova senha para sua conta Silence.",
+    "newPassword": "Nova senha",
+    "confirmPassword": "Confirmar nova senha",
+    "submit": "Redefinir senha",
+    "submitting": "Redefinindo",
+    "success": "Senha atualizada. Redirecionando para o login…",
+    "invalidLink": "Este link de redefinição é inválido ou expirou. Solicite um novo na página de login."
+  },
   "UserLayout": {
     "mySession": "Minha sessão",
-    "signIn": "Entrar"
+    "signIn": "Entrar",
+    "impersonationBanner": "Você está visualizando o app do usuário como esta conta, via acesso de administrador.",
+    "exitToAdmin": "Voltar para a administração"
   },
   "UserApp": {
     "eyebrow": "Área do usuário",

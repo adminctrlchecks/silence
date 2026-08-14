@@ -7,6 +7,7 @@ import {
   Languages,
   MessageSquareText,
   MoonStar,
+  ShieldCheck,
 } from 'lucide-react';
 import { ChangePasswordCard } from '@/components/auth/change-password-card';
 import { DashboardOverview } from '@/components/admin/dashboard-overview';
@@ -19,6 +20,7 @@ const modules = [
   { label: 'Chart config', href: '/admin/chart-config', icon: BarChart3, detail: 'Astrology style and required fields' },
   { label: 'Import', href: '/admin/import', icon: FileSpreadsheet, detail: 'Spreadsheet templates and job status' },
   { label: 'Languages', href: '/admin/languages', icon: Languages, detail: 'Enabled locales and auto-translate' },
+  { label: 'Audit log', href: '/admin/audit-log', icon: ShieldCheck, detail: 'Sensitive admin activity trail' },
 ];
 
 export default function AdminHome() {

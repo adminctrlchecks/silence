@@ -11,6 +11,9 @@ import {
   userLoginSchema,
   refreshTokenSchema,
   changePasswordSchema,
+  userForgotPasswordSchema,
+  adminForgotPasswordSchema,
+  resetPasswordSchema,
   createQuestionSchema,
   updateQuestionSchema,
   createAnswerSchema,
@@ -29,6 +32,9 @@ export class UserRegisterDto extends createZodDto(userRegisterSchema) {}
 export class UserLoginDto extends createZodDto(userLoginSchema) {}
 export class RefreshTokenDto extends createZodDto(refreshTokenSchema) {}
 export class ChangePasswordDto extends createZodDto(changePasswordSchema) {}
+export class UserForgotPasswordDto extends createZodDto(userForgotPasswordSchema) {}
+export class AdminForgotPasswordDto extends createZodDto(adminForgotPasswordSchema) {}
+export class ResetPasswordDto extends createZodDto(resetPasswordSchema) {}
 export class CreateQuestionDto extends createZodDto(createQuestionSchema) {}
 export class UpdateQuestionDto extends createZodDto(updateQuestionSchema) {}
 export class CreateAnswerDto extends createZodDto(createAnswerSchema) {}

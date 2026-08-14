@@ -7,6 +7,7 @@ import request from 'supertest';
 import * as XLSX from 'xlsx';
 import { PrismaService } from './prisma/prisma.service';
 import { GeminiService } from './integrations/gemini/gemini.service';
+import { EmailService } from './integrations/email/email.service';
 import { HttpExceptionFilter } from './common/http-exception.filter';
 
 jest.setTimeout(60_000);
@@ -64,6 +65,7 @@ function xlsxBuffer(rows: (string | number)[][]): Buffer {
 describe('Silence API e2e', () => {
   let app: INestApplication;
   let prisma: PrismaService;
+  let email: { sendPasswordReset: jest.Mock };
 
   beforeAll(async () => {
     process.env.DATABASE_URL = testDatabaseUrl();
@@ -74,6 +76,8 @@ describe('Silence API e2e', () => {
     await resetSchema();
     migrateTestSchema();
 
+    email = { sendPasswordReset: jest.fn().mockResolvedValue(undefined) };
+
     const { AppModule } = await import('./app.module');
     const moduleRef = await Test.createTestingModule({ imports: [AppModule] })
       .overrideProvider(GeminiService)
@@ -82,6 +86,8 @@ describe('Silence API e2e', () => {
         interpretChart: jest.fn().mockResolvedValue('Generated chart interpretation from e2e Gemini stub'),
         translate: jest.fn((text: string, lang: string) => Promise.resolve(`${lang}:${text}`)),
       })
+      .overrideProvider(EmailService)
+      .useValue(email)
       .compile();
 
     app = moduleRef.createNestApplication();
@@ -784,5 +790,133 @@ describe('Silence API e2e', () => {
       .set('Authorization', `Bearer ${matched.token}`)
       .expect(200);
     expect(replay.body.id).toBe(burnoutRule.id);
+  });
+
+  it('forgot/reset password (user + admin) and the admin audit log — Phase 6', async () => {
+    email.sendPasswordReset.mockClear();
+    const runId = Date.now().toString(36);
+
+    // Register a user and confirm their current password works.
+    const register = await request(app.getHttpServer())
+      .post('/api/v1/auth/user/register')
+      .send({
+        name: 'Reset Tester',
+        category: 'other',
+        dob: '1993-06-06',
+        timeOfBirth: '08:00',
+        placeOfBirth: { city: 'Goa', country: 'IN' },
+        contact: `reset-e2e-${runId}@example.com`,
+        password: 'original-password',
+        lang: 'en',
+        consent: true,
+      })
+      .expect(201);
+    const { user } = register.body as { user: { id: string } };
+
+    // Forgot-password always returns the same generic response, whether or not the contact exists.
+    await request(app.getHttpServer())
+      .post('/api/v1/auth/user/forgot-password')
+      .send({ contact: `reset-e2e-${runId}@example.com` })
+      .expect(201)
+      .expect(({ body }) => expect(body).toEqual({ sent: true }));
+    await request(app.getHttpServer())
+      .post('/api/v1/auth/user/forgot-password')
+      .send({ contact: 'no-such-contact@example.com' })
+      .expect(201)
+      .expect(({ body }) => expect(body).toEqual({ sent: true }));
+
+    // Only the real contact triggered an email.
+    expect(email.sendPasswordReset).toHaveBeenCalledTimes(1);
+    const userResetUrl = email.sendPasswordReset.mock.calls[0][0].resetUrl as string;
+    const userToken = new URL(userResetUrl).searchParams.get('token');
+    expect(userResetUrl).toContain('/reset-password?token=');
+
+    // Reset with the emailed token, then verify old/new password behavior.
+    await request(app.getHttpServer())
+      .post('/api/v1/auth/user/reset-password')
+      .send({ token: userToken, newPassword: 'brand-new-password', confirmPassword: 'brand-new-password' })
+      .expect(201)
+      .expect(({ body }) => expect(body).toEqual({ changed: true }));
+
+    await request(app.getHttpServer())
+      .post('/api/v1/auth/user/login')
+      .send({ contact: `reset-e2e-${runId}@example.com`, password: 'original-password' })
+      .expect(401);
+    await request(app.getHttpServer())
+      .post('/api/v1/auth/user/login')
+      .send({ contact: `reset-e2e-${runId}@example.com`, password: 'brand-new-password' })
+      .expect(201);
+
+    // The same token cannot be replayed.
+    await request(app.getHttpServer())
+      .post('/api/v1/auth/user/reset-password')
+      .send({ token: userToken, newPassword: 'another-password', confirmPassword: 'another-password' })
+      .expect(401);
+
+    // Admin forgot/reset password follows the same contract.
+    email.sendPasswordReset.mockClear();
+    await request(app.getHttpServer())
+      .post('/api/v1/auth/admin/forgot-password')
+      .send({ email: 'admin@example.com' })
+      .expect(201)
+      .expect(({ body }) => expect(body).toEqual({ sent: true }));
+
+    const adminResetUrl = email.sendPasswordReset.mock.calls[0][0].resetUrl as string;
+    const adminResetToken = new URL(adminResetUrl).searchParams.get('token');
+    expect(adminResetUrl).toContain('/admin/reset-password?token=');
+
+    await request(app.getHttpServer())
+      .post('/api/v1/auth/admin/reset-password')
+      .send({ token: adminResetToken, newPassword: 'new-admin-password', confirmPassword: 'new-admin-password' })
+      .expect(201)
+      .expect(({ body }) => expect(body).toEqual({ changed: true }));
+
+    // Sign back in with the new admin password (restores state for later tests in this file).
+    const adminRelogin = await request(app.getHttpServer())
+      .post('/api/v1/auth/admin/login')
+      .send({ email: 'admin@example.com', password: 'new-admin-password' })
+      .expect(201);
+    const freshAdminToken = (adminRelogin.body as { token: string }).token;
+    await request(app.getHttpServer())
+      .post('/api/v1/auth/admin/change-password')
+      .set('Authorization', `Bearer ${freshAdminToken}`)
+      .send({ currentPassword: 'new-admin-password', newPassword: 'admin-password', confirmPassword: 'admin-password' })
+      .expect(201);
+
+    // The admin audit log captured the login, the password reset, and the password change.
+    const audit = await request(app.getHttpServer())
+      .get('/api/v1/admin/audit-log?limit=50')
+      .set('Authorization', `Bearer ${freshAdminToken}`)
+      .expect(200);
+    const actions = audit.body.data.map((e: { action: string }) => e.action);
+    expect(actions).toEqual(
+      expect.arrayContaining(['admin_login', 'admin_password_reset', 'admin_password_change']),
+    );
+
+    // Filtering the audit log by action works.
+    const filtered = await request(app.getHttpServer())
+      .get('/api/v1/admin/audit-log?action=admin_password_reset')
+      .set('Authorization', `Bearer ${freshAdminToken}`)
+      .expect(200);
+    expect(filtered.body.data.length).toBeGreaterThanOrEqual(1);
+    expect(filtered.body.data.every((e: { action: string }) => e.action === 'admin_password_reset')).toBe(true);
+
+    // Admin-as-user impersonation is also audited, with the target user id recorded.
+    await request(app.getHttpServer())
+      .post('/api/v1/auth/admin/user-session')
+      .set('Authorization', `Bearer ${freshAdminToken}`)
+      .expect(201);
+    const impersonation = await request(app.getHttpServer())
+      .get('/api/v1/admin/audit-log?action=admin_impersonate_user&limit=1')
+      .set('Authorization', `Bearer ${freshAdminToken}`)
+      .expect(200);
+    expect(impersonation.body.data[0]).toMatchObject({ action: 'admin_impersonate_user', targetType: 'user' });
+
+    // Sanity: the original registered user id is untouched by any of this.
+    const stillThere = await request(app.getHttpServer())
+      .post('/api/v1/auth/user/login')
+      .send({ contact: `reset-e2e-${runId}@example.com`, password: 'brand-new-password' })
+      .expect(201);
+    expect((stillThere.body as { user: { id: string } }).user.id).toBe(user.id);
   });
 });

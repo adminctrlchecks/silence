@@ -11,6 +11,7 @@ import type {
   ImportType,
   ReadingSessionStatus,
   NextStep,
+  AdminAuditAction,
 } from './enums';
 
 export interface Translated {
@@ -217,6 +218,19 @@ export interface AuthResponse<T> {
   token: string;
   admin?: T;
   user?: T;
+}
+
+// ── Admin audit log (docs/API.md §7c) ─────────────────────────────────────────
+
+export interface AdminAuditLogEntry {
+  id: string;
+  adminId: string;
+  adminEmail: string;
+  action: AdminAuditAction;
+  targetType?: string;
+  targetId?: string;
+  detail?: string;
+  createdAt: string;
 }
 
 // ── Admin command center (docs/API.md §7b) ────────────────────────────────────

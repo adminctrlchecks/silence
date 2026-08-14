@@ -43,6 +43,7 @@
     "country": "国",
     "contact": "メールまたは電話",
     "password": "パスワード",
+    "forgotPassword": "パスワードをお忘れですか?",
     "consent": "プロフィール、出生情報、回答、チャート、レメディの保存に同意します。",
     "createSubmit": "プロフィール作成",
     "signInSubmit": "サインイン",
@@ -54,9 +55,33 @@
     "birthPlace": "出生地",
     "birthPlacePlaceholder": "都市を検索…"
   },
+  "ForgotPassword": {
+    "eyebrow": "アカウント復旧",
+    "title": "パスワードをお忘れですか?",
+    "description": "登録時に使用したメールアドレスまたは電話番号を入力してください。アカウントと一致する場合、リセットリンクをお送りします。",
+    "fieldLabel": "メールまたは電話番号",
+    "fieldPlaceholder": "you@example.com",
+    "submit": "リセットリンクを送信",
+    "submitting": "送信中",
+    "success": "その連絡先がアカウントと一致する場合、リセットリンクをお送りしています。",
+    "backToLogin": "サインインに戻る"
+  },
+  "ResetPassword": {
+    "eyebrow": "アカウント復旧",
+    "title": "新しいパスワードを選択",
+    "description": "Silenceアカウントの新しいパスワードを入力してください。",
+    "newPassword": "新しいパスワード",
+    "confirmPassword": "新しいパスワードの確認",
+    "submit": "パスワードをリセット",
+    "submitting": "リセット中",
+    "success": "パスワードが更新されました。サインインへ移動しています…",
+    "invalidLink": "このリセットリンクは無効か期限切れです。サインインページから新しいリンクをリクエストしてください。"
+  },
   "UserLayout": {
     "mySession": "マイセッション",
-    "signIn": "サインイン"
+    "signIn": "サインイン",
+    "impersonationBanner": "管理者アクセスにより、このアカウントとしてユーザーアプリを表示しています。",
+    "exitToAdmin": "管理画面に戻る"
   },
   "UserApp": {
     "eyebrow": "ユーザーワークスペース",

@@ -19,6 +19,8 @@ import { SessionsModule } from './sessions/sessions.module';
 import { GeocodeModule } from './integrations/geocode/geocode.module';
 import { PlacesModule } from './places/places.module';
 import { AdminDashboardModule } from './admin-dashboard/admin-dashboard.module';
+import { EmailModule } from './integrations/email/email.module';
+import { AdminAuditModule } from './admin-audit/admin-audit.module';
 
 @Module({
   imports: [
@@ -42,6 +44,8 @@ import { AdminDashboardModule } from './admin-dashboard/admin-dashboard.module';
     GeocodeModule,
     PlacesModule,
     AdminDashboardModule,
+    EmailModule,
+    AdminAuditModule,
   ],
   providers: [
     // Apply rate limiting globally.

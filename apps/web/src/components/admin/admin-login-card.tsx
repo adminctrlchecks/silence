@@ -1,6 +1,7 @@
 'use client';
 
 import { Loader2, ShieldCheck } from 'lucide-react';
+import Link from 'next/link';
 import { useRouter, useSearchParams } from 'next/navigation';
 import { useState } from 'react';
 import { Button } from '@/components/ui/button';
@@ -65,7 +66,12 @@ export function AdminLoginCard() {
             <Input id="email" name="email" type="email" autoComplete="email" required />
           </div>
           <div className="space-y-2">
-            <Label htmlFor="password">Password</Label>
+            <div className="flex items-center justify-between">
+              <Label htmlFor="password">Password</Label>
+              <Link href="/admin/forgot-password" className="text-xs font-medium text-primary">
+                Forgot password?
+              </Link>
+            </div>
             <Input id="password" name="password" type="password" autoComplete="current-password" required />
           </div>
 

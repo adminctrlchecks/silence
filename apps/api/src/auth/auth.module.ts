@@ -5,9 +5,10 @@ import { AuthService } from './auth.service';
 import { AuthController } from './auth.controller';
 import { AdminJwtStrategy } from './strategies/admin-jwt.strategy';
 import { UserJwtStrategy } from './strategies/user-jwt.strategy';
+import { AdminAuditModule } from '../admin-audit/admin-audit.module';
 
 @Module({
-  imports: [PassportModule, JwtModule.register({})],
+  imports: [PassportModule, JwtModule.register({}), AdminAuditModule],
   controllers: [AuthController],
   providers: [AuthService, AdminJwtStrategy, UserJwtStrategy],
   exports: [AuthService],

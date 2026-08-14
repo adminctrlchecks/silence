@@ -43,6 +43,7 @@
     "country": "Pays",
     "contact": "E-mail ou téléphone",
     "password": "Mot de passe",
+    "forgotPassword": "Mot de passe oublié ?",
     "consent": "J'accepte d'enregistrer mon profil, mes détails de naissance, mes réponses, ma carte et mon remède.",
     "createSubmit": "Créer un profil",
     "signInSubmit": "Se connecter",
@@ -54,9 +55,33 @@
     "birthPlace": "Lieu de naissance",
     "birthPlacePlaceholder": "Chercher une ville…"
   },
+  "ForgotPassword": {
+    "eyebrow": "Récupération de compte",
+    "title": "Mot de passe oublié ?",
+    "description": "Saisissez l'e-mail ou le téléphone utilisé lors de l'inscription. S'il correspond à un compte, nous vous enverrons un lien de réinitialisation.",
+    "fieldLabel": "E-mail ou téléphone",
+    "fieldPlaceholder": "vous@exemple.com",
+    "submit": "Envoyer le lien de réinitialisation",
+    "submitting": "Envoi en cours",
+    "success": "Si ce contact correspond à un compte, un lien de réinitialisation est en route.",
+    "backToLogin": "Retour à la connexion"
+  },
+  "ResetPassword": {
+    "eyebrow": "Récupération de compte",
+    "title": "Choisissez un nouveau mot de passe",
+    "description": "Saisissez un nouveau mot de passe pour votre compte Silence.",
+    "newPassword": "Nouveau mot de passe",
+    "confirmPassword": "Confirmer le nouveau mot de passe",
+    "submit": "Réinitialiser le mot de passe",
+    "submitting": "Réinitialisation",
+    "success": "Mot de passe mis à jour. Redirection vers la connexion…",
+    "invalidLink": "Ce lien de réinitialisation est invalide ou a expiré. Demandez-en un nouveau depuis la page de connexion."
+  },
   "UserLayout": {
     "mySession": "Ma session",
-    "signIn": "Se connecter"
+    "signIn": "Se connecter",
+    "impersonationBanner": "Vous consultez l'application utilisateur en tant que ce compte, via l'accès administrateur.",
+    "exitToAdmin": "Retour à l'administration"
   },
   "UserApp": {
     "eyebrow": "Espace utilisateur",

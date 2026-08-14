@@ -177,7 +177,14 @@ export function AuthCard({
             <Input id="contact" name="contact" autoComplete="email" required />
           </div>
           <div className="space-y-2">
-            <Label htmlFor="password">{t('password')}</Label>
+            <div className="flex items-center justify-between">
+              <Label htmlFor="password">{t('password')}</Label>
+              {registering ? null : (
+                <Link href="/forgot-password" className="text-xs font-medium text-primary">
+                  {t('forgotPassword')}
+                </Link>
+              )}
+            </div>
             <Input id="password" name="password" type="password" autoComplete={registering ? 'new-password' : 'current-password'} required />
           </div>
 

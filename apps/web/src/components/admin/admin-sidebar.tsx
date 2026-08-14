@@ -12,6 +12,7 @@ import {
   MessageSquareText,
   MoonStar,
   Settings2,
+  ShieldCheck,
   Users,
 } from 'lucide-react';
 import { cn } from '@/lib/utils';
@@ -27,6 +28,7 @@ const navItems = [
   { href: '/admin/import', label: 'Import', icon: FileSpreadsheet },
   { href: '/admin/languages', label: 'Languages', icon: Languages },
   { href: '/admin/users', label: 'Users', icon: Users },
+  { href: '/admin/audit-log', label: 'Audit log', icon: ShieldCheck },
 ];
 
 export function AdminSidebar() {

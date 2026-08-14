@@ -45,6 +45,7 @@
     "birthPlacePlaceholder": "Search for a city…",
     "contact": "Email or phone",
     "password": "Password",
+    "forgotPassword": "Forgot password?",
     "consent": "I consent to saving my profile, birth details, answers, chart, and remedy.",
     "createSubmit": "Create profile",
     "signInSubmit": "Sign in",
@@ -54,9 +55,33 @@
     "registerError": "Registration failed. Please check the details and try again.",
     "loginError": "Sign in failed. Please check your contact and password."
   },
+  "ForgotPassword": {
+    "eyebrow": "Account recovery",
+    "title": "Forgot your password?",
+    "description": "Enter the email or phone you used to sign up. If it matches an account, we'll send a reset link.",
+    "fieldLabel": "Email or phone",
+    "fieldPlaceholder": "you@example.com",
+    "submit": "Send reset link",
+    "submitting": "Sending",
+    "success": "If that contact matches an account, a reset link is on its way.",
+    "backToLogin": "Back to sign in"
+  },
+  "ResetPassword": {
+    "eyebrow": "Account recovery",
+    "title": "Choose a new password",
+    "description": "Enter a new password for your Silence account.",
+    "newPassword": "New password",
+    "confirmPassword": "Confirm new password",
+    "submit": "Reset password",
+    "submitting": "Resetting",
+    "success": "Password updated. Redirecting to sign in…",
+    "invalidLink": "This reset link is invalid or has expired. Request a new one from the sign-in page."
+  },
   "UserLayout": {
     "mySession": "My session",
-    "signIn": "Sign in"
+    "signIn": "Sign in",
+    "impersonationBanner": "You're viewing the user app as this account, signed in via admin.",
+    "exitToAdmin": "Exit to admin"
   },
   "UserApp": {
     "eyebrow": "Your astrology session",

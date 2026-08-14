@@ -48,3 +48,12 @@ export const NEXT_STEPS = [
   'view_history',
 ] as const;
 export type NextStep = (typeof NEXT_STEPS)[number];
+
+/** Sensitive admin actions recorded in AdminAuditLog (Phase 6). */
+export const ADMIN_AUDIT_ACTIONS = [
+  'admin_login',
+  'admin_password_change',
+  'admin_password_reset',
+  'admin_impersonate_user',
+] as const;
+export type AdminAuditAction = (typeof ADMIN_AUDIT_ACTIONS)[number];

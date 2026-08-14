@@ -43,6 +43,7 @@
     "country": "País",
     "contact": "Correo o teléfono",
     "password": "Contraseña",
+    "forgotPassword": "¿Olvidaste tu contraseña?",
     "consent": "Acepto guardar mi perfil, datos de nacimiento, respuestas, carta y remedio.",
     "createSubmit": "Crear perfil",
     "signInSubmit": "Iniciar sesión",
@@ -54,9 +55,33 @@
     "birthPlace": "Lugar de nacimiento",
     "birthPlacePlaceholder": "Buscar una ciudad…"
   },
+  "ForgotPassword": {
+    "eyebrow": "Recuperación de cuenta",
+    "title": "¿Olvidaste tu contraseña?",
+    "description": "Introduce el correo o teléfono que usaste para registrarte. Si coincide con una cuenta, te enviaremos un enlace de restablecimiento.",
+    "fieldLabel": "Correo o teléfono",
+    "fieldPlaceholder": "tu@ejemplo.com",
+    "submit": "Enviar enlace de restablecimiento",
+    "submitting": "Enviando",
+    "success": "Si ese contacto coincide con una cuenta, un enlace de restablecimiento está en camino.",
+    "backToLogin": "Volver a iniciar sesión"
+  },
+  "ResetPassword": {
+    "eyebrow": "Recuperación de cuenta",
+    "title": "Elige una nueva contraseña",
+    "description": "Introduce una nueva contraseña para tu cuenta de Silence.",
+    "newPassword": "Nueva contraseña",
+    "confirmPassword": "Confirmar nueva contraseña",
+    "submit": "Restablecer contraseña",
+    "submitting": "Restableciendo",
+    "success": "Contraseña actualizada. Redirigiendo al inicio de sesión…",
+    "invalidLink": "Este enlace de restablecimiento no es válido o ha caducado. Solicita uno nuevo desde la página de inicio de sesión."
+  },
   "UserLayout": {
     "mySession": "Mi sesión",
-    "signIn": "Iniciar sesión"
+    "signIn": "Iniciar sesión",
+    "impersonationBanner": "Estás viendo la app de usuario como esta cuenta, con acceso desde el panel de administración.",
+    "exitToAdmin": "Volver al panel de administración"
   },
   "UserApp": {
     "eyebrow": "Área de usuario",

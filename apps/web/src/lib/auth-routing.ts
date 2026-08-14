@@ -4,6 +4,8 @@ export const ADMIN_TOKEN_COOKIE = 'silence_admin_token';
 const protectedPrefixes = ['/app', '/profile', '/history', '/chart', '/remedy'];
 const authPaths = ['/login', '/register'];
 const adminAuthPath = '/admin/login';
+// Reachable without an admin token, in addition to adminAuthPath.
+const adminPublicPaths = [adminAuthPath, '/admin/forgot-password', '/admin/reset-password'];
 
 export type RouteDecision =
   | { kind: 'next' }
@@ -35,7 +37,7 @@ export function decideAdminRoute(pathname: string, search: string, hasAdminToken
     return { kind: 'redirect', pathname: '/admin' };
   }
 
-  if (pathname !== adminAuthPath && !hasAdminToken) {
+  if (!adminPublicPaths.includes(pathname) && !hasAdminToken) {
     return { kind: 'redirect', pathname: adminAuthPath, redirectParam: `${pathname}${search}` };
   }
 

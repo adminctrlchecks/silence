@@ -38,8 +38,12 @@
 | Method | Endpoint | Description |
 |--------|----------|-------------|
 | `POST` | `/auth/admin/login` | Admin login → returns admin token. |
+| `POST` | `/auth/admin/forgot-password` | Request an admin password reset email; always returns `{ "sent": true }`. |
+| `POST` | `/auth/admin/reset-password` | Complete an admin password reset with an emailed token. |
 | `POST` | `/auth/user/register` | Create a user + save details. |
 | `POST` | `/auth/user/login` | User login → returns user token. |
+| `POST` | `/auth/user/forgot-password` | Request a user password reset email; always returns `{ "sent": true }`. |
+| `POST` | `/auth/user/reset-password` | Complete a user password reset with an emailed token. |
 
 **POST `/auth/admin/login`**
 ```json
@@ -47,6 +51,22 @@
 { "email": "admin@example.com", "password": "••••••" }
 // response
 { "token": "…", "admin": { "id": "a1", "name": "Admin" } }
+```
+
+**POST `/auth/admin/forgot-password`**
+```json
+// request
+{ "email": "admin@example.com" }
+// response
+{ "sent": true }
+```
+
+**POST `/auth/admin/reset-password`**
+```json
+// request
+{ "token": "emailed-token", "newPassword": "new-password", "confirmPassword": "new-password" }
+// response
+{ "changed": true }
 ```
 
 **POST `/auth/user/register`** — recommended detail set (birth data is needed for
@@ -65,6 +85,22 @@ the astrology chart).
 }
 // response
 { "token": "…", "user": { "id": "u_1", "name": "Asha", "category": "female" } }
+```
+
+**POST `/auth/user/forgot-password`**
+```json
+// request
+{ "contact": "+91…" }
+// response
+{ "sent": true }
+```
+
+**POST `/auth/user/reset-password`**
+```json
+// request
+{ "token": "emailed-token", "newPassword": "new-password", "confirmPassword": "new-password" }
+// response
+{ "changed": true }
 ```
 
 ---
@@ -300,6 +336,41 @@ hardcoded admin overview cards.
 placeholder fallback text — chart generation itself has no persisted error
 log yet (see docs/WORLD_CLASS_PRODUCT_GAP_ANALYSIS.md Phase 10), so this is
 the closest live signal that AI interpretation failed for a chart.
+
+---
+
+## 7c. Admin — Audit Log
+
+Sensitive admin activity trail for security/support review. Requires an admin
+token.
+
+| Method | Endpoint | Description |
+|--------|----------|-------------|
+| `GET`  | `/admin/audit-log?action=&adminId=&page=&limit=` | Recent sensitive admin events, newest first. |
+
+`action` is one of `admin_login | admin_password_change |
+admin_password_reset | admin_impersonate_user`.
+
+**GET `/admin/audit-log`** (shape)
+```json
+{
+  "data": [
+    {
+      "id": "log_1",
+      "adminId": "admin_1",
+      "adminEmail": "admin@example.com",
+      "action": "admin_login",
+      "targetType": "user",
+      "targetId": "user_1",
+      "detail": "optional note",
+      "createdAt": "2026-08-14T13:30:17.000Z"
+    }
+  ],
+  "page": 1,
+  "limit": 20,
+  "total": 1
+}
+```
 
 ---
 

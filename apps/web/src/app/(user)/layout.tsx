@@ -1,22 +1,31 @@
 import Link from 'next/link';
-import { cookies } from 'next/headers';
+import { ShieldAlert } from 'lucide-react';
 import { getTranslations } from 'next-intl/server';
 import type { ReactNode } from 'react';
 import { AuthSessionProvider } from '@/components/auth/auth-session-provider';
 import { SignOutButton } from '@/components/auth/sign-out-button';
 import { ThemeToggle } from '@/components/theme-toggle';
 import { Button } from '@/components/ui/button';
-import { USER_TOKEN_COOKIE } from '@/lib/auth-routing';
+import { getUserSession } from '@/lib/user-session';
 
 export default async function UserLayout({ children }: { children: ReactNode }) {
-  const cookieStore = await cookies();
+  const session = await getUserSession();
   const common = await getTranslations('Common');
   const t = await getTranslations('UserLayout');
-  const authenticated = Boolean(cookieStore.get(USER_TOKEN_COOKIE)?.value);
+  const authenticated = Boolean(session);
 
   return (
     <AuthSessionProvider authenticated={authenticated}>
       <div className="min-h-screen bg-background">
+        {session?.isAdminSession ? (
+          <div className="flex items-center justify-center gap-2 bg-amber-500/15 px-4 py-2 text-center text-xs font-medium text-amber-700 dark:text-amber-400">
+            <ShieldAlert className="size-3.5 shrink-0" />
+            {t('impersonationBanner')}
+            <Link href="/admin" className="underline underline-offset-2">
+              {t('exitToAdmin')}
+            </Link>
+          </div>
+        ) : null}
         <header className="border-b border-border bg-card/85 backdrop-blur">
           <div className="mx-auto flex h-16 w-full max-w-6xl items-center justify-between px-4 sm:px-6">
             <Link href="/" className="text-base font-semibold tracking-normal">

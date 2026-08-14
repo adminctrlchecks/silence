@@ -287,3 +287,34 @@ model ImportJob {
   createdAt DateTime     @default(now())
   updatedAt DateTime     @updatedAt
 }
+
+// A one-time, hashed token for the "forgot password" flow (admin or user).
+// Only the sha256 hash is stored — never the plaintext token, which only ever
+// exists in the emailed link. usedAt makes a token single-use.
+model PasswordResetToken {
+  id        String   @id @default(cuid())
+  role      String // admin | user
+  targetId  String // Admin.id or User.id, depending on role
+  tokenHash String   @unique
+  expiresAt DateTime
+  usedAt    DateTime?
+  createdAt DateTime @default(now())
+
+  @@index([role, targetId])
+}
+
+// Sensitive admin actions — login, password changes/resets, and entering the
+// user app as a given user — so support/security can see who did what.
+model AdminAuditLog {
+  id         String   @id @default(cuid())
+  adminId    String
+  adminEmail String
+  action     String // admin_login | admin_password_change | admin_password_reset | admin_impersonate_user
+  targetType String? // e.g. "user"
+  targetId   String? // e.g. the impersonated User.id
+  detail     String?
+  createdAt  DateTime @default(now())
+
+  @@index([adminId, createdAt])
+  @@index([action, createdAt])
+}

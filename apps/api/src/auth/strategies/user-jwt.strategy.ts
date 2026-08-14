@@ -5,6 +5,8 @@ import { ExtractJwt, Strategy } from 'passport-jwt';
 export interface UserJwtPayload {
   sub: string;
   role: 'user';
+  /** Set when this token was issued via admin-as-user (POST /auth/admin/user-session). */
+  isAdminSession?: boolean;
 }
 
 @Injectable()
@@ -19,6 +21,6 @@ export class UserJwtStrategy extends PassportStrategy(Strategy, 'user-jwt') {
 
   validate(payload: UserJwtPayload) {
     if (payload.role !== 'user') throw new UnauthorizedException();
-    return { id: payload.sub, role: payload.role };
+    return { id: payload.sub, role: payload.role, isAdminSession: payload.isAdminSession ?? false };
   }
 }

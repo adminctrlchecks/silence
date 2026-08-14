@@ -19,6 +19,7 @@ import type {
   ReadingSessionDetail,
   AdminDashboardMetrics,
   ContentMatrix,
+  AdminAuditLogEntry,
 } from '@silence/shared';
 
 export type AdminUserSummary = UserProfile & {
@@ -151,6 +152,14 @@ export const authApi = {
     ),
   userChangePassword: (token: string, body: unknown) =>
     request<{ changed: boolean }>('/auth/user/change-password', { method: 'POST', token, body }),
+  userForgotPassword: (body: { contact: string }) =>
+    request<{ sent: boolean }>('/auth/user/forgot-password', { method: 'POST', body }),
+  userResetPassword: (body: unknown) =>
+    request<{ changed: boolean }>('/auth/user/reset-password', { method: 'POST', body }),
+  adminForgotPassword: (body: { email: string }) =>
+    request<{ sent: boolean }>('/auth/admin/forgot-password', { method: 'POST', body }),
+  adminResetPassword: (body: unknown) =>
+    request<{ changed: boolean }>('/auth/admin/reset-password', { method: 'POST', body }),
 };
 
 /** Admin endpoints — docs/API.md §2–7 (all require an admin token). */
@@ -209,4 +218,6 @@ export const adminApi = {
     request<ChartConfig>('/admin/chart-config', { method: 'PUT', token, body }),
   importStatus: (token: string, jobId: string) =>
     request<ImportJob>(`/admin/import/${jobId}`, { token }),
+  auditLog: (token: string, q: Query = {}) =>
+    request<Paginated<AdminAuditLogEntry>>('/admin/audit-log', { token, query: q }),
 };

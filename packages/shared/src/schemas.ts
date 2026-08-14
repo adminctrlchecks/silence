@@ -66,6 +66,27 @@ export const changePasswordSchema = z
     path: ['confirmPassword'],
   });
 
+// ── Forgot / reset password (Phase 6) ─────────────────────────────────────────
+// Forgot-password requests always resolve the same way regardless of whether
+// the contact/email exists, so the schema is deliberately minimal.
+export const userForgotPasswordSchema = z.object({
+  contact: z.string().min(1),
+});
+export const adminForgotPasswordSchema = z.object({
+  email: z.string().email(),
+});
+
+export const resetPasswordSchema = z
+  .object({
+    token: z.string().min(1),
+    newPassword: z.string().min(8, 'New password must be at least 8 characters'),
+    confirmPassword: z.string().min(8, 'Confirm password must be at least 8 characters'),
+  })
+  .refine((data) => data.newPassword === data.confirmPassword, {
+    message: 'New passwords do not match',
+    path: ['confirmPassword'],
+  });
+
 // ── Questions ─────────────────────────────────────────────────────────────
 export const createQuestionSchema = z.object({
   level: levelSchema,
@@ -165,6 +186,9 @@ export type UserRegisterInput = z.infer<typeof userRegisterSchema>;
 export type UserLoginInput = z.infer<typeof userLoginSchema>;
 export type RefreshTokenInput = z.infer<typeof refreshTokenSchema>;
 export type ChangePasswordInput = z.infer<typeof changePasswordSchema>;
+export type UserForgotPasswordInput = z.infer<typeof userForgotPasswordSchema>;
+export type AdminForgotPasswordInput = z.infer<typeof adminForgotPasswordSchema>;
+export type ResetPasswordInput = z.infer<typeof resetPasswordSchema>;
 export type CreateQuestionInput = z.infer<typeof createQuestionSchema>;
 export type UpdateQuestionInput = z.infer<typeof updateQuestionSchema>;
 export type CreateAnswerInput = z.infer<typeof createAnswerSchema>;

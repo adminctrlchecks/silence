@@ -49,6 +49,8 @@ export interface PrismaMock {
   importJob: ModelMock;
   readingSession: ModelMock;
   remedyResult: ModelMock;
+  passwordResetToken: ModelMock;
+  adminAuditLog: ModelMock;
   $transaction: jest.Mock;
 }
 
@@ -69,6 +71,8 @@ export function createPrismaMock(): PrismaMock {
     importJob: model(),
     readingSession: model(),
     remedyResult: model(),
+    passwordResetToken: model(),
+    adminAuditLog: model(),
   };
   m.$transaction = jest.fn(async (arg: unknown) =>
     Array.isArray(arg) ? Promise.all(arg) : (arg as (p: PrismaMock) => unknown)(m as PrismaMock),
