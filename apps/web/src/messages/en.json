@@ -58,12 +58,54 @@
   },
   "UserApp": {
     "eyebrow": "Your astrology session",
-    "title": "Question, chart, and remedy",
+    "title": "Your reading dashboard",
+    "primaryAction": {
+      "start_reading": "Start your reading",
+      "continue_questions": "Continue your reading",
+      "view_chart": "View your chart",
+      "view_remedy": "View your remedy",
+      "view_history": "View your history"
+    },
+    "startNewReading": "Start a new reading",
+    "profileCompleteness": "Profile completeness",
+    "profileComplete": "Your profile is complete.",
+    "missingFieldsIntro": "Add these details for a more accurate reading:",
+    "fields": {
+      "name": "Name",
+      "category": "Category",
+      "dob": "Date of birth",
+      "timeOfBirth": "Time of birth",
+      "placeCity": "Birth city",
+      "placeCountry": "Birth country",
+      "placeCoordinates": "Exact coordinates",
+      "contact": "Contact",
+      "lang": "Language",
+      "consent": "Consent"
+    },
+    "readingStatus": "Reading status",
+    "noActiveReading": "You don't have an active reading yet. Start one whenever you're ready.",
+    "levelProgress": "{answered} of {total}",
+    "readingArtifacts": "Chart & remedy",
+    "chartStatus": "Birth chart",
+    "chartReady": "Generated",
+    "chartPending": "Not generated yet",
+    "remedyStatus": "Remedy",
+    "remedyReady": "Shown",
+    "remedyPending": "Not shown yet",
+    "totalReadings": "{count} completed readings",
+    "quickLinks": "Quick links",
     "questions": "Answer questions",
     "chart": "Birth chart",
     "remedy": "Remedy",
     "profile": "Profile",
-    "history": "History"
+    "history": "History",
+    "status": {
+      "draft": "Not started",
+      "in_progress": "In progress",
+      "chart_ready": "Chart ready",
+      "remedy_ready": "Remedy ready",
+      "complete": "Complete"
+    }
   },
   "Chart": {
     "eyebrow": "Birth chart",
@@ -109,13 +151,32 @@
     "adminPortal": "Admin portal"
   },
   "History": {
-    "eyebrow": "Saved sessions",
-    "title": "Your history",
+    "eyebrow": "Your readings",
+    "title": "Reading history",
+    "count": "{count} readings",
+    "empty": "You haven't started a reading yet.",
+    "startFirst": "Start your first reading",
+    "startedOn": "Started {date}",
+    "completedOn": "Completed {date}",
+    "viewDetails": "View details",
+    "questionsAnswered": "{answered} of {total} answered",
+    "chartLabel": "Chart",
+    "remedyLabel": "Remedy",
+    "ready": "Ready",
+    "notReady": "Not yet",
+    "back": "Back to history",
     "responses": "Responses",
-    "charts": "Charts",
-    "count": "{count} saved",
-    "emptyResponses": "No responses have been saved yet.",
-    "emptyCharts": "No charts have been saved yet."
+    "chartSection": "Chart",
+    "remedySection": "Remedy",
+    "noChart": "No chart was generated for this reading.",
+    "noRemedy": "No remedy was shown for this reading.",
+    "status": {
+      "draft": "Not started",
+      "in_progress": "In progress",
+      "chart_ready": "Chart ready",
+      "remedy_ready": "Remedy ready",
+      "complete": "Complete"
+    }
   },
   "Questions": {
     "eyebrow": "Question flow",

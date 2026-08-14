@@ -44,8 +44,20 @@ export class ChartService {
   /**
    * Generates (and persists) the user's chart from their birth details + Level 2 data.
    * Engine computes geometry; Gemini writes the interpretation text.
+   *
+   * When `sessionId` is given and that session already has a chart, the existing
+   * chart is returned as-is instead of recomputing — a reading's chart stays
+   * stable across reloads rather than growing a new row on every page visit.
    */
-  async generateForUser(userId: string, lang = 'en') {
+  async generateForUser(userId: string, lang = 'en', sessionId?: string) {
+    if (sessionId) {
+      const existing = await this.prisma.userChart.findFirst({
+        where: { sessionId },
+        orderBy: { createdAt: 'desc' },
+      });
+      if (existing) return this.present(existing);
+    }
+
     const user = await this.prisma.user.findUnique({ where: { id: userId } });
     if (!user) throw new NotFoundException('User not found');
 
@@ -86,6 +98,7 @@ export class ChartService {
     const chart = await this.prisma.userChart.create({
       data: {
         userId,
+        sessionId,
         category: user.category,
         style: STYLE_TO_DB[cfg.style as keyof typeof STYLE_TO_DB] ?? 'north_indian',
         data: geometry as object,
@@ -93,11 +106,22 @@ export class ChartService {
       },
     });
 
+    return this.present(chart);
+  }
+
+  private present(chart: {
+    userId: string;
+    category: Category;
+    style: string;
+    data: unknown;
+    interpretation: string | null;
+    createdAt: Date;
+  }) {
     return {
-      userId,
-      category: user.category,
-      type: 'astrology',
-      style: cfg.style,
+      userId: chart.userId,
+      category: chart.category,
+      type: 'astrology' as const,
+      style: STYLE_FROM_DB[chart.style] ?? chart.style,
       data: chart.data,
       interpretation: chart.interpretation,
       createdAt: chart.createdAt.toISOString(),

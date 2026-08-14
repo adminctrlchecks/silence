@@ -127,6 +127,8 @@ export const autoTranslateSchema = z.object({
 // ── User flow ────────────────────────────────────────────────────────────────
 export const submitResponsesSchema = z.object({
   userId: z.string().min(1),
+  // Optional: ties these responses to a ReadingSession. Omitted by older callers.
+  sessionId: z.string().min(1).optional(),
   level: levelSchema,
   category: categorySchema,
   answers: z

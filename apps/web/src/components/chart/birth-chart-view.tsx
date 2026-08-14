@@ -1,4 +1,3 @@
-import type { UserChart } from '@silence/shared';
 import { getTranslations } from 'next-intl/server';
 import { RoxyVedicKundli } from '@/components/roxy-ui/vedic-kundli';
 import { chartToRoxyBirthChart } from '@/lib/roxy-chart-adapter';
@@ -13,7 +12,15 @@ type ChartGeometry = {
   }>;
 };
 
-export async function BirthChartView({ chart }: { chart: UserChart }) {
+/** Accepts both the live `UserChart` (chart endpoint) and `SavedUserChart` (session/history) shapes. */
+type ChartLike = {
+  style: string;
+  data: unknown;
+  interpretation?: string | null;
+  createdAt: string;
+};
+
+export async function BirthChartView({ chart }: { chart: ChartLike }) {
   const t = await getTranslations('Chart');
   const roxyChart = chartToRoxyBirthChart(chart);
   const geometry = chart.data as ChartGeometry;

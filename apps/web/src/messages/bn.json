@@ -58,12 +58,54 @@
   },
   "UserApp": {
     "eyebrow": "ব্যবহারকারী কর্মক্ষেত্র",
-    "title": "আপনার Silence সেশন",
+    "title": "আপনার রিডিং ড্যাশবোর্ড",
+    "primaryAction": {
+      "start_reading": "আপনার রিডিং শুরু করুন",
+      "continue_questions": "আপনার রিডিং চালিয়ে যান",
+      "view_chart": "আপনার ছক দেখুন",
+      "view_remedy": "আপনার প্রতিকার দেখুন",
+      "view_history": "আপনার ইতিহাস দেখুন"
+    },
+    "startNewReading": "নতুন রিডিং শুরু করুন",
+    "profileCompleteness": "প্রোফাইল সম্পূর্ণতা",
+    "profileComplete": "আপনার প্রোফাইল সম্পূর্ণ।",
+    "missingFieldsIntro": "আরও নির্ভুল রিডিংয়ের জন্য এই তথ্যগুলো যোগ করুন:",
+    "fields": {
+      "name": "নাম",
+      "category": "বিভাগ",
+      "dob": "জন্ম তারিখ",
+      "timeOfBirth": "জন্ম সময়",
+      "placeCity": "জন্ম শহর",
+      "placeCountry": "জন্ম দেশ",
+      "placeCoordinates": "সঠিক স্থানাঙ্ক",
+      "contact": "যোগাযোগ",
+      "lang": "ভাষা",
+      "consent": "সম্মতি"
+    },
+    "readingStatus": "রিডিং অবস্থা",
+    "noActiveReading": "আপনার এখনো কোনো সক্রিয় রিডিং নেই। যখন প্রস্তুত হবেন তখন শুরু করুন।",
+    "levelProgress": "{total} এর মধ্যে {answered}",
+    "readingArtifacts": "ছক ও প্রতিকার",
+    "chartStatus": "জন্মছক",
+    "chartReady": "তৈরি হয়েছে",
+    "chartPending": "এখনো তৈরি হয়নি",
+    "remedyStatus": "প্রতিকার",
+    "remedyReady": "দেখানো হয়েছে",
+    "remedyPending": "এখনো দেখানো হয়নি",
+    "totalReadings": "{count}টি সম্পন্ন রিডিং",
+    "quickLinks": "দ্রুত লিংক",
     "questions": "প্রশ্ন প্রবাহ",
     "chart": "সংরক্ষিত ছক",
     "remedy": "প্রতিকার",
     "profile": "প্রোফাইল",
-    "history": "ইতিহাস"
+    "history": "ইতিহাস",
+    "status": {
+      "draft": "শুরু হয়নি",
+      "in_progress": "চলমান",
+      "chart_ready": "ছক প্রস্তুত",
+      "remedy_ready": "প্রতিকার প্রস্তুত",
+      "complete": "সম্পন্ন"
+    }
   },
   "Chart": {
     "eyebrow": "নমুনা ছক",
@@ -109,13 +151,32 @@
     "adminPortal": "Admin portal"
   },
   "History": {
-    "eyebrow": "সংরক্ষিত সেশন",
-    "title": "আপনার ইতিহাস",
+    "eyebrow": "আপনার রিডিংসমূহ",
+    "title": "রিডিং ইতিহাস",
+    "count": "{count}টি রিডিং",
+    "empty": "আপনি এখনো কোনো রিডিং শুরু করেননি।",
+    "startFirst": "আপনার প্রথম রিডিং শুরু করুন",
+    "startedOn": "{date} তারিখে শুরু হয়েছে",
+    "completedOn": "{date} তারিখে সম্পন্ন হয়েছে",
+    "viewDetails": "বিস্তারিত দেখুন",
+    "questionsAnswered": "{total} এর মধ্যে {answered}টি উত্তর দেওয়া হয়েছে",
+    "chartLabel": "ছক",
+    "remedyLabel": "প্রতিকার",
+    "ready": "প্রস্তুত",
+    "notReady": "এখনো নয়",
+    "back": "ইতিহাসে ফিরে যান",
     "responses": "উত্তর",
-    "charts": "চার্ট",
-    "count": "{count} সংরক্ষিত",
-    "emptyResponses": "এখনও কোনো উত্তর সংরক্ষিত নেই।",
-    "emptyCharts": "এখনও কোনো চার্ট সংরক্ষিত নেই।"
+    "chartSection": "ছক",
+    "remedySection": "প্রতিকার",
+    "noChart": "এই রিডিংয়ের জন্য কোনো ছক তৈরি হয়নি।",
+    "noRemedy": "এই রিডিংয়ের জন্য কোনো প্রতিকার দেখানো হয়নি।",
+    "status": {
+      "draft": "শুরু হয়নি",
+      "in_progress": "চলমান",
+      "chart_ready": "ছক প্রস্তুত",
+      "remedy_ready": "প্রতিকার প্রস্তুত",
+      "complete": "সম্পন্ন"
+    }
   },
   "Questions": {
     "eyebrow": "প্রশ্ন প্রবাহ",

@@ -95,7 +95,7 @@ async function seedUserJourneyContent(): Promise<AdminSeed> {
   return { category, questions: { common, level1, level2 }, remedy };
 }
 
-test('full user journey: pick, register, answer, chart, remedy', async ({ page }) => {
+test('full reading journey: register, start reading, answer partial, refresh/resume, finish, chart, remedy, history', async ({ page }) => {
   const seed = await seedUserJourneyContent();
   const contact = `e2e-${Date.now()}@example.com`;
 
@@ -119,26 +119,70 @@ test('full user journey: pick, register, answer, chart, remedy', async ({ page }
   await page.locator('input[name="consent"]').check();
   await page.getByRole('button', { name: 'Create profile' }).click();
 
+  // 3. Dashboard: a fresh user lands on a guided dashboard, not a blank menu.
   await expect(page).toHaveURL(/\/app$/);
-  await page.getByRole('link', { name: 'Question flow' }).click();
+  await expect(page.getByRole('heading', { name: 'Your reading dashboard' })).toBeVisible();
+  await expect(page.getByText("You don't have an active reading yet.")).toBeVisible();
 
-  for (const level of ['common', 'level1', 'level2'] as const) {
-    await expect(page.getByText(seed.questions[level].text)).toBeVisible();
-    const answerFields = page.getByPlaceholder('Type your answer');
-    const fieldCount = await answerFields.count();
-
-    for (let index = 0; index < fieldCount; index++) {
-      await answerFields.nth(index).fill(`E2E ${level} answer ${index + 1}`);
+  // Fills every answer field currently on screen (there may be more than the
+  // one question this test seeded, if other content already exists for this
+  // category) so "Save and continue" is never blocked by an unrelated field.
+  async function fillAllVisibleAnswers(prefix: string) {
+    const fields = page.getByPlaceholder('Write a few honest lines...');
+    const count = await fields.count();
+    for (let i = 0; i < count; i++) {
+      await fields.nth(i).fill(`${prefix} ${i + 1}`);
     }
-
-    await page.getByRole('button', { name: level === 'level2' ? 'Save responses' : 'Save and continue' }).click();
   }
 
-  await page.getByRole('link', { name: 'View chart' }).click();
-  await expect(page.getByRole('heading', { name: 'Birth chart preview' })).toBeVisible();
-  await expect(page.getByText('Interpretation')).toBeVisible();
+  // 4. Start reading — creates the ReadingSession.
+  await page.getByRole('link', { name: 'Start your reading' }).click();
+  await expect(page).toHaveURL(/\/app\/questions$/);
+  await expect(page.getByText(seed.questions.common.text)).toBeVisible();
 
+  // 5. Answer partial: only the common level, then save and continue.
+  await fillAllVisibleAnswers('E2E common answer');
+  await page.getByRole('button', { name: 'Save and continue' }).click();
+  await expect(page.getByText(seed.questions.level1.text)).toBeVisible();
+
+  // 6. Refresh/resume: reloading mid-flow must not lose the saved common answer
+  // or send the user back to step 1 — it resumes on the next incomplete level.
+  await page.reload();
+  await expect(page.getByText(seed.questions.level1.text)).toBeVisible();
+  await expect(page.getByText(seed.questions.common.text)).not.toBeVisible();
+
+  // 7. Answer level 1, continue.
+  await fillAllVisibleAnswers('E2E level1 answer');
+  await page.getByRole('button', { name: 'Save and continue' }).click();
+  await expect(page.getByText(seed.questions.level2.text)).toBeVisible();
+
+  // 8. Finish: answer level 2 (the final layer) and save.
+  await fillAllVisibleAnswers('E2E level2 answer');
+  await page.getByRole('button', { name: 'Save final layer' }).click();
+  await expect(page.getByRole('link', { name: 'Open your chart' })).toBeVisible();
+
+  // 9. Chart — generated from the same reading session. Ephemeris + Gemini
+  // interpretation can take a few seconds, so give this step more headroom.
+  await page.getByRole('link', { name: 'Open your chart' }).click();
+  await expect(page.getByRole('heading', { name: 'Your astrology chart' })).toBeVisible({ timeout: 30_000 });
+  await expect(page.getByText('Chart reading')).toBeVisible();
+
+  // 10. Remedy — resolved and snapshotted for this session.
   await page.goto('/app/remedy');
   await expect(page.getByRole('heading', { name: seed.remedy.title })).toBeVisible();
   await expect(page.getByText(seed.remedy.text)).toBeVisible();
+
+  // 11. Dashboard reflects the completed reading and offers to start a new one.
+  await page.goto('/app');
+  await expect(page.getByRole('link', { name: 'Start a new reading' })).toBeVisible();
+  await expect(page.getByText('1 completed readings')).toBeVisible();
+
+  // 12. History shows the reading as one coherent session, not loose rows.
+  await page.goto('/history');
+  await expect(page.getByText('Complete', { exact: true })).toBeVisible();
+  await page.getByRole('link', { name: 'View details' }).click();
+  await expect(page.getByText('E2E common answer').first()).toBeVisible();
+  await expect(page.getByText('E2E level1 answer').first()).toBeVisible();
+  await expect(page.getByText('E2E level2 answer').first()).toBeVisible();
+  await expect(page.getByText(seed.remedy.title)).toBeVisible();
 });

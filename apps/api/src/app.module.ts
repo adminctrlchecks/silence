@@ -15,6 +15,7 @@ import { ResponsesModule } from './responses/responses.module';
 import { ImportModule } from './import/import.module';
 import { GeminiModule } from './integrations/gemini/gemini.module';
 import { AstrologyModule } from './integrations/astrology/astrology.module';
+import { SessionsModule } from './sessions/sessions.module';
 
 @Module({
   imports: [
@@ -34,6 +35,7 @@ import { AstrologyModule } from './integrations/astrology/astrology.module';
     ImportModule,
     GeminiModule,
     AstrologyModule,
+    SessionsModule,
   ],
   providers: [
     // Apply rate limiting globally.

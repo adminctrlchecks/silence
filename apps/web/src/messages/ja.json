@@ -58,12 +58,54 @@
   },
   "UserApp": {
     "eyebrow": "ユーザーワークスペース",
-    "title": "あなたのSilenceセッション",
+    "title": "リーディングダッシュボード",
+    "primaryAction": {
+      "start_reading": "リーディングを始める",
+      "continue_questions": "リーディングを続ける",
+      "view_chart": "チャートを見る",
+      "view_remedy": "レメディを見る",
+      "view_history": "履歴を見る"
+    },
+    "startNewReading": "新しいリーディングを始める",
+    "profileCompleteness": "プロフィールの完成度",
+    "profileComplete": "プロフィールは完成しています。",
+    "missingFieldsIntro": "より正確なリーディングのために、以下の情報を追加してください:",
+    "fields": {
+      "name": "名前",
+      "category": "カテゴリー",
+      "dob": "生年月日",
+      "timeOfBirth": "出生時刻",
+      "placeCity": "出生都市",
+      "placeCountry": "出生国",
+      "placeCoordinates": "正確な座標",
+      "contact": "連絡先",
+      "lang": "言語",
+      "consent": "同意"
+    },
+    "readingStatus": "リーディングの状況",
+    "noActiveReading": "現在進行中のリーディングはありません。準備ができたら始めましょう。",
+    "levelProgress": "{total}件中{answered}件",
+    "readingArtifacts": "チャートとレメディ",
+    "chartStatus": "出生図",
+    "chartReady": "生成済み",
+    "chartPending": "まだ生成されていません",
+    "remedyStatus": "レメディ",
+    "remedyReady": "表示済み",
+    "remedyPending": "まだ表示されていません",
+    "totalReadings": "完了したリーディング {count} 件",
+    "quickLinks": "クイックリンク",
     "questions": "質問フロー",
     "chart": "保存済みチャート",
     "remedy": "レメディ",
     "profile": "プロフィール",
-    "history": "履歴"
+    "history": "履歴",
+    "status": {
+      "draft": "未開始",
+      "in_progress": "進行中",
+      "chart_ready": "チャート準備完了",
+      "remedy_ready": "レメディ準備完了",
+      "complete": "完了"
+    }
   },
   "Chart": {
     "eyebrow": "サンプルチャート",
@@ -109,13 +151,32 @@
     "adminPortal": "Admin portal"
   },
   "History": {
-    "eyebrow": "保存済みセッション",
-    "title": "あなたの履歴",
+    "eyebrow": "あなたのリーディング",
+    "title": "リーディング履歴",
+    "count": "{count} 件のリーディング",
+    "empty": "まだリーディングを開始していません。",
+    "startFirst": "最初のリーディングを始める",
+    "startedOn": "{date} に開始",
+    "completedOn": "{date} に完了",
+    "viewDetails": "詳細を見る",
+    "questionsAnswered": "{total}件中{answered}件回答済み",
+    "chartLabel": "チャート",
+    "remedyLabel": "レメディ",
+    "ready": "準備完了",
+    "notReady": "まだ",
+    "back": "履歴に戻る",
     "responses": "回答",
-    "charts": "チャート",
-    "count": "{count} 件保存済み",
-    "emptyResponses": "保存された回答はまだありません。",
-    "emptyCharts": "保存されたチャートはまだありません。"
+    "chartSection": "チャート",
+    "remedySection": "レメディ",
+    "noChart": "このリーディングではチャートが生成されませんでした。",
+    "noRemedy": "このリーディングではレメディが表示されませんでした。",
+    "status": {
+      "draft": "未開始",
+      "in_progress": "進行中",
+      "chart_ready": "チャート準備完了",
+      "remedy_ready": "レメディ準備完了",
+      "complete": "完了"
+    }
   },
   "Questions": {
     "eyebrow": "質問フロー",

@@ -58,12 +58,54 @@
   },
   "UserApp": {
     "eyebrow": "مساحة المستخدم",
-    "title": "جلسة Silence الخاصة بك",
+    "title": "لوحة قراءتك",
+    "primaryAction": {
+      "start_reading": "ابدأ قراءتك",
+      "continue_questions": "تابع قراءتك",
+      "view_chart": "عرض خريطتك",
+      "view_remedy": "عرض علاجك",
+      "view_history": "عرض سجلك"
+    },
+    "startNewReading": "ابدأ قراءة جديدة",
+    "profileCompleteness": "اكتمال الملف الشخصي",
+    "profileComplete": "ملفك الشخصي مكتمل.",
+    "missingFieldsIntro": "أضف هذه التفاصيل للحصول على قراءة أكثر دقة:",
+    "fields": {
+      "name": "الاسم",
+      "category": "الفئة",
+      "dob": "تاريخ الميلاد",
+      "timeOfBirth": "وقت الميلاد",
+      "placeCity": "مدينة الميلاد",
+      "placeCountry": "بلد الميلاد",
+      "placeCoordinates": "الإحداثيات الدقيقة",
+      "contact": "وسيلة التواصل",
+      "lang": "اللغة",
+      "consent": "الموافقة"
+    },
+    "readingStatus": "حالة القراءة",
+    "noActiveReading": "ليس لديك قراءة نشطة بعد. ابدأها متى شئت.",
+    "levelProgress": "{answered} من {total}",
+    "readingArtifacts": "الخريطة والعلاج",
+    "chartStatus": "الخريطة الفلكية",
+    "chartReady": "تم إنشاؤها",
+    "chartPending": "لم يتم إنشاؤها بعد",
+    "remedyStatus": "العلاج",
+    "remedyReady": "تم عرضه",
+    "remedyPending": "لم يُعرض بعد",
+    "totalReadings": "{count} قراءات مكتملة",
+    "quickLinks": "روابط سريعة",
     "questions": "مسار الأسئلة",
     "chart": "الخريطة المحفوظة",
     "remedy": "العلاج",
     "profile": "الملف",
-    "history": "السجل"
+    "history": "السجل",
+    "status": {
+      "draft": "لم تبدأ",
+      "in_progress": "قيد التقدم",
+      "chart_ready": "الخريطة جاهزة",
+      "remedy_ready": "العلاج جاهز",
+      "complete": "مكتملة"
+    }
   },
   "Chart": {
     "eyebrow": "خريطة تجريبية",
@@ -109,13 +151,32 @@
     "adminPortal": "Admin portal"
   },
   "History": {
-    "eyebrow": "الجلسات المحفوظة",
-    "title": "سجلك",
+    "eyebrow": "قراءاتك",
+    "title": "سجل القراءات",
+    "count": "{count} قراءة",
+    "empty": "لم تبدأ أي قراءة بعد.",
+    "startFirst": "ابدأ قراءتك الأولى",
+    "startedOn": "بدأت في {date}",
+    "completedOn": "اكتملت في {date}",
+    "viewDetails": "عرض التفاصيل",
+    "questionsAnswered": "{answered} من {total} تمت الإجابة عنها",
+    "chartLabel": "الخريطة",
+    "remedyLabel": "العلاج",
+    "ready": "جاهز",
+    "notReady": "ليس بعد",
+    "back": "العودة إلى السجل",
     "responses": "الإجابات",
-    "charts": "الخرائط",
-    "count": "{count} محفوظ",
-    "emptyResponses": "لم يتم حفظ أي إجابات بعد.",
-    "emptyCharts": "لم يتم حفظ أي خرائط بعد."
+    "chartSection": "الخريطة",
+    "remedySection": "العلاج",
+    "noChart": "لم يتم إنشاء خريطة لهذه القراءة.",
+    "noRemedy": "لم يُعرض علاج لهذه القراءة.",
+    "status": {
+      "draft": "لم تبدأ",
+      "in_progress": "قيد التقدم",
+      "chart_ready": "الخريطة جاهزة",
+      "remedy_ready": "العلاج جاهز",
+      "complete": "مكتملة"
+    }
   },
   "Questions": {
     "eyebrow": "مسار الأسئلة",

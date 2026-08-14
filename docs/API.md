@@ -244,11 +244,67 @@ via `POST /admin/languages` with no code change.
 ```json
 {
   "userId": "u_1",
+  "sessionId": "s_1",
   "level": "level1",
   "category": "female",
   "answers": [ { "questionId": "q_101", "value": "6 hours" } ]
 }
 ```
+`sessionId` is optional (omit for the legacy append-only behavior) — when
+given, it must belong to the caller and the response rows are tied to that
+`ReadingSession`, which also advances from `draft` to `in_progress`.
+
+---
+
+## 8a. User — Reading Sessions
+
+A `ReadingSession` is one guided pass through the funnel: questions → chart →
+remedy. `/app` and `/history` are built on these instead of loose response/
+chart rows. Every route below requires a user token and is scoped to `{id}`
+(the caller's own user id).
+
+| Method | Endpoint | Description |
+|--------|----------|-------------|
+| `POST` | `/users/{id}/sessions` | Start a new reading, or resume the existing non-complete one (idempotent). |
+| `GET`  | `/users/{id}/sessions?page=&limit=` | List the user's reading sessions, most recent first. |
+| `GET`  | `/users/{id}/sessions/{sessionId}` | Full detail: responses, chart, remedy for one session. |
+| `GET`  | `/users/{id}/dashboard` | Profile completeness + active session summary + `nextStep` for `/app`. |
+
+Status moves through `draft → in_progress → chart_ready → remedy_ready →
+complete`. A session is marked `complete` the moment its remedy is recorded.
+
+```json
+// POST /users/u_1/sessions -> 201
+{
+  "id": "s_1",
+  "status": "draft",
+  "category": "female",
+  "lang": "en",
+  "startedAt": "2026-08-14T09:00:00.000Z",
+  "completedAt": null,
+  "updatedAt": "2026-08-14T09:00:00.000Z",
+  "questionProgress": {
+    "common": { "answered": 0, "total": 3 },
+    "level1": { "answered": 0, "total": 2 },
+    "level2": { "answered": 0, "total": 2 }
+  },
+  "hasChart": false,
+  "hasRemedy": false
+}
+```
+
+```json
+// GET /users/u_1/dashboard
+{
+  "profile": { "percent": 90, "missingFields": ["placeCoordinates"] },
+  "activeSession": { /* ReadingSessionSummary, or null */ },
+  "nextStep": "continue_questions",
+  "totalSessions": 2
+}
+```
+`nextStep` is one of `start_reading | continue_questions | view_chart |
+view_remedy | view_history` — the web app maps it to the single primary
+"Continue reading" action and its localized label.
 
 ---
 
@@ -256,8 +312,17 @@ via `POST /admin/languages` with no code change.
 
 | Method | Endpoint | Description |
 |--------|----------|-------------|
-| `GET`  | `/users/{id}/chart?lang=` | Get the chart generated from the user's Level 2 data. |
-| `GET`  | `/users/{id}/remedy?lang=` | Get the remedy for the user. |
+| `GET`  | `/users/{id}/chart?lang=&sessionId=` | Get the chart generated from the user's Level 2 data. |
+| `GET`  | `/users/{id}/remedy?lang=&sessionId=` | Get the remedy for the user. |
+
+`sessionId` is optional. Without it, chart/remedy resolve exactly as before
+(chart is recomputed every call; remedy is the latest for the category). With
+it, both become session-scoped and stable: a chart already generated for that
+session is returned as-is instead of recomputed, and a remedy already shown
+for that session is replayed from its snapshot instead of re-resolved.
+Passing `sessionId` on the chart call also advances the session to
+`chart_ready`; on the remedy call it snapshots a `RemedyResult` and marks the
+session `complete`.
 
 ```json
 // GET /users/u_1/chart
@@ -274,21 +339,15 @@ The user's details, their questions+answers, and their chart are persisted.
 |--------|----------|-------------|
 | `GET`  | `/users/{id}` | Get user profile/details. |
 | `PUT`  | `/users/{id}` | Update user details. |
-| `GET`  | `/users/{id}/history` | Get saved Q&A + chart for the user. |
+| `GET`  | `/users/{id}/history` | Get saved Q&A + chart for the user (flat, legacy — prefer §8a `/sessions`). |
 
 ```json
 // GET /users/u_1/history
 {
   "userId": "u_1",
   "category": "female",
-  "sessions": [
-    {
-      "date": "2026-08-13",
-      "responses": [ { "questionId": "q_101", "value": "6 hours", "answerShown": "…" } ],
-      "chart": { "type": "bar", "data": [ /* … */ ] },
-      "remedy": { "title": "Sleep hygiene", "text": "…" }
-    }
-  ]
+  "responses": [ { "id": "r_1", "questionId": "q_101", "level": "level1", "value": "6 hours", "createdAt": "…" } ],
+  "charts": [ { "id": "c_1", "type": "bar", "data": [ /* … */ ], "createdAt": "…" } ]
 }
 ```
 
@@ -311,8 +370,12 @@ Remedy(id, category, title, text, linkedLevel, linkedQuestionId)
 ChartConfig(category, type, source, fields)
 
 User(id, name, category, dob, timeOfBirth, placeOfBirth, contact, lang, consent)
-UserResponse(id, userId, questionId, level, category, value, createdAt)
-UserChart(id, userId, category, type, data, createdAt)
+UserResponse(id, userId, sessionId?, questionId, level, category, value, createdAt)
+UserChart(id, userId, sessionId?, category, type, data, createdAt)
+
+ReadingSession(id, userId, status, category, lang, startedAt, completedAt, updatedAt)
+  // status: draft | in_progress | chart_ready | remedy_ready | complete
+  └─ RemedyResult(sessionId, remedyId?, title, text, linkedLevel, linkedQuestionId, source)
 
 ImportJob(id, type, status, created, updated, errors)
 ```

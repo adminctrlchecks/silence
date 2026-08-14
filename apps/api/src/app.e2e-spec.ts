@@ -430,4 +430,190 @@ describe('Silence API e2e', () => {
       .expect(200)
       .expect(({ body }) => expect(body).toEqual({ deleted: true }));
   });
+
+  it('covers reading sessions: start, resume, finish, chart, remedy, history', async () => {
+    const adminLogin = await request(app.getHttpServer())
+      .post('/api/v1/auth/admin/login')
+      .send({ email: 'admin@example.com', password: 'admin-password' })
+      .expect(201);
+    const adminToken = (adminLogin.body as { token: string }).token;
+
+    const category = 'male';
+    const runId = Date.now().toString(36);
+
+    async function createQuestion(level: string, order: number) {
+      const res = await request(app.getHttpServer())
+        .post('/api/v1/admin/questions')
+        .set('Authorization', `Bearer ${adminToken}`)
+        .send({ level, category, text: `Session e2e ${level} question ${runId}`, order })
+        .expect(201);
+      return (res.body as { id: string }).id;
+    }
+
+    const commonQ = await createQuestion('common', 1);
+    const level1Q = await createQuestion('level1', 2);
+    const level2Q = await createQuestion('level2', 3);
+
+    await request(app.getHttpServer())
+      .post('/api/v1/admin/remedies')
+      .set('Authorization', `Bearer ${adminToken}`)
+      .send({ category, title: `Session e2e remedy ${runId}`, text: 'Stay grounded and consistent.' })
+      .expect(201);
+
+    const contact = `session-e2e-${runId}@example.com`;
+    const register = await request(app.getHttpServer())
+      .post('/api/v1/auth/user/register')
+      .send({
+        name: 'Session Tester',
+        category,
+        dob: '1990-05-01',
+        timeOfBirth: '10:00',
+        placeOfBirth: { city: 'Delhi', country: 'IN', lat: 28.6139, lng: 77.209 },
+        contact,
+        password: 'user-password',
+        lang: 'en',
+        consent: true,
+      })
+      .expect(201);
+    const { token, user } = register.body as { token: string; user: { id: string } };
+
+    // Dashboard before starting anything: no active session, profile is 100% complete.
+    const dashboardBefore = await request(app.getHttpServer())
+      .get(`/api/v1/users/${user.id}/dashboard`)
+      .set('Authorization', `Bearer ${token}`)
+      .expect(200);
+    expect(dashboardBefore.body).toMatchObject({ activeSession: null, nextStep: 'start_reading', totalSessions: 0 });
+    expect(dashboardBefore.body.profile.percent).toBe(100);
+
+    // Start reading -> creates a draft session.
+    const started = await request(app.getHttpServer())
+      .post(`/api/v1/users/${user.id}/sessions`)
+      .set('Authorization', `Bearer ${token}`)
+      .expect(201);
+    const sessionId = (started.body as { id: string }).id;
+    expect(started.body).toMatchObject({ status: 'draft', hasChart: false, hasRemedy: false });
+
+    // Calling start-or-resume again is idempotent: same session, no duplicate.
+    const resumedImmediately = await request(app.getHttpServer())
+      .post(`/api/v1/users/${user.id}/sessions`)
+      .set('Authorization', `Bearer ${token}`)
+      .expect(201);
+    expect(resumedImmediately.body.id).toBe(sessionId);
+
+    // Answer partial: common + level1 only, not level2 yet.
+    await request(app.getHttpServer())
+      .post('/api/v1/responses')
+      .set('Authorization', `Bearer ${token}`)
+      .send({ userId: user.id, sessionId, level: 'common', category, answers: [{ questionId: commonQ, value: 'Common answer' }] })
+      .expect(201);
+    await request(app.getHttpServer())
+      .post('/api/v1/responses')
+      .set('Authorization', `Bearer ${token}`)
+      .send({ userId: user.id, sessionId, level: 'level1', category, answers: [{ questionId: level1Q, value: 'Level1 answer' }] })
+      .expect(201);
+
+    // Refresh/resume: the session detail reflects partial progress and status in_progress.
+    const midDetail = await request(app.getHttpServer())
+      .get(`/api/v1/users/${user.id}/sessions/${sessionId}`)
+      .set('Authorization', `Bearer ${token}`)
+      .expect(200);
+    expect(midDetail.body).toMatchObject({ status: 'in_progress', hasChart: false, hasRemedy: false });
+    expect(midDetail.body.questionProgress).toMatchObject({
+      common: { answered: 1, total: 1 },
+      level1: { answered: 1, total: 1 },
+      level2: { answered: 0, total: 1 },
+    });
+    expect(midDetail.body.responses).toHaveLength(2);
+
+    // Resuming via start-or-resume still returns the same in-progress session.
+    const resumedAfterPartial = await request(app.getHttpServer())
+      .post(`/api/v1/users/${user.id}/sessions`)
+      .set('Authorization', `Bearer ${token}`)
+      .expect(201);
+    expect(resumedAfterPartial.body.id).toBe(sessionId);
+
+    // Finish: answer level2.
+    await request(app.getHttpServer())
+      .post('/api/v1/responses')
+      .set('Authorization', `Bearer ${token}`)
+      .send({ userId: user.id, sessionId, level: 'level2', category, answers: [{ questionId: level2Q, value: 'Level2 reflection' }] })
+      .expect(201);
+
+    // Chart: generates and links to the session, moving status to chart_ready.
+    const chart = await request(app.getHttpServer())
+      .get(`/api/v1/users/${user.id}/chart?lang=en&sessionId=${sessionId}`)
+      .set('Authorization', `Bearer ${token}`)
+      .expect(200);
+    expect(chart.body).toMatchObject({ userId: user.id, category });
+
+    // Calling chart again for the same session returns the SAME chart (no duplicate row).
+    const chartAgain = await request(app.getHttpServer())
+      .get(`/api/v1/users/${user.id}/chart?lang=en&sessionId=${sessionId}`)
+      .set('Authorization', `Bearer ${token}`)
+      .expect(200);
+    expect(chartAgain.body.createdAt).toBe(chart.body.createdAt);
+
+    const afterChart = await request(app.getHttpServer())
+      .get(`/api/v1/users/${user.id}/sessions/${sessionId}`)
+      .set('Authorization', `Bearer ${token}`)
+      .expect(200);
+    expect(afterChart.body).toMatchObject({ status: 'chart_ready', hasChart: true, hasRemedy: false });
+
+    // Remedy: records a snapshot and marks the session complete.
+    const remedy = await request(app.getHttpServer())
+      .get(`/api/v1/users/${user.id}/remedy?lang=en&sessionId=${sessionId}`)
+      .set('Authorization', `Bearer ${token}`)
+      .expect(200);
+    expect(remedy.body.title).toContain('Session e2e remedy');
+
+    const afterRemedy = await request(app.getHttpServer())
+      .get(`/api/v1/users/${user.id}/sessions/${sessionId}`)
+      .set('Authorization', `Bearer ${token}`)
+      .expect(200);
+    expect(afterRemedy.body).toMatchObject({ status: 'complete', hasChart: true, hasRemedy: true });
+    expect(afterRemedy.body.completedAt).toBeTruthy();
+    expect(afterRemedy.body.remedy).toMatchObject({ title: remedy.body.title });
+
+    // A completed session is no longer "active" — dashboard + start-or-resume both open a NEW one.
+    const dashboardAfter = await request(app.getHttpServer())
+      .get(`/api/v1/users/${user.id}/dashboard`)
+      .set('Authorization', `Bearer ${token}`)
+      .expect(200);
+    expect(dashboardAfter.body).toMatchObject({ activeSession: null, nextStep: 'start_reading', totalSessions: 1 });
+
+    const newSession = await request(app.getHttpServer())
+      .post(`/api/v1/users/${user.id}/sessions`)
+      .set('Authorization', `Bearer ${token}`)
+      .expect(201);
+    expect(newSession.body.id).not.toBe(sessionId);
+
+    // History lists both sessions, most recent first.
+    const history = await request(app.getHttpServer())
+      .get(`/api/v1/users/${user.id}/sessions`)
+      .set('Authorization', `Bearer ${token}`)
+      .expect(200);
+    expect(history.body.total).toBe(2);
+    expect(history.body.data.map((s: { id: string }) => s.id)).toEqual([newSession.body.id, sessionId]);
+
+    // Another user cannot read this user's session.
+    const otherRegister = await request(app.getHttpServer())
+      .post('/api/v1/auth/user/register')
+      .send({
+        name: 'Other User',
+        category: 'other',
+        dob: '1992-02-02',
+        timeOfBirth: '11:00',
+        placeOfBirth: { city: 'Mumbai', country: 'IN' },
+        contact: `other-${runId}@example.com`,
+        password: 'user-password',
+        lang: 'en',
+        consent: true,
+      })
+      .expect(201);
+    const otherToken = (otherRegister.body as { token: string }).token;
+    await request(app.getHttpServer())
+      .get(`/api/v1/users/${user.id}/sessions/${sessionId}`)
+      .set('Authorization', `Bearer ${otherToken}`)
+      .expect(403);
+  });
 });

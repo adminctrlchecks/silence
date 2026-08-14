@@ -58,12 +58,54 @@
   },
   "UserApp": {
     "eyebrow": "用户工作区",
-    "title": "你的 Silence 会话",
+    "title": "你的解读仪表盘",
+    "primaryAction": {
+      "start_reading": "开始你的解读",
+      "continue_questions": "继续你的解读",
+      "view_chart": "查看你的星盘",
+      "view_remedy": "查看你的补救建议",
+      "view_history": "查看你的历史记录"
+    },
+    "startNewReading": "开始新的解读",
+    "profileCompleteness": "档案完整度",
+    "profileComplete": "你的档案已完整。",
+    "missingFieldsIntro": "添加以下信息以获得更准确的解读：",
+    "fields": {
+      "name": "姓名",
+      "category": "类别",
+      "dob": "出生日期",
+      "timeOfBirth": "出生时间",
+      "placeCity": "出生城市",
+      "placeCountry": "出生国家",
+      "placeCoordinates": "精确坐标",
+      "contact": "联系方式",
+      "lang": "语言",
+      "consent": "同意"
+    },
+    "readingStatus": "解读状态",
+    "noActiveReading": "你还没有进行中的解读。准备好后随时开始。",
+    "levelProgress": "{answered} / {total}",
+    "readingArtifacts": "星盘与补救建议",
+    "chartStatus": "出生星盘",
+    "chartReady": "已生成",
+    "chartPending": "尚未生成",
+    "remedyStatus": "补救建议",
+    "remedyReady": "已展示",
+    "remedyPending": "尚未展示",
+    "totalReadings": "已完成 {count} 次解读",
+    "quickLinks": "快捷链接",
     "questions": "问题流程",
     "chart": "已保存星盘",
     "remedy": "补救建议",
     "profile": "档案",
-    "history": "历史"
+    "history": "历史",
+    "status": {
+      "draft": "未开始",
+      "in_progress": "进行中",
+      "chart_ready": "星盘已就绪",
+      "remedy_ready": "补救建议已就绪",
+      "complete": "已完成"
+    }
   },
   "Chart": {
     "eyebrow": "示例星盘",
@@ -109,13 +151,32 @@
     "adminPortal": "Admin portal"
   },
   "History": {
-    "eyebrow": "已保存会话",
-    "title": "你的历史",
+    "eyebrow": "你的解读",
+    "title": "解读历史",
+    "count": "{count} 次解读",
+    "empty": "你还没有开始任何解读。",
+    "startFirst": "开始你的第一次解读",
+    "startedOn": "开始于 {date}",
+    "completedOn": "完成于 {date}",
+    "viewDetails": "查看详情",
+    "questionsAnswered": "已回答 {answered} / {total}",
+    "chartLabel": "星盘",
+    "remedyLabel": "补救建议",
+    "ready": "已就绪",
+    "notReady": "尚未",
+    "back": "返回历史记录",
     "responses": "回答",
-    "charts": "图表",
-    "count": "已保存 {count}",
-    "emptyResponses": "还没有保存回答。",
-    "emptyCharts": "还没有保存图表。"
+    "chartSection": "星盘",
+    "remedySection": "补救建议",
+    "noChart": "此次解读未生成星盘。",
+    "noRemedy": "此次解读未展示补救建议。",
+    "status": {
+      "draft": "未开始",
+      "in_progress": "进行中",
+      "chart_ready": "星盘已就绪",
+      "remedy_ready": "补救建议已就绪",
+      "complete": "已完成"
+    }
   },
   "Questions": {
     "eyebrow": "问题流程",

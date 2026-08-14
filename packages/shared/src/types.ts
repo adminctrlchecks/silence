@@ -2,7 +2,16 @@
  * Response/entity types returned by the API (docs/API.md §11 data model).
  * Request/input types live in schemas.ts (inferred from Zod).
  */
-import type { Category, Level, AnswerSource, ChartStyle, ImportStatus, ImportType } from './enums';
+import type {
+  Category,
+  Level,
+  AnswerSource,
+  ChartStyle,
+  ImportStatus,
+  ImportType,
+  ReadingSessionStatus,
+  NextStep,
+} from './enums';
 
 export interface Translated {
   /** { langCode: text } — resolved server-side for the requested ?lang. */
@@ -110,6 +119,58 @@ export interface UserHistory {
   lang?: string;
   responses: SavedUserResponse[];
   charts: SavedUserChart[];
+}
+
+// ── Reading sessions ─────────────────────────────────────────────────────────
+
+export interface SavedRemedyResult {
+  id: string;
+  remedyId?: string;
+  title: string;
+  text: string;
+  source: string;
+  createdAt: string;
+}
+
+export interface QuestionLevelProgress {
+  answered: number;
+  total: number;
+}
+
+/** Answered/total question counts per level, for the active session's category+lang. */
+export type QuestionProgress = Record<Level, QuestionLevelProgress>;
+
+export interface ReadingSessionSummary {
+  id: string;
+  status: ReadingSessionStatus;
+  category: Category;
+  lang: string;
+  startedAt: string;
+  completedAt?: string | null;
+  updatedAt: string;
+  questionProgress: QuestionProgress;
+  hasChart: boolean;
+  hasRemedy: boolean;
+}
+
+export interface ReadingSessionDetail extends ReadingSessionSummary {
+  responses: SavedUserResponse[];
+  chart?: SavedUserChart | null;
+  remedy?: SavedRemedyResult | null;
+}
+
+export interface ProfileCompleteness {
+  /** 0-100 */
+  percent: number;
+  missingFields: string[];
+}
+
+/** Everything `/app` needs to render a guided dashboard in one call. */
+export interface DashboardSummary {
+  profile: ProfileCompleteness;
+  activeSession: ReadingSessionSummary | null;
+  nextStep: NextStep;
+  totalSessions: number;
 }
 
 export interface ImportJob {

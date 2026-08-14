@@ -1,32 +1,15 @@
-import {
-  Body,
-  Controller,
-  ForbiddenException,
-  Get,
-  Param,
-  Put,
-  Query,
-  Req,
-  UseGuards,
-} from '@nestjs/common';
-import type { Request } from 'express';
+import { Body, Controller, Get, Param, Post, Put, Query, Req, UseGuards } from '@nestjs/common';
 import { updateUserProfileSchema } from '@silence/shared';
 import { ApiBearerAuth, ApiTags } from '@nestjs/swagger';
 import { AdminJwtGuard } from '../auth/guards/admin-jwt.guard';
 import { UpdateUserProfileDto } from '../common/dto';
 import { ZodValidationPipe } from '../common/zod-validation.pipe';
 import { UserJwtGuard } from '../auth/guards/user-jwt.guard';
+import { assertOwnUser, type AuthenticatedRequest } from '../common/assert-own-user';
 import { ChartService } from '../chart/chart.service';
 import { RemediesService } from '../remedies/remedies.service';
+import { SessionsService } from '../sessions/sessions.service';
 import { UsersService } from './users.service';
-
-type AuthenticatedRequest = Request & { user?: { id?: string; role?: string } };
-
-function assertOwnUser(req: AuthenticatedRequest, id: string) {
-  if (req.user?.id !== id) {
-    throw new ForbiddenException('You can only access your own user record');
-  }
-}
 
 /** User profile, chart, remedy, history - docs/API.md sections 9-10. */
 @ApiTags('user: profile')
@@ -38,6 +21,7 @@ export class UsersController {
     private readonly users: UsersService,
     private readonly chart: ChartService,
     private readonly remedies: RemediesService,
+    private readonly sessions: SessionsService,
   ) {}
 
   @Get(':id')
@@ -63,16 +47,70 @@ export class UsersController {
   }
 
   @Get(':id/chart')
-  chartFor(@Param('id') id: string, @Req() req: AuthenticatedRequest, @Query('lang') lang?: string) {
+  async chartFor(
+    @Param('id') id: string,
+    @Req() req: AuthenticatedRequest,
+    @Query('lang') lang?: string,
+    @Query('sessionId') sessionId?: string,
+  ) {
     assertOwnUser(req, id);
-    return this.chart.generateForUser(id, lang ?? 'en');
+    if (sessionId) await this.sessions.findOwned(id, sessionId); // 403/404 before doing any work
+    const chart = await this.chart.generateForUser(id, lang ?? 'en', sessionId);
+    if (sessionId) await this.sessions.markChartReady(sessionId);
+    return chart;
   }
 
   @Get(':id/remedy')
-  async remedyFor(@Param('id') id: string, @Req() req: AuthenticatedRequest, @Query('lang') lang?: string) {
+  async remedyFor(
+    @Param('id') id: string,
+    @Req() req: AuthenticatedRequest,
+    @Query('lang') lang?: string,
+    @Query('sessionId') sessionId?: string,
+  ) {
     assertOwnUser(req, id);
     const user = await this.users.get(id);
-    return this.remedies.forCategory(user.category, lang);
+    if (!sessionId) return this.remedies.forCategory(user.category, lang);
+
+    await this.sessions.findOwned(id, sessionId); // 403/404 before doing any work
+    const existing = await this.sessions.getRemedySnapshot(sessionId);
+    if (existing) return existing;
+
+    const remedy = await this.remedies.forCategory(user.category, lang);
+    await this.sessions.recordRemedy(sessionId, remedy);
+    return remedy;
+  }
+
+  @Get(':id/dashboard')
+  dashboard(@Param('id') id: string, @Req() req: AuthenticatedRequest) {
+    assertOwnUser(req, id);
+    return this.sessions.dashboard(id);
+  }
+
+  @Post(':id/sessions')
+  startOrResumeSession(@Param('id') id: string, @Req() req: AuthenticatedRequest) {
+    assertOwnUser(req, id);
+    return this.sessions.startOrResume(id);
+  }
+
+  @Get(':id/sessions')
+  listSessions(
+    @Param('id') id: string,
+    @Req() req: AuthenticatedRequest,
+    @Query('page') page?: string,
+    @Query('limit') limit?: string,
+  ) {
+    assertOwnUser(req, id);
+    return this.sessions.list(id, page ? Number(page) : undefined, limit ? Number(limit) : undefined);
+  }
+
+  @Get(':id/sessions/:sessionId')
+  async sessionDetail(
+    @Param('id') id: string,
+    @Param('sessionId') sessionId: string,
+    @Req() req: AuthenticatedRequest,
+  ) {
+    assertOwnUser(req, id);
+    return this.sessions.getDetail(id, sessionId);
   }
 }
 

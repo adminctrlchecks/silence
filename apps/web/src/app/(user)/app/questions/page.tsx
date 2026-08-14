@@ -16,14 +16,17 @@ export default async function QuestionsPage() {
 
   const profile = await publicApi.profile(session.userId, session.token);
   const lang = normalizeSessionLanguage(profile.lang);
-  const questionLists = await Promise.all(
-    levels.map((level) => publicApi.questions({ level, category: profile.category, lang })),
-  );
+  const [activeSession, ...questionLists] = await Promise.all([
+    publicApi.startOrResumeSession(profile.id, session.token),
+    ...levels.map((level) => publicApi.questions({ level, category: profile.category, lang })),
+  ]);
+  const existingResponses = await publicApi.sessionDetail(profile.id, activeSession.id, session.token);
 
   return (
     <main className="mx-auto w-full max-w-5xl px-4 py-8 sm:px-6">
       <QuestionFlow
         userId={profile.id}
+        sessionId={activeSession.id}
         category={profile.category}
         lang={lang}
         questions={{
@@ -31,6 +34,7 @@ export default async function QuestionsPage() {
           level1: questionLists[1].data,
           level2: questionLists[2].data,
         }}
+        savedAnswers={Object.fromEntries(existingResponses.responses.map((r) => [r.questionId, r.value]))}
       />
     </main>
   );

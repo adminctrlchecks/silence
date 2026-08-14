@@ -58,12 +58,54 @@
   },
   "UserApp": {
     "eyebrow": "Espace utilisateur",
-    "title": "Votre session Silence",
+    "title": "Votre tableau de bord de lecture",
+    "primaryAction": {
+      "start_reading": "Commencer votre lecture",
+      "continue_questions": "Continuer votre lecture",
+      "view_chart": "Voir votre carte",
+      "view_remedy": "Voir votre remède",
+      "view_history": "Voir votre historique"
+    },
+    "startNewReading": "Commencer une nouvelle lecture",
+    "profileCompleteness": "Complétude du profil",
+    "profileComplete": "Votre profil est complet.",
+    "missingFieldsIntro": "Ajoutez ces informations pour une lecture plus précise :",
+    "fields": {
+      "name": "Nom",
+      "category": "Catégorie",
+      "dob": "Date de naissance",
+      "timeOfBirth": "Heure de naissance",
+      "placeCity": "Ville de naissance",
+      "placeCountry": "Pays de naissance",
+      "placeCoordinates": "Coordonnées exactes",
+      "contact": "Contact",
+      "lang": "Langue",
+      "consent": "Consentement"
+    },
+    "readingStatus": "Statut de la lecture",
+    "noActiveReading": "Vous n'avez pas encore de lecture en cours. Commencez-en une quand vous êtes prêt.",
+    "levelProgress": "{answered} sur {total}",
+    "readingArtifacts": "Carte et remède",
+    "chartStatus": "Carte natale",
+    "chartReady": "Générée",
+    "chartPending": "Pas encore générée",
+    "remedyStatus": "Remède",
+    "remedyReady": "Affiché",
+    "remedyPending": "Pas encore affiché",
+    "totalReadings": "{count} lectures terminées",
+    "quickLinks": "Liens rapides",
     "questions": "Parcours de questions",
     "chart": "Carte enregistrée",
     "remedy": "Remède",
     "profile": "Profil",
-    "history": "Historique"
+    "history": "Historique",
+    "status": {
+      "draft": "Non commencée",
+      "in_progress": "En cours",
+      "chart_ready": "Carte prête",
+      "remedy_ready": "Remède prêt",
+      "complete": "Terminée"
+    }
   },
   "Chart": {
     "eyebrow": "Carte exemple",
@@ -109,13 +151,32 @@
     "adminPortal": "Admin portal"
   },
   "History": {
-    "eyebrow": "Sessions enregistrées",
-    "title": "Votre historique",
+    "eyebrow": "Vos lectures",
+    "title": "Historique des lectures",
+    "count": "{count} lectures",
+    "empty": "Vous n'avez pas encore commencé de lecture.",
+    "startFirst": "Commencer votre première lecture",
+    "startedOn": "Commencée le {date}",
+    "completedOn": "Terminée le {date}",
+    "viewDetails": "Voir les détails",
+    "questionsAnswered": "{answered} sur {total} répondues",
+    "chartLabel": "Carte",
+    "remedyLabel": "Remède",
+    "ready": "Prête",
+    "notReady": "Pas encore",
+    "back": "Retour à l'historique",
     "responses": "Réponses",
-    "charts": "Cartes",
-    "count": "{count} enregistrées",
-    "emptyResponses": "Aucune réponse n'a encore été enregistrée.",
-    "emptyCharts": "Aucune carte n'a encore été enregistrée."
+    "chartSection": "Carte",
+    "remedySection": "Remède",
+    "noChart": "Aucune carte n'a été générée pour cette lecture.",
+    "noRemedy": "Aucun remède n'a été affiché pour cette lecture.",
+    "status": {
+      "draft": "Non commencée",
+      "in_progress": "En cours",
+      "chart_ready": "Carte prête",
+      "remedy_ready": "Remède prêt",
+      "complete": "Terminée"
+    }
   },
   "Questions": {
     "eyebrow": "Parcours de questions",

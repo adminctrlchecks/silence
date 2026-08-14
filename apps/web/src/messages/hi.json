@@ -58,12 +58,54 @@
   },
   "UserApp": {
     "eyebrow": "उपयोगकर्ता कार्यक्षेत्र",
-    "title": "आपका Silence सत्र",
+    "title": "आपका रीडिंग डैशबोर्ड",
+    "primaryAction": {
+      "start_reading": "अपनी रीडिंग शुरू करें",
+      "continue_questions": "अपनी रीडिंग जारी रखें",
+      "view_chart": "अपनी कुंडली देखें",
+      "view_remedy": "अपना उपाय देखें",
+      "view_history": "अपना इतिहास देखें"
+    },
+    "startNewReading": "नई रीडिंग शुरू करें",
+    "profileCompleteness": "प्रोफाइल पूर्णता",
+    "profileComplete": "आपकी प्रोफाइल पूर्ण है।",
+    "missingFieldsIntro": "अधिक सटीक रीडिंग के लिए ये विवरण जोड़ें:",
+    "fields": {
+      "name": "नाम",
+      "category": "श्रेणी",
+      "dob": "जन्म तिथि",
+      "timeOfBirth": "जन्म समय",
+      "placeCity": "जन्म शहर",
+      "placeCountry": "जन्म देश",
+      "placeCoordinates": "सटीक निर्देशांक",
+      "contact": "संपर्क",
+      "lang": "भाषा",
+      "consent": "सहमति"
+    },
+    "readingStatus": "रीडिंग की स्थिति",
+    "noActiveReading": "आपकी अभी कोई सक्रिय रीडिंग नहीं है। जब तैयार हों तब शुरू करें।",
+    "levelProgress": "{total} में से {answered}",
+    "readingArtifacts": "कुंडली और उपाय",
+    "chartStatus": "जन्म कुंडली",
+    "chartReady": "तैयार",
+    "chartPending": "अभी तैयार नहीं हुई",
+    "remedyStatus": "उपाय",
+    "remedyReady": "दिखाया गया",
+    "remedyPending": "अभी नहीं दिखाया गया",
+    "totalReadings": "{count} पूर्ण रीडिंग",
+    "quickLinks": "त्वरित लिंक",
     "questions": "प्रश्न प्रवाह",
     "chart": "सहेजी गई कुंडली",
     "remedy": "उपाय",
     "profile": "प्रोफाइल",
-    "history": "इतिहास"
+    "history": "इतिहास",
+    "status": {
+      "draft": "शुरू नहीं हुई",
+      "in_progress": "प्रगति में",
+      "chart_ready": "कुंडली तैयार",
+      "remedy_ready": "उपाय तैयार",
+      "complete": "पूर्ण"
+    }
   },
   "Chart": {
     "eyebrow": "नमूना कुंडली",
@@ -109,13 +151,32 @@
     "adminPortal": "Admin portal"
   },
   "History": {
-    "eyebrow": "सहेजे गए सत्र",
-    "title": "आपका इतिहास",
+    "eyebrow": "आपकी रीडिंग",
+    "title": "रीडिंग इतिहास",
+    "count": "{count} रीडिंग",
+    "empty": "आपने अभी तक कोई रीडिंग शुरू नहीं की है।",
+    "startFirst": "अपनी पहली रीडिंग शुरू करें",
+    "startedOn": "{date} को शुरू हुई",
+    "completedOn": "{date} को पूर्ण हुई",
+    "viewDetails": "विवरण देखें",
+    "questionsAnswered": "{total} में से {answered} का उत्तर दिया गया",
+    "chartLabel": "कुंडली",
+    "remedyLabel": "उपाय",
+    "ready": "तैयार",
+    "notReady": "अभी नहीं",
+    "back": "इतिहास पर वापस जाएं",
     "responses": "उत्तर",
-    "charts": "चार्ट",
-    "count": "{count} सहेजे गए",
-    "emptyResponses": "अभी तक कोई उत्तर सहेजा नहीं गया है।",
-    "emptyCharts": "अभी तक कोई चार्ट सहेजा नहीं गया है।"
+    "chartSection": "कुंडली",
+    "remedySection": "उपाय",
+    "noChart": "इस रीडिंग के लिए कोई कुंडली नहीं बनाई गई।",
+    "noRemedy": "इस रीडिंग के लिए कोई उपाय नहीं दिखाया गया।",
+    "status": {
+      "draft": "शुरू नहीं हुई",
+      "in_progress": "प्रगति में",
+      "chart_ready": "कुंडली तैयार",
+      "remedy_ready": "उपाय तैयार",
+      "complete": "पूर्ण"
+    }
   },
   "Questions": {
     "eyebrow": "प्रश्न प्रवाह",

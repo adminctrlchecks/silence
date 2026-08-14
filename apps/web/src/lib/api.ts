@@ -14,6 +14,9 @@ import type {
   Category,
   Level,
   ChartConfig,
+  DashboardSummary,
+  ReadingSessionSummary,
+  ReadingSessionDetail,
 } from '@silence/shared';
 
 export type AdminUserSummary = UserProfile & {
@@ -95,15 +98,23 @@ export const publicApi = {
     request<{ saved: number }>('/responses', { method: 'POST', body, token }),
   answer: (q: { questionId: string; level: Level; category: Category; lang?: string }) =>
     request<Answer>('/answers', { query: q }),
-  chart: (userId: string, lang: string, token: string) =>
-    request<UserChart>(`/users/${userId}/chart`, { query: { lang }, token }),
-  remedy: (userId: string, lang: string, token: string) =>
-    request<Remedy>(`/users/${userId}/remedy`, { query: { lang }, token }),
+  chart: (userId: string, lang: string, token: string, sessionId?: string) =>
+    request<UserChart>(`/users/${userId}/chart`, { query: { lang, sessionId }, token }),
+  remedy: (userId: string, lang: string, token: string, sessionId?: string) =>
+    request<Remedy>(`/users/${userId}/remedy`, { query: { lang, sessionId }, token }),
   profile: (userId: string, token: string) => request<UserProfile>(`/users/${userId}`, { token }),
   updateProfile: (userId: string, token: string, body: unknown) =>
     request<UserProfile>(`/users/${userId}`, { method: 'PUT', token, body }),
   history: (userId: string, lang: string, token: string) =>
     request<UserHistory>(`/users/${userId}/history`, { query: { lang }, token }),
+  dashboard: (userId: string, token: string) =>
+    request<DashboardSummary>(`/users/${userId}/dashboard`, { token }),
+  startOrResumeSession: (userId: string, token: string) =>
+    request<ReadingSessionSummary>(`/users/${userId}/sessions`, { method: 'POST', token }),
+  listSessions: (userId: string, token: string, q: { page?: number; limit?: number } = {}) =>
+    request<Paginated<ReadingSessionSummary>>(`/users/${userId}/sessions`, { token, query: q }),
+  sessionDetail: (userId: string, sessionId: string, token: string) =>
+    request<ReadingSessionDetail>(`/users/${userId}/sessions/${sessionId}`, { token }),
 };
 
 /** Auth endpoints — docs/API.md §1. */

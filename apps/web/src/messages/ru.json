@@ -58,12 +58,54 @@
   },
   "UserApp": {
     "eyebrow": "Кабинет пользователя",
-    "title": "Ваша сессия Silence",
+    "title": "Ваша панель чтения",
+    "primaryAction": {
+      "start_reading": "Начать чтение",
+      "continue_questions": "Продолжить чтение",
+      "view_chart": "Посмотреть карту",
+      "view_remedy": "Посмотреть рекомендации",
+      "view_history": "Посмотреть историю"
+    },
+    "startNewReading": "Начать новое чтение",
+    "profileCompleteness": "Заполненность профиля",
+    "profileComplete": "Ваш профиль заполнен полностью.",
+    "missingFieldsIntro": "Добавьте эти данные для более точного чтения:",
+    "fields": {
+      "name": "Имя",
+      "category": "Категория",
+      "dob": "Дата рождения",
+      "timeOfBirth": "Время рождения",
+      "placeCity": "Город рождения",
+      "placeCountry": "Страна рождения",
+      "placeCoordinates": "Точные координаты",
+      "contact": "Контакт",
+      "lang": "Язык",
+      "consent": "Согласие"
+    },
+    "readingStatus": "Статус чтения",
+    "noActiveReading": "У вас пока нет активного чтения. Начните, когда будете готовы.",
+    "levelProgress": "{answered} из {total}",
+    "readingArtifacts": "Карта и рекомендации",
+    "chartStatus": "Натальная карта",
+    "chartReady": "Создана",
+    "chartPending": "Ещё не создана",
+    "remedyStatus": "Рекомендации",
+    "remedyReady": "Показаны",
+    "remedyPending": "Ещё не показаны",
+    "totalReadings": "{count} завершённых чтений",
+    "quickLinks": "Быстрые ссылки",
     "questions": "Вопросы",
     "chart": "Сохраненная карта",
     "remedy": "Рекомендации",
     "profile": "Профиль",
-    "history": "История"
+    "history": "История",
+    "status": {
+      "draft": "Не начато",
+      "in_progress": "В процессе",
+      "chart_ready": "Карта готова",
+      "remedy_ready": "Рекомендации готовы",
+      "complete": "Завершено"
+    }
   },
   "Chart": {
     "eyebrow": "Пример карты",
@@ -109,13 +151,32 @@
     "adminPortal": "Admin portal"
   },
   "History": {
-    "eyebrow": "Сохраненные сеансы",
-    "title": "Ваша история",
+    "eyebrow": "Ваши чтения",
+    "title": "История чтений",
+    "count": "{count} чтений",
+    "empty": "Вы ещё не начали ни одного чтения.",
+    "startFirst": "Начать первое чтение",
+    "startedOn": "Начато {date}",
+    "completedOn": "Завершено {date}",
+    "viewDetails": "Посмотреть детали",
+    "questionsAnswered": "Отвечено {answered} из {total}",
+    "chartLabel": "Карта",
+    "remedyLabel": "Рекомендации",
+    "ready": "Готово",
+    "notReady": "Ещё нет",
+    "back": "Назад к истории",
     "responses": "Ответы",
-    "charts": "Карты",
-    "count": "{count} сохранено",
-    "emptyResponses": "Ответы пока не сохранены.",
-    "emptyCharts": "Карты пока не сохранены."
+    "chartSection": "Карта",
+    "remedySection": "Рекомендации",
+    "noChart": "Для этого чтения карта не создавалась.",
+    "noRemedy": "Для этого чтения рекомендации не показывались.",
+    "status": {
+      "draft": "Не начато",
+      "in_progress": "В процессе",
+      "chart_ready": "Карта готова",
+      "remedy_ready": "Рекомендации готовы",
+      "complete": "Завершено"
+    }
   },
   "Questions": {
     "eyebrow": "Вопросы",
