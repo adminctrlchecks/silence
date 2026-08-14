@@ -47,8 +47,10 @@ describe('UsersService', () => {
     await expect(service.update('nope', { name: 'x' })).rejects.toBeInstanceOf(NotFoundException);
   });
 
-  it('listForAdmin() returns paginated users with response/chart counts', async () => {
-    prisma.user.findMany.mockResolvedValue([{ ...DB_USER, _count: { responses: 2, charts: 1 } }]);
+  it('listForAdmin() returns paginated users with response/chart/session counts', async () => {
+    prisma.user.findMany.mockResolvedValue([
+      { ...DB_USER, _count: { responses: 2, charts: 1, sessions: 3 } },
+    ]);
     prisma.user.count.mockResolvedValue(1);
 
     const res = await service.listForAdmin();
@@ -58,9 +60,30 @@ describe('UsersService', () => {
       id: 'u1',
       responseCount: 2,
       chartCount: 1,
+      sessionCount: 3,
       createdAt: '2026-08-14T00:00:00.000Z',
     });
     expect(res.data[0]).not.toHaveProperty('passwordHash');
+  });
+
+  it('listForAdmin() applies search, category filter, and sort', async () => {
+    prisma.user.findMany.mockResolvedValue([]);
+    prisma.user.count.mockResolvedValue(0);
+
+    await service.listForAdmin({ search: 'asha', category: 'female', sortBy: 'name', sortDir: 'asc' });
+
+    expect(prisma.user.findMany).toHaveBeenCalledWith(
+      expect.objectContaining({
+        where: {
+          category: 'female',
+          OR: [
+            { name: { contains: 'asha', mode: 'insensitive' } },
+            { contact: { contains: 'asha', mode: 'insensitive' } },
+          ],
+        },
+        orderBy: { name: 'asc' },
+      }),
+    );
   });
 
   it('getForAdmin() includes saved responses and charts', async () => {

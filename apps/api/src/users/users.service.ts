@@ -3,6 +3,18 @@ import type { Category, UpdateUserProfileInput } from '@silence/shared';
 import { PrismaService } from '../prisma/prisma.service';
 import { paginated, parsePageParams } from '../common/pagination';
 
+export type AdminUserSortBy = 'createdAt' | 'name' | 'responseCount' | 'chartCount';
+
+export interface AdminUserListFilter {
+  page?: number;
+  limit?: number;
+  /** Matches against name or contact, case-insensitive. */
+  search?: string;
+  category?: Category;
+  sortBy?: AdminUserSortBy;
+  sortDir?: 'asc' | 'desc';
+}
+
 @Injectable()
 export class UsersService {
   constructor(private readonly prisma: PrismaService) {}
@@ -63,18 +75,38 @@ export class UsersService {
     return this.present(u);
   }
 
-  async listForAdmin(page?: number, limit?: number) {
-    const pp = parsePageParams(page, limit);
+  async listForAdmin(filter: AdminUserListFilter = {}) {
+    const pp = parsePageParams(filter.page, filter.limit);
+    const where = {
+      ...(filter.category && { category: filter.category }),
+      ...(filter.search && {
+        OR: [
+          { name: { contains: filter.search, mode: 'insensitive' as const } },
+          { contact: { contains: filter.search, mode: 'insensitive' as const } },
+        ],
+      }),
+    };
+    const sortDir = filter.sortDir ?? 'desc';
+    const orderBy =
+      filter.sortBy === 'name'
+        ? { name: sortDir }
+        : filter.sortBy === 'responseCount'
+          ? { responses: { _count: sortDir } }
+          : filter.sortBy === 'chartCount'
+            ? { charts: { _count: sortDir } }
+            : { createdAt: sortDir };
+
     const [rows, total] = await this.prisma.$transaction([
       this.prisma.user.findMany({
-        orderBy: { createdAt: 'desc' },
+        where,
+        orderBy,
         skip: pp.skip,
         take: pp.take,
         include: {
-          _count: { select: { responses: true, charts: true } },
+          _count: { select: { responses: true, charts: true, sessions: true } },
         },
       }),
-      this.prisma.user.count(),
+      this.prisma.user.count({ where }),
     ]);
 
     return paginated(
@@ -84,6 +116,7 @@ export class UsersService {
         updatedAt: user.updatedAt.toISOString(),
         responseCount: user._count.responses,
         chartCount: user._count.charts,
+        sessionCount: user._count.sessions,
       })),
       pp.page,
       pp.limit,

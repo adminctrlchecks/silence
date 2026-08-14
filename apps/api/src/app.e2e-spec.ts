@@ -377,6 +377,49 @@ describe('Silence API e2e', () => {
         expect(body.responses).toHaveLength(1);
       });
 
+    // Admin users list supports search and sort — Phase 4.
+    await request(app.getHttpServer())
+      .get('/api/v1/admin/users?search=Asha&sortBy=name&sortDir=asc')
+      .set('Authorization', `Bearer ${adminToken}`)
+      .expect(200)
+      .expect(({ body }) => {
+        expect(body.data).toEqual(
+          expect.arrayContaining([expect.objectContaining({ id: userBody.user.id })]),
+        );
+      });
+    await request(app.getHttpServer())
+      .get('/api/v1/admin/users?search=no-such-user-xyz')
+      .set('Authorization', `Bearer ${adminToken}`)
+      .expect(200)
+      .expect(({ body }) => expect(body.total).toBe(0));
+
+    // Admin command center — live dashboard metrics and content matrix — Phase 4.
+    await request(app.getHttpServer())
+      .get('/api/v1/admin/dashboard/metrics')
+      .set('Authorization', `Bearer ${adminToken}`)
+      .expect(200)
+      .expect(({ body }) => {
+        expect(body.users.total).toBeGreaterThanOrEqual(2);
+        expect(body).toHaveProperty('sessions.byStatus');
+        expect(body).toHaveProperty('questions.total');
+        expect(body).toHaveProperty('answers.unreviewedAi');
+        expect(body).toHaveProperty('remedies.categoriesMissingRemedy');
+        expect(Array.isArray(body.translations)).toBe(true);
+        expect(body).toHaveProperty('chart.aiFallbackCount');
+        expect(body).toHaveProperty('imports.failed');
+      });
+
+    await request(app.getHttpServer())
+      .get('/api/v1/admin/dashboard/content-matrix')
+      .set('Authorization', `Bearer ${adminToken}`)
+      .expect(200)
+      .expect(({ body }) => {
+        expect(body.cells.length).toBe(9); // 3 levels x 3 categories
+        expect(body.cells[0]).toHaveProperty('questionsWithReviewedAnswer');
+        expect(body.cells[0]).toHaveProperty('remedyCount');
+        expect(body.cells[0]).toHaveProperty('languages');
+      });
+
     await request(app.getHttpServer())
       .put(`/api/v1/users/${userBody.user.id}`)
       .set('Authorization', `Bearer ${userBody.token}`)
@@ -573,6 +616,21 @@ describe('Silence API e2e', () => {
     expect(afterRemedy.body).toMatchObject({ status: 'complete', hasChart: true, hasRemedy: true });
     expect(afterRemedy.body.completedAt).toBeTruthy();
     expect(afterRemedy.body.remedy).toMatchObject({ title: remedy.body.title });
+
+    // Admin can inspect the same user's journey via admin-scoped session endpoints — Phase 4.
+    const adminSessionList = await request(app.getHttpServer())
+      .get(`/api/v1/admin/users/${user.id}/sessions`)
+      .set('Authorization', `Bearer ${adminToken}`)
+      .expect(200);
+    expect(adminSessionList.body.total).toBe(1);
+    expect(adminSessionList.body.data[0]).toMatchObject({ id: sessionId, status: 'complete' });
+
+    const adminSessionDetail = await request(app.getHttpServer())
+      .get(`/api/v1/admin/users/${user.id}/sessions/${sessionId}`)
+      .set('Authorization', `Bearer ${adminToken}`)
+      .expect(200);
+    expect(adminSessionDetail.body).toMatchObject({ status: 'complete', hasChart: true, hasRemedy: true });
+    expect(adminSessionDetail.body.responses).toHaveLength(3);
 
     // A completed session is no longer "active" — dashboard + start-or-resume both open a NEW one.
     const dashboardAfter = await request(app.getHttpServer())

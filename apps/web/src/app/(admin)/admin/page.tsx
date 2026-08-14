@@ -9,13 +9,7 @@ import {
   MoonStar,
 } from 'lucide-react';
 import { ChangePasswordCard } from '@/components/auth/change-password-card';
-
-const metrics = [
-  { value: '11', label: 'Languages', detail: 'Arabic RTL ready' },
-  { value: '3', label: 'Categories', detail: 'Male, female, other' },
-  { value: '2', label: 'Answer levels', detail: 'Level 1 and Level 2' },
-  { value: '3010', label: 'API port', detail: 'NestJS source of truth' },
-];
+import { DashboardOverview } from '@/components/admin/dashboard-overview';
 
 const modules = [
   { label: 'Questions', href: '/admin/questions', icon: ClipboardList, detail: 'Common, Level 1, Level 2' },
@@ -30,15 +24,7 @@ const modules = [
 export default function AdminHome() {
   return (
     <div className="space-y-6">
-      <section className="grid gap-3 sm:grid-cols-2 xl:grid-cols-4">
-        {metrics.map(({ value, label, detail }) => (
-          <div key={label} className="rounded-md border border-border bg-card p-4 shadow-sm">
-            <p className="text-2xl font-semibold tracking-normal">{value}</p>
-            <p className="mt-1 text-sm font-medium">{label}</p>
-            <p className="mt-1 text-xs text-muted-foreground">{detail}</p>
-          </div>
-        ))}
-      </section>
+      <DashboardOverview />
 
       <section className="rounded-md border border-border bg-card shadow-sm">
         <div className="border-b border-border px-4 py-3">

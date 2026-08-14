@@ -17,6 +17,8 @@ import type {
   DashboardSummary,
   ReadingSessionSummary,
   ReadingSessionDetail,
+  AdminDashboardMetrics,
+  ContentMatrix,
 } from '@silence/shared';
 
 export type AdminUserSummary = UserProfile & {
@@ -24,6 +26,7 @@ export type AdminUserSummary = UserProfile & {
   updatedAt: string;
   responseCount: number;
   chartCount: number;
+  sessionCount: number;
 };
 
 export type AdminUserDetail = UserProfile & {
@@ -188,6 +191,12 @@ export const adminApi = {
     request<Paginated<AdminUserSummary>>('/admin/users', { token, query: q }),
   getUser: (token: string, id: string) =>
     request<AdminUserDetail>(`/admin/users/${id}`, { token }),
+  listUserSessions: (token: string, userId: string, q: Query = {}) =>
+    request<Paginated<ReadingSessionSummary>>(`/admin/users/${userId}/sessions`, { token, query: q }),
+  getUserSession: (token: string, userId: string, sessionId: string) =>
+    request<ReadingSessionDetail>(`/admin/users/${userId}/sessions/${sessionId}`, { token }),
+  dashboardMetrics: (token: string) => request<AdminDashboardMetrics>('/admin/dashboard/metrics', { token }),
+  contentMatrix: (token: string) => request<ContentMatrix>('/admin/dashboard/content-matrix', { token }),
   createRemedy: (token: string, body: unknown) =>
     request<Remedy>('/admin/remedies', { method: 'POST', token, body }),
   updateRemedy: (token: string, id: string, body: unknown) =>

@@ -18,6 +18,7 @@ import { AstrologyModule } from './integrations/astrology/astrology.module';
 import { SessionsModule } from './sessions/sessions.module';
 import { GeocodeModule } from './integrations/geocode/geocode.module';
 import { PlacesModule } from './places/places.module';
+import { AdminDashboardModule } from './admin-dashboard/admin-dashboard.module';
 
 @Module({
   imports: [
@@ -40,6 +41,7 @@ import { PlacesModule } from './places/places.module';
     SessionsModule,
     GeocodeModule,
     PlacesModule,
+    AdminDashboardModule,
   ],
   providers: [
     // Apply rate limiting globally.
