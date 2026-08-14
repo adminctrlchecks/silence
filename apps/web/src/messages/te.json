@@ -50,7 +50,9 @@
     "newToSilence": "Silenceకి కొత్తవారా?",
     "createOne": "ఒకటి సృష్టించండి",
     "registerError": "నమోదు విఫలమైంది. వివరాలు తనిఖీ చేసి మళ్లీ ప్రయత్నించండి.",
-    "loginError": "సైన్ ఇన్ విఫలమైంది. మీ సంప్రదింపు వివరాలు మరియు పాస్‌వర్డ్ తనిఖీ చేయండి."
+    "loginError": "సైన్ ఇన్ విఫలమైంది. మీ సంప్రదింపు వివరాలు మరియు పాస్‌వర్డ్ తనిఖీ చేయండి.",
+    "birthPlace": "జన్మ స్థలం",
+    "birthPlacePlaceholder": "నగరాన్ని వెతకండి…"
   },
   "UserLayout": {
     "mySession": "నా సెషన్",
@@ -58,12 +60,54 @@
   },
   "UserApp": {
     "eyebrow": "వినియోగదారు వర్క్‌స్పేస్",
-    "title": "మీ Silence సెషన్",
+    "title": "మీ రీడింగ్ డాష్‌బోర్డ్",
+    "primaryAction": {
+      "start_reading": "మీ రీడింగ్ ప్రారంభించండి",
+      "continue_questions": "మీ రీడింగ్ కొనసాగించండి",
+      "view_chart": "మీ చార్ట్ చూడండి",
+      "view_remedy": "మీ పరిహారం చూడండి",
+      "view_history": "మీ చరిత్ర చూడండి"
+    },
+    "startNewReading": "కొత్త రీడింగ్ ప్రారంభించండి",
+    "profileCompleteness": "ప్రొఫైల్ పూర్తి స్థాయి",
+    "profileComplete": "మీ ప్రొఫైల్ పూర్తయింది.",
+    "missingFieldsIntro": "మరింత ఖచ్చితమైన రీడింగ్ కోసం ఈ వివరాలను జోడించండి:",
+    "fields": {
+      "name": "పేరు",
+      "category": "వర్గం",
+      "dob": "పుట్టిన తేదీ",
+      "timeOfBirth": "పుట్టిన సమయం",
+      "placeCity": "పుట్టిన నగరం",
+      "placeCountry": "పుట్టిన దేశం",
+      "placeCoordinates": "ఖచ్చితమైన నిర్దేశాంకాలు",
+      "contact": "సంప్రదింపు",
+      "lang": "భాష",
+      "consent": "సమ్మతి"
+    },
+    "readingStatus": "రీడింగ్ స్థితి",
+    "noActiveReading": "మీకు ఇంకా క్రియాశీల రీడింగ్ లేదు. సిద్ధంగా ఉన్నప్పుడు ప్రారంభించండి.",
+    "levelProgress": "{total}లో {answered}",
+    "readingArtifacts": "చార్ట్ & పరిహారం",
+    "chartStatus": "జన్మ చార్ట్",
+    "chartReady": "సృష్టించబడింది",
+    "chartPending": "ఇంకా సృష్టించలేదు",
+    "remedyStatus": "పరిహారం",
+    "remedyReady": "చూపించబడింది",
+    "remedyPending": "ఇంకా చూపించలేదు",
+    "totalReadings": "{count} పూర్తయిన రీడింగ్‌లు",
+    "quickLinks": "త్వరిత లింకులు",
     "questions": "ప్రశ్నల ప్రవాహం",
     "chart": "సేవ్ చేసిన చార్ట్",
     "remedy": "పరిహారం",
     "profile": "ప్రొఫైల్",
-    "history": "చరిత్ర"
+    "history": "చరిత్ర",
+    "status": {
+      "draft": "ప్రారంభం కాలేదు",
+      "in_progress": "పురోగతిలో ఉంది",
+      "chart_ready": "చార్ట్ సిద్ధం",
+      "remedy_ready": "పరిహారం సిద్ధం",
+      "complete": "పూర్తయింది"
+    }
   },
   "Chart": {
     "eyebrow": "నమూనా చార్ట్",
@@ -77,7 +121,13 @@
     "keyPlacements": "Key placements",
     "house": "House {house}",
     "retrograde": "retrograde",
-    "notAvailable": "Not available"
+    "notAvailable": "Not available",
+    "accuracy": {
+      "exact": "నిమిషం-ఖచ్చితమైన",
+      "approximate": "అంచనా",
+      "uncertain": "అనిశ్చితం",
+      "label": "గణన ఖచ్చితత"
+    }
   },
   "Remedy": {
     "eyebrow": "వ్యక్తిగత పరిహారం",
@@ -106,16 +156,37 @@
     "saved": "Profile updated.",
     "city": "Birth city",
     "country": "Birth country",
-    "adminPortal": "Admin portal"
+    "adminPortal": "Admin portal",
+    "birthPlace": "జన్మ స్థలం",
+    "birthPlacePlaceholder": "నగరాన్ని వెతకండి…"
   },
   "History": {
-    "eyebrow": "సేవ్ చేసిన సెషన్లు",
-    "title": "మీ చరిత్ర",
+    "eyebrow": "మీ రీడింగ్‌లు",
+    "title": "రీడింగ్ చరిత్ర",
+    "count": "{count} రీడింగ్‌లు",
+    "empty": "మీరు ఇంకా ఏ రీడింగ్ ప్రారంభించలేదు.",
+    "startFirst": "మీ మొదటి రీడింగ్ ప్రారంభించండి",
+    "startedOn": "{date}న ప్రారంభమైంది",
+    "completedOn": "{date}న పూర్తయింది",
+    "viewDetails": "వివరాలు చూడండి",
+    "questionsAnswered": "{total}లో {answered} సమాధానం ఇవ్వబడింది",
+    "chartLabel": "చార్ట్",
+    "remedyLabel": "పరిహారం",
+    "ready": "సిద్ధం",
+    "notReady": "ఇంకా లేదు",
+    "back": "చరిత్రకు తిరిగి వెళ్ళండి",
     "responses": "సమాధానాలు",
-    "charts": "చార్టులు",
-    "count": "{count} సేవ్ అయ్యాయి",
-    "emptyResponses": "ఇంకా ఏ సమాధానాలు సేవ్ కాలేదు.",
-    "emptyCharts": "ఇంకా ఏ చార్టులు సేవ్ కాలేదు."
+    "chartSection": "చార్ట్",
+    "remedySection": "పరిహారం",
+    "noChart": "ఈ రీడింగ్ కోసం ఏ చార్ట్ సృష్టించబడలేదు.",
+    "noRemedy": "ఈ రీడింగ్ కోసం ఏ పరిహారం చూపించలేదు.",
+    "status": {
+      "draft": "ప్రారంభం కాలేదు",
+      "in_progress": "పురోగతిలో ఉంది",
+      "chart_ready": "చార్ట్ సిద్ధం",
+      "remedy_ready": "పరిహారం సిద్ధం",
+      "complete": "పూర్తయింది"
+    }
   },
   "Questions": {
     "eyebrow": "ప్రశ్నల ప్రవాహం",

@@ -47,6 +47,17 @@ enum ImportStatus {
   failed
 }
 
+// A single guided reading, from first answer through chart + remedy.
+// Responses/charts stay attached to the user directly (sessionId is nullable)
+// so pre-existing rows and any caller that skips sessions keep working.
+enum ReadingSessionStatus {
+  draft // created, no responses saved yet
+  in_progress // at least one response saved, chart not generated yet
+  chart_ready // chart generated for this session, remedy not shown yet
+  remedy_ready // remedy shown for this session, not yet marked complete
+  complete // remedy shown and the session was explicitly finished
+}
+
 model Admin {
   id           String   @id @default(cuid())
   email        String   @unique
@@ -153,7 +164,7 @@ model ChartConfig {
 }
 
 model User {
-  id           String         @id @default(cuid())
+  id           String           @id @default(cuid())
   name         String
   category     Category
   dob          String // YYYY-MM-DD
@@ -162,44 +173,88 @@ model User {
   placeCountry String
   placeLat     Float?
   placeLng     Float?
-  contact      String         @unique
+  placeTimezone String?
+  contact      String           @unique
   passwordHash String?
-  lang         String         @default("en")
-  consent      Boolean        @default(false)
-  createdAt    DateTime       @default(now())
-  updatedAt    DateTime       @updatedAt
+  lang         String           @default("en")
+  consent      Boolean          @default(false)
+  createdAt    DateTime         @default(now())
+  updatedAt    DateTime         @updatedAt
   responses    UserResponse[]
   charts       UserChart[]
+  sessions     ReadingSession[]
 
   @@index([category])
 }
 
 model UserResponse {
-  id         String   @id @default(cuid())
+  id         String          @id @default(cuid())
   userId     String
+  sessionId  String?
   questionId String
   level      Level
   category   Category
   value      String
-  createdAt  DateTime @default(now())
-  user       User     @relation(fields: [userId], references: [id], onDelete: Cascade)
-  question   Question @relation(fields: [questionId], references: [id], onDelete: Cascade)
+  createdAt  DateTime        @default(now())
+  user       User            @relation(fields: [userId], references: [id], onDelete: Cascade)
+  question   Question        @relation(fields: [questionId], references: [id], onDelete: Cascade)
+  session    ReadingSession? @relation(fields: [sessionId], references: [id], onDelete: SetNull)
 
   @@index([userId, level])
+  @@index([sessionId])
 }
 
 model UserChart {
-  id             String   @id @default(cuid())
+  id             String          @id @default(cuid())
   userId         String
+  sessionId      String?
   category       Category
-  type           String   @default("astrology")
-  style          String   @default("north_indian")
+  type           String          @default("astrology")
+  style          String          @default("north_indian")
   data           Json // ephemeris output (planetary positions / houses)
   interpretation String? // Gemini-written text
-  createdAt      DateTime @default(now())
-  user           User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  createdAt      DateTime        @default(now())
+  user           User            @relation(fields: [userId], references: [id], onDelete: Cascade)
+  session        ReadingSession? @relation(fields: [sessionId], references: [id], onDelete: SetNull)
 
   @@index([userId])
+  @@index([sessionId])
+}
+
+// One reading = one pass through the funnel (questions -> chart -> remedy).
+// A user can have many, so `/history` can show discrete readings over time
+// instead of a flat list of unrelated response/chart rows.
+model ReadingSession {
+  id           String               @id @default(cuid())
+  userId       String
+  status       ReadingSessionStatus @default(draft)
+  category     Category
+  lang         String
+  startedAt    DateTime             @default(now())
+  completedAt  DateTime?
+  updatedAt    DateTime             @updatedAt
+  user         User                 @relation(fields: [userId], references: [id], onDelete: Cascade)
+  responses    UserResponse[]
+  charts       UserChart[]
+  remedyResult RemedyResult?
+
+  @@index([userId, status])
+  @@index([userId, startedAt])
+}
+
+// Snapshot of the remedy shown for a session, kept even if the underlying
+// Remedy row is later edited or deleted (remedyId is a soft reference).
+model RemedyResult {
+  id               String         @id @default(cuid())
+  sessionId        String         @unique
+  remedyId         String?
+  title            String
+  text             String
+  linkedLevel      Level?
+  linkedQuestionId String?
+  source           String         @default("category") // category | rule | ai (rule/ai reserved for a future personalization pass)
+  createdAt        DateTime       @default(now())
+  session          ReadingSession @relation(fields: [sessionId], references: [id], onDelete: Cascade)
 }
 
 model ImportJob {

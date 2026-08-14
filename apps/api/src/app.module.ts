@@ -15,6 +15,9 @@ import { ResponsesModule } from './responses/responses.module';
 import { ImportModule } from './import/import.module';
 import { GeminiModule } from './integrations/gemini/gemini.module';
 import { AstrologyModule } from './integrations/astrology/astrology.module';
+import { SessionsModule } from './sessions/sessions.module';
+import { GeocodeModule } from './integrations/geocode/geocode.module';
+import { PlacesModule } from './places/places.module';
 
 @Module({
   imports: [
@@ -34,6 +37,9 @@ import { AstrologyModule } from './integrations/astrology/astrology.module';
     ImportModule,
     GeminiModule,
     AstrologyModule,
+    SessionsModule,
+    GeocodeModule,
+    PlacesModule,
   ],
   providers: [
     // Apply rate limiting globally.

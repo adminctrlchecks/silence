@@ -4,11 +4,12 @@ import type { Category } from '@silence/shared';
 
 export interface BirthDetails {
   dob: string; // YYYY-MM-DD
-  timeOfBirth: string; // HH:MM (treated as UT — see note below)
+  timeOfBirth: string; // HH:MM (local time)
   lat?: number;
   lng?: number;
   city: string;
   country: string;
+  timezone?: string;
 }
 
 const { constants: C } = sweph;
@@ -55,13 +56,52 @@ function inArc(lon: number, start: number, end: number): boolean {
 }
 
 /**
+ * Converts a local date/time in a specific timezone to a UTC Date.
+ */
+export function localToUtc(dob: string, timeOfBirth: string, timezone?: string): Date {
+  const [year, month, day] = (dob || '2000-01-01').split('-').map(Number);
+  const [hour, minute] = (timeOfBirth || '12:00').split(':').map(Number);
+  const fallbackDate = new Date(Date.UTC(year, month - 1, day, hour, minute));
+
+  if (!timezone) {
+    return fallbackDate;
+  }
+
+  try {
+    const formatter = new Intl.DateTimeFormat('en-US', {
+      timeZone: timezone,
+      year: 'numeric',
+      month: 'numeric',
+      day: 'numeric',
+      hour: 'numeric',
+      minute: 'numeric',
+      second: 'numeric',
+      hour12: false,
+    });
+    
+    const parts = formatter.formatToParts(fallbackDate);
+    const getPart = (type: string) => Number(parts.find(p => p.type === type)?.value);
+    
+    const y = getPart('year');
+    const m = getPart('month');
+    const d = getPart('day');
+    let h = getPart('hour');
+    if (h === 24) h = 0;
+    const min = getPart('minute');
+    
+    const formattedDate = new Date(Date.UTC(y, m - 1, d, h, min));
+    const diffMs = fallbackDate.getTime() - formattedDate.getTime();
+    
+    return new Date(fallbackDate.getTime() + diffMs);
+  } catch (_err) {
+    return fallbackDate;
+  }
+}
+
+/**
  * Computes the astrology chart geometry from birth date/time/place using the
  * Swiss Ephemeris (via `sweph`, Moshier mode). Engine produces the geometry;
  * Gemini writes the interpretation text elsewhere (docs/API.md §12).
- *
- * Note on time: birth time is treated as UT. Real timezone → UT conversion needs
- * the birthplace timezone (a later enhancement); positions of the slow bodies
- * are unaffected, and the Ascendant/houses shift predictably with the offset.
  */
 @Injectable()
 export class AstrologyService {
@@ -115,16 +155,35 @@ export class AstrologyService {
       zodiac: 'tropical',
       input: birth,
       julianDay: round(jd, 6),
+      accuracy: this.determineAccuracy(birth),
       ascendant,
       houses,
       placements,
     };
   }
 
+  private determineAccuracy(birth: BirthDetails): 'exact' | 'approximate' | 'uncertain' {
+    const hasCoords = typeof birth.lat === 'number' && typeof birth.lng === 'number';
+    const hasTimezone = typeof birth.timezone === 'string' && birth.timezone.length > 0;
+    
+    if (hasCoords && hasTimezone) {
+      return 'exact';
+    }
+    if (hasCoords || (birth.city?.trim() && birth.country?.trim())) {
+      return 'approximate';
+    }
+    return 'uncertain';
+  }
+
   private julianDayUT(birth: BirthDetails): number {
-    const [y, m, d] = birth.dob.split('-').map(Number);
-    const [hh, mm] = birth.timeOfBirth.split(':').map(Number);
-    const hour = (hh || 0) + (mm || 0) / 60;
+    const utcDate = localToUtc(birth.dob, birth.timeOfBirth, birth.timezone);
+    const y = utcDate.getUTCFullYear();
+    const m = utcDate.getUTCMonth() + 1;
+    const d = utcDate.getUTCDate();
+    const hh = utcDate.getUTCHours();
+    const mm = utcDate.getUTCMinutes();
+    const ss = utcDate.getUTCSeconds();
+    const hour = hh + mm / 60 + ss / 3600;
     return sweph.julday(y, m, d, hour, C.SE_GREG_CAL);
   }
 

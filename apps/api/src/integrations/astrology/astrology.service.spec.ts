@@ -68,4 +68,54 @@ describe('AstrologyService', () => {
     const sun = noCoords.placements.find((p) => p.planet === 'Sun')!;
     expect(sun.house).toBe(sun.sign); // whole-sign fallback
   });
+
+  describe('timezone conversion', () => {
+    it('correctly shifts UT calculations based on timezone', () => {
+      // Birth at 07:35 local time on 1998-04-21 in Chennai, India (Asia/Kolkata, UTC+5:30)
+      const birthIndia = {
+        dob: '1998-04-21',
+        timeOfBirth: '07:35',
+        lat: 13.0827,
+        lng: 80.2707,
+        city: 'Chennai',
+        country: 'IN',
+        timezone: 'Asia/Kolkata',
+      };
+
+      // Birth at 07:35 local time on 1998-04-21 in New York, USA (America/New_York, EDT, UTC-4)
+      const birthUS = {
+        dob: '1998-04-21',
+        timeOfBirth: '07:35',
+        lat: 40.7128,
+        lng: -74.0060,
+        city: 'New York',
+        country: 'US',
+        timezone: 'America/New_York',
+      };
+
+      const chartIndia = service.compute(birthIndia, 'other');
+      const chartUS = service.compute(birthUS, 'other');
+
+      // Chennai 07:35 local is 02:05 UTC. New York 07:35 local (EDT) is 11:35 UTC.
+      // The difference is exactly 9.5 hours (9.5 / 24 = 0.395833 Julian Days).
+      expect(chartUS.julianDay - chartIndia.julianDay).toBeCloseTo(9.5 / 24, 4);
+      
+      expect(chartIndia.ascendant).not.toEqual(chartUS.ascendant);
+      expect(chartIndia.accuracy).toBe('exact');
+      expect(chartUS.accuracy).toBe('exact');
+    });
+
+    it('falls back to approximate when timezone is missing', () => {
+      const birthApprox = {
+        dob: '1998-04-21',
+        timeOfBirth: '07:35',
+        lat: 13.0827,
+        lng: 80.2707,
+        city: 'Chennai',
+        country: 'IN',
+      };
+      const chart = service.compute(birthApprox, 'other');
+      expect(chart.accuracy).toBe('approximate');
+    });
+  });
 });

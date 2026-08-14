@@ -14,10 +14,12 @@ export default async function ChartPage() {
   }
 
   const profile = await publicApi.profile(session.userId, session.token);
+  const activeSession = await publicApi.startOrResumeSession(profile.id, session.token);
   const chart = await publicApi.chart(
     profile.id,
     normalizeSessionLanguage(profile.lang),
     session.token,
+    activeSession.id,
   );
 
   return (

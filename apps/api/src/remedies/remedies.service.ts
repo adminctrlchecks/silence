@@ -1,5 +1,5 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
-import type { Category, CreateRemedyInput, UpdateRemedyInput } from '@silence/shared';
+import type { Category, Level, CreateRemedyInput, UpdateRemedyInput } from '@silence/shared';
 import { PrismaService } from '../prisma/prisma.service';
 import { parsePageParams, paginated } from '../common/pagination';
 
@@ -81,7 +81,7 @@ export class RemediesService {
       category: Category;
       title: string;
       text: string;
-      linkedLevel?: string | null;
+      linkedLevel?: Level | null;
       linkedQuestionId?: string | null;
       translations?: { lang: string; title: string; text: string }[];
     },

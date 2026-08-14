@@ -14,6 +14,9 @@ import type {
   Category,
   Level,
   ChartConfig,
+  DashboardSummary,
+  ReadingSessionSummary,
+  ReadingSessionDetail,
 } from '@silence/shared';
 
 export type AdminUserSummary = UserProfile & {
@@ -89,21 +92,34 @@ async function request<T>(
 /** Public (user-facing) endpoints — docs/API.md §8–10. */
 export const publicApi = {
   languages: () => request<{ data: { code: string; name: string; rtl: boolean }[] }>('/languages'),
+  placesSearch: (q: string) =>
+    request<Array<{ city: string; country: string; lat: number; lng: number; timezone: string }>>(
+      '/places/search',
+      { query: { q } },
+    ),
   questions: (q: { level?: Level; category?: Category; lang?: string }) =>
     request<Paginated<Question>>('/questions', { query: q }),
   submitResponses: (body: unknown, token: string) =>
     request<{ saved: number }>('/responses', { method: 'POST', body, token }),
   answer: (q: { questionId: string; level: Level; category: Category; lang?: string }) =>
     request<Answer>('/answers', { query: q }),
-  chart: (userId: string, lang: string, token: string) =>
-    request<UserChart>(`/users/${userId}/chart`, { query: { lang }, token }),
-  remedy: (userId: string, lang: string, token: string) =>
-    request<Remedy>(`/users/${userId}/remedy`, { query: { lang }, token }),
+  chart: (userId: string, lang: string, token: string, sessionId?: string) =>
+    request<UserChart>(`/users/${userId}/chart`, { query: { lang, sessionId }, token }),
+  remedy: (userId: string, lang: string, token: string, sessionId?: string) =>
+    request<Remedy>(`/users/${userId}/remedy`, { query: { lang, sessionId }, token }),
   profile: (userId: string, token: string) => request<UserProfile>(`/users/${userId}`, { token }),
   updateProfile: (userId: string, token: string, body: unknown) =>
     request<UserProfile>(`/users/${userId}`, { method: 'PUT', token, body }),
   history: (userId: string, lang: string, token: string) =>
     request<UserHistory>(`/users/${userId}/history`, { query: { lang }, token }),
+  dashboard: (userId: string, token: string) =>
+    request<DashboardSummary>(`/users/${userId}/dashboard`, { token }),
+  startOrResumeSession: (userId: string, token: string) =>
+    request<ReadingSessionSummary>(`/users/${userId}/sessions`, { method: 'POST', token }),
+  listSessions: (userId: string, token: string, q: { page?: number; limit?: number } = {}) =>
+    request<Paginated<ReadingSessionSummary>>(`/users/${userId}/sessions`, { token, query: q }),
+  sessionDetail: (userId: string, sessionId: string, token: string) =>
+    request<ReadingSessionDetail>(`/users/${userId}/sessions/${sessionId}`, { token }),
 };
 
 /** Auth endpoints — docs/API.md §1. */

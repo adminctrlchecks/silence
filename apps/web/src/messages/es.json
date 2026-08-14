@@ -50,7 +50,9 @@
     "newToSilence": "¿Nuevo en Silence?",
     "createOne": "Crear uno",
     "registerError": "No se pudo registrar. Revisa los datos e inténtalo de nuevo.",
-    "loginError": "No se pudo iniciar sesión. Revisa tu contacto y contraseña."
+    "loginError": "No se pudo iniciar sesión. Revisa tu contacto y contraseña.",
+    "birthPlace": "Lugar de nacimiento",
+    "birthPlacePlaceholder": "Buscar una ciudad…"
   },
   "UserLayout": {
     "mySession": "Mi sesión",
@@ -58,12 +60,54 @@
   },
   "UserApp": {
     "eyebrow": "Área de usuario",
-    "title": "Tu sesión de Silence",
+    "title": "Tu panel de lectura",
+    "primaryAction": {
+      "start_reading": "Comienza tu lectura",
+      "continue_questions": "Continúa tu lectura",
+      "view_chart": "Ver tu carta",
+      "view_remedy": "Ver tu remedio",
+      "view_history": "Ver tu historial"
+    },
+    "startNewReading": "Comenzar una nueva lectura",
+    "profileCompleteness": "Perfil completo",
+    "profileComplete": "Tu perfil está completo.",
+    "missingFieldsIntro": "Añade estos datos para una lectura más precisa:",
+    "fields": {
+      "name": "Nombre",
+      "category": "Categoría",
+      "dob": "Fecha de nacimiento",
+      "timeOfBirth": "Hora de nacimiento",
+      "placeCity": "Ciudad de nacimiento",
+      "placeCountry": "País de nacimiento",
+      "placeCoordinates": "Coordenadas exactas",
+      "contact": "Contacto",
+      "lang": "Idioma",
+      "consent": "Consentimiento"
+    },
+    "readingStatus": "Estado de la lectura",
+    "noActiveReading": "Aún no tienes una lectura activa. Comienza una cuando quieras.",
+    "levelProgress": "{answered} de {total}",
+    "readingArtifacts": "Carta y remedio",
+    "chartStatus": "Carta natal",
+    "chartReady": "Generada",
+    "chartPending": "Aún no generada",
+    "remedyStatus": "Remedio",
+    "remedyReady": "Mostrado",
+    "remedyPending": "Aún no mostrado",
+    "totalReadings": "{count} lecturas completadas",
+    "quickLinks": "Enlaces rápidos",
     "questions": "Flujo de preguntas",
     "chart": "Carta guardada",
     "remedy": "Remedio",
     "profile": "Perfil",
-    "history": "Historial"
+    "history": "Historial",
+    "status": {
+      "draft": "No iniciada",
+      "in_progress": "En curso",
+      "chart_ready": "Carta lista",
+      "remedy_ready": "Remedio listo",
+      "complete": "Completa"
+    }
   },
   "Chart": {
     "eyebrow": "Carta de muestra",
@@ -77,7 +121,13 @@
     "keyPlacements": "Key placements",
     "house": "House {house}",
     "retrograde": "retrograde",
-    "notAvailable": "Not available"
+    "notAvailable": "Not available",
+    "accuracy": {
+      "exact": "Exacto al minuto",
+      "approximate": "Aproximado",
+      "uncertain": "Incierto",
+      "label": "Precisión del cálculo"
+    }
   },
   "Remedy": {
     "eyebrow": "Remedio personal",
@@ -106,16 +156,37 @@
     "saved": "Profile updated.",
     "city": "Birth city",
     "country": "Birth country",
-    "adminPortal": "Admin portal"
+    "adminPortal": "Admin portal",
+    "birthPlace": "Lugar de nacimiento",
+    "birthPlacePlaceholder": "Buscar una ciudad…"
   },
   "History": {
-    "eyebrow": "Sesiones guardadas",
-    "title": "Tu historial",
+    "eyebrow": "Tus lecturas",
+    "title": "Historial de lecturas",
+    "count": "{count} lecturas",
+    "empty": "Aún no has comenzado una lectura.",
+    "startFirst": "Comienza tu primera lectura",
+    "startedOn": "Comenzada el {date}",
+    "completedOn": "Completada el {date}",
+    "viewDetails": "Ver detalles",
+    "questionsAnswered": "{answered} de {total} respondidas",
+    "chartLabel": "Carta",
+    "remedyLabel": "Remedio",
+    "ready": "Lista",
+    "notReady": "Aún no",
+    "back": "Volver al historial",
     "responses": "Respuestas",
-    "charts": "Cartas",
-    "count": "{count} guardadas",
-    "emptyResponses": "Aún no hay respuestas guardadas.",
-    "emptyCharts": "Aún no hay cartas guardadas."
+    "chartSection": "Carta",
+    "remedySection": "Remedio",
+    "noChart": "No se generó ninguna carta para esta lectura.",
+    "noRemedy": "No se mostró ningún remedio para esta lectura.",
+    "status": {
+      "draft": "No iniciada",
+      "in_progress": "En curso",
+      "chart_ready": "Carta lista",
+      "remedy_ready": "Remedio listo",
+      "complete": "Completa"
+    }
   },
   "Questions": {
     "eyebrow": "Flujo de preguntas",

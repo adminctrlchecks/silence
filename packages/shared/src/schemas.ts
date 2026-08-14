@@ -30,6 +30,7 @@ export const placeOfBirthSchema = z.object({
   country: z.string().min(1), // ISO country code or name
   lat: z.number().optional(),
   lng: z.number().optional(),
+  timezone: z.string().optional(),
 });
 
 export const userRegisterSchema = z.object({
@@ -127,6 +128,8 @@ export const autoTranslateSchema = z.object({
 // ── User flow ────────────────────────────────────────────────────────────────
 export const submitResponsesSchema = z.object({
   userId: z.string().min(1),
+  // Optional: ties these responses to a ReadingSession. Omitted by older callers.
+  sessionId: z.string().min(1).optional(),
   level: levelSchema,
   category: categorySchema,
   answers: z

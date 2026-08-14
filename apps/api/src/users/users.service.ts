@@ -14,7 +14,19 @@ export class UsersService {
   }
 
   async update(id: string, patch: UpdateUserProfileInput) {
-    await this.ensureExists(id);
+    const existing = await this.prisma.user.findUnique({ where: { id } });
+    if (!existing) throw new NotFoundException('User not found');
+
+    const birthDetailsChanged =
+      (patch.dob && patch.dob !== existing.dob) ||
+      (patch.timeOfBirth && patch.timeOfBirth !== existing.timeOfBirth) ||
+      (patch.placeOfBirth &&
+        (patch.placeOfBirth.city !== existing.placeCity ||
+          patch.placeOfBirth.country !== existing.placeCountry ||
+          patch.placeOfBirth.lat !== existing.placeLat ||
+          patch.placeOfBirth.lng !== existing.placeLng ||
+          patch.placeOfBirth.timezone !== existing.placeTimezone));
+
     const u = await this.prisma.user.update({
       where: { id },
       data: {
@@ -26,9 +38,28 @@ export class UsersService {
         placeCountry: patch.placeOfBirth?.country,
         placeLat: patch.placeOfBirth?.lat,
         placeLng: patch.placeOfBirth?.lng,
+        placeTimezone: patch.placeOfBirth?.timezone,
         lang: patch.lang,
       },
     });
+
+    if (birthDetailsChanged) {
+      const activeSessions = await this.prisma.readingSession.findMany({
+        where: { userId: id, status: { not: 'complete' } },
+        select: { id: true },
+      });
+      const activeSessionIds = activeSessions.map((s) => s.id);
+      if (activeSessionIds.length > 0) {
+        await this.prisma.userChart.deleteMany({
+          where: { sessionId: { in: activeSessionIds } },
+        });
+        await this.prisma.readingSession.updateMany({
+          where: { id: { in: activeSessionIds }, status: 'chart_ready' },
+          data: { status: 'in_progress' },
+        });
+      }
+    }
+
     return this.present(u);
   }
 
@@ -117,6 +148,7 @@ export class UsersService {
     placeCountry: string;
     placeLat: number | null;
     placeLng: number | null;
+    placeTimezone: string | null;
     contact: string;
     lang: string;
     consent: boolean;
@@ -132,6 +164,7 @@ export class UsersService {
         country: u.placeCountry,
         lat: u.placeLat ?? undefined,
         lng: u.placeLng ?? undefined,
+        timezone: u.placeTimezone ?? undefined,
       },
       contact: u.contact,
       lang: u.lang,

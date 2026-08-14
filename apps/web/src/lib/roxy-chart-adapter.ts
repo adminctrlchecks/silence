@@ -1,4 +1,3 @@
-import type { UserChart } from '@silence/shared';
 import type { BirthChartResponse as RoxyBirthChartResponse } from '@roxyapi/ui-react';
 import { MOCK_BIRTH_CHART } from '@/lib/mock-chart';
 
@@ -50,7 +49,11 @@ function adaptPlanet(planet: Planet) {
   };
 }
 
-export function chartToRoxyBirthChart(chart: UserChart): RoxyBirthChartResponse {
+export function chartToRoxyBirthChart(chart: {
+  data: unknown;
+  style: string;
+  createdAt: string;
+}): RoxyBirthChartResponse {
   const source = chart.data as ApiChartGeometry | undefined;
 
   if (!source?.planets?.length) {

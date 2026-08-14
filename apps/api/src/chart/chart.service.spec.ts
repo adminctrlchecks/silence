@@ -60,6 +60,45 @@ describe('ChartService', () => {
       lang: 'en',
     });
     expect(prisma.userChart.create).toHaveBeenCalled();
+    expect(prisma.userChart.create.mock.calls[0][0].data).toMatchObject({ userId: 'u1', sessionId: undefined });
     expect(res).toMatchObject({ userId: 'u1', category: 'female', type: 'astrology', interpretation: 'interpretation text' });
+  });
+
+  it('generateForUser() with a sessionId returns the existing chart instead of recomputing', async () => {
+    prisma.userChart.findFirst.mockResolvedValue({
+      userId: 'u1',
+      category: 'female',
+      style: 'south_indian',
+      data: { engine: 'stored' },
+      interpretation: 'stored interpretation',
+      createdAt: new Date('2026-01-01T00:00:00Z'),
+    });
+
+    const res = await service.generateForUser('u1', 'en', 's1');
+
+    expect(prisma.userChart.findFirst).toHaveBeenCalledWith(
+      expect.objectContaining({ where: { sessionId: 's1' } }),
+    );
+    expect(astrology.compute).not.toHaveBeenCalled();
+    expect(gemini.interpretChart).not.toHaveBeenCalled();
+    expect(prisma.userChart.create).not.toHaveBeenCalled();
+    expect(res).toMatchObject({ userId: 'u1', style: 'south-indian', interpretation: 'stored interpretation' });
+  });
+
+  it('generateForUser() with a sessionId but no existing chart generates and links it', async () => {
+    prisma.userChart.findFirst.mockResolvedValue(null);
+    prisma.user.findUnique.mockResolvedValue({
+      id: 'u1', category: 'female', dob: '1998-04-21', timeOfBirth: '07:35',
+      placeCity: 'Chennai', placeCountry: 'IN', placeLat: 13.08, placeLng: 80.27,
+    });
+    prisma.chartConfig.findUnique.mockResolvedValue(null);
+    prisma.userResponse.findMany.mockResolvedValue([]);
+    prisma.userChart.create.mockImplementation((args: { data: Record<string, unknown> }) =>
+      Promise.resolve({ id: 'c1', createdAt: new Date(), ...args.data }),
+    );
+
+    await service.generateForUser('u1', 'en', 's1');
+
+    expect(prisma.userChart.create.mock.calls[0][0].data).toMatchObject({ userId: 'u1', sessionId: 's1' });
   });
 });

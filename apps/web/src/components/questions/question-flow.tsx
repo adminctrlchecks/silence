@@ -15,20 +15,30 @@ const levels: Level[] = ['common', 'level1', 'level2'];
 
 export function QuestionFlow({
   userId,
+  sessionId,
   category,
   lang,
   questions,
+  savedAnswers = {},
 }: {
   userId: string;
+  sessionId: string;
   category: Category;
   lang: string;
   questions: QuestionsByLevel;
+  savedAnswers?: AnswersByQuestion;
 }) {
   const t = useTranslations('Questions');
-  const [step, setStep] = useState<Level>('common');
-  const [answers, setAnswers] = useState<AnswersByQuestion>({});
+  const levelComplete = (level: Level) =>
+    questions[level].length > 0 && questions[level].every((q) => savedAnswers[q.id]?.trim());
+  const [step, setStep] = useState<Level>(
+    () => levels.find((level) => !levelComplete(level)) ?? levels[levels.length - 1],
+  );
+  const [answers, setAnswers] = useState<AnswersByQuestion>(savedAnswers);
   const [pending, setPending] = useState(false);
-  const [saved, setSaved] = useState<Partial<Record<Level, boolean>>>({});
+  const [saved, setSaved] = useState<Partial<Record<Level, boolean>>>(() =>
+    Object.fromEntries(levels.map((level) => [level, levelComplete(level)])),
+  );
   const [displayAnswers, setDisplayAnswers] = useState<DisplayAnswersByQuestion>({});
   const [error, setError] = useState<string | null>(null);
 
@@ -59,6 +69,7 @@ export function QuestionFlow({
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
         userId,
+        sessionId,
         level: step,
         category,
         answers: currentQuestions.map((question) => ({

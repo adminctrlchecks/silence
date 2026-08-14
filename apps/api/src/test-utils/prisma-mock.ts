@@ -4,26 +4,32 @@
 type ModelMock = {
   findMany: jest.Mock;
   findUnique: jest.Mock;
+  findUniqueOrThrow: jest.Mock;
   findFirst: jest.Mock;
   create: jest.Mock;
   createMany: jest.Mock;
   update: jest.Mock;
+  updateMany: jest.Mock;
   upsert: jest.Mock;
   delete: jest.Mock;
   count: jest.Mock;
+  groupBy: jest.Mock;
 };
 
 function model(): ModelMock {
   return {
     findMany: jest.fn(),
     findUnique: jest.fn(),
+    findUniqueOrThrow: jest.fn(),
     findFirst: jest.fn(),
     create: jest.fn(),
     createMany: jest.fn(),
     update: jest.fn(),
+    updateMany: jest.fn(),
     upsert: jest.fn(),
     delete: jest.fn(),
     count: jest.fn(),
+    groupBy: jest.fn(),
   };
 }
 
@@ -41,6 +47,8 @@ export interface PrismaMock {
   chartConfig: ModelMock;
   admin: ModelMock;
   importJob: ModelMock;
+  readingSession: ModelMock;
+  remedyResult: ModelMock;
   $transaction: jest.Mock;
 }
 
@@ -59,6 +67,8 @@ export function createPrismaMock(): PrismaMock {
     chartConfig: model(),
     admin: model(),
     importJob: model(),
+    readingSession: model(),
+    remedyResult: model(),
   };
   m.$transaction = jest.fn(async (arg: unknown) =>
     Array.isArray(arg) ? Promise.all(arg) : (arg as (p: PrismaMock) => unknown)(m as PrismaMock),

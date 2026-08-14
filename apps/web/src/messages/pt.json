@@ -50,7 +50,9 @@
     "newToSilence": "Novo no Silence?",
     "createOne": "Criar um",
     "registerError": "Falha no cadastro. Verifique os dados e tente novamente.",
-    "loginError": "Falha ao entrar. Verifique o contato e a senha."
+    "loginError": "Falha ao entrar. Verifique o contato e a senha.",
+    "birthPlace": "Local de nascimento",
+    "birthPlacePlaceholder": "Procurar uma cidade…"
   },
   "UserLayout": {
     "mySession": "Minha sessão",
@@ -58,12 +60,54 @@
   },
   "UserApp": {
     "eyebrow": "Área do usuário",
-    "title": "Sua sessão Silence",
+    "title": "Seu painel de leitura",
+    "primaryAction": {
+      "start_reading": "Comece sua leitura",
+      "continue_questions": "Continue sua leitura",
+      "view_chart": "Ver seu mapa",
+      "view_remedy": "Ver seu remédio",
+      "view_history": "Ver seu histórico"
+    },
+    "startNewReading": "Iniciar uma nova leitura",
+    "profileCompleteness": "Completude do perfil",
+    "profileComplete": "Seu perfil está completo.",
+    "missingFieldsIntro": "Adicione estes dados para uma leitura mais precisa:",
+    "fields": {
+      "name": "Nome",
+      "category": "Categoria",
+      "dob": "Data de nascimento",
+      "timeOfBirth": "Hora de nascimento",
+      "placeCity": "Cidade de nascimento",
+      "placeCountry": "País de nascimento",
+      "placeCoordinates": "Coordenadas exatas",
+      "contact": "Contato",
+      "lang": "Idioma",
+      "consent": "Consentimento"
+    },
+    "readingStatus": "Status da leitura",
+    "noActiveReading": "Você ainda não tem uma leitura ativa. Comece uma quando estiver pronto.",
+    "levelProgress": "{answered} de {total}",
+    "readingArtifacts": "Mapa e remédio",
+    "chartStatus": "Mapa natal",
+    "chartReady": "Gerado",
+    "chartPending": "Ainda não gerado",
+    "remedyStatus": "Remédio",
+    "remedyReady": "Mostrado",
+    "remedyPending": "Ainda não mostrado",
+    "totalReadings": "{count} leituras concluídas",
+    "quickLinks": "Links rápidos",
     "questions": "Fluxo de perguntas",
     "chart": "Mapa salvo",
     "remedy": "Remédio",
     "profile": "Perfil",
-    "history": "Histórico"
+    "history": "Histórico",
+    "status": {
+      "draft": "Não iniciada",
+      "in_progress": "Em andamento",
+      "chart_ready": "Mapa pronto",
+      "remedy_ready": "Remédio pronto",
+      "complete": "Concluída"
+    }
   },
   "Chart": {
     "eyebrow": "Mapa de exemplo",
@@ -77,7 +121,13 @@
     "keyPlacements": "Key placements",
     "house": "House {house}",
     "retrograde": "retrograde",
-    "notAvailable": "Not available"
+    "notAvailable": "Not available",
+    "accuracy": {
+      "exact": "Exato ao minuto",
+      "approximate": "Aproximado",
+      "uncertain": "Incerto",
+      "label": "Precisão do cálculo"
+    }
   },
   "Remedy": {
     "eyebrow": "Remédio pessoal",
@@ -106,16 +156,37 @@
     "saved": "Profile updated.",
     "city": "Birth city",
     "country": "Birth country",
-    "adminPortal": "Admin portal"
+    "adminPortal": "Admin portal",
+    "birthPlace": "Local de nascimento",
+    "birthPlacePlaceholder": "Procurar uma cidade…"
   },
   "History": {
-    "eyebrow": "Sessões salvas",
-    "title": "Seu histórico",
+    "eyebrow": "Suas leituras",
+    "title": "Histórico de leituras",
+    "count": "{count} leituras",
+    "empty": "Você ainda não começou uma leitura.",
+    "startFirst": "Comece sua primeira leitura",
+    "startedOn": "Iniciada em {date}",
+    "completedOn": "Concluída em {date}",
+    "viewDetails": "Ver detalhes",
+    "questionsAnswered": "{answered} de {total} respondidas",
+    "chartLabel": "Mapa",
+    "remedyLabel": "Remédio",
+    "ready": "Pronto",
+    "notReady": "Ainda não",
+    "back": "Voltar ao histórico",
     "responses": "Respostas",
-    "charts": "Mapas",
-    "count": "{count} salvos",
-    "emptyResponses": "Nenhuma resposta foi salva ainda.",
-    "emptyCharts": "Nenhum mapa foi salvo ainda."
+    "chartSection": "Mapa",
+    "remedySection": "Remédio",
+    "noChart": "Nenhum mapa foi gerado para esta leitura.",
+    "noRemedy": "Nenhum remédio foi mostrado para esta leitura.",
+    "status": {
+      "draft": "Não iniciada",
+      "in_progress": "Em andamento",
+      "chart_ready": "Mapa pronto",
+      "remedy_ready": "Remédio pronto",
+      "complete": "Concluída"
+    }
   },
   "Questions": {
     "eyebrow": "Fluxo de perguntas",
