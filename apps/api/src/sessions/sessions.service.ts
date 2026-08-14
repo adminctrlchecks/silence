@@ -136,6 +136,7 @@ export class SessionsService {
             title: session.remedyResult.title,
             text: session.remedyResult.text,
             source: session.remedyResult.source,
+            matchDetail: session.remedyResult.matchDetail ?? undefined,
             createdAt: session.remedyResult.createdAt.toISOString(),
           }
         : null,
@@ -184,10 +185,12 @@ export class SessionsService {
       text: snapshot.text,
       linkedLevel: snapshot.linkedLevel ?? undefined,
       linkedQuestionId: snapshot.linkedQuestionId ?? undefined,
+      source: snapshot.source as Remedy['source'],
+      matchDetail: snapshot.matchDetail ?? undefined,
     };
   }
 
-  /** Snapshots the remedy shown for a session: -> complete. */
+  /** Snapshots the remedy shown for a session (including why the rule engine picked it): -> complete. */
   async recordRemedy(sessionId: string, remedy: Remedy) {
     await this.prisma.remedyResult.create({
       data: {
@@ -197,7 +200,8 @@ export class SessionsService {
         text: remedy.text,
         linkedLevel: remedy.linkedLevel,
         linkedQuestionId: remedy.linkedQuestionId,
-        source: 'category',
+        source: remedy.source ?? 'category',
+        matchDetail: remedy.matchDetail,
       },
     });
     await this.prisma.readingSession.update({

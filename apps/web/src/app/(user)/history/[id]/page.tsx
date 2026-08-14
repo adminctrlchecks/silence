@@ -96,6 +96,11 @@ export default async function HistorySessionPage({ params }: { params: Promise<{
               <p className="mt-3 text-sm leading-6 text-muted-foreground" dir="auto">
                 {detail.remedy.text}
               </p>
+              {detail.remedy.source === 'rule' && detail.remedy.matchDetail ? (
+                <p className="mt-3 text-xs text-muted-foreground">
+                  {t('whyThisRemedy')}: {detail.remedy.matchDetail}
+                </p>
+              ) : null}
             </div>
           ) : (
             <p className="mt-4 text-sm text-muted-foreground">{t('noRemedy')}</p>

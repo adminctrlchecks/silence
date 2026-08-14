@@ -55,6 +55,12 @@ export default async function RemedyPage() {
           ) : null}
         </div>
 
+        {remedy.source === 'rule' && remedy.matchDetail ? (
+          <p className="mt-4 text-xs text-muted-foreground">
+            {t('whyThisPractice')}: {remedy.matchDetail}
+          </p>
+        ) : null}
+
         <p className="mt-4 text-sm leading-6 text-muted-foreground">{t('closing')}</p>
       </section>
     </main>

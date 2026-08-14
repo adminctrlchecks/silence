@@ -134,7 +134,8 @@
     "category": "వర్గం: {category}",
     "linkedLevel": "లింక్ స్థాయి: {level}",
     "practice": "Suggested practice",
-    "closing": "Keep the remedy gentle and repeatable. Small consistency is more useful than intensity."
+    "closing": "Keep the remedy gentle and repeatable. Small consistency is more useful than intensity.",
+    "whyThisPractice": "ఈ అభ్యాసం ఎందుకు"
   },
   "Profile": {
     "eyebrow": "సేవ్ చేసిన ప్రొఫైల్",
@@ -180,6 +181,7 @@
     "remedySection": "పరిహారం",
     "noChart": "ఈ రీడింగ్ కోసం ఏ చార్ట్ సృష్టించబడలేదు.",
     "noRemedy": "ఈ రీడింగ్ కోసం ఏ పరిహారం చూపించలేదు.",
+    "whyThisRemedy": "ఈ పరిహారం ఎందుకు",
     "status": {
       "draft": "ప్రారంభం కాలేదు",
       "in_progress": "పురోగతిలో ఉంది",

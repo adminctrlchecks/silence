@@ -134,7 +134,8 @@
     "category": "Категория: {category}",
     "linkedLevel": "Связанный уровень: {level}",
     "practice": "Suggested practice",
-    "closing": "Keep the remedy gentle and repeatable. Small consistency is more useful than intensity."
+    "closing": "Keep the remedy gentle and repeatable. Small consistency is more useful than intensity.",
+    "whyThisPractice": "Почему эта практика"
   },
   "Profile": {
     "eyebrow": "Сохраненный профиль",
@@ -180,6 +181,7 @@
     "remedySection": "Рекомендации",
     "noChart": "Для этого чтения карта не создавалась.",
     "noRemedy": "Для этого чтения рекомендации не показывались.",
+    "whyThisRemedy": "Почему эта рекомендация",
     "status": {
       "draft": "Не начато",
       "in_progress": "В процессе",

@@ -674,4 +674,115 @@ describe('Silence API e2e', () => {
       .set('Authorization', `Bearer ${otherToken}`)
       .expect(403);
   });
+
+  it('personalizes remedies via rule matching — Phase 5', async () => {
+    const adminLogin = await request(app.getHttpServer())
+      .post('/api/v1/auth/admin/login')
+      .send({ email: 'admin@example.com', password: 'admin-password' })
+      .expect(201);
+    const adminToken = (adminLogin.body as { token: string }).token;
+
+    const category = 'other';
+    const runId = Date.now().toString(36);
+
+    const level2Q = await request(app.getHttpServer())
+      .post('/api/v1/admin/questions')
+      .set('Authorization', `Bearer ${adminToken}`)
+      .send({ level: 'level2', category, text: `Remedy e2e reflection ${runId}`, order: 1 })
+      .expect(201)
+      .then((res) => (res.body as { id: string }).id);
+
+    // A generic, filter-less fallback and a remedy targeted at a specific response signal.
+    const fallback = await request(app.getHttpServer())
+      .post('/api/v1/admin/remedies')
+      .set('Authorization', `Bearer ${adminToken}`)
+      .send({ category, title: `Fallback remedy ${runId}`, text: 'General guidance for everyone.' })
+      .expect(201)
+      .then((res) => res.body as { id: string; title: string });
+
+    const burnoutRule = await request(app.getHttpServer())
+      .post('/api/v1/admin/remedies')
+      .set('Authorization', `Bearer ${adminToken}`)
+      .send({
+        category,
+        title: `Burnout remedy ${runId}`,
+        text: 'Rest deeply and step back from overcommitment.',
+        keywordFilter: 'burnout',
+      })
+      .expect(201)
+      .then((res) => res.body as { id: string; title: string });
+
+    async function registerAndAnswer(suffix: string, level2Answer: string) {
+      const register = await request(app.getHttpServer())
+        .post('/api/v1/auth/user/register')
+        .send({
+          name: `Remedy Tester ${suffix}`,
+          category,
+          dob: '1991-03-03',
+          timeOfBirth: '09:00',
+          placeOfBirth: { city: 'Pune', country: 'IN' },
+          contact: `remedy-e2e-${suffix}-${runId}@example.com`,
+          password: 'user-password',
+          lang: 'en',
+          consent: true,
+        })
+        .expect(201);
+      const { token, user } = register.body as { token: string; user: { id: string } };
+
+      const session = await request(app.getHttpServer())
+        .post(`/api/v1/users/${user.id}/sessions`)
+        .set('Authorization', `Bearer ${token}`)
+        .expect(201);
+      const sessionId = (session.body as { id: string }).id;
+
+      await request(app.getHttpServer())
+        .post('/api/v1/responses')
+        .set('Authorization', `Bearer ${token}`)
+        .send({ userId: user.id, sessionId, level: 'level2', category, answers: [{ questionId: level2Q, value: level2Answer }] })
+        .expect(201);
+
+      return { token, userId: user.id, sessionId };
+    }
+
+    const matched = await registerAndAnswer('a', 'I feel total burnout from overworking lately');
+    const unmatched = await registerAndAnswer('b', 'Everything feels calm and steady right now');
+
+    // Same category, different response signals -> different remedies.
+    const matchedRemedy = await request(app.getHttpServer())
+      .get(`/api/v1/users/${matched.userId}/remedy?lang=en&sessionId=${matched.sessionId}`)
+      .set('Authorization', `Bearer ${matched.token}`)
+      .expect(200);
+    expect(matchedRemedy.body).toMatchObject({ id: burnoutRule.id, title: burnoutRule.title, source: 'rule' });
+    expect(matchedRemedy.body.matchDetail).toContain('burnout');
+
+    const unmatchedRemedy = await request(app.getHttpServer())
+      .get(`/api/v1/users/${unmatched.userId}/remedy?lang=en&sessionId=${unmatched.sessionId}`)
+      .set('Authorization', `Bearer ${unmatched.token}`)
+      .expect(200);
+    expect(unmatchedRemedy.body).toMatchObject({ id: fallback.id, title: fallback.title, source: 'category' });
+    expect(unmatchedRemedy.body.matchDetail).toBe('category fallback');
+
+    // The reasoning persists in the session snapshot, visible to the user...
+    const userSessionDetail = await request(app.getHttpServer())
+      .get(`/api/v1/users/${matched.userId}/sessions/${matched.sessionId}`)
+      .set('Authorization', `Bearer ${matched.token}`)
+      .expect(200);
+    expect(userSessionDetail.body.remedy).toMatchObject({ title: burnoutRule.title, source: 'rule' });
+    expect(userSessionDetail.body.remedy.matchDetail).toContain('burnout');
+
+    // ...and to admin, so admin can understand why this remedy was selected (Phase 4 timeline + Phase 5 rules).
+    const adminSessionDetail = await request(app.getHttpServer())
+      .get(`/api/v1/admin/users/${matched.userId}/sessions/${matched.sessionId}`)
+      .set('Authorization', `Bearer ${adminToken}`)
+      .expect(200);
+    expect(adminSessionDetail.body.remedy).toMatchObject({ title: burnoutRule.title, source: 'rule' });
+    expect(adminSessionDetail.body.remedy.matchDetail).toContain('burnout');
+
+    // Re-requesting the remedy replays the same snapshot instead of re-matching.
+    const replay = await request(app.getHttpServer())
+      .get(`/api/v1/users/${matched.userId}/remedy?lang=en&sessionId=${matched.sessionId}`)
+      .set('Authorization', `Bearer ${matched.token}`)
+      .expect(200);
+    expect(replay.body.id).toBe(burnoutRule.id);
+  });
 });

@@ -180,6 +180,8 @@ describe('SessionsService', () => {
         text: 'Keep a bedtime.',
         linkedLevel: 'level2',
         linkedQuestionId: 'q1',
+        source: 'category',
+        matchDetail: undefined,
       });
     });
 

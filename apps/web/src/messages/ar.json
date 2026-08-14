@@ -134,7 +134,8 @@
     "category": "الفئة: {category}",
     "linkedLevel": "المستوى المرتبط: {level}",
     "practice": "Suggested practice",
-    "closing": "Keep the remedy gentle and repeatable. Small consistency is more useful than intensity."
+    "closing": "Keep the remedy gentle and repeatable. Small consistency is more useful than intensity.",
+    "whyThisPractice": "لماذا هذه الممارسة"
   },
   "Profile": {
     "eyebrow": "الملف المحفوظ",
@@ -180,6 +181,7 @@
     "remedySection": "العلاج",
     "noChart": "لم يتم إنشاء خريطة لهذه القراءة.",
     "noRemedy": "لم يُعرض علاج لهذه القراءة.",
+    "whyThisRemedy": "لماذا هذا العلاج",
     "status": {
       "draft": "لم تبدأ",
       "in_progress": "قيد التقدم",

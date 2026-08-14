@@ -1,5 +1,5 @@
 import { Body, Controller, Get, Param, Post, Put, Query, Req, UseGuards } from '@nestjs/common';
-import { updateUserProfileSchema, type Category } from '@silence/shared';
+import { updateUserProfileSchema, type Category, type Level } from '@silence/shared';
 import { ApiBearerAuth, ApiTags } from '@nestjs/swagger';
 import { AdminJwtGuard } from '../auth/guards/admin-jwt.guard';
 import { UpdateUserProfileDto } from '../common/dto';
@@ -71,11 +71,17 @@ export class UsersController {
     const user = await this.users.get(id);
     if (!sessionId) return this.remedies.forCategory(user.category, lang);
 
-    await this.sessions.findOwned(id, sessionId); // 403/404 before doing any work
+    const session = await this.sessions.findOwned(id, sessionId); // 403/404 before doing any work
     const existing = await this.sessions.getRemedySnapshot(sessionId);
     if (existing) return existing;
 
-    const remedy = await this.remedies.forCategory(user.category, lang);
+    const chart = session.charts.at(-1) ?? null;
+    const remedy = await this.remedies.selectRemedy({
+      category: user.category as Category,
+      lang,
+      chartData: chart?.data,
+      responses: session.responses.map((r) => ({ level: r.level as Level, questionId: r.questionId, value: r.value })),
+    });
     await this.sessions.recordRemedy(sessionId, remedy);
     return remedy;
   }
