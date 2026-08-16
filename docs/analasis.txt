@@ -1,0 +1,1608 @@
+# ROLE
+
+You are acting as a **Principal Product Designer, Senior UX/UI Architect, Design Systems Architect, Frontend Architect, Accessibility Specialist, Product Strategist, Information Architect, and Technical Product Manager** working together as one expert team.
+
+Your task is NOT to blindly redesign the existing application.
+
+Your first responsibility is to **deeply understand the existing product**, its purpose, users, business/domain logic, data model, workflows, existing screens, documentation, technical architecture, and current limitations.
+
+After understanding the existing system, you must create a **complete end-to-end product transformation blueprint** that can be used as the authoritative implementation specification for bringing this product to a polished, modern, international-quality product standard.
+
+---
+
+# PRIMARY OBJECTIVE
+
+Transform the current product from a basic/functionality-first interface into a:
+
+* professional
+* modern
+* trustworthy
+* scalable
+* responsive
+* accessible
+* visually consistent
+* internationally usable
+* production-ready
+* product-quality
+
+experience.
+
+The final target should feel like a **real international SaaS/product platform**, not like a prototype where all functionality has simply been placed on one page.
+
+The product must have:
+
+* proper information architecture
+* proper homepage
+* proper navigation
+* proper navbar
+* proper footer
+* proper authentication experience where applicable
+* proper user dashboard
+* proper profile
+* proper settings
+* proper page hierarchy
+* proper containers
+* proper spacing
+* proper typography
+* proper responsive behavior
+* proper mobile experience
+* proper loading states
+* proper empty states
+* proper error states
+* proper success states
+* proper confirmation states
+* proper dialogs/modals
+* proper forms
+* proper tables/cards/lists
+* proper imagery
+* proper icons
+* proper accessibility
+* proper legal pages
+* proper privacy experience
+* proper Terms & Conditions
+* proper SEO foundations
+* proper design system
+* proper reusable components
+* proper UX flows
+
+Do not treat this as merely a visual redesign.
+
+Treat it as a **complete product UX/UI and frontend experience architecture exercise**.
+
+---
+
+# IMPORTANT: PHASE 1 IS ANALYSIS + DOCUMENTATION ONLY
+
+Do NOT immediately start modifying the application's implementation.
+
+Do NOT start randomly changing components.
+
+Do NOT start rewriting pages before understanding the product.
+
+For this phase, your primary deliverable is a set of detailed `.md` files documenting exactly:
+
+1. what currently exists
+2. what is wrong/missing
+3. what should exist
+4. why it should exist
+5. how the experience should work
+6. how pages should be structured
+7. how components should be structured
+8. how the design system should work
+9. what content should exist
+10. what imagery/icons are needed
+11. how responsive behavior should work
+12. how accessibility should work
+13. how the implementation should be sequenced
+14. what should be prioritized
+15. what should NOT be changed unnecessarily
+
+The Markdown documentation should become the **source of truth for the subsequent implementation phase**.
+
+---
+
+# STEP 1 — DEEPLY INSPECT THE ENTIRE REPOSITORY
+
+Before making recommendations, inspect the repository thoroughly.
+
+Do not only inspect the obvious frontend files.
+
+Analyze, where applicable:
+
+* README files
+* `/docs`
+* source code
+* routes
+* pages
+* components
+* layouts
+* hooks
+* utilities
+* services
+* API integrations
+* backend code
+* database/schema definitions
+* models
+* authentication
+* authorization
+* configuration
+* environment examples
+* assets
+* images
+* icons
+* fonts
+* CSS
+* Tailwind/theme configuration
+* design tokens
+* package dependencies
+* state management
+* forms
+* validation
+* API contracts
+* analytics
+* existing SEO
+* existing metadata
+* existing error handling
+* existing responsive logic
+* existing accessibility implementation
+
+Also inspect git structure/history if available and useful.
+
+Do not assume that something doesn't exist merely because it isn't visible from the homepage.
+
+---
+
+# STEP 2 — READ THE `/docs` DIRECTORY END-TO-END
+
+The `/docs` directory is extremely important.
+
+Read all relevant documentation before designing the target experience.
+
+Build an understanding of:
+
+* product purpose
+* product vision
+* business/domain concepts
+* user types
+* workflows
+* requirements
+* features
+* terminology
+* data
+* business rules
+* constraints
+* existing decisions
+* future plans
+* technical assumptions
+* known problems
+
+If there are contradictions between documentation and implementation:
+
+1. identify them
+2. document them
+3. determine which source appears authoritative
+4. do NOT silently choose one
+5. flag the conflict for review
+
+Create a documentation-derived understanding of the product before proposing major UX changes.
+
+---
+
+# STEP 3 — CREATE A CURRENT-STATE PRODUCT MAP
+
+Document the current application as it actually exists.
+
+Create:
+
+## Current Route Inventory
+
+For every route/page, document:
+
+* route
+* page name
+* purpose
+* user type
+* entry point
+* current components
+* current functionality
+* data used
+* actions available
+* navigation relationships
+* mobile behavior
+* desktop behavior
+* obvious UX problems
+* visual problems
+* content problems
+* accessibility problems
+* missing states
+* recommended disposition:
+
+  * keep
+  * improve
+  * restructure
+  * merge
+  * split
+  * replace
+  * remove
+
+Do not invent routes without marking them as proposed.
+
+---
+
+# STEP 4 — CREATE A USER JOURNEY MAP
+
+Understand the product from the user's perspective.
+
+Document major journeys such as applicable:
+
+* discovering the product
+* landing on homepage
+* understanding value proposition
+* signing up
+* logging in
+* onboarding
+* completing profile
+* using the core product
+* searching
+* filtering
+* creating something
+* editing something
+* viewing details
+* managing account
+* changing settings
+* receiving notifications
+* completing the primary business workflow
+* logging out
+* recovering from errors
+* returning users
+* mobile usage
+
+For each journey identify:
+
+* trigger
+* user intent
+* starting page
+* steps
+* decisions
+* possible errors
+* success state
+* abandonment risks
+* UX improvements
+
+---
+
+# STEP 5 — DEFINE THE TARGET INFORMATION ARCHITECTURE
+
+Do not keep the existing "everything on one page" structure simply because it currently exists.
+
+Determine what the correct product hierarchy should be.
+
+Design a proposed structure containing, where relevant:
+
+## Public Experience
+
+* Homepage
+* About
+* Features
+* How It Works
+* Pricing if applicable
+* FAQ
+* Contact
+* Resources if applicable
+* Terms & Conditions
+* Privacy Policy
+* Cookie Policy if applicable
+* Accessibility Statement if appropriate
+
+## Authentication
+
+* Login
+* Sign Up
+* Forgot Password
+* Reset Password
+* Email Verification
+* Authentication error states
+* Session expiration
+* Account recovery
+
+## Application
+
+* Dashboard
+* Main product workspace
+* Core feature pages
+* Search
+* Detail pages
+* Create/edit flows
+* Notifications
+* Profile
+* Account settings
+* Preferences
+* Security
+* Help/support
+
+Only include pages that make sense for this particular product.
+
+Do not blindly implement this list.
+
+The repository and product documentation must determine the actual architecture.
+
+---
+
+# STEP 6 — DESIGN THE GLOBAL NAVIGATION SYSTEM
+
+Create a complete navigation recommendation.
+
+Analyze:
+
+## Desktop Navbar
+
+Determine:
+
+* logo placement
+* primary navigation
+* secondary navigation
+* CTA
+* search
+* notifications
+* profile menu
+* login/signup
+* responsive transition
+
+## Application Navigation
+
+Determine whether the product needs:
+
+* sidebar
+* collapsible sidebar
+* top navigation
+* tabs
+* breadcrumbs
+* contextual navigation
+* command/search navigation
+* bottom navigation on mobile
+
+## Footer
+
+Define:
+
+* product links
+* company links
+* support
+* legal
+* social links if appropriate
+* copyright
+* language/region selector if appropriate
+
+Explain the reasoning behind the structure.
+
+---
+
+# STEP 7 — CREATE A PROFESSIONAL DESIGN SYSTEM
+
+This is one of the most important deliverables.
+
+Do NOT randomly choose colors for individual pages.
+
+Create a unified design system.
+
+Define:
+
+## Brand Direction
+
+Recommend:
+
+* brand personality
+* visual personality
+* trust level
+* emotional tone
+* product character
+* appropriate visual style
+
+## Color System
+
+Create a systematic color palette including:
+
+* primary
+* secondary
+* accent
+* background
+* surface
+* elevated surface
+* border
+* text primary
+* text secondary
+* muted text
+* success
+* warning
+* error
+* information
+* disabled
+
+Provide:
+
+* HEX
+* RGB/HSL where useful
+* semantic token name
+* usage
+* contrast considerations
+
+Do not choose colors merely because they "look nice".
+
+Validate the proposed system against accessibility requirements, targeting **WCAG 2.2 AA** where applicable.
+
+Avoid excessive gradients, excessive colors, poor contrast, or visually trendy choices that reduce usability.
+
+---
+
+# STEP 8 — TYPOGRAPHY SYSTEM
+
+Recommend a professional typography system.
+
+Define:
+
+* primary font
+* fallback fonts
+* display sizes
+* heading sizes
+* body sizes
+* labels
+* captions
+* buttons
+* navigation
+* line heights
+* font weights
+* letter spacing
+* responsive typography
+
+Explain why the typography fits the product.
+
+Consider:
+
+* readability
+* international character support
+* performance
+* accessibility
+* brand personality
+
+---
+
+# STEP 9 — SPACING, GRID AND CONTAINER SYSTEM
+
+Define a consistent layout system.
+
+Specify:
+
+* max-width containers
+* page gutters
+* desktop spacing
+* tablet spacing
+* mobile spacing
+* section spacing
+* card padding
+* grid behavior
+* column behavior
+* gap scale
+* border radius
+* elevation/shadows
+* alignment rules
+
+Create a systematic spacing scale instead of arbitrary values.
+
+Every page should follow the same underlying layout rules.
+
+---
+
+# STEP 10 — COMPONENT SYSTEM
+
+Define the reusable component architecture.
+
+At minimum evaluate the need for:
+
+* Button
+* Button group
+* Link
+* Icon button
+* Input
+* Textarea
+* Select
+* Combobox
+* Search
+* Checkbox
+* Radio
+* Switch
+* Form field
+* Form validation
+* Card
+* Avatar
+* Badge
+* Tag
+* Tooltip
+* Alert
+* Toast
+* Modal
+* Drawer
+* Dropdown
+* Popover
+* Tabs
+* Accordion
+* Breadcrumb
+* Pagination
+* Table
+* List
+* Empty state
+* Loading state
+* Skeleton
+* Error state
+* Confirmation state
+* Stepper
+* Progress indicator
+* Date/time controls where applicable
+* Navigation components
+* Header
+* Sidebar
+* Footer
+
+For each component document:
+
+* purpose
+* variants
+* anatomy
+* states
+* interaction behavior
+* responsive behavior
+* accessibility requirements
+* content rules
+* reusable props/inputs
+* examples of usage
+* when NOT to use it
+
+---
+
+# STEP 11 — PAGE-BY-PAGE UX SPECIFICATION
+
+This must be extremely detailed.
+
+For EVERY existing or proposed important page, create a page specification.
+
+Use a consistent structure:
+
+## Page Name
+
+### Purpose
+
+What is this page supposed to accomplish?
+
+### Primary User
+
+Who uses it?
+
+### User Intent
+
+What is the user trying to accomplish?
+
+### Entry Points
+
+How does the user reach this page?
+
+### Exit Points
+
+Where can they go next?
+
+### Page Hierarchy
+
+Define the exact order of sections.
+
+### Layout
+
+Define:
+
+* container
+* grid
+* columns
+* alignment
+* spacing
+* responsive behavior
+
+### Header
+
+Define:
+
+* title
+* subtitle
+* breadcrumbs
+* actions
+
+### Main Content
+
+Define each section in order.
+
+### Primary CTA
+
+Define:
+
+* label
+* location
+* behavior
+* success result
+
+### Secondary Actions
+
+Define them separately.
+
+### Cards/Tables/Lists
+
+Specify the appropriate component and content.
+
+### Images
+
+Specify:
+
+* image type
+* subject
+* orientation
+* aspect ratio
+* placement
+* purpose
+* recommended source
+* accessibility alt text
+
+### Icons
+
+Specify:
+
+* icon purpose
+* style
+* size
+* placement
+
+### Loading State
+
+Describe exact behavior.
+
+### Empty State
+
+Describe exact behavior and CTA.
+
+### Error State
+
+Describe exact behavior.
+
+### Success State
+
+Describe exact behavior.
+
+### Permission State
+
+If applicable.
+
+### Mobile Layout
+
+Explain how every major section changes on:
+
+* mobile
+* tablet
+* desktop
+* large desktop
+
+### Accessibility
+
+Define:
+
+* keyboard navigation
+* focus behavior
+* semantic structure
+* labels
+* ARIA where required
+* contrast
+* screen reader considerations
+
+### SEO
+
+For public pages where applicable:
+
+* title
+* meta description
+* heading structure
+* canonical strategy
+* structured data if appropriate
+* social sharing metadata
+
+### Content
+
+Provide recommended content direction.
+
+Do not use meaningless filler such as "Lorem ipsum".
+
+---
+
+# STEP 12 — HOMEPAGE SPECIFICATION
+
+The homepage must be treated as a major product experience, not merely another route.
+
+Define a complete homepage architecture.
+
+Evaluate sections such as:
+
+1. Announcement bar if appropriate
+2. Navbar
+3. Hero
+4. Primary value proposition
+5. Primary CTA
+6. Supporting CTA
+7. Product visual/demo
+8. Key benefits
+9. How it works
+10. Core capabilities
+11. Social proof if genuinely available
+12. Trust indicators
+13. Testimonials if legitimate data exists
+14. FAQ
+15. Final CTA
+16. Footer
+
+Do not automatically include every section.
+
+Choose sections based on the actual product.
+
+The homepage should answer:
+
+* What is this?
+* Who is it for?
+* What problem does it solve?
+* Why should someone care?
+* How does it work?
+* Why should the user trust it?
+* What should the user do next?
+
+---
+
+# STEP 13 — USER DASHBOARD SPECIFICATION
+
+Design a proper application dashboard.
+
+Do not create a dashboard merely by putting existing features into cards.
+
+Define:
+
+* dashboard purpose
+* first-time user experience
+* returning user experience
+* key metrics if applicable
+* recent activity
+* tasks/actions
+* shortcuts
+* notifications
+* recommendations
+* progress
+* personalized information
+* empty state
+* onboarding state
+* loading state
+* error state
+
+Determine what information is genuinely useful to users.
+
+Avoid dashboard clutter.
+
+---
+
+# STEP 14 — PROFILE + ACCOUNT EXPERIENCE
+
+Define a proper profile/account architecture.
+
+Evaluate:
+
+* Profile overview
+* Edit profile
+* Personal information
+* Preferences
+* Security
+* Password
+* Sessions
+* Notifications
+* Privacy
+* Account deletion
+* Data management
+* Logout
+
+Only include features supported by the actual product.
+
+---
+
+# STEP 15 — TERMS, PRIVACY AND LEGAL EXPERIENCE
+
+Determine what legal pages are needed.
+
+At minimum evaluate:
+
+* Terms & Conditions
+* Privacy Policy
+* Cookie Policy where applicable
+* Accessibility statement where appropriate
+* Disclaimer where applicable
+
+These pages should have:
+
+* professional layout
+* readable typography
+* clear headings
+* table of contents if long
+* last updated date
+* effective date where appropriate
+* responsive behavior
+* accessible navigation
+
+IMPORTANT:
+
+Do not invent legal claims or pretend to provide jurisdiction-specific legal advice.
+
+If actual legal content is not available in the repository, clearly identify the content as requiring legal review.
+
+---
+
+# STEP 16 — RESPONSIVE DESIGN
+
+The application must NOT be treated as "desktop first and shrink it."
+
+Define responsive behavior intentionally.
+
+For each important page/component document behavior at:
+
+* small mobile
+* large mobile
+* tablet
+* desktop
+* large desktop
+
+Pay particular attention to:
+
+* navbar
+* sidebar
+* cards
+* tables
+* forms
+* modals
+* dialogs
+* images
+* typography
+* buttons
+* navigation
+* horizontal scrolling
+* touch targets
+
+Target accessible touch interaction and practical mobile usability.
+
+---
+
+# STEP 17 — ACCESSIBILITY
+
+Use **WCAG 2.2 AA** as the target baseline where applicable.
+
+Audit and document:
+
+* semantic HTML
+* heading hierarchy
+* keyboard navigation
+* focus visibility
+* focus order
+* screen readers
+* form labels
+* validation
+* error messaging
+* color contrast
+* non-color indicators
+* reduced motion
+* text resizing
+* zoom behavior
+* touch targets
+* dialogs
+* menus
+* dropdowns
+* tables
+* images
+* alt text
+
+Do not use accessibility as a final checklist only.
+
+Accessibility must influence the component architecture from the beginning.
+
+---
+
+# STEP 18 — INTERNATIONALIZATION
+
+Because this product should be suitable for international use, evaluate:
+
+* i18n architecture
+* translation readiness
+* date formats
+* time formats
+* number formats
+* currencies if applicable
+* time zones
+* pluralization
+* text expansion
+* RTL readiness
+* international names
+* address formats
+* phone numbers
+* locale-aware formatting
+
+Do not assume all users follow one country's conventions unless the product specifically requires it.
+
+---
+
+# STEP 19 — CONTENT STRATEGY
+
+Review all existing visible content.
+
+Identify:
+
+* unclear labels
+* inconsistent terminology
+* technical language
+* weak CTAs
+* unnecessary text
+* duplicate content
+* missing explanations
+* placeholder content
+* inconsistent capitalization
+* inconsistent button wording
+
+Create a content style recommendation.
+
+Define:
+
+* tone of voice
+* terminology
+* CTA conventions
+* headings
+* error messages
+* empty states
+* onboarding language
+* confirmation messages
+
+The UI should communicate clearly, not simply display data.
+
+---
+
+# STEP 20 — IMAGES, PHOTOS AND VISUAL ASSETS
+
+Do not use random stock imagery.
+
+Determine where imagery genuinely improves the product.
+
+For every required image, specify:
+
+* purpose
+* subject
+* visual style
+* composition
+* aspect ratio
+* approximate dimensions
+* light/dark treatment
+* placement
+* accessibility requirements
+
+If web access/search is available, research suitable high-quality image sources.
+
+Prioritize:
+
+* appropriate licensing
+* professional quality
+* consistent visual style
+* performance
+* relevance
+* international representation where appropriate
+
+Document the source and licensing considerations for every externally sourced asset.
+
+Do not download copyrighted assets without appropriate rights.
+
+If suitable assets cannot be confidently sourced, specify the exact image brief that should be created instead.
+
+---
+
+# STEP 21 — ICON SYSTEM
+
+Recommend a single coherent icon strategy.
+
+Avoid mixing unrelated icon families.
+
+Define:
+
+* icon library
+* stroke/fill style
+* default size
+* small size
+* large size
+* button icon rules
+* navigation icon rules
+* semantic icons
+* decorative icons
+* accessibility behavior
+
+Use icons to improve comprehension, not merely decoration.
+
+---
+
+# STEP 22 — MOTION AND INTERACTION DESIGN
+
+Define where motion is useful.
+
+Evaluate:
+
+* page transitions
+* hover states
+* focus states
+* button feedback
+* loading
+* skeletons
+* drawers
+* modals
+* dropdowns
+* notifications
+* success states
+
+Avoid excessive animation.
+
+Define reduced-motion behavior.
+
+---
+
+# STEP 23 — PERFORMANCE
+
+Review the current architecture and recommend UX-related performance improvements.
+
+Evaluate:
+
+* image optimization
+* lazy loading
+* code splitting
+* route loading
+* font loading
+* bundle size
+* caching
+* skeletons
+* perceived performance
+* Core Web Vitals
+
+Do not sacrifice usability for visual effects.
+
+---
+
+# STEP 24 — SEO
+
+For public-facing pages, document:
+
+* URL structure
+* page titles
+* meta descriptions
+* heading hierarchy
+* canonical URLs
+* Open Graph
+* Twitter/social metadata where appropriate
+* sitemap
+* robots
+* structured data where appropriate
+* internal linking
+* semantic HTML
+
+Do not over-optimize or keyword-stuff content.
+
+---
+
+# STEP 25 — SECURITY AND TRUST UX
+
+Do not redesign security-sensitive functionality casually.
+
+Review user-facing security experiences such as:
+
+* login
+* password reset
+* session expiration
+* account deletion
+* permission errors
+* sensitive actions
+* confirmation dialogs
+* security settings
+
+Recommend secure UX patterns without exposing sensitive implementation details.
+
+---
+
+# STEP 26 — ERROR, EMPTY, LOADING AND EDGE STATES
+
+This is mandatory.
+
+For every major workflow, explicitly define:
+
+### Loading
+
+What does the user see?
+
+### Empty
+
+What does the user see when there is no data?
+
+### Error
+
+What happened and how does the user recover?
+
+### Success
+
+How is completion communicated?
+
+### Partial Failure
+
+What happens when some operations succeed and others fail?
+
+### Offline/Network Failure
+
+If applicable.
+
+### Permission Denied
+
+If applicable.
+
+### Session Expired
+
+If applicable.
+
+A world-class product must design these states intentionally.
+
+---
+
+# STEP 27 — DESIGN TOKENS
+
+Create a proposed token architecture.
+
+For example, define conceptual token groups for:
+
+* colors
+* spacing
+* typography
+* radius
+* shadows
+* borders
+* breakpoints
+* motion
+* z-index
+
+Do not hard-code component-specific values unnecessarily.
+
+The goal is a scalable design system.
+
+---
+
+# STEP 28 — PAGE PRIORITIZATION
+
+Create a prioritization matrix.
+
+Classify work into:
+
+## P0 — Critical
+
+Required for the product to feel complete and usable.
+
+## P1 — High
+
+Major quality improvements.
+
+## P2 — Medium
+
+Important polish and scalability.
+
+## P3 — Later
+
+Optional enhancements.
+
+Also classify each item as:
+
+* UX
+* UI
+* content
+* architecture
+* accessibility
+* performance
+* SEO
+* legal
+* assets
+* responsive
+* technical
+
+---
+
+# STEP 29 — IMPLEMENTATION ROADMAP
+
+Create a phased implementation plan.
+
+Recommended structure:
+
+### Phase 0 — Discovery & Architecture
+
+Documentation and decisions.
+
+### Phase 1 — Design System
+
+Tokens, typography, colors, components.
+
+### Phase 2 — Global Shell
+
+Navbar, footer, navigation, containers, responsive framework.
+
+### Phase 3 — Public Experience
+
+Homepage and public pages.
+
+### Phase 4 — Authentication
+
+Auth flows and states.
+
+### Phase 5 — Application Shell
+
+Dashboard/navigation/layout.
+
+### Phase 6 — Core Product Pages
+
+Implement the primary business workflows.
+
+### Phase 7 — Profile & Settings
+
+Account experience.
+
+### Phase 8 — Legal & Trust
+
+Terms/privacy/etc.
+
+### Phase 9 — Accessibility & Responsive Hardening
+
+### Phase 10 — Performance, SEO & QA
+
+Adjust this roadmap based on the actual repository.
+
+---
+
+# STEP 30 — DO NOT OVER-DESIGN
+
+Do not make the application look "premium" by simply adding:
+
+* excessive gradients
+* giant typography everywhere
+* excessive glassmorphism
+* unnecessary animations
+* too many cards
+* excessive shadows
+* meaningless illustrations
+* excessive colors
+* decorative UI that harms usability
+
+The goal is:
+
+**clarity + hierarchy + trust + consistency + usability + visual quality.**
+
+The product should look modern without looking like a design experiment.
+
+---
+
+# STEP 31 — INTERNATIONAL PRODUCT QUALITY PRINCIPLES
+
+Use established principles and standards where applicable.
+
+Consider:
+
+* WCAG 2.2 AA
+* responsive web standards
+* semantic HTML
+* accessible interaction
+* internationalization
+* localization readiness
+* modern UX conventions
+* usability heuristics
+* performance best practices
+* SEO best practices
+* privacy expectations
+* secure UX patterns
+
+Do NOT claim that there is one universal "international UI standard."
+
+Instead, explain which recognized standards and best practices are being used and why.
+
+---
+
+# STEP 32 — COMPETITIVE / REFERENCE ANALYSIS
+
+Where appropriate and where web access is available, research high-quality products in the same or adjacent category.
+
+Do not copy them.
+
+Use them to understand:
+
+* navigation patterns
+* information architecture
+* onboarding
+* dashboards
+* visual hierarchy
+* interaction patterns
+* content structure
+* responsive behavior
+* trust patterns
+
+Document:
+
+* reference product
+* what is good
+* what is relevant
+* what should NOT be copied
+* how the insight applies to this product
+
+Use current, reputable sources.
+
+---
+
+# STEP 33 — CREATE THE MARKDOWN DOCUMENTATION SET
+
+Create a structured documentation system.
+
+At minimum, produce documents similar to:
+
+```text
+docs/
+└── product-redesign/
+    ├── 00-executive-summary.md
+    ├── 01-repository-audit.md
+    ├── 02-product-understanding.md
+    ├── 03-current-state.md
+    ├── 04-user-personas-and-journeys.md
+    ├── 05-information-architecture.md
+    ├── 06-route-and-page-inventory.md
+    ├── 07-navigation-architecture.md
+    ├── 08-design-direction.md
+    ├── 09-color-system.md
+    ├── 10-typography-system.md
+    ├── 11-spacing-grid-layout.md
+    ├── 12-design-tokens.md
+    ├── 13-component-system.md
+    ├── 14-page-specifications.md
+    ├── 15-homepage-specification.md
+    ├── 16-dashboard-specification.md
+    ├── 17-profile-settings-specification.md
+    ├── 18-authentication-flows.md
+    ├── 19-legal-pages.md
+    ├── 20-responsive-design.md
+    ├── 21-accessibility.md
+    ├── 22-internationalization.md
+    ├── 23-content-strategy.md
+    ├── 24-image-and-asset-strategy.md
+    ├── 25-icon-system.md
+    ├── 26-motion-interaction.md
+    ├── 27-performance.md
+    ├── 28-seo.md
+    ├── 29-error-empty-loading-states.md
+    ├── 30-security-trust-ux.md
+    ├── 31-competitive-reference-analysis.md
+    ├── 32-priority-matrix.md
+    ├── 33-implementation-roadmap.md
+    ├── 34-qa-acceptance-criteria.md
+    └── 35-final-implementation-checklist.md
+```
+
+Modify this structure if the actual project requires a better organization.
+
+Do not create meaningless documentation just to satisfy the file count.
+
+Every document must contain useful, actionable information.
+
+---
+
+# STEP 34 — TRACEABILITY
+
+Every major recommendation should be traceable.
+
+Where possible, distinguish:
+
+* CURRENT — exists in repository
+* DOCUMENTED — found in project documentation
+* PROPOSED — recommended new behavior
+* ASSUMPTION — inferred but not confirmed
+* NEEDS DECISION — requires product-owner confirmation
+
+This is extremely important.
+
+Do not present assumptions as facts.
+
+---
+
+# STEP 35 — IDENTIFY QUESTIONS AND DECISIONS
+
+At the end, create:
+
+```text
+docs/product-redesign/open-decisions.md
+```
+
+List decisions that cannot responsibly be made from the repository.
+
+For each:
+
+* question
+* why it matters
+* possible options
+* recommended option
+* impact if unresolved
+* priority
+
+Do not block the entire analysis unnecessarily.
+
+Make reasonable recommendations while clearly identifying assumptions.
+
+---
+
+# STEP 36 — CREATE A FINAL GAP ANALYSIS
+
+Create a final comparison:
+
+## Current Product
+
+What exists today.
+
+## Target Product
+
+What the product should become.
+
+## Major Gaps
+
+What needs to change.
+
+Organize gaps by:
+
+* product
+* UX
+* UI
+* content
+* navigation
+* accessibility
+* responsive
+* architecture
+* assets
+* performance
+* SEO
+* legal
+* security/trust
+
+---
+
+# STEP 37 — FINAL QUALITY BAR
+
+Before finishing, review your own documentation as if another senior engineering team will implement the product using these Markdown files without having this conversation.
+
+Ask:
+
+* Is the product understandable?
+* Is every important page defined?
+* Is the navigation clear?
+* Is the homepage defined?
+* Is the dashboard defined?
+* Are profile/settings defined?
+* Are legal pages defined?
+* Are responsive rules defined?
+* Are mobile behaviors defined?
+* Are colors systematic?
+* Is typography systematic?
+* Are components reusable?
+* Are images specified?
+* Are icons specified?
+* Are accessibility requirements explicit?
+* Are loading/empty/error states defined?
+* Are internationalization concerns covered?
+* Are SEO concerns covered?
+* Are performance concerns covered?
+* Are implementation priorities clear?
+* Are assumptions clearly marked?
+* Can developers implement from the documentation?
+* Can designers understand the visual direction?
+* Can QA test against the specification?
+
+If not, improve the documentation before completing Phase 1.
+
+---
+
+# IMPORTANT EXECUTION RULES
+
+1. **Inspect first. Recommend second.**
+2. Do not blindly follow the current UI structure.
+3. Do not assume one-page architecture is correct.
+4. Do not invent business functionality without clearly labeling it as proposed.
+5. Do not destroy existing functionality merely for visual reasons.
+6. Preserve existing business logic unless there is a documented reason to change it.
+7. Prefer reusable components.
+8. Prefer systematic design tokens.
+9. Prefer accessibility from the beginning.
+10. Prefer mobile-responsive architecture from the beginning.
+11. Prefer simple, clear, professional UI over unnecessary visual complexity.
+12. Use real content/context from the repository wherever possible.
+13. Do not use Lorem Ipsum for important UI recommendations.
+14. Do not use random stock imagery.
+15. If web search is available, research appropriate image/icon/reference sources.
+16. Record image licensing/source considerations.
+17. Do not fabricate testimonials, statistics, customer logos, certifications, awards, or trust claims.
+18. Do not fabricate legal claims.
+19. Do not expose secrets or environment variables while auditing the repository.
+20. Do not modify application code during this documentation phase unless explicitly required to inspect or validate something.
+21. Keep all recommendations consistent with the actual product.
+22. Avoid unnecessary dependencies.
+23. Do not redesign purely for aesthetics if it damages usability.
+24. Treat the documentation as an implementation specification, not a generic design essay.
+
+---
+
+# DELIVERABLE FORMAT
+
+At the end of the analysis, provide a concise final summary containing:
+
+## Product Understanding
+
+What you believe this product is.
+
+## Current State
+
+What is currently working and what is weak.
+
+## Target Experience
+
+What the finished product should feel and behave like.
+
+## Biggest UX Problems
+
+Top issues.
+
+## Biggest UI Problems
+
+Top issues.
+
+## Biggest Architecture Problems
+
+Top issues.
+
+## Highest-Priority Changes
+
+P0/P1 items.
+
+## Proposed Design Direction
+
+Color, typography, layout, imagery and interaction direction.
+
+## Proposed Page Architecture
+
+Final recommended page hierarchy.
+
+## Implementation Sequence
+
+Recommended order of implementation.
+
+## Open Decisions
+
+Things requiring product-owner confirmation.
+
+---
+
+# SUCCESS CRITERIA
+
+This Phase 1 task is successful only when the repository contains a **complete, coherent, actionable product transformation specification**.
+
+A developer should be able to open the Markdown documentation and understand:
+
+> "This is what the product currently is, this is what it should become, this is why, this is how every important page should work, this is how the design system works, these are the components required, these are the responsive rules, these are the assets required, these are the accessibility requirements, and this is the order in which everything should be implemented."
+
+Do not stop after identifying superficial UI problems.
+
+Go **end-to-end, page-by-page, workflow-by-workflow, component-by-component, state-by-state**.
+
+The goal is not merely to make the application prettier.
+
+The goal is to define a **complete, coherent, scalable, internationally usable product experience** based on the actual repository and product documentation.
+
+Begin by inspecting the repository and `/docs` thoroughly.
+
+Then create the documentation set.
+
+**Do not start implementation yet.**
