@@ -1,3 +1,4 @@
+import type { Metadata } from 'next';
 import { cookies } from 'next/headers';
 import { AuthCard } from '@/components/auth/auth-card';
 import {
@@ -6,6 +7,14 @@ import {
   categoryOrDefault,
   normalizeSessionLanguage,
 } from '@/lib/session-preferences';
+
+export const metadata: Metadata = {
+  title: 'Create Your Silence Profile',
+  robots: {
+    index: false,
+    follow: false,
+  },
+};
 
 export default async function RegisterPage() {
   const cookieStore = await cookies();

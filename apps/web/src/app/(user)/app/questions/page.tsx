@@ -1,4 +1,5 @@
 import type { Category, Level } from '@silence/shared';
+import type { Metadata } from 'next';
 import { redirect } from 'next/navigation';
 import { QuestionFlow } from '@/components/questions/question-flow';
 import { publicApi } from '@/lib/api';
@@ -6,6 +7,14 @@ import { normalizeSessionLanguage } from '@/lib/session-preferences';
 import { getUserSession } from '@/lib/user-session';
 
 const levels: Level[] = ['common', 'level1', 'level2'];
+
+export const metadata: Metadata = {
+  title: 'Guided Questions',
+  robots: {
+    index: false,
+    follow: false,
+  },
+};
 
 export default async function QuestionsPage() {
   const session = await getUserSession();

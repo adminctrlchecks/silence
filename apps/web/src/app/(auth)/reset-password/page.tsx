@@ -1,6 +1,15 @@
+import type { Metadata } from 'next';
 import { Suspense } from 'react';
 import { getTranslations } from 'next-intl/server';
 import { ResetPasswordCard } from '@/components/auth/reset-password-card';
+
+export const metadata: Metadata = {
+  title: 'Choose a New Password',
+  robots: {
+    index: false,
+    follow: false,
+  },
+};
 
 export default async function ResetPasswordPage() {
   const t = await getTranslations('ResetPassword');

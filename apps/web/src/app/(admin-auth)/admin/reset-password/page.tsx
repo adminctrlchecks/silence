@@ -1,5 +1,14 @@
+import type { Metadata } from 'next';
 import { Suspense } from 'react';
 import { ResetPasswordCard } from '@/components/auth/reset-password-card';
+
+export const metadata: Metadata = {
+  title: 'Reset Admin Password',
+  robots: {
+    index: false,
+    follow: false,
+  },
+};
 
 export default function AdminResetPasswordPage() {
   return (

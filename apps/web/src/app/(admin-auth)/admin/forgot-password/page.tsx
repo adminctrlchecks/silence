@@ -1,4 +1,13 @@
+import type { Metadata } from 'next';
 import { ForgotPasswordCard } from '@/components/auth/forgot-password-card';
+
+export const metadata: Metadata = {
+  title: 'Admin Password Recovery',
+  robots: {
+    index: false,
+    follow: false,
+  },
+};
 
 export default function AdminForgotPasswordPage() {
   return (

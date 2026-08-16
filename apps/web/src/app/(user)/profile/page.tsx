@@ -1,3 +1,4 @@
+import type { Metadata } from 'next';
 import { getTranslations } from 'next-intl/server';
 import { cookies } from 'next/headers';
 import Link from 'next/link';
@@ -8,6 +9,14 @@ import { Button } from '@/components/ui/button';
 import { publicApi } from '@/lib/api';
 import { ADMIN_TOKEN_COOKIE } from '@/lib/auth-routing';
 import { getUserSession } from '@/lib/user-session';
+
+export const metadata: Metadata = {
+  title: 'Profile and Settings',
+  robots: {
+    index: false,
+    follow: false,
+  },
+};
 
 export default async function ProfilePage() {
   const t = await getTranslations('Profile');

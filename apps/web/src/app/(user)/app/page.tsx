@@ -1,4 +1,5 @@
 import type { NextStep, QuestionProgress } from '@silence/shared';
+import type { Metadata } from 'next';
 import { CheckCircle2, Circle, MoonStar, Sparkles, UserRound, History as HistoryIcon } from 'lucide-react';
 import { getTranslations } from 'next-intl/server';
 import Link from 'next/link';
@@ -16,6 +17,14 @@ const NEXT_STEP_HREF: Record<NextStep, string> = {
 };
 
 const LEVEL_ORDER: Array<keyof QuestionProgress> = ['common', 'level1', 'level2'];
+
+export const metadata: Metadata = {
+  title: 'Your Reading Dashboard',
+  robots: {
+    index: false,
+    follow: false,
+  },
+};
 
 export default async function UserAppPage() {
   const t = await getTranslations('UserApp');

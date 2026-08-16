@@ -1,9 +1,18 @@
+import type { Metadata } from 'next';
 import { getTranslations } from 'next-intl/server';
 import { redirect } from 'next/navigation';
 import { BirthChartView } from '@/components/chart/birth-chart-view';
 import { publicApi } from '@/lib/api';
 import { normalizeSessionLanguage } from '@/lib/session-preferences';
 import { getUserSession } from '@/lib/user-session';
+
+export const metadata: Metadata = {
+  title: 'Your Astrology Chart',
+  robots: {
+    index: false,
+    follow: false,
+  },
+};
 
 export default async function ChartPage() {
   const t = await getTranslations('Chart');

@@ -1,4 +1,5 @@
 import Link from 'next/link';
+import type { Metadata } from 'next';
 import { cookies } from 'next/headers';
 import {
   ArrowRight,
@@ -23,6 +24,22 @@ import {
   normalizeCategory,
   normalizeSessionLanguage,
 } from '@/lib/session-preferences';
+
+export const metadata: Metadata = {
+  title: {
+    absolute: 'Silence - Multilingual Astrology Q&A',
+  },
+  description:
+    'Create a profile, answer guided astrology questions, view a birth chart, and receive a personal remedy in your preferred language.',
+  alternates: {
+    canonical: '/',
+  },
+  openGraph: {
+    title: 'Silence - Multilingual Astrology Q&A',
+    description:
+      'Create a profile, answer guided astrology questions, view a birth chart, and receive a personal remedy in your preferred language.',
+  },
+};
 
 const journeySteps = [
   {

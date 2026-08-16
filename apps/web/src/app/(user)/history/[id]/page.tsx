@@ -1,3 +1,4 @@
+import type { Metadata } from 'next';
 import { getTranslations } from 'next-intl/server';
 import { ArrowLeft, Sparkles } from 'lucide-react';
 import Link from 'next/link';
@@ -7,6 +8,14 @@ import { Button } from '@/components/ui/button';
 import { publicApi } from '@/lib/api';
 import { normalizeSessionLanguage } from '@/lib/session-preferences';
 import { getUserSession } from '@/lib/user-session';
+
+export const metadata: Metadata = {
+  title: 'Reading Detail',
+  robots: {
+    index: false,
+    follow: false,
+  },
+};
 
 function formatDate(value: string, lang: string) {
   const date = new Date(value);

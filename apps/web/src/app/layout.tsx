@@ -10,8 +10,27 @@ import { LANGUAGE_COOKIE } from '@/lib/session-preferences';
 import './globals.css';
 
 export const metadata: Metadata = {
-  title: 'Silence',
-  description: 'Multilingual astrology Q&A.',
+  metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL ?? 'http://localhost:3011'),
+  applicationName: 'Silence',
+  title: {
+    default: 'Silence - Multilingual Astrology Q&A',
+    template: '%s | Silence',
+  },
+  description:
+    'Create a profile, answer guided astrology questions, view a birth chart, and receive a personal remedy in your preferred language.',
+  openGraph: {
+    type: 'website',
+    siteName: 'Silence',
+    title: 'Silence - Multilingual Astrology Q&A',
+    description:
+      'Create a profile, answer guided astrology questions, view a birth chart, and receive a personal remedy in your preferred language.',
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'Silence - Multilingual Astrology Q&A',
+    description:
+      'Create a profile, answer guided astrology questions, view a birth chart, and receive a personal remedy in your preferred language.',
+  },
 };
 
 export default async function RootLayout({ children }: { children: ReactNode }) {

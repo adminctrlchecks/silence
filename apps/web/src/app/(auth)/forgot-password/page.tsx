@@ -1,5 +1,14 @@
+import type { Metadata } from 'next';
 import { getTranslations } from 'next-intl/server';
 import { ForgotPasswordCard } from '@/components/auth/forgot-password-card';
+
+export const metadata: Metadata = {
+  title: 'Reset Access',
+  robots: {
+    index: false,
+    follow: false,
+  },
+};
 
 export default async function ForgotPasswordPage() {
   const t = await getTranslations('ForgotPassword');
