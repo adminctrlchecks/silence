@@ -39,14 +39,15 @@ Phase 1 produced a complete blueprint in `docs/product-redesign/`. Phase 2 turns
 | Phase | Task | Files touched | Verified via | Commit |
 |-------|------|----------------|---------------|--------|
 | Phase 0 | Create branch `feat/product-redesign-v2` from current `main` | `docs/product-redesign/IMPLEMENTATION_PROGRESS.md` | `git branch --show-current` | `1c3a982` |
-| Phase 0 | Re-read roadmap, priority matrix, and open decisions | `docs/product-redesign/IMPLEMENTATION_PROGRESS.md` | `Get-Content -Raw` for all three planning docs | pending |
+| Phase 0 | Re-read roadmap, priority matrix, and open decisions | `docs/product-redesign/IMPLEMENTATION_PROGRESS.md` | `Get-Content -Raw` for all three planning docs | `bd90466` |
+| Phase 0 | Confirm task breakdown matches specs | `docs/product-redesign/IMPLEMENTATION_PROGRESS.md` | `Test-Path` check for cited spec files | pending |
 
 ## 3. Work Queue (in roadmap order — P0 items are distributed across phases 1–6 and 8; do not reorder across phases, but within a phase prefer P0 tasks first)
 
 ### Phase 0 — Decisions & Setup
 - [x] Create branch `feat/product-redesign-v2` from current `main`.
 - [x] Re-read `33-implementation-roadmap.md`, `32-priority-matrix.md`, `open-decisions.md` in full.
-- [ ] Confirm this file's task breakdown still matches the specs (specs are the source of truth if they've been edited since this file was written); adjust checklist rows below if needed.
+- [x] Confirm this file's task breakdown still matches the specs (specs are the source of truth if they've been edited since this file was written); adjust checklist rows below if needed.
 
 ### Phase 1 — Design System `P0`
 - [ ] Implement color/status/destructive tokens per [09-color-system.md](09-color-system.md) and [12-design-tokens.md](12-design-tokens.md) in `apps/web/src/app/globals.css`.
