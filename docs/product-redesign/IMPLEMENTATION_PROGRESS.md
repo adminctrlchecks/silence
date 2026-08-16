@@ -40,7 +40,8 @@ Phase 1 produced a complete blueprint in `docs/product-redesign/`. Phase 2 turns
 |-------|------|----------------|---------------|--------|
 | Phase 0 | Create branch `feat/product-redesign-v2` from current `main` | `docs/product-redesign/IMPLEMENTATION_PROGRESS.md` | `git branch --show-current` | `1c3a982` |
 | Phase 0 | Re-read roadmap, priority matrix, and open decisions | `docs/product-redesign/IMPLEMENTATION_PROGRESS.md` | `Get-Content -Raw` for all three planning docs | `bd90466` |
-| Phase 0 | Confirm task breakdown matches specs | `docs/product-redesign/IMPLEMENTATION_PROGRESS.md` | `Test-Path` check for cited spec files | pending |
+| Phase 0 | Confirm task breakdown matches specs | `docs/product-redesign/IMPLEMENTATION_PROGRESS.md` | `Test-Path` check for cited spec files | `b0c1d3e` |
+| Phase 1 | Implement color/status/destructive tokens | `apps/web/src/app/globals.css`, `docs/product-redesign/IMPLEMENTATION_PROGRESS.md` | `pnpm --filter @silence/web typecheck`; `pnpm --filter @silence/web lint`; `pnpm --filter @silence/web build`; Playwright smoke screenshots for `/` light/dark desktop and `/ar` mobile RTL | pending |
 
 ## 3. Work Queue (in roadmap order — P0 items are distributed across phases 1–6 and 8; do not reorder across phases, but within a phase prefer P0 tasks first)
 
@@ -50,7 +51,7 @@ Phase 1 produced a complete blueprint in `docs/product-redesign/`. Phase 2 turns
 - [x] Confirm this file's task breakdown still matches the specs (specs are the source of truth if they've been edited since this file was written); adjust checklist rows below if needed.
 
 ### Phase 1 — Design System `P0`
-- [ ] Implement color/status/destructive tokens per [09-color-system.md](09-color-system.md) and [12-design-tokens.md](12-design-tokens.md) in `apps/web/src/app/globals.css`.
+- [x] Implement color/status/destructive tokens per [09-color-system.md](09-color-system.md) and [12-design-tokens.md](12-design-tokens.md) in `apps/web/src/app/globals.css`.
 - [ ] Implement typography/spacing/container/radius/shadow tokens per [10-typography-system.md](10-typography-system.md), [11-spacing-grid-layout.md](11-spacing-grid-layout.md), [12-design-tokens.md](12-design-tokens.md).
 - [ ] Expand `components/ui/`: Button variants, Link, FormField, Input, Textarea, Select, Checkbox, Alert, Skeleton per [13-component-system.md](13-component-system.md).
 - [ ] Add Dialog/Drawer/Toast primitives (needed by later phases — admin confirm dialogs, mobile nav drawer, form feedback).
