@@ -1,6 +1,7 @@
 'use client';
 
 import type { ReactNode } from 'react';
+import { PageContainer } from '@/components/layout/page-container';
 import { cn } from '@/lib/utils';
 import { AdminHeader } from './admin-header';
 import { AdminSidebar } from './admin-sidebar';
@@ -22,7 +23,9 @@ function AdminShellFrame({ children }: { children: ReactNode }) {
       ) : null}
       <div className={cn('min-h-screen transition-[padding] duration-300 ease-in-out', open ? 'lg:ps-72' : 'lg:ps-20')}>
         <AdminHeader />
-        <main className="mx-auto w-full max-w-7xl px-4 py-5 md:px-6">{children}</main>
+        <PageContainer as="main" size="wide" gutter="admin" className="py-5">
+          {children}
+        </PageContainer>
       </div>
     </div>
   );

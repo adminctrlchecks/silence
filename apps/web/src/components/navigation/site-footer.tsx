@@ -2,6 +2,7 @@
 
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
+import { PageContainer } from '@/components/layout/page-container';
 import { LanguageSwitcher } from './language-switcher';
 import { localizeHref } from './nav-links';
 
@@ -22,7 +23,7 @@ export function SiteFooter({ appName }: { appName: string }) {
 
   return (
     <footer className="border-t border-border bg-card">
-      <div className="mx-auto grid w-full max-w-7xl gap-8 px-4 py-10 sm:px-6 md:grid-cols-[1fr_auto_auto]">
+      <PageContainer size="wide" className="grid gap-8 py-10 md:grid-cols-[1fr_auto_auto]">
         <div className="max-w-sm">
           <p className="text-base font-semibold">{appName}</p>
           <p className="mt-2 text-sm leading-6 text-muted-foreground">
@@ -52,7 +53,7 @@ export function SiteFooter({ appName }: { appName: string }) {
           </nav>
           <LanguageSwitcher />
         </div>
-      </div>
+      </PageContainer>
     </footer>
   );
 }

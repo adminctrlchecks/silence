@@ -1,5 +1,6 @@
 import Link from 'next/link';
 import { Compass, Home } from 'lucide-react';
+import { PageContainer } from '@/components/layout/page-container';
 import { Button } from '@/components/ui/button';
 
 export function NotFoundContent({
@@ -20,7 +21,7 @@ export function NotFoundContent({
   secondaryLabel?: string;
 }) {
   return (
-    <main className="page-container page-container-narrow py-16" tabIndex={-1}>
+    <PageContainer as="main" size="narrow" className="py-16" tabIndex={-1}>
       <div className="rounded-lg border border-border bg-card p-6 shadow-card sm:p-8">
         <div className="flex items-start gap-4">
           <span className="flex size-11 shrink-0 items-center justify-center rounded-md bg-primary text-primary-foreground">
@@ -46,6 +47,6 @@ export function NotFoundContent({
           </div>
         </div>
       </div>
-    </main>
+    </PageContainer>
   );
 }

@@ -5,6 +5,7 @@ import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { useState } from 'react';
 import { SignOutButton } from '@/components/auth/sign-out-button';
+import { PageContainer } from '@/components/layout/page-container';
 import { ThemeToggle } from '@/components/theme-toggle';
 import { Button } from '@/components/ui/button';
 import { Drawer } from '@/components/ui/drawer';
@@ -41,7 +42,7 @@ export function PublicNavbar({
 
   return (
     <header className="sticky top-0 z-header border-b border-border bg-card/90 backdrop-blur">
-      <div className="mx-auto flex h-16 w-full max-w-7xl items-center justify-between px-4 sm:px-6">
+      <PageContainer size="wide" className="flex h-16 items-center justify-between">
         <Link href={authenticated ? appHref : homeHref} className="flex items-center gap-3 font-semibold text-foreground">
           <span className="flex size-9 items-center justify-center rounded-md bg-primary text-primary-foreground">
             <MoonStar className="size-4" aria-hidden />
@@ -88,7 +89,7 @@ export function PublicNavbar({
         <Button type="button" variant="ghost" size="icon" className="md:hidden" aria-label="Open menu" onClick={() => setDrawerOpen(true)}>
           <Menu aria-hidden />
         </Button>
-      </div>
+      </PageContainer>
 
       <Drawer
         open={drawerOpen}

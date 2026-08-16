@@ -3,6 +3,7 @@
 import { History, LayoutDashboard, MessageSquareText, MoonStar, Sparkles } from 'lucide-react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
+import { PageContainer } from '@/components/layout/page-container';
 import { cn } from '@/lib/utils';
 import { isActivePath, localizeHref } from './nav-links';
 
@@ -30,7 +31,7 @@ export function UserAppNavigation() {
   return (
     <>
       <nav className="hidden border-b border-border bg-card md:block" aria-label="User app navigation">
-        <div className="mx-auto flex h-12 w-full max-w-7xl items-center gap-1 px-4 sm:px-6">
+        <PageContainer size="wide" className="flex h-12 items-center gap-1">
           {appLinks.map((item) => {
             const active = isActiveAppLink(item.href, pathname);
             const Icon = item.icon;
@@ -49,7 +50,7 @@ export function UserAppNavigation() {
               </Link>
             );
           })}
-        </div>
+        </PageContainer>
       </nav>
       <nav
         className="fixed inset-x-0 bottom-0 z-header border-t border-border bg-card/95 px-2 pb-[max(0.75rem,env(safe-area-inset-bottom))] pt-2 shadow-popover backdrop-blur md:hidden"

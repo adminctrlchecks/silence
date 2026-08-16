@@ -231,6 +231,13 @@ a {
   padding-inline: var(--space-gutter-mobile);
 }
 
+.page-container-admin {
+  width: 100%;
+  max-width: var(--container-wide-width);
+  margin-inline: auto;
+  padding-inline: var(--space-gutter-mobile);
+}
+
 .page-container-narrow {
   max-width: var(--container-narrow-width);
 }
@@ -278,6 +285,10 @@ a {
     padding-inline: var(--space-gutter-tablet);
   }
 
+  .page-container-admin {
+    padding-inline: var(--space-gutter-tablet);
+  }
+
   .section-y {
     padding-block: var(--space-section-md);
   }
@@ -286,6 +297,10 @@ a {
 @media (min-width: 64rem) {
   .page-container {
     padding-inline: var(--space-gutter-desktop);
+  }
+
+  .page-container-admin {
+    padding-inline: var(--space-gutter-tablet);
   }
 
   .section-y {
