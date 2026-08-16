@@ -10,6 +10,7 @@ import { Button } from '@/components/ui/button';
 import { Drawer } from '@/components/ui/drawer';
 import { LanguageSwitcher } from './language-switcher';
 import { isActivePath, localizeHref } from './nav-links';
+import { ProfileMenu } from './profile-menu';
 
 const publicLinks = [
   { href: '/#how-it-works', label: 'How it works' },
@@ -70,7 +71,7 @@ export function PublicNavbar({
               <Button asChild variant="outline" size="sm">
                 <Link href={appHref}>{labels.mySession}</Link>
               </Button>
-              <SignOutButton endpoint="/api/auth/logout" redirectTo={loginHref} label={labels.signOut} />
+              <ProfileMenu signOutLabel={labels.signOut} />
             </>
           ) : (
             <>
@@ -123,6 +124,11 @@ export function PublicNavbar({
                 <Button asChild>
                   <Link href={appHref} onClick={() => setDrawerOpen(false)}>
                     {labels.mySession}
+                  </Link>
+                </Button>
+                <Button asChild variant="outline">
+                  <Link href={localizeHref('/profile', pathname)} onClick={() => setDrawerOpen(false)}>
+                    Profile
                   </Link>
                 </Button>
                 <SignOutButton endpoint="/api/auth/logout" redirectTo={loginHref} label={labels.signOut} />

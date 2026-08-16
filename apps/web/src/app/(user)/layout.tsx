@@ -5,6 +5,7 @@ import type { ReactNode } from 'react';
 import { AuthSessionProvider } from '@/components/auth/auth-session-provider';
 import { PublicNavbar } from '@/components/navigation/public-navbar';
 import { SiteFooter } from '@/components/navigation/site-footer';
+import { UserAppNavigation } from '@/components/navigation/user-app-navigation';
 import { getUserSession } from '@/lib/user-session';
 
 export default async function UserLayout({ children }: { children: ReactNode }) {
@@ -36,8 +37,11 @@ export default async function UserLayout({ children }: { children: ReactNode }) 
             adminSignIn: common('signInAsAdmin'),
           }}
         />
-        <div className="min-h-[calc(100vh-4rem)]">{children}</div>
-        <SiteFooter appName={common('appName')} />
+        {authenticated ? <UserAppNavigation /> : null}
+        <div className={authenticated ? 'pb-20 md:pb-0' : undefined}>
+          <div className="min-h-[calc(100vh-4rem)]">{children}</div>
+          <SiteFooter appName={common('appName')} />
+        </div>
       </div>
     </AuthSessionProvider>
   );
