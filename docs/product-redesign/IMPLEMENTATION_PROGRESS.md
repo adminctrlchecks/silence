@@ -42,7 +42,8 @@ Phase 1 produced a complete blueprint in `docs/product-redesign/`. Phase 2 turns
 | Phase 0 | Re-read roadmap, priority matrix, and open decisions | `docs/product-redesign/IMPLEMENTATION_PROGRESS.md` | `Get-Content -Raw` for all three planning docs | `bd90466` |
 | Phase 0 | Confirm task breakdown matches specs | `docs/product-redesign/IMPLEMENTATION_PROGRESS.md` | `Test-Path` check for cited spec files | `b0c1d3e` |
 | Phase 1 | Implement color/status/destructive tokens | `apps/web/src/app/globals.css`, `docs/product-redesign/IMPLEMENTATION_PROGRESS.md` | `pnpm --filter @silence/web typecheck`; `pnpm --filter @silence/web lint`; `pnpm --filter @silence/web build`; Playwright smoke screenshots for `/` light/dark desktop and `/ar` mobile RTL | `a6c0c5a` |
-| Phase 1 | Implement typography/spacing/container/radius/shadow tokens | `apps/web/src/app/globals.css`, `docs/product-redesign/IMPLEMENTATION_PROGRESS.md` | `pnpm --filter @silence/web typecheck`; `pnpm --filter @silence/web lint`; `pnpm --filter @silence/web build`; Playwright smoke screenshots for `/` light/dark desktop and `/ar` mobile RTL | pending |
+| Phase 1 | Implement typography/spacing/container/radius/shadow tokens | `apps/web/src/app/globals.css`, `docs/product-redesign/IMPLEMENTATION_PROGRESS.md` | `pnpm --filter @silence/web typecheck`; `pnpm --filter @silence/web lint`; `pnpm --filter @silence/web build`; Playwright smoke screenshots for `/` light/dark desktop and `/ar` mobile RTL | `8cedc4a` |
+| Phase 1 | Expand `components/ui` form, feedback, and navigation primitives | `apps/web/src/components/ui/button.tsx`, `apps/web/src/components/ui/input.tsx`, `apps/web/src/components/ui/textarea.tsx`, `apps/web/src/components/ui/select.tsx`, `apps/web/src/components/ui/checkbox.tsx`, `apps/web/src/components/ui/form-field.tsx`, `apps/web/src/components/ui/alert.tsx`, `apps/web/src/components/ui/skeleton.tsx`, `apps/web/src/components/ui/link.tsx`, `docs/product-redesign/IMPLEMENTATION_PROGRESS.md` | `pnpm --filter @silence/web typecheck`; `pnpm --filter @silence/web lint`; `pnpm --filter @silence/web build`; Playwright smoke screenshots for `/login` light/dark desktop and `/ar/login` mobile RTL | pending |
 
 ## 3. Work Queue (in roadmap order — P0 items are distributed across phases 1–6 and 8; do not reorder across phases, but within a phase prefer P0 tasks first)
 
@@ -54,7 +55,7 @@ Phase 1 produced a complete blueprint in `docs/product-redesign/`. Phase 2 turns
 ### Phase 1 — Design System `P0`
 - [x] Implement color/status/destructive tokens per [09-color-system.md](09-color-system.md) and [12-design-tokens.md](12-design-tokens.md) in `apps/web/src/app/globals.css`.
 - [x] Implement typography/spacing/container/radius/shadow tokens per [10-typography-system.md](10-typography-system.md), [11-spacing-grid-layout.md](11-spacing-grid-layout.md), [12-design-tokens.md](12-design-tokens.md).
-- [ ] Expand `components/ui/`: Button variants, Link, FormField, Input, Textarea, Select, Checkbox, Alert, Skeleton per [13-component-system.md](13-component-system.md).
+- [x] Expand `components/ui/`: Button variants, Link, FormField, Input, Textarea, Select, Checkbox, Alert, Skeleton per [13-component-system.md](13-component-system.md).
 - [ ] Add Dialog/Drawer/Toast primitives (needed by later phases — admin confirm dialogs, mobile nav drawer, form feedback).
 - [ ] Verify light/dark contrast (WCAG AA) and RTL basics on the new primitives per [21-accessibility.md](21-accessibility.md).
 
