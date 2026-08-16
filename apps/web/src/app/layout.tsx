@@ -4,6 +4,7 @@ import { getMessages } from 'next-intl/server';
 import { cookies, headers } from 'next/headers';
 import type { ReactNode } from 'react';
 import { ThemeProvider } from '@/components/theme-provider';
+import { ToastProvider } from '@/components/ui/toast';
 import { dirFor, normalizeLanguage } from '@/lib/i18n';
 import { LANGUAGE_COOKIE } from '@/lib/session-preferences';
 import './globals.css';
@@ -24,7 +25,7 @@ export default async function RootLayout({ children }: { children: ReactNode }) 
       <body className="min-h-screen bg-background text-foreground antialiased">
         <ThemeProvider attribute="class" defaultTheme="system" enableSystem disableTransitionOnChange>
           <NextIntlClientProvider locale={lang} messages={messages}>
-            {children}
+            <ToastProvider>{children}</ToastProvider>
           </NextIntlClientProvider>
         </ThemeProvider>
       </body>
