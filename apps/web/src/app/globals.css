@@ -34,14 +34,80 @@
   --color-info-background: var(--info-background);
   --color-disabled: var(--disabled);
   --color-disabled-foreground: var(--disabled-foreground);
+  --font-sans: var(--font-family-ui);
+  --font-multilingual: var(--font-family-multilingual);
+  --text-display-lg: 3.5rem;
+  --text-display-lg--line-height: 4rem;
+  --text-display-md: 2.75rem;
+  --text-display-md--line-height: 3.25rem;
+  --text-heading-h1: 2.25rem;
+  --text-heading-h1--line-height: 2.75rem;
+  --text-heading-h2: 1.75rem;
+  --text-heading-h2--line-height: 2.25rem;
+  --text-heading-h3: 1.375rem;
+  --text-heading-h3--line-height: 1.875rem;
+  --text-heading-h4: 1.125rem;
+  --text-heading-h4--line-height: 1.625rem;
+  --text-body-lg: 1.125rem;
+  --text-body-lg--line-height: 1.875rem;
+  --text-body-md: 1rem;
+  --text-body-md--line-height: 1.625rem;
+  --text-body-sm: 0.875rem;
+  --text-body-sm--line-height: 1.375rem;
+  --text-caption: 0.75rem;
+  --text-caption--line-height: 1.125rem;
+  --container-narrow: 45rem;
+  --container-reading: 55rem;
+  --container-app: 70rem;
+  --container-wide: 80rem;
+  --shadow-sm: var(--shadow-card);
+  --shadow-md: var(--shadow-popover);
+  --radius-xs: 0.25rem;
   --radius-sm: calc(var(--radius) - 2px);
   --radius-md: var(--radius);
   --radius-lg: calc(var(--radius) + 2px);
+  --radius-xl: 0.625rem;
 }
 
 :root {
   color-scheme: light;
+  --font-family-ui:
+    Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  --font-family-multilingual:
+    Inter, ui-sans-serif, system-ui, 'Noto Sans', 'Noto Sans Arabic', 'Noto Sans Devanagari',
+    'Noto Sans Bengali', 'Noto Sans Telugu', 'Noto Sans JP', 'Noto Sans SC', sans-serif;
+  --font-weight-regular: 400;
+  --font-weight-medium: 500;
+  --font-weight-semibold: 600;
+  --font-weight-bold: 700;
+  --letter-spacing-default: 0;
+  --space-gutter-mobile: 1rem;
+  --space-gutter-tablet: 1.5rem;
+  --space-gutter-desktop: 2rem;
+  --space-section-sm: 3rem;
+  --space-section-md: 4rem;
+  --space-section-lg: 5rem;
+  --container-narrow-width: 45rem;
+  --container-reading-width: 55rem;
+  --container-app-width: 70rem;
+  --container-wide-width: 80rem;
   --radius: 0.5rem;
+  --radius-xs-value: 0.25rem;
+  --radius-sm-value: 0.375rem;
+  --radius-md-value: 0.5rem;
+  --radius-lg-value: 0.625rem;
+  --radius-full-value: 999px;
+  --shadow-card: 0 1px 2px rgb(23 32 31 / 0.08), 0 8px 24px rgb(23 32 31 / 0.05);
+  --shadow-popover: 0 14px 40px rgb(23 32 31 / 0.16);
+  --motion-duration-fast: 120ms;
+  --motion-duration-base: 200ms;
+  --motion-duration-slow: 300ms;
+  --motion-easing-standard: ease-out;
+  --z-header: 30;
+  --z-overlay: 40;
+  --z-sidebar: 50;
+  --z-modal: 60;
+  --z-toast: 70;
   --background: #faf8f1;
   --foreground: #17201f;
   --app: #f3f6f4;
@@ -88,8 +154,8 @@
   --roxy-info: var(--info-background);
   --roxy-info-fg: var(--info);
   --roxy-radius-md: var(--radius);
-  --roxy-shadow-md: 0 4px 12px rgb(0 0 0 / 0.08);
-  --roxy-motion-duration: 200ms;
+  --roxy-shadow-md: var(--shadow-card);
+  --roxy-motion-duration: var(--motion-duration-base);
 }
 
 .dark {
@@ -125,7 +191,9 @@
   --info-background: #1b2d43;
   --disabled: #303542;
   --disabled-foreground: #7f887f;
-  --roxy-shadow-md: 0 4px 12px rgb(0 0 0 / 0.4);
+  --shadow-card: 0 1px 2px rgb(0 0 0 / 0.28), 0 8px 24px rgb(0 0 0 / 0.28);
+  --shadow-popover: 0 18px 48px rgb(0 0 0 / 0.45);
+  --roxy-shadow-md: var(--shadow-card);
 }
 
 * {
@@ -140,9 +208,9 @@ body {
   min-height: 100vh;
   background: var(--background);
   color: var(--foreground);
-  font-family:
-    Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  font-family: var(--font-family-multilingual);
   line-height: 1.5;
+  letter-spacing: var(--letter-spacing-default);
 }
 
 button,
@@ -156,6 +224,41 @@ a {
   color: inherit;
 }
 
+.page-container {
+  width: 100%;
+  max-width: var(--container-app-width);
+  margin-inline: auto;
+  padding-inline: var(--space-gutter-mobile);
+}
+
+.page-container-narrow {
+  max-width: var(--container-narrow-width);
+}
+
+.page-container-reading {
+  max-width: var(--container-reading-width);
+}
+
+.page-container-wide {
+  max-width: var(--container-wide-width);
+}
+
+.section-y {
+  padding-block: var(--space-section-sm);
+}
+
+.surface-card {
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  background: var(--card);
+  color: var(--card-foreground);
+  box-shadow: var(--shadow-card);
+}
+
+.text-balance {
+  text-wrap: balance;
+}
+
 [dir='rtl'] {
   text-align: right;
 }
@@ -167,5 +270,36 @@ a {
 @media (min-width: 64rem) {
   [dir='rtl'] .admin-sidebar-panel.admin-sidebar-mobile-closed {
     transform: translateX(0);
+  }
+}
+
+@media (min-width: 48rem) {
+  .page-container {
+    padding-inline: var(--space-gutter-tablet);
+  }
+
+  .section-y {
+    padding-block: var(--space-section-md);
+  }
+}
+
+@media (min-width: 64rem) {
+  .page-container {
+    padding-inline: var(--space-gutter-desktop);
+  }
+
+  .section-y {
+    padding-block: var(--space-section-lg);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 1ms !important;
+    animation-iteration-count: 1 !important;
+    scroll-behavior: auto !important;
+    transition-duration: 1ms !important;
   }
 }
