@@ -2,7 +2,8 @@
 
 import { X } from 'lucide-react';
 import type { ReactNode } from 'react';
-import { useId, useRef } from 'react';
+import { useEffect, useId, useRef, useState } from 'react';
+import { createPortal } from 'react-dom';
 import { Button } from '@/components/ui/button';
 import { cn } from '@/lib/utils';
 import { useOverlayFocus } from './use-overlay-focus';
@@ -27,12 +28,14 @@ export function Dialog({
   const titleId = useId();
   const descriptionId = useId();
   const panelRef = useRef<HTMLDivElement>(null);
+  const [mounted, setMounted] = useState(false);
 
+  useEffect(() => setMounted(true), []);
   useOverlayFocus({ open, onOpenChange, panelRef });
 
-  if (!open) return null;
+  if (!mounted || !open) return null;
 
-  return (
+  return createPortal(
     <div className="fixed inset-0 z-modal flex items-center justify-center p-4" role="presentation">
       <button
         type="button"
@@ -76,6 +79,7 @@ export function Dialog({
         {children ? <div className="mt-5">{children}</div> : null}
         {footer ? <div className="mt-6 flex flex-col-reverse gap-2 sm:flex-row sm:justify-end">{footer}</div> : null}
       </section>
-    </div>
+    </div>,
+    document.body,
   );
 }

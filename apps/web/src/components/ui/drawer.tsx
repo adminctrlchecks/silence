@@ -3,17 +3,12 @@
 import { X } from 'lucide-react';
 import type { ReactNode } from 'react';
 import { useEffect, useId, useRef, useState } from 'react';
+import { createPortal } from 'react-dom';
 import { Button } from '@/components/ui/button';
 import { cn } from '@/lib/utils';
 import { useOverlayFocus } from './use-overlay-focus';
 
 type DrawerSide = 'start' | 'end' | 'left' | 'right' | 'bottom';
-
-const sideClasses: Record<Exclude<DrawerSide, 'start' | 'end'>, string> = {
-  left: 'inset-y-0 left-0 h-full w-[min(24rem,calc(100vw-2rem))] rounded-r-lg',
-  right: 'inset-y-0 right-0 h-full w-[min(24rem,calc(100vw-2rem))] rounded-l-lg',
-  bottom: 'inset-x-0 bottom-0 max-h-[85svh] rounded-t-lg',
-};
 
 export function Drawer({
   open,
@@ -38,18 +33,20 @@ export function Drawer({
   const descriptionId = useId();
   const panelRef = useRef<HTMLDivElement>(null);
   const [dir, setDir] = useState<'ltr' | 'rtl'>('ltr');
+  const [mounted, setMounted] = useState(false);
 
   useEffect(() => {
+    setMounted(true);
     setDir(document.documentElement.dir === 'rtl' ? 'rtl' : 'ltr');
   }, []);
 
   useOverlayFocus({ open, onOpenChange, panelRef });
 
-  if (!open) return null;
+  if (!mounted || !open) return null;
 
   const resolvedSide = side === 'start' ? (dir === 'rtl' ? 'right' : 'left') : side === 'end' ? (dir === 'rtl' ? 'left' : 'right') : side;
 
-  return (
+  return createPortal(
     <div className="fixed inset-0 z-modal" role="presentation">
       <button
         type="button"
@@ -66,7 +63,9 @@ export function Drawer({
         tabIndex={-1}
         className={cn(
           'absolute flex flex-col border border-border bg-elevated p-5 shadow-popover outline-none',
-          sideClasses[resolvedSide],
+          resolvedSide === 'left' && 'bottom-0 left-0 top-0 w-[calc(100vw-2rem)] max-w-sm rounded-r-lg',
+          resolvedSide === 'right' && 'bottom-0 right-0 top-0 w-[calc(100vw-2rem)] max-w-sm rounded-l-lg',
+          resolvedSide === 'bottom' && 'inset-x-0 bottom-0 max-h-[85svh] rounded-t-lg',
           className,
         )}
       >
@@ -88,6 +87,7 @@ export function Drawer({
         {children ? <div className="mt-5 min-h-0 flex-1 overflow-y-auto overscroll-contain">{children}</div> : null}
         {footer ? <div className="mt-6 border-t border-border pt-4">{footer}</div> : null}
       </aside>
-    </div>
+    </div>,
+    document.body,
   );
 }

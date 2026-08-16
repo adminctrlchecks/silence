@@ -3,9 +3,8 @@ import { ShieldAlert } from 'lucide-react';
 import { getTranslations } from 'next-intl/server';
 import type { ReactNode } from 'react';
 import { AuthSessionProvider } from '@/components/auth/auth-session-provider';
-import { SignOutButton } from '@/components/auth/sign-out-button';
-import { ThemeToggle } from '@/components/theme-toggle';
-import { Button } from '@/components/ui/button';
+import { PublicNavbar } from '@/components/navigation/public-navbar';
+import { SiteFooter } from '@/components/navigation/site-footer';
 import { getUserSession } from '@/lib/user-session';
 
 export default async function UserLayout({ children }: { children: ReactNode }) {
@@ -26,32 +25,19 @@ export default async function UserLayout({ children }: { children: ReactNode }) 
             </Link>
           </div>
         ) : null}
-        <header className="border-b border-border bg-card/85 backdrop-blur">
-          <div className="mx-auto flex h-16 w-full max-w-6xl items-center justify-between px-4 sm:px-6">
-            <Link href="/" className="text-base font-semibold tracking-normal">
-              {common('appName')}
-            </Link>
-            <nav className="flex items-center gap-2">
-              <Button asChild variant="ghost" size="sm">
-                <Link href="/app">{t('mySession')}</Link>
-              </Button>
-              {authenticated ? (
-                <SignOutButton endpoint="/api/auth/logout" redirectTo="/login" />
-              ) : (
-                <>
-                  <Button asChild variant="outline" size="sm">
-                    <Link href="/login">{t('signIn')}</Link>
-                  </Button>
-                  <Button asChild variant="ghost" size="sm">
-                    <Link href="/admin/login">{common('signInAsAdmin')}</Link>
-                  </Button>
-                </>
-              )}
-              <ThemeToggle />
-            </nav>
-          </div>
-        </header>
-        {children}
+        <PublicNavbar
+          authenticated={authenticated}
+          labels={{
+            appName: common('appName'),
+            mySession: t('mySession'),
+            signIn: t('signIn'),
+            startReading: common('createProfile'),
+            signOut: 'Sign out',
+            adminSignIn: common('signInAsAdmin'),
+          }}
+        />
+        <div className="min-h-[calc(100vh-4rem)]">{children}</div>
+        <SiteFooter appName={common('appName')} />
       </div>
     </AuthSessionProvider>
   );
