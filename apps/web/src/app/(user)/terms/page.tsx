@@ -1,9 +1,14 @@
 import type { Metadata } from 'next';
 import { LegalPageLayout, LegalSection, type LegalSectionMeta } from '@/components/legal/legal-page-layout';
+import { localeAlternates } from '@/lib/seo';
 
 export const metadata: Metadata = {
   title: 'Terms & Conditions',
   description: 'The terms that govern using Silence.',
+  alternates: {
+    canonical: '/terms',
+    languages: localeAlternates('/terms'),
+  },
 };
 
 // All copy in this file is real and product-accurate (grounded in what the

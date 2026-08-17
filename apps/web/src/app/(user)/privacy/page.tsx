@@ -1,9 +1,14 @@
 import type { Metadata } from 'next';
 import { LegalPageLayout, LegalSection, type LegalSectionMeta } from '@/components/legal/legal-page-layout';
+import { localeAlternates } from '@/lib/seo';
 
 export const metadata: Metadata = {
   title: 'Privacy Policy',
   description: 'What data Silence collects, how it is used, and your privacy choices.',
+  alternates: {
+    canonical: '/privacy',
+    languages: localeAlternates('/privacy'),
+  },
 };
 
 // See the same NEEDS LEGAL REVIEW / NEEDS DECISION note in apps/web/src/app/(user)/terms/page.tsx —

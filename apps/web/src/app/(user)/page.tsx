@@ -25,6 +25,7 @@ import {
   normalizeCategory,
   normalizeSessionLanguage,
 } from '@/lib/session-preferences';
+import { localeAlternates } from '@/lib/seo';
 
 export const metadata: Metadata = {
   title: {
@@ -34,6 +35,7 @@ export const metadata: Metadata = {
     'Create a profile, answer guided astrology questions, view a birth chart, and receive a personal remedy in your preferred language.',
   alternates: {
     canonical: '/',
+    languages: localeAlternates('/'),
   },
   // No page-local `openGraph` override here: the root layout already sets an
   // identical openGraph title/description, and only the root layout's
