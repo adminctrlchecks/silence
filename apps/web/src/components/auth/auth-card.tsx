@@ -315,7 +315,6 @@ export function AuthCard({
             <div className="mt-3">
               <GoogleSignInButton
                 lang={locale}
-                label={t('continueWithGoogle')}
                 onSuccess={(profileComplete) => {
                   setError(null);
                   router.push(localizedPath(pathname, profileComplete ? '/app' : '/profile/birth-details?onboarding=1'));
