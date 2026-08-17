@@ -314,7 +314,6 @@ export function AuthCard({
             </p>
             <div className="mt-3">
               <GoogleSignInButton
-                mode={mode}
                 lang={locale}
                 label={t('continueWithGoogle')}
                 onSuccess={(profileComplete) => {
