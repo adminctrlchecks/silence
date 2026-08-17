@@ -1,7 +1,7 @@
 'use client';
 
-import { IMPORT_TYPES, type ImportJob, type ImportType } from '@silence/shared';
-import { Download, FileSpreadsheet, Loader2, RefreshCw, UploadCloud, X } from 'lucide-react';
+import { IMPORT_TYPES, type ImportJob, type ImportStatus, type ImportType } from '@silence/shared';
+import { AlertTriangle, CheckCircle2, Download, FileSpreadsheet, Loader2, RefreshCw, UploadCloud, X } from 'lucide-react';
 import { useCallback, useEffect, useMemo, useState } from 'react';
 import { useDropzone } from 'react-dropzone';
 import { Button } from '@/components/ui/button';
@@ -13,6 +13,12 @@ const importLabels: Record<ImportType, string> = {
   'answers-level1': 'Level 1 answers',
   'answers-level2': 'Level 2 answers',
   remedies: 'Remedies',
+};
+
+const statusStyles: Record<ImportStatus, { icon: typeof Loader2; className: string; label: string }> = {
+  processing: { icon: Loader2, className: 'text-primary', label: 'Processing' },
+  done: { icon: CheckCircle2, className: 'text-success', label: 'Done' },
+  failed: { icon: AlertTriangle, className: 'text-destructive', label: 'Failed' },
 };
 
 async function parseJson<T>(response: Response): Promise<T> {
@@ -203,7 +209,13 @@ export function ImportAdmin() {
               <div className="grid gap-3 sm:grid-cols-4">
                 <div className="rounded-md border border-border bg-background p-3">
                   <p className="text-xs text-muted-foreground">Status</p>
-                  <p className="mt-1 text-sm font-semibold capitalize">{job.status}</p>
+                  <p className={cn('mt-1 flex items-center gap-1.5 text-sm font-semibold', statusStyles[job.status].className)}>
+                    {(() => {
+                      const StatusIcon = statusStyles[job.status].icon;
+                      return <StatusIcon className={cn('size-3.5', job.status === 'processing' && 'animate-spin')} aria-hidden />;
+                    })()}
+                    {statusStyles[job.status].label}
+                  </p>
                 </div>
                 <div className="rounded-md border border-border bg-background p-3">
                   <p className="text-xs text-muted-foreground">Created</p>
@@ -213,9 +225,16 @@ export function ImportAdmin() {
                   <p className="text-xs text-muted-foreground">Updated</p>
                   <p className="mt-1 text-sm font-semibold">{job.updated ?? 0}</p>
                 </div>
-                <div className="rounded-md border border-border bg-background p-3">
+                <div
+                  className={cn(
+                    'rounded-md border p-3',
+                    job.errors?.length ? 'border-destructive/30 bg-destructive/5' : 'border-border bg-background',
+                  )}
+                >
                   <p className="text-xs text-muted-foreground">Errors</p>
-                  <p className="mt-1 text-sm font-semibold">{job.errors?.length ?? 0}</p>
+                  <p className={cn('mt-1 text-sm font-semibold', job.errors?.length ? 'text-destructive' : undefined)}>
+                    {job.errors?.length ?? 0}
+                  </p>
                 </div>
               </div>
 
