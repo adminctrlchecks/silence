@@ -10,12 +10,68 @@
   "Home": {
     "eyebrow": "أسئلة وأجوبة فلكية",
     "title": "Silence",
-    "languageLabel": "اللغة",
-    "languageValue": "11",
-    "chartLabel": "الخريطة",
-    "chartValue": "الفلك",
-    "savedProfileLabel": "ملف محفوظ",
-    "savedProfileValue": "JWT"
+    "heroSubtitle": "أجب عن أسئلة فلكية موجهة، واحصل على خريطة ميلاد من بياناتك المحفوظة، وتلقَّ علاجًا شخصيًا بلغتك المفضلة.",
+    "startCta": "ابدأ قراءتك",
+    "howItWorksCta": "شاهد كيف يعمل",
+    "savedNotice": "يتم حفظ ملفك الشخصي وقراءتك في حسابك عند إنشائه.",
+    "previewAlt": "معاينة لقراءة Silence مع أسئلة موجهة وخريطة ميلاد وعلاج.",
+    "previewGuidedQuestionLabel": "سؤال موجه",
+    "previewGuidedQuestionText": "ما النمط الذي أنت مستعد لفهمه بوضوح أكبر؟",
+    "previewChartLabel": "خريطة الميلاد",
+    "previewChartText": "الطالع والمواقع الرئيسية",
+    "previewRemedyLabel": "العلاج",
+    "previewRemedyText": "ممارسة قابلة للتكرار اختيرت لهذه القراءة.",
+    "howItWorksEyebrow": "كيف يعمل",
+    "howItWorksTitle": "قراءة موجهة، وليست توقعات بنقرة واحدة",
+    "stepLabel": "الخطوة {number}",
+    "step1Title": "أنشئ ملفك الشخصي",
+    "step1Description": "اختر لغة وفئة، ثم احفظ تفاصيل الميلاد المستخدمة لحساب الخريطة.",
+    "step2Title": "أجب عن الأسئلة الموجهة",
+    "step2Description": "تنقل عبر ثلاث طبقات من التأملات حتى تستجيب القراءة لسياقك.",
+    "step3Title": "اطّلع على خريطتك",
+    "step3Description": "شاهد تفاصيل الخريطة المحسوبة وسياق الدقة وتفسيرًا عند توفر بيانات كافية.",
+    "step4Title": "احصل على علاج",
+    "step4Description": "احصل على ممارسة شخصية مختارة من نموذج المحتوى الذي تديره أدوات إدارة Silence.",
+    "step5Title": "عد في أي وقت",
+    "step5Description": "يتيح لك سجل القراءات المحفوظ مراجعة الإجابات وتفاصيل الخريطة والعلاجات من حسابك.",
+    "whyEyebrow": "لماذا يستخدمه الناس",
+    "whyTitle": "مبني حول رحلة القراءة الموجودة بالفعل في التطبيق",
+    "whyDescription": "يركز Silence على الملف الشخصي والأسئلة والخريطة والعلاج والسجل. لا يستخدم شهادات ملفقة أو ادعاءات نتائج غير موثقة.",
+    "benefit1Title": "نقطة انطلاق بـ 11 لغة",
+    "benefit1Description": "يدعم Silence مجموعة اللغات الأولية الموثقة، بما في ذلك التعامل مع العربية من اليمين لليسار.",
+    "benefit2Title": "سجل قراءات محفوظ",
+    "benefit2Description": "يمكن لحسابك الاحتفاظ بجلسات القراءة والإجابات ولقطات الخريطة وسجل العلاجات.",
+    "benefit3Title": "حساب خريطة الميلاد",
+    "benefit3Description": "تستخدم صفحات الخريطة تاريخ ووقت ومكان الميلاد المحفوظين، والإحداثيات والمنطقة الزمنية عند توفرها.",
+    "benefit4Title": "عمليات محتوى مدمجة",
+    "benefit4Description": "تدير أدوات الإدارة الأسئلة والإجابات والعلاجات والترجمات والاستيراد وحالات المراجعة.",
+    "trustEyebrow": "الثقة والخصوصية",
+    "trustTitle": "اعرف سبب طلب كل تفصيل",
+    "trustDescription": "يدعم تاريخ ووقت ومكان الميلاد حساب الخريطة. يمكن لحسابك حفظ الإجابات والخرائط والعلاجات وسجل القراءات حتى تتمكن من العودة لاحقًا.",
+    "dataItem1Title": "تفاصيل الميلاد",
+    "dataItem1Description": "تُستخدم لحساب الخريطة وسياق الدقة.",
+    "dataItem2Title": "إجابات القراءة",
+    "dataItem2Description": "محفوظة مع جلستك حتى يعمل التوجيه والسجل.",
+    "dataItem3Title": "المساعدة بالذكاء الاصطناعي",
+    "dataItem3Description": "تُستخدم في سير عمل الإنشاء والترجمة الحالي؛ الصياغة القانونية بحاجة إلى مراجعة.",
+    "startPanelEyebrow": "لوحة البدء",
+    "startPanelTitle": "اختر كيف تبدأ القراءة",
+    "startPanelDescription": "اختر لغة وفئة أولاً. تُحفظ هذه التفضيلات محليًا وتُنقل إلى إنشاء الملف الشخصي.",
+    "startPanelCta": "متابعة إلى الملف الشخصي",
+    "faqEyebrow": "الأسئلة الشائعة",
+    "faqTitle": "قبل أن تبدأ",
+    "faq1Question": "ما هو Silence؟",
+    "faq1Answer": "Silence هو تطبيق أسئلة وأجوبة فلكية موجه. تنشئ ملفًا شخصيًا وتجيب عن تأملات وتطّلع على خريطة وتتلقى مسار علاج شخصي.",
+    "faq2Question": "لماذا تُطلب معلومات وقت ومكان الميلاد؟",
+    "faq2Answer": "تُستخدم تاريخ ووقت ومكان الميلاد لحساب تفاصيل الخريطة. إذا كانت التفاصيل غير مكتملة، فقد تكون دقة الخريطة تقريبية أو غير مؤكدة.",
+    "faq3Question": "هل يمكنني العودة إلى القراءات السابقة؟",
+    "faq3Answer": "نعم. سجل القراءات جزء من مسار المنتج الحالي للمستخدمين المسجلين.",
+    "faq4Question": "هل هذه نصيحة طبية أو قانونية أو مالية؟",
+    "faq4Answer": "لا. Silence مخصص للإرشاد الفلكي التأملي، وليس نصيحة طبية أو قانونية أو مالية. راجع <terms>الشروط</terms> للحصول على إخلاء المسؤولية الكامل.",
+    "faq5Question": "كيف يُستخدم الذكاء الاصطناعي؟",
+    "faq5Answer": "يتم إنشاء بعض الإجابات والترجمات وتفسيرات الخريطة بمساعدة الذكاء الاصطناعي. راجع <privacy>الخصوصية</privacy> لمزيد من التفاصيل.",
+    "finalTitle": "هل أنت مستعد لبدء قراءتك؟",
+    "finalDescription": "أنشئ ملفًا شخصيًا واحفظ تفضيلاتك وتنقل عبر مسار قراءة Silence الموجه."
   },
   "SessionPicker": {
     "language": "اللغة",
@@ -44,7 +100,7 @@
     "contact": "البريد أو الهاتف",
     "password": "كلمة المرور",
     "forgotPassword": "هل نسيت كلمة المرور؟",
-    "consent": "أوافق على حفظ ملفي وتفاصيل ميلادي وإجاباتي وخريطتي والعلاج المقترح.",
+    "consent": "أوافق على <terms>الشروط</terms> و<privacy>سياسة الخصوصية</privacy>، وأوافق على حفظ ملفي وتفاصيل ميلادي وإجاباتي وخريطتي والعلاج المقترح.",
     "createSubmit": "إنشاء ملف",
     "signInSubmit": "تسجيل الدخول",
     "alreadyHaveProfile": "هل لديك ملف بالفعل؟",
@@ -56,7 +112,23 @@
     "birthPlacePlaceholder": "ابحث عن مدينة…",
     "continueWithGoogle": "المتابعة باستخدام Google",
     "orContinueWithEmail": "أو المتابعة بالبريد الإلكتروني",
-    "googleSignInError": "فشل تسجيل الدخول عبر Google. حاول مرة أخرى."
+    "googleSignInError": "فشل تسجيل الدخول عبر Google. حاول مرة أخرى.",
+    "eyebrowLogin": "تسجيل الدخول",
+    "eyebrowRegister": "ملف جديد",
+    "descriptionLogin": "أدخل بيانات التواصل وكلمة المرور لمتابعة قراءتك.",
+    "descriptionRegister": "أنشئ ملفك الشخصي في ثلاث خطوات سريعة لإصدار خريطتك والعلاج المقترح.",
+    "steps": {
+      "identity": "الهوية",
+      "birth": "تفاصيل الميلاد",
+      "account": "الحساب"
+    },
+    "stepProgress": "الخطوة {current} من {total}: {label}",
+    "back": "رجوع",
+    "continue": "متابعة",
+    "birthWhyTitle": "لماذا نطلب تفاصيل ميلاد دقيقة",
+    "birthWhyBody": "يتيح لنا تاريخ ووقت ومكان ميلادك حساب مواقع الكواكب والبيوت الفلكية بدقة لخريطتك. حتى فرق دقائق قليلة قد يغيّر النتيجة، لذا استخدم شهادة الميلاد أو سجلاً عائليًا موثوقًا إذا لم تكن متأكدًا.",
+    "agreementNotice": "بالمتابعة، أنت توافق على <terms>الشروط</terms> و<privacy>سياسة الخصوصية</privacy>.",
+    "stepValidationError": "يرجى تعبئة جميع الحقول المطلوبة قبل المتابعة."
   },
   "ForgotPassword": {
     "eyebrow": "استعادة الحساب",
@@ -78,13 +150,16 @@
     "submit": "إعادة تعيين كلمة المرور",
     "submitting": "جارٍ إعادة التعيين",
     "success": "تم تحديث كلمة المرور. جارٍ التحويل لتسجيل الدخول…",
-    "invalidLink": "رابط إعادة التعيين هذا غير صالح أو منتهي الصلاحية. اطلب رابطًا جديدًا من صفحة تسجيل الدخول."
+    "invalidLink": "رابط إعادة التعيين هذا غير صالح أو منتهي الصلاحية. اطلب رابطًا جديدًا من صفحة تسجيل الدخول.",
+    "requestNewLink": "طلب رابط إعادة تعيين جديد"
   },
   "UserLayout": {
     "mySession": "جلستي",
     "signIn": "تسجيل الدخول",
     "impersonationBanner": "أنت تشاهد تطبيق المستخدم بصفتك هذا الحساب، عبر دخول المسؤول.",
-    "exitToAdmin": "العودة إلى الإدارة"
+    "exitToAdmin": "العودة إلى الإدارة",
+    "signOut": "تسجيل الخروج",
+    "signingOut": "جارٍ تسجيل الخروج"
   },
   "UserApp": {
     "eyebrow": "مساحة المستخدم",
@@ -135,7 +210,23 @@
       "chart_ready": "الخريطة جاهزة",
       "remedy_ready": "العلاج جاهز",
       "complete": "مكتملة"
-    }
+    },
+    "greeting": "مرحبًا، {name}",
+    "subtitleFirstTime": "قراءتك الأولى جاهزة لتبدأ.",
+    "subtitleInProgress": "أكمل من حيث توقفت.",
+    "subtitleChartReady": "خريطتك الفلكية جاهزة للعرض.",
+    "subtitleRemedyReady": "علاجك جاهز للعرض.",
+    "subtitleReturning": "جاهزون متى أردت بدء قراءة جديدة.",
+    "journey": {
+      "profile": "الملف الشخصي",
+      "questions": "الأسئلة",
+      "chart": "الخريطة",
+      "remedy": "العلاج",
+      "complete": "مكتمل"
+    },
+    "firstTimeExplainer": "أجب عن بعض الأسئلة الموجهة، ثم احصل على خريطتك الفلكية وعلاج شخصي - نحو ثلاث خطوات.",
+    "recentReading": "أحدث قراءة لك",
+    "viewFullHistory": "عرض السجل الكامل"
   },
   "Chart": {
     "eyebrow": "خريطة تجريبية",
@@ -155,7 +246,40 @@
       "approximate": "تقريبي",
       "uncertain": "غير مؤكد",
       "label": "دقة الحساب"
-    }
+    },
+    "chartVisualAlt": "عجلة الخريطة الفلكية الفيدية توضح مواقع الكواكب عبر البيوت الاثني عشر. راجع جدول المواقع أدناه للحصول على المواضع الدقيقة.",
+    "chartSummaryHeading": "ملخص الخريطة",
+    "birthDataLabel": "بيانات الميلاد",
+    "atConnector": "في",
+    "birthPlaceLabel": "مكان الميلاد",
+    "coordinatesNotAvailable": "الإحداثيات غير متوفرة",
+    "calculationLabel": "الحساب",
+    "zodiacSuffix": "نظام {zodiac}",
+    "julianDayLabel": "اليوم اليولياني {value}",
+    "timezoneLabel": "المنطقة الزمنية: {value}",
+    "placementsHeading": "المواقع",
+    "placementsDescription": "الكوكب والبرج والدرجة والبيت والحركة من الخريطة المحسوبة.",
+    "columnPlanet": "الكوكب",
+    "columnSign": "البرج",
+    "columnDegree": "الدرجة",
+    "columnHouse": "البيت",
+    "columnMotion": "الحركة",
+    "motionDirect": "مباشر",
+    "housesHeading": "البيوت",
+    "housesFallback": "تحتاج زوايا البيوت إلى إحداثيات ميلاد دقيقة. تستخدم المواقع الحالية البديل القائم على البرج.",
+    "interpretationHeading": "القراءة الشخصية",
+    "generatedOn": "أُنشئت في {date}",
+    "viewRemedy": "عرض العلاج",
+    "warningApproximate": "الإحداثيات الدقيقة أو المنطقة الزمنية غير متوفرة، لذا قد تتغير البيوت والطالع.",
+    "warningUncertain": "إحداثيات مكان الميلاد غير متوفرة، لذا تستخدم الخريطة بيوتًا بديلة قائمة على البرج.",
+    "detailAscendant": "البرج الطالع من وقت ومكان الميلاد",
+    "detailSun": "الموقع الشمسي الأساسي",
+    "detailMoon": "الموقع القمري العاطفي",
+    "activeHouseDetail": "{count} مواقع هنا",
+    "detailNoHouseEmphasis": "لا يوجد تركيز على بيت معين",
+    "labelSun": "الشمس",
+    "labelMoon": "القمر",
+    "labelActiveHouse": "البيت الأنشط"
   },
   "Remedy": {
     "eyebrow": "العلاج الشخصي",
@@ -163,7 +287,11 @@
     "linkedLevel": "المستوى المرتبط: {level}",
     "practice": "Suggested practice",
     "closing": "Keep the remedy gentle and repeatable. Small consistency is more useful than intensity.",
-    "whyThisPractice": "لماذا هذه الممارسة"
+    "whyThisPractice": "لماذا هذه الممارسة",
+    "whyGeneric": "تم اختياره كممارسة داعمة لفئتك وقراءتك الحالية.",
+    "howToRepeat": "كيفية التكرار",
+    "backToChart": "العودة إلى الخريطة",
+    "viewHistory": "عرض سجل القراءات"
   },
   "Profile": {
     "eyebrow": "الملف المحفوظ",
@@ -190,7 +318,19 @@
     "birthPlacePlaceholder": "ابحث عن مدينة…",
     "completeProfileTitle": "أكمل إعداد ملفك الشخصي",
     "completeProfileDescription": "أضف بيانات ميلادك ووافق على الشروط حتى نتمكن من إنشاء قراءتك الفلكية الشخصية.",
-    "consentEditLabel": "أوافق على الشروط وسياسة الخصوصية، وأوافق على تخزين Silence لبيانات ميلادي لإنشاء قراءتي."
+    "consentEditLabel": "أوافق على الشروط وسياسة الخصوصية، وأوافق على تخزين Silence لبيانات ميلادي لإنشاء قراءتي.",
+    "nav": {
+      "overview": "نظرة عامة",
+      "birthDetails": "تفاصيل الميلاد",
+      "security": "الأمان",
+      "privacy": "الخصوصية"
+    },
+    "consentMissingNote": "أكمل تفاصيل ميلادك لإنهاء الإعداد.",
+    "birthDetailsEyebrow": "تفاصيل الميلاد",
+    "birthDetailsTitle": "تفاصيل الميلاد",
+    "birthDetailsDescription": "تاريخ ووقت ومكان الميلاد المستخدمة لحساب خريطتك.",
+    "changeImpactTitle": "سيؤثر هذا على القراءات المستقبلية",
+    "changeImpactBody": "قد يؤثر تغيير هذه التفاصيل على أي خريطة جديدة تُنشئها. تحتفظ القراءات المكتملة بالفعل بخريطتها الأصلية كسجل تاريخي."
   },
   "History": {
     "eyebrow": "قراءاتك",
@@ -219,7 +359,11 @@
       "chart_ready": "الخريطة جاهزة",
       "remedy_ready": "العلاج جاهز",
       "complete": "مكتملة"
-    }
+    },
+    "previousPage": "السابق",
+    "nextPage": "التالي",
+    "pageOf": "صفحة {current} من {total}",
+    "emptyExplainer": "بمجرد إكمال قراءة، تُحفظ هنا مع إجاباتك وخريطتك وعلاجك لتتمكن من مراجعتها في أي وقت."
   },
   "Questions": {
     "eyebrow": "مسار الأسئلة",
@@ -241,7 +385,9 @@
     "intro": "Move through three short layers. Your final chart reading is shaped by your Level 2 reflections, so plain honest answers work best.",
     "progress": "Step {current} of {total}.",
     "stepHelp": "Save this layer to reveal the guidance written for each question.",
-    "emptyTitle": "This layer is waiting for content."
+    "emptyTitle": "This layer is waiting for content.",
+    "saving": "جارٍ الحفظ…",
+    "savedAnnouncement": "تم حفظ {level}."
   },
   "Security": {
     "eyebrow": "Security",
@@ -252,6 +398,71 @@
     "confirmPassword": "Confirm new password",
     "submit": "Change password",
     "submitting": "Changing password",
-    "success": "Password changed. Please sign in again."
+    "success": "Password changed. Please sign in again.",
+    "manageCta": "إدارة كلمة المرور"
+  },
+  "Disclaimer": {
+    "chartRemedy": "هذه القراءة للتأمل وفهم الذات - وليست نصيحة طبية أو قانونية أو مالية، والنتائج غير مضمونة. راجع <terms>الشروط</terms> لمزيد من التفاصيل."
+  },
+  "Privacy": {
+    "eyebrow": "الخصوصية",
+    "title": "الخصوصية وبياناتك",
+    "consentStatusTitle": "موافقتك",
+    "consentGiven": "لقد وافقت على حفظ ملفك الشخصي وتفاصيل ميلادك وإجاباتك وخريطتك والعلاج المقترح.",
+    "consentMissing": "لم تكمل الموافقة بعد. أكمل تفاصيل ميلادك لتفعيل القراءات.",
+    "manageBirthDetails": "إدارة تفاصيل الميلاد",
+    "dataWeStoreTitle": "ما نقوم بتخزينه",
+    "dataWeStoreBody": "ملفك الشخصي وتفاصيل ميلادك وإجابات الأسئلة والخرائط والعلاجات التي تم إنشاؤها.",
+    "aiTitle": "معالجة الذكاء الاصطناعي",
+    "aiBody": "يتم إنشاء بعض الإجابات والترجمات وتفسيرات الخرائط باستخدام نموذج Gemini للذكاء الاصطناعي من Google. يتم وضع علامة على المحتوى الذي راجعه المشرف بشكل منفصل في سجل قراءاتك.",
+    "legalTitle": "الشؤون القانونية",
+    "readTerms": "قراءة الشروط",
+    "readPrivacyPolicy": "قراءة سياسة الخصوصية",
+    "requestTitle": "طلب بياناتك أو حذفها",
+    "requestBody": "لا نقدم بعد خيار التصدير أو الحذف الذاتي. تواصل معنا وسنتعامل مع طلبك يدويًا."
+  },
+  "Legal": {
+    "draftNotice": "هذه الصفحة مسودة عمل لشروطنا القانونية وهي قيد المراجعة القانونية الرسمية. وهي ليست نهائية بعد.",
+    "translationNotice": "هذه الصفحة متاحة حاليًا باللغة الإنجليزية فقط. سيتم توفير نسخة مترجمة بعد المراجعة القانونية.",
+    "tableOfContents": "في هذه الصفحة",
+    "lastUpdated": "آخر تحديث {date}",
+    "backToTop": "العودة إلى الأعلى"
+  },
+  "Nav": {
+    "howItWorks": "كيف يعمل",
+    "faq": "الأسئلة الشائعة",
+    "privacy": "الخصوصية",
+    "terms": "الشروط",
+    "home": "الرئيسية",
+    "startReading": "ابدأ القراءة",
+    "adminSignIn": "تسجيل دخول المشرف",
+    "product": "المنتج",
+    "trust": "الثقة",
+    "footerDescription": "أسئلة وأجوبة تأملية في علم التنجيم مع قراءات محفوظة وإصدار خريطة ومسار علاج شخصي.",
+    "copyright": "© {year} {appName}. المالك القانوني قيد المراجعة.",
+    "openMenu": "فتح القائمة",
+    "publicNavigationLabel": "التنقل العام",
+    "mobileNavigationLabel": "التنقل على الجوال",
+    "footerProductNavLabel": "تنقل تذييل المنتج",
+    "footerTrustNavLabel": "تنقل تذييل الثقة",
+    "openProfileMenu": "فتح قائمة الملف الشخصي",
+    "accountTitle": "الحساب",
+    "accountDescription": "الملف الشخصي والأمان",
+    "accountNavLabel": "تنقل الحساب",
+    "profileLabel": "الملف الشخصي",
+    "dashboardLabel": "لوحة التحكم",
+    "historyLabel": "السجل",
+    "language": "اللغة",
+    "userAppNavigationLabel": "تنقل تطبيق المستخدم",
+    "mobileUserAppNavigationLabel": "تنقل تطبيق المستخدم على الجوال",
+    "signIn": "تسجيل الدخول"
+  },
+  "NotFound": {
+    "rootTitle": "هذه الصفحة غير متوفرة",
+    "rootDescription": "قد يكون الرابط مكتوبًا بشكل خاطئ أو منتهي الصلاحية أو لم يعد جزءًا من Silence.",
+    "goHome": "الذهاب إلى الرئيسية",
+    "userTitle": "لم نتمكن من العثور على هذه الصفحة",
+    "userDescription": "عد إلى لوحة قراءاتك أو استخدم روابط التذييل للخصوصية والشروط.",
+    "goDashboard": "الذهاب إلى لوحة التحكم"
   }
 }

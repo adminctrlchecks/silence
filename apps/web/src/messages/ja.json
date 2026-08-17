@@ -10,12 +10,68 @@
   "Home": {
     "eyebrow": "占星術Q&A",
     "title": "Silence",
-    "languageLabel": "言語",
-    "languageValue": "11",
-    "chartLabel": "チャート",
-    "chartValue": "占星術",
-    "savedProfileLabel": "保存済みプロフィール",
-    "savedProfileValue": "JWT"
+    "heroSubtitle": "誘導形式の占星術の質問に答え、保存した出生情報から出生図を作成し、あなたの希望する言語で個別のレメディを受け取りましょう。",
+    "startCta": "リーディングを始める",
+    "howItWorksCta": "仕組みを見る",
+    "savedNotice": "アカウントを作成すると、プロフィールとリーディングがアカウントに保存されます。",
+    "previewAlt": "誘導質問、出生図、レメディを含むSilenceリーディングのプレビュー。",
+    "previewGuidedQuestionLabel": "誘導質問",
+    "previewGuidedQuestionText": "あなたがより明確に理解する準備ができているパターンは何ですか？",
+    "previewChartLabel": "出生図",
+    "previewChartText": "アセンダントと主要な配置",
+    "previewRemedyLabel": "レメディ",
+    "previewRemedyText": "このリーディングのために選ばれた繰り返し可能な実践。",
+    "howItWorksEyebrow": "利用の流れ",
+    "howItWorksTitle": "誘導形式のリーディング、ワンクリックの占いではありません",
+    "stepLabel": "ステップ {number}",
+    "step1Title": "プロフィールを作成",
+    "step1Description": "言語とカテゴリーを選び、チャート計算に使用する出生情報を保存します。",
+    "step2Title": "誘導質問に回答",
+    "step2Description": "3層の内省を進み、リーディングがあなたの状況に応じられるようにします。",
+    "step3Title": "チャートを見る",
+    "step3Description": "計算された出生図の詳細、精度の背景、十分なデータがある場合は解釈を確認します。",
+    "step4Title": "レメディを受け取る",
+    "step4Description": "Silence管理ツールが管理するコンテンツモデルから選ばれた個別の実践を受け取ります。",
+    "step5Title": "いつでも戻る",
+    "step5Description": "保存されたリーディング履歴により、アカウントから回答、チャートの詳細、レメディを見返すことができます。",
+    "whyEyebrow": "利用される理由",
+    "whyTitle": "アプリに既にあるリーディングの流れを中心に構築",
+    "whyDescription": "Silenceはプロフィール、質問、チャート、レメディ、履歴に焦点を当てています。捏造された体験談や検証不可能な結果の主張は使用しません。",
+    "benefit1Title": "11言語からのスタート",
+    "benefit1Description": "Silenceはアラビア語RTL対応を含む、文書化されたシード言語セットをサポートします。",
+    "benefit2Title": "保存されたリーディング履歴",
+    "benefit2Description": "アカウントにリーディングセッション、回答、チャートのスナップショット、レメディ履歴を保持できます。",
+    "benefit3Title": "出生図の計算",
+    "benefit3Description": "チャートページは、利用可能な場合、保存された生年月日、出生時刻、場所、座標、タイムゾーンを使用します。",
+    "benefit4Title": "組み込みのコンテンツ運用",
+    "benefit4Description": "管理ツールが質問、回答、レメディ、翻訳、インポート、レビュー状態を管理します。",
+    "trustEyebrow": "信頼とプライバシー",
+    "trustTitle": "各項目が必要な理由を知る",
+    "trustDescription": "生年月日、時刻、場所はチャート計算を支えます。アカウントには回答、チャート、レメディ、リーディング履歴を保存でき、後で戻ってくることができます。",
+    "dataItem1Title": "出生情報",
+    "dataItem1Description": "チャート計算と精度の背景情報に使用されます。",
+    "dataItem2Title": "リーディングの回答",
+    "dataItem2Description": "ガイダンスと履歴が機能するように、セッションとともに保存されます。",
+    "dataItem3Title": "AI支援",
+    "dataItem3Description": "現在の生成・翻訳ワークフローで使用されています。法的文言は審査が必要です。",
+    "startPanelEyebrow": "スタートパネル",
+    "startPanelTitle": "リーディングの始め方を選ぶ",
+    "startPanelDescription": "まず言語とカテゴリーを選択してください。これらの設定はローカルに保存され、プロフィール作成に引き継がれます。",
+    "startPanelCta": "プロフィールへ進む",
+    "faqEyebrow": "よくある質問",
+    "faqTitle": "始める前に",
+    "faq1Question": "Silenceとは何ですか？",
+    "faq1Answer": "Silenceは誘導形式の占星術Q&Aアプリです。プロフィールを作成し、内省に回答し、チャートを見て、個別のレメディの道筋を受け取ります。",
+    "faq2Question": "なぜ出生時刻と場所を尋ねるのですか？",
+    "faq2Answer": "生年月日、時刻、場所はチャートの詳細を計算するために使用されます。情報が不完全な場合、チャートの精度は概算または不確かになることがあります。",
+    "faq3Question": "以前のリーディングに戻れますか？",
+    "faq3Answer": "はい。サインイン済みユーザーにとって、リーディング履歴は現在のプロダクトフローの一部です。",
+    "faq4Question": "これは医療、法律、または財務上の助言ですか？",
+    "faq4Answer": "いいえ。Silenceは内省的な占星術のガイダンスを提供するものであり、医療、法律、財務上の助言ではありません。完全な免責事項については<terms>利用規約</terms>をご覧ください。",
+    "faq5Question": "AIはどのように使われていますか？",
+    "faq5Answer": "一部の回答、翻訳、チャートの解釈はAI支援によって生成されます。詳細は<privacy>プライバシー</privacy>をご覧ください。",
+    "finalTitle": "リーディングを始める準備はできましたか？",
+    "finalDescription": "プロフィールを作成し、設定を保存して、誘導形式のSilenceリーディングの道を進みましょう。"
   },
   "SessionPicker": {
     "language": "言語",
@@ -44,7 +100,7 @@
     "contact": "メールまたは電話",
     "password": "パスワード",
     "forgotPassword": "パスワードをお忘れですか?",
-    "consent": "プロフィール、出生情報、回答、チャート、レメディの保存に同意します。",
+    "consent": "<terms>利用規約</terms>および<privacy>プライバシーポリシー</privacy>に同意し、プロフィール、出生情報、回答、チャート、レメディの保存に同意します。",
     "createSubmit": "プロフィール作成",
     "signInSubmit": "サインイン",
     "alreadyHaveProfile": "すでにプロフィールがありますか？",
@@ -56,7 +112,23 @@
     "birthPlacePlaceholder": "都市を検索…",
     "continueWithGoogle": "Google で続ける",
     "orContinueWithEmail": "またはメールで続ける",
-    "googleSignInError": "Google サインインに失敗しました。もう一度お試しください。"
+    "googleSignInError": "Google サインインに失敗しました。もう一度お試しください。",
+    "eyebrowLogin": "サインイン",
+    "eyebrowRegister": "新規プロフィール",
+    "descriptionLogin": "連絡先とパスワードを入力して、リーディングを続けましょう。",
+    "descriptionRegister": "チャートとレメディを作成するために、3つの簡単なステップでプロフィールを設定します。",
+    "steps": {
+      "identity": "基本情報",
+      "birth": "出生情報",
+      "account": "アカウント"
+    },
+    "stepProgress": "ステップ {current} / {total}：{label}",
+    "back": "戻る",
+    "continue": "次へ",
+    "birthWhyTitle": "正確な出生情報をお伺いする理由",
+    "birthWhyBody": "生年月日、出生時刻、出生地により、惑星の位置とハウスを正確に計算できます。数分の違いでも結果が変わることがあるため、不確かな場合は出生証明書や信頼できる家族の記録をご利用ください。",
+    "agreementNotice": "続行することで、<terms>利用規約</terms>および<privacy>プライバシーポリシー</privacy>に同意したものとみなされます。",
+    "stepValidationError": "続行する前に、必須項目をすべて入力してください。"
   },
   "ForgotPassword": {
     "eyebrow": "アカウント復旧",
@@ -78,13 +150,16 @@
     "submit": "パスワードをリセット",
     "submitting": "リセット中",
     "success": "パスワードが更新されました。サインインへ移動しています…",
-    "invalidLink": "このリセットリンクは無効か期限切れです。サインインページから新しいリンクをリクエストしてください。"
+    "invalidLink": "このリセットリンクは無効か期限切れです。サインインページから新しいリンクをリクエストしてください。",
+    "requestNewLink": "新しいリセットリンクをリクエスト"
   },
   "UserLayout": {
     "mySession": "マイセッション",
     "signIn": "サインイン",
     "impersonationBanner": "管理者アクセスにより、このアカウントとしてユーザーアプリを表示しています。",
-    "exitToAdmin": "管理画面に戻る"
+    "exitToAdmin": "管理画面に戻る",
+    "signOut": "サインアウト",
+    "signingOut": "サインアウト中"
   },
   "UserApp": {
     "eyebrow": "ユーザーワークスペース",
@@ -135,7 +210,23 @@
       "chart_ready": "チャート準備完了",
       "remedy_ready": "レメディ準備完了",
       "complete": "完了"
-    }
+    },
+    "greeting": "ようこそ、{name}さん",
+    "subtitleFirstTime": "最初のリーディングを始める準備ができています。",
+    "subtitleInProgress": "中断したところから再開しましょう。",
+    "subtitleChartReady": "出生図の閲覧準備ができました。",
+    "subtitleRemedyReady": "レメディの閲覧準備ができました。",
+    "subtitleReturning": "新しいリーディングを始めたいときにいつでもどうぞ。",
+    "journey": {
+      "profile": "プロフィール",
+      "questions": "質問",
+      "chart": "チャート",
+      "remedy": "レメディ",
+      "complete": "完了"
+    },
+    "firstTimeExplainer": "いくつかの質問に答えると、出生図と個別のレメディが得られます —約3ステップです。",
+    "recentReading": "最近のリーディング",
+    "viewFullHistory": "全履歴を見る"
   },
   "Chart": {
     "eyebrow": "サンプルチャート",
@@ -155,7 +246,40 @@
       "approximate": "近似値",
       "uncertain": "不確か",
       "label": "計算精度"
-    }
+    },
+    "chartVisualAlt": "12ハウスにわたる惑星配置を示すヴェーダ出生図ホイール。正確な位置については下の配置表をご覧ください。",
+    "chartSummaryHeading": "チャート概要",
+    "birthDataLabel": "出生データ",
+    "atConnector": "",
+    "birthPlaceLabel": "出生地",
+    "coordinatesNotAvailable": "座標が利用できません",
+    "calculationLabel": "計算方式",
+    "zodiacSuffix": "{zodiac}黄道",
+    "julianDayLabel": "ユリウス日 {value}",
+    "timezoneLabel": "タイムゾーン: {value}",
+    "placementsHeading": "配置",
+    "placementsDescription": "計算されたチャートからの惑星、サイン、度数、ハウス、順行/逆行。",
+    "columnPlanet": "惑星",
+    "columnSign": "サイン",
+    "columnDegree": "度数",
+    "columnHouse": "ハウス",
+    "columnMotion": "動き",
+    "motionDirect": "順行",
+    "housesHeading": "ハウス",
+    "housesFallback": "ハウスカスプには正確な出生座標が必要です。現在の配置はサインベースの代替を使用しています。",
+    "interpretationHeading": "個人のリーディング",
+    "generatedOn": "{date}に生成",
+    "viewRemedy": "レメディを見る",
+    "warningApproximate": "正確な座標またはタイムゾーンが不足しているため、ハウスとアセンダントが変わる可能性があります。",
+    "warningUncertain": "出生地の座標が不足しているため、チャートはサインベースの代替ハウスを使用しています。",
+    "detailAscendant": "出生時刻と場所によるアセンダントサイン",
+    "detailSun": "太陽の主要配置",
+    "detailMoon": "感情面の月の配置",
+    "activeHouseDetail": "ここに{count}件の配置",
+    "detailNoHouseEmphasis": "特に強調されたハウスはありません",
+    "labelSun": "太陽",
+    "labelMoon": "月",
+    "labelActiveHouse": "活発なハウス"
   },
   "Remedy": {
     "eyebrow": "個人レメディ",
@@ -163,7 +287,11 @@
     "linkedLevel": "関連レベル: {level}",
     "practice": "Suggested practice",
     "closing": "Keep the remedy gentle and repeatable. Small consistency is more useful than intensity.",
-    "whyThisPractice": "この習慣をすすめる理由"
+    "whyThisPractice": "この習慣をすすめる理由",
+    "whyGeneric": "あなたのカテゴリーと今回のリーディングのためのサポート的な実践として選ばれました。",
+    "howToRepeat": "繰り返し方",
+    "backToChart": "チャートに戻る",
+    "viewHistory": "リーディング履歴を見る"
   },
   "Profile": {
     "eyebrow": "保存済みプロフィール",
@@ -190,7 +318,19 @@
     "birthPlacePlaceholder": "都市を検索…",
     "completeProfileTitle": "プロフィールの設定を完了してください",
     "completeProfileDescription": "パーソナライズされた占星術リーディングを作成するために、生年月日の情報と同意を追加してください。",
-    "consentEditLabel": "利用規約とプライバシーポリシーに同意し、Silence が私の生年月日情報を保存してリーディングを作成することに同意します。"
+    "consentEditLabel": "利用規約とプライバシーポリシーに同意し、Silence が私の生年月日情報を保存してリーディングを作成することに同意します。",
+    "nav": {
+      "overview": "概要",
+      "birthDetails": "出生情報",
+      "security": "セキュリティ",
+      "privacy": "プライバシー"
+    },
+    "consentMissingNote": "オンボーディングを完了するには出生情報を入力してください。",
+    "birthDetailsEyebrow": "出生情報",
+    "birthDetailsTitle": "出生情報",
+    "birthDetailsDescription": "チャートの計算に使用される生年月日、出生時刻、出生地。",
+    "changeImpactTitle": "今後のリーディングに影響します",
+    "changeImpactBody": "この情報を変更すると、今後生成するチャートに影響する場合があります。既に完了したリーディングは、履歴として元のチャートを保持します。"
   },
   "History": {
     "eyebrow": "あなたのリーディング",
@@ -219,7 +359,11 @@
       "chart_ready": "チャート準備完了",
       "remedy_ready": "レメディ準備完了",
       "complete": "完了"
-    }
+    },
+    "previousPage": "前へ",
+    "nextPage": "次へ",
+    "pageOf": "{total}ページ中{current}ページ目",
+    "emptyExplainer": "リーディングを完了すると、回答・チャート・レメディとともにここに保存され、いつでも見返すことができます。"
   },
   "Questions": {
     "eyebrow": "質問フロー",
@@ -241,7 +385,9 @@
     "intro": "Move through three short layers. Your final chart reading is shaped by your Level 2 reflections, so plain honest answers work best.",
     "progress": "Step {current} of {total}.",
     "stepHelp": "Save this layer to reveal the guidance written for each question.",
-    "emptyTitle": "This layer is waiting for content."
+    "emptyTitle": "This layer is waiting for content.",
+    "saving": "保存中…",
+    "savedAnnouncement": "{level}を保存しました。"
   },
   "Security": {
     "eyebrow": "Security",
@@ -252,6 +398,71 @@
     "confirmPassword": "Confirm new password",
     "submit": "Change password",
     "submitting": "Changing password",
-    "success": "Password changed. Please sign in again."
+    "success": "Password changed. Please sign in again.",
+    "manageCta": "パスワードを管理"
+  },
+  "Disclaimer": {
+    "chartRemedy": "このリーディングは内省と自己理解のためのものであり、医療・法律・財務上の助言ではなく、結果を保証するものでもありません。詳しくは<terms>利用規約</terms>をご覧ください。"
+  },
+  "Privacy": {
+    "eyebrow": "プライバシー",
+    "title": "プライバシーとあなたのデータ",
+    "consentStatusTitle": "あなたの同意",
+    "consentGiven": "プロフィール、出生情報、回答、チャート、レメディの保存に同意しています。",
+    "consentMissing": "まだ同意が完了していません。リーディングを有効にするには出生情報を完了してください。",
+    "manageBirthDetails": "出生情報を管理",
+    "dataWeStoreTitle": "保存する情報",
+    "dataWeStoreBody": "プロフィール、出生情報、質問への回答、生成されたチャート、レメディ。",
+    "aiTitle": "AI処理",
+    "aiBody": "一部の回答、翻訳、チャート解釈はGoogleのGemini AIモデルを使用して生成されます。管理者がレビューしたコンテンツはリーディング履歴で別途表示されます。",
+    "legalTitle": "法的情報",
+    "readTerms": "利用規約を読む",
+    "readPrivacyPolicy": "プライバシーポリシーを読む",
+    "requestTitle": "データのリクエストまたは削除",
+    "requestBody": "現在、セルフサービスでのエクスポートや削除は提供していません。お問い合わせいただければ、手動で対応いたします。"
+  },
+  "Legal": {
+    "draftNotice": "このページは法的条項の作業草案であり、正式な法的レビューを待っています。まだ最終版ではありません。",
+    "translationNotice": "このページは現在英語版のみ提供されています。法的レビュー後に翻訳版を掲載します。",
+    "tableOfContents": "このページの内容",
+    "lastUpdated": "最終更新日 {date}",
+    "backToTop": "トップに戻る"
+  },
+  "Nav": {
+    "howItWorks": "利用の流れ",
+    "faq": "よくある質問",
+    "privacy": "プライバシー",
+    "terms": "利用規約",
+    "home": "ホーム",
+    "startReading": "リーディングを始める",
+    "adminSignIn": "管理者サインイン",
+    "product": "プロダクト",
+    "trust": "信頼性",
+    "footerDescription": "保存されたリーディング、チャート生成、個人向けレメディパスを備えた内省的な占星術Q&A。",
+    "copyright": "© {year} {appName}。法的所有者は審査待ちです。",
+    "openMenu": "メニューを開く",
+    "publicNavigationLabel": "パブリックナビゲーション",
+    "mobileNavigationLabel": "モバイルナビゲーション",
+    "footerProductNavLabel": "フッタープロダクトナビゲーション",
+    "footerTrustNavLabel": "フッター信頼性ナビゲーション",
+    "openProfileMenu": "プロフィールメニューを開く",
+    "accountTitle": "アカウント",
+    "accountDescription": "プロフィールとセキュリティ",
+    "accountNavLabel": "アカウントナビゲーション",
+    "profileLabel": "プロフィール",
+    "dashboardLabel": "ダッシュボード",
+    "historyLabel": "履歴",
+    "language": "言語",
+    "userAppNavigationLabel": "ユーザーアプリナビゲーション",
+    "mobileUserAppNavigationLabel": "モバイルユーザーアプリナビゲーション",
+    "signIn": "サインイン"
+  },
+  "NotFound": {
+    "rootTitle": "このページは利用できません",
+    "rootDescription": "リンクの入力ミス、期限切れ、またはSilenceに存在しなくなった可能性があります。",
+    "goHome": "ホームへ",
+    "userTitle": "そのページが見つかりませんでした",
+    "userDescription": "リーディングダッシュボードに戻るか、フッターのプライバシーと利用規約のリンクをご利用ください。",
+    "goDashboard": "ダッシュボードへ"
   }
 }

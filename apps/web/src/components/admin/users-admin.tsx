@@ -431,7 +431,8 @@ export function UsersAdmin() {
                                     <span>{r.level}</span>
                                     <span>{formatDate(r.createdAt)}</span>
                                   </div>
-                                  <p className="mt-1 break-words">{r.value}</p>
+                                  {r.questionText ? <p className="mt-1 break-words font-medium">{r.questionText}</p> : null}
+                                  <p className="mt-1 break-words text-muted-foreground">{r.value}</p>
                                   {r.answerTextShown ? (
                                     <p className="mt-1 break-words rounded-sm bg-primary/5 p-1.5 text-primary">
                                       {r.answerTextShown}

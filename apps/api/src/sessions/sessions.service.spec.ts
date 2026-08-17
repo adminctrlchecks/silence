@@ -116,6 +116,72 @@ describe('SessionsService', () => {
     });
   });
 
+  describe('getDetail()', () => {
+    it('resolves each response to the question text in the session language', async () => {
+      prisma.readingSession.findUnique.mockResolvedValue(
+        sessionRow({
+          lang: 'fr',
+          responses: [
+            {
+              id: 'r1',
+              userId: 'u1',
+              questionId: 'q1',
+              level: 'common',
+              category: 'female',
+              value: 'my answer',
+              answerId: null,
+              answerTextShown: null,
+              createdAt: new Date('2026-01-01T00:00:00Z'),
+            },
+          ],
+        }),
+      );
+      prisma.question.findMany.mockResolvedValue([
+        { id: 'q1', text: 'What pattern are you ready to understand?', translations: [{ text: 'Quel schéma...?' }] },
+      ]);
+
+      const result = await service.getDetail('u1', 's1');
+
+      expect(prisma.question.findMany).toHaveBeenCalledWith(
+        expect.objectContaining({ where: { id: { in: ['q1'] } }, include: { translations: { where: { lang: 'fr' } } } }),
+      );
+      expect(result.responses[0]).toMatchObject({ questionId: 'q1', questionText: 'Quel schéma...?' });
+    });
+
+    it('falls back to the question base text when no translation exists for the session language', async () => {
+      prisma.readingSession.findUnique.mockResolvedValue(
+        sessionRow({
+          responses: [
+            {
+              id: 'r1',
+              userId: 'u1',
+              questionId: 'q1',
+              level: 'common',
+              category: 'female',
+              value: 'my answer',
+              answerId: null,
+              answerTextShown: null,
+              createdAt: new Date('2026-01-01T00:00:00Z'),
+            },
+          ],
+        }),
+      );
+      prisma.question.findMany.mockResolvedValue([{ id: 'q1', text: 'Base text', translations: [] }]);
+
+      const result = await service.getDetail('u1', 's1');
+
+      expect(result.responses[0]).toMatchObject({ questionText: 'Base text' });
+    });
+
+    it('skips the question lookup entirely when there are no responses', async () => {
+      prisma.readingSession.findUnique.mockResolvedValue(sessionRow());
+
+      await service.getDetail('u1', 's1');
+
+      expect(prisma.question.findMany).not.toHaveBeenCalled();
+    });
+  });
+
   describe('question progress', () => {
     it('counts distinct answered questions per level from responses', async () => {
       prisma.readingSession.findFirst.mockResolvedValue(

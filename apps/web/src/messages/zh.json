@@ -10,12 +10,68 @@
   "Home": {
     "eyebrow": "占星问答",
     "title": "Silence",
-    "languageLabel": "语言",
-    "languageValue": "11",
-    "chartLabel": "星盘",
-    "chartValue": "占星",
-    "savedProfileLabel": "已保存档案",
-    "savedProfileValue": "JWT"
+    "heroSubtitle": "回答引导式占星问题，根据已保存的出生信息生成星盘，并以您偏好的语言获取个人补救建议。",
+    "startCta": "开始解读",
+    "howItWorksCta": "查看运作方式",
+    "savedNotice": "创建账户后，您的档案和解读将保存在您的账户中。",
+    "previewAlt": "包含引导式问题、星盘和补救建议的Silence解读预览。",
+    "previewGuidedQuestionLabel": "引导式问题",
+    "previewGuidedQuestionText": "您准备好更清楚地理解哪种模式？",
+    "previewChartLabel": "星盘",
+    "previewChartText": "上升点与关键位置",
+    "previewRemedyLabel": "补救建议",
+    "previewRemedyText": "为此次解读选定的可重复练习。",
+    "howItWorksEyebrow": "运作方式",
+    "howItWorksTitle": "引导式解读，而非一键式星座运势",
+    "stepLabel": "第 {number} 步",
+    "step1Title": "创建您的档案",
+    "step1Description": "选择语言和类别，然后保存用于星盘计算的出生信息。",
+    "step2Title": "回答引导式问题",
+    "step2Description": "完成三层反思，让解读能够回应您的具体情况。",
+    "step3Title": "查看您的星盘",
+    "step3Description": "查看计算出的星盘详情、准确度背景，以及在数据充足时的解读。",
+    "step4Title": "获取补救建议",
+    "step4Description": "从Silence管理工具管理的内容模型中获取为您选定的个人练习。",
+    "step5Title": "随时返回",
+    "step5Description": "已保存的解读历史让您可以从账户中重新查看答案、星盘详情和补救建议。",
+    "whyEyebrow": "人们为何使用它",
+    "whyTitle": "围绕应用中已有的解读流程构建",
+    "whyDescription": "Silence专注于档案、问题、星盘、补救建议和历史记录，不使用捏造的用户评价或无法验证的结果声明。",
+    "benefit1Title": "11种语言起步",
+    "benefit1Description": "Silence支持文档化的初始语言集，包括阿拉伯语从右到左的处理。",
+    "benefit2Title": "已保存的解读历史",
+    "benefit2Description": "您的账户可以保留解读会话、答案、星盘快照和补救建议历史。",
+    "benefit3Title": "星盘计算",
+    "benefit3Description": "星盘页面在可用时使用已保存的出生日期、时间、地点、坐标和时区。",
+    "benefit4Title": "内置内容运营",
+    "benefit4Description": "管理工具管理问题、答案、补救建议、翻译、导入和审核状态。",
+    "trustEyebrow": "信任与隐私",
+    "trustTitle": "了解为何需要每项信息",
+    "trustDescription": "出生日期、时间和地点用于支持星盘计算。您的账户可以保存答案、星盘、补救建议和解读历史，方便您以后查看。",
+    "dataItem1Title": "出生信息",
+    "dataItem1Description": "用于星盘计算和准确度背景说明。",
+    "dataItem2Title": "解读答案",
+    "dataItem2Description": "与您的会话一起保存，以便指导和历史记录正常运作。",
+    "dataItem3Title": "AI辅助",
+    "dataItem3Description": "用于当前的生成和翻译流程；法律措辞尚待审查。",
+    "startPanelEyebrow": "启动面板",
+    "startPanelTitle": "选择解读的开始方式",
+    "startPanelDescription": "先选择语言和类别。这些偏好会在本地保存，并延续到档案创建过程中。",
+    "startPanelCta": "继续创建档案",
+    "faqEyebrow": "常见问题",
+    "faqTitle": "开始之前",
+    "faq1Question": "什么是Silence？",
+    "faq1Answer": "Silence是一款引导式占星问答应用。您创建档案、回答反思性问题、查看星盘，并获得个人补救建议路径。",
+    "faq2Question": "为什么需要出生时间和地点？",
+    "faq2Answer": "出生日期、时间和地点用于计算星盘详情。如果信息不完整，星盘的准确度可能是近似或不确定的。",
+    "faq3Question": "我可以返回查看以前的解读吗？",
+    "faq3Answer": "可以。解读历史是当前已登录用户产品流程的一部分。",
+    "faq4Question": "这是医疗、法律或财务建议吗？",
+    "faq4Answer": "不是。Silence提供的是反思性占星指导，而非医疗、法律或财务建议。完整免责声明请参阅<terms>服务条款</terms>。",
+    "faq5Question": "AI是如何使用的？",
+    "faq5Answer": "部分答案、翻译和星盘解读是通过AI辅助生成的。详情请参阅<privacy>隐私政策</privacy>。",
+    "finalTitle": "准备好开始您的解读了吗？",
+    "finalDescription": "创建档案，保存您的偏好设置，并按照Silence的引导式解读路径进行。"
   },
   "SessionPicker": {
     "language": "语言",
@@ -44,7 +100,7 @@
     "contact": "电子邮件或电话",
     "password": "密码",
     "forgotPassword": "忘记密码了吗?",
-    "consent": "我同意保存我的档案、出生信息、答案、星盘和补救建议。",
+    "consent": "我同意<terms>服务条款</terms>和<privacy>隐私政策</privacy>，并同意保存我的档案、出生信息、答案、星盘和补救建议。",
     "createSubmit": "创建档案",
     "signInSubmit": "登录",
     "alreadyHaveProfile": "已有档案？",
@@ -56,7 +112,23 @@
     "birthPlacePlaceholder": "搜索城市…",
     "continueWithGoogle": "使用 Google 继续",
     "orContinueWithEmail": "或使用邮箱继续",
-    "googleSignInError": "Google 登录失败，请重试。"
+    "googleSignInError": "Google 登录失败，请重试。",
+    "eyebrowLogin": "登录",
+    "eyebrowRegister": "新建档案",
+    "descriptionLogin": "输入联系方式和密码以继续您的解读。",
+    "descriptionRegister": "通过三个简单步骤设置您的档案，以生成星盘和补救建议。",
+    "steps": {
+      "identity": "基本信息",
+      "birth": "出生信息",
+      "account": "账户"
+    },
+    "stepProgress": "第 {current} 步，共 {total} 步：{label}",
+    "back": "返回",
+    "continue": "继续",
+    "birthWhyTitle": "为什么我们需要精确的出生信息",
+    "birthWhyBody": "您的出生日期、时间和地点使我们能够准确计算行星位置和宫位，以生成您的星盘。即使几分钟的误差也可能改变结果，如果不确定，请使用出生证明或可靠的家庭记录。",
+    "agreementNotice": "继续操作即表示您同意我们的<terms>服务条款</terms>和<privacy>隐私政策</privacy>。",
+    "stepValidationError": "请在继续之前填写所有必填字段。"
   },
   "ForgotPassword": {
     "eyebrow": "账户找回",
@@ -78,11 +150,14 @@
     "submit": "重置密码",
     "submitting": "重置中",
     "success": "密码已更新。正在跳转到登录…",
-    "invalidLink": "此重置链接无效或已过期。请在登录页面重新申请。"
+    "invalidLink": "此重置链接无效或已过期。请在登录页面重新申请。",
+    "requestNewLink": "申请新的重置链接"
   },
   "UserLayout": {
     "mySession": "我的会话",
-    "signIn": "登录"
+    "signIn": "登录",
+    "signOut": "退出登录",
+    "signingOut": "正在退出"
   },
   "UserApp": {
     "eyebrow": "用户工作区",
@@ -133,7 +208,23 @@
       "chart_ready": "星盘已就绪",
       "remedy_ready": "补救建议已就绪",
       "complete": "已完成"
-    }
+    },
+    "greeting": "欢迎，{name}",
+    "subtitleFirstTime": "您的第一次解读已准备就绪。",
+    "subtitleInProgress": "从上次中断的地方继续。",
+    "subtitleChartReady": "您的星盘已可查看。",
+    "subtitleRemedyReady": "您的补救建议已可查看。",
+    "subtitleReturning": "随时准备好开始新的解读。",
+    "journey": {
+      "profile": "档案",
+      "questions": "问题",
+      "chart": "星盘",
+      "remedy": "补救建议",
+      "complete": "已完成"
+    },
+    "firstTimeExplainer": "回答几个引导性问题，然后获取您的星盘和个人补救建议——大约三个步骤。",
+    "recentReading": "您最近的一次解读",
+    "viewFullHistory": "查看完整历史记录"
   },
   "Chart": {
     "eyebrow": "示例星盘",
@@ -153,7 +244,40 @@
       "approximate": "近似",
       "uncertain": "不确定",
       "label": "计算精度"
-    }
+    },
+    "chartVisualAlt": "吠陀出生图轮盘，显示行星在12宫中的位置。请查看下方位置表以获取精确位置。",
+    "chartSummaryHeading": "星盘概要",
+    "birthDataLabel": "出生数据",
+    "atConnector": "",
+    "birthPlaceLabel": "出生地",
+    "coordinatesNotAvailable": "坐标不可用",
+    "calculationLabel": "计算方式",
+    "zodiacSuffix": "{zodiac}黄道",
+    "julianDayLabel": "儒略日 {value}",
+    "timezoneLabel": "时区：{value}",
+    "placementsHeading": "行星位置",
+    "placementsDescription": "来自计算星盘的行星、星座、度数、宫位和运行状态。",
+    "columnPlanet": "行星",
+    "columnSign": "星座",
+    "columnDegree": "度数",
+    "columnHouse": "宫位",
+    "columnMotion": "运行",
+    "motionDirect": "顺行",
+    "housesHeading": "宫位",
+    "housesFallback": "宫位分界需要精确的出生坐标。当前位置使用基于星座的备用方案。",
+    "interpretationHeading": "个人解读",
+    "generatedOn": "生成于 {date}",
+    "viewRemedy": "查看补救建议",
+    "warningApproximate": "缺少精确坐标或时区，因此宫位和上升点可能会有偏差。",
+    "warningUncertain": "缺少出生地坐标，因此星盘使用基于星座的备用宫位。",
+    "detailAscendant": "根据出生时间和地点得出的上升星座",
+    "detailSun": "主要太阳位置",
+    "detailMoon": "情感层面的月亮位置",
+    "activeHouseDetail": "此处有{count}个位置",
+    "detailNoHouseEmphasis": "没有明显的宫位侧重",
+    "labelSun": "太阳",
+    "labelMoon": "月亮",
+    "labelActiveHouse": "活跃宫位"
   },
   "Remedy": {
     "eyebrow": "个人补救建议",
@@ -161,7 +285,11 @@
     "linkedLevel": "关联级别：{level}",
     "practice": "Suggested practice",
     "closing": "Keep the remedy gentle and repeatable. Small consistency is more useful than intensity.",
-    "whyThisPractice": "为什么推荐这个练习"
+    "whyThisPractice": "为什么推荐这个练习",
+    "whyGeneric": "作为适合您类别和本次解读的辅助练习而选定。",
+    "howToRepeat": "如何重复练习",
+    "backToChart": "返回星盘",
+    "viewHistory": "查看解读历史"
   },
   "Profile": {
     "eyebrow": "已保存资料",
@@ -188,7 +316,19 @@
     "birthPlacePlaceholder": "搜索城市…",
     "completeProfileTitle": "完成个人资料设置",
     "completeProfileDescription": "请添加您的出生信息并同意条款，以便我们为您生成个性化占星解读。",
-    "consentEditLabel": "我同意服务条款和隐私政策，并同意 Silence 存储我的出生信息以生成我的解读。"
+    "consentEditLabel": "我同意服务条款和隐私政策，并同意 Silence 存储我的出生信息以生成我的解读。",
+    "nav": {
+      "overview": "概览",
+      "birthDetails": "出生信息",
+      "security": "安全",
+      "privacy": "隐私"
+    },
+    "consentMissingNote": "请完善您的出生信息以完成引导流程。",
+    "birthDetailsEyebrow": "出生信息",
+    "birthDetailsTitle": "出生信息",
+    "birthDetailsDescription": "用于计算您星盘的出生日期、时间和地点。",
+    "changeImpactTitle": "这将影响未来的解读",
+    "changeImpactBody": "更改这些信息可能会影响您生成的任何新星盘。您已完成的解读会保留其原始星盘作为历史记录。"
   },
   "History": {
     "eyebrow": "你的解读",
@@ -217,7 +357,11 @@
       "chart_ready": "星盘已就绪",
       "remedy_ready": "补救建议已就绪",
       "complete": "已完成"
-    }
+    },
+    "previousPage": "上一页",
+    "nextPage": "下一页",
+    "pageOf": "第 {current} 页，共 {total} 页",
+    "emptyExplainer": "完成一次解读后，它会连同您的答案、星盘和补救建议一起保存在这里，方便您随时查看。"
   },
   "Questions": {
     "eyebrow": "问题流程",
@@ -239,7 +383,9 @@
     "intro": "Move through three short layers. Your final chart reading is shaped by your Level 2 reflections, so plain honest answers work best.",
     "progress": "Step {current} of {total}.",
     "stepHelp": "Save this layer to reveal the guidance written for each question.",
-    "emptyTitle": "This layer is waiting for content."
+    "emptyTitle": "This layer is waiting for content.",
+    "saving": "保存中…",
+    "savedAnnouncement": "{level} 已保存。"
   },
   "Security": {
     "eyebrow": "Security",
@@ -250,6 +396,71 @@
     "confirmPassword": "Confirm new password",
     "submit": "Change password",
     "submitting": "Changing password",
-    "success": "Password changed. Please sign in again."
+    "success": "Password changed. Please sign in again.",
+    "manageCta": "管理密码"
+  },
+  "Disclaimer": {
+    "chartRemedy": "此解读仅供反思与自我认识之用，并非医疗、法律或财务建议，结果不作任何保证。详情请见我们的<terms>服务条款</terms>。"
+  },
+  "Privacy": {
+    "eyebrow": "隐私",
+    "title": "隐私与您的数据",
+    "consentStatusTitle": "您的同意",
+    "consentGiven": "您已同意保存您的档案、出生信息、答案、星盘和补救建议。",
+    "consentMissing": "您尚未完成同意。请完善出生信息以启用解读。",
+    "manageBirthDetails": "管理出生信息",
+    "dataWeStoreTitle": "我们存储的内容",
+    "dataWeStoreBody": "您的档案、出生信息、问题答案、生成的星盘和补救建议。",
+    "aiTitle": "AI 处理",
+    "aiBody": "部分答案、翻译和星盘解读是使用 Google 的 Gemini AI 模型生成的。经管理员审核的内容会在您的解读历史中单独标注。",
+    "legalTitle": "法律信息",
+    "readTerms": "阅读服务条款",
+    "readPrivacyPolicy": "阅读隐私政策",
+    "requestTitle": "请求或删除您的数据",
+    "requestBody": "我们目前尚未提供自助导出或删除功能。请联系我们，我们将手动处理您的请求。"
+  },
+  "Legal": {
+    "draftNotice": "本页是我们法律条款的工作草案，正等待正式法律审查，尚未定稿。",
+    "translationNotice": "本页目前仅提供英文版本。法律审查完成后将提供翻译版本。",
+    "tableOfContents": "本页内容",
+    "lastUpdated": "最后更新于 {date}",
+    "backToTop": "返回顶部"
+  },
+  "Nav": {
+    "howItWorks": "运作方式",
+    "faq": "常见问题",
+    "privacy": "隐私",
+    "terms": "条款",
+    "home": "首页",
+    "startReading": "开始解读",
+    "adminSignIn": "管理员登录",
+    "product": "产品",
+    "trust": "信任",
+    "footerDescription": "反思性占星问答，提供已保存的解读、星盘生成和个人补救建议路径。",
+    "copyright": "© {year} {appName}。法律所有者待审核。",
+    "openMenu": "打开菜单",
+    "publicNavigationLabel": "公共导航",
+    "mobileNavigationLabel": "移动导航",
+    "footerProductNavLabel": "页脚产品导航",
+    "footerTrustNavLabel": "页脚信任导航",
+    "openProfileMenu": "打开个人资料菜单",
+    "accountTitle": "账户",
+    "accountDescription": "个人资料与安全",
+    "accountNavLabel": "账户导航",
+    "profileLabel": "个人资料",
+    "dashboardLabel": "仪表盘",
+    "historyLabel": "历史记录",
+    "language": "语言",
+    "userAppNavigationLabel": "用户应用导航",
+    "mobileUserAppNavigationLabel": "移动端用户应用导航",
+    "signIn": "登录"
+  },
+  "NotFound": {
+    "rootTitle": "此页面不可用",
+    "rootDescription": "链接可能输入有误、已过期，或不再是 Silence 的一部分。",
+    "goHome": "返回首页",
+    "userTitle": "我们找不到该页面",
+    "userDescription": "返回您的解读仪表盘，或使用页脚链接查看隐私政策和条款。",
+    "goDashboard": "前往仪表盘"
   }
 }

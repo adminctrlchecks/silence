@@ -10,12 +10,68 @@
   "Home": {
     "eyebrow": "Perguntas de astrologia",
     "title": "Silence",
-    "languageLabel": "Idioma",
-    "languageValue": "11",
-    "chartLabel": "Mapa",
-    "chartValue": "Astrologia",
-    "savedProfileLabel": "Perfil salvo",
-    "savedProfileValue": "JWT"
+    "heroSubtitle": "Responda perguntas astrológicas guiadas, gere um mapa astral a partir dos seus dados de nascimento salvos e receba um remédio pessoal no seu idioma preferido.",
+    "startCta": "Comece sua leitura",
+    "howItWorksCta": "Veja como funciona",
+    "savedNotice": "Seu perfil e sua leitura são salvos na sua conta quando você cria uma.",
+    "previewAlt": "Prévia de uma leitura Silence com perguntas guiadas, um mapa astral e um remédio.",
+    "previewGuidedQuestionLabel": "Pergunta guiada",
+    "previewGuidedQuestionText": "Qual padrão você está pronto para entender com mais clareza?",
+    "previewChartLabel": "Mapa astral",
+    "previewChartText": "Ascendente e posições principais",
+    "previewRemedyLabel": "Remédio",
+    "previewRemedyText": "Uma prática repetível selecionada para esta leitura.",
+    "howItWorksEyebrow": "Como funciona",
+    "howItWorksTitle": "Uma leitura guiada, não um horóscopo de um clique",
+    "stepLabel": "Etapa {number}",
+    "step1Title": "Crie seu perfil",
+    "step1Description": "Escolha um idioma e uma categoria, depois salve os dados de nascimento usados para o cálculo do mapa.",
+    "step2Title": "Responda perguntas guiadas",
+    "step2Description": "Avance por três camadas de reflexões para que a leitura possa responder ao seu contexto.",
+    "step3Title": "Veja seu mapa",
+    "step3Description": "Veja os detalhes calculados do mapa astral, o contexto de precisão e uma interpretação quando houver dados suficientes.",
+    "step4Title": "Receba um remédio",
+    "step4Description": "Obtenha uma prática pessoal selecionada do modelo de conteúdo gerenciado pelas ferramentas de administração do Silence.",
+    "step5Title": "Volte quando quiser",
+    "step5Description": "O histórico de leituras salvo permite revisar respostas, detalhes do mapa e remédios a partir da sua conta.",
+    "whyEyebrow": "Por que as pessoas usam",
+    "whyTitle": "Construído em torno da jornada de leitura já existente no app",
+    "whyDescription": "O Silence foca em perfil, perguntas, mapa, remédio e histórico. Não usa depoimentos fabricados nem alegações de resultados não verificáveis.",
+    "benefit1Title": "Ponto de partida com 11 idiomas",
+    "benefit1Description": "O Silence oferece suporte ao conjunto documentado de idiomas iniciais, incluindo tratamento de árabe RTL.",
+    "benefit2Title": "Histórico de leituras salvo",
+    "benefit2Description": "Sua conta pode manter sessões de leitura, respostas, capturas de mapa e histórico de remédios.",
+    "benefit3Title": "Cálculo do mapa astral",
+    "benefit3Description": "As páginas de mapa usam data, hora, local de nascimento, coordenadas e fuso horário salvos quando disponíveis.",
+    "benefit4Title": "Operações de conteúdo integradas",
+    "benefit4Description": "As ferramentas de administração gerenciam perguntas, respostas, remédios, traduções, importações e estados de revisão.",
+    "trustEyebrow": "Confiança e privacidade",
+    "trustTitle": "Saiba por que cada detalhe é solicitado",
+    "trustDescription": "Data, hora e local de nascimento apoiam o cálculo do mapa. Sua conta pode salvar respostas, mapas, remédios e histórico de leituras para que você possa voltar depois.",
+    "dataItem1Title": "Dados de nascimento",
+    "dataItem1Description": "Usados para o cálculo do mapa e contexto de precisão.",
+    "dataItem2Title": "Respostas de leitura",
+    "dataItem2Description": "Salvas com sua sessão para que a orientação e o histórico funcionem.",
+    "dataItem3Title": "Assistência de IA",
+    "dataItem3Description": "Usada nos fluxos atuais de geração e tradução; o texto legal precisa de revisão.",
+    "startPanelEyebrow": "Painel inicial",
+    "startPanelTitle": "Escolha como a leitura começa",
+    "startPanelDescription": "Escolha primeiro um idioma e uma categoria. Essas preferências são salvas localmente e levadas para a criação do perfil.",
+    "startPanelCta": "Continuar para o perfil",
+    "faqEyebrow": "Perguntas frequentes",
+    "faqTitle": "Antes de começar",
+    "faq1Question": "O que é o Silence?",
+    "faq1Answer": "O Silence é um app de perguntas e respostas astrológicas guiado. Você cria um perfil, responde reflexões, vê um mapa e recebe um caminho de remédio pessoal.",
+    "faq2Question": "Por que pedir hora e local de nascimento?",
+    "faq2Answer": "Data, hora e local de nascimento são usados para calcular os detalhes do mapa. Se os dados estiverem incompletos, a precisão do mapa pode ser aproximada ou incerta.",
+    "faq3Question": "Posso voltar a leituras anteriores?",
+    "faq3Answer": "Sim. O histórico de leituras faz parte do fluxo atual do produto para usuários conectados.",
+    "faq4Question": "Isso é aconselhamento médico, jurídico ou financeiro?",
+    "faq4Answer": "Não. O Silence oferece orientação astrológica reflexiva, não aconselhamento médico, jurídico ou financeiro. Consulte os <terms>Termos</terms> para o aviso completo.",
+    "faq5Question": "Como a IA é usada?",
+    "faq5Answer": "Algumas respostas, traduções e interpretações de mapa são geradas com assistência de IA. Consulte a <privacy>Privacidade</privacy> para mais detalhes.",
+    "finalTitle": "Pronto para começar sua leitura?",
+    "finalDescription": "Crie um perfil, salve suas preferências e siga o caminho de leitura guiado do Silence."
   },
   "SessionPicker": {
     "language": "Idioma",
@@ -44,7 +100,7 @@
     "contact": "E-mail ou telefone",
     "password": "Senha",
     "forgotPassword": "Esqueceu sua senha?",
-    "consent": "Concordo em salvar meu perfil, dados de nascimento, respostas, mapa e remédio.",
+    "consent": "Concordo com os <terms>Termos</terms> e a <privacy>Política de Privacidade</privacy>, e consinto em salvar meu perfil, dados de nascimento, respostas, mapa e remédio.",
     "createSubmit": "Criar perfil",
     "signInSubmit": "Entrar",
     "alreadyHaveProfile": "Já tem um perfil?",
@@ -56,7 +112,23 @@
     "birthPlacePlaceholder": "Procurar uma cidade…",
     "continueWithGoogle": "Continuar com o Google",
     "orContinueWithEmail": "ou continuar com e-mail",
-    "googleSignInError": "Falha ao entrar com o Google. Tente novamente."
+    "googleSignInError": "Falha ao entrar com o Google. Tente novamente.",
+    "eyebrowLogin": "Entrar",
+    "eyebrowRegister": "Novo perfil",
+    "descriptionLogin": "Informe seu contato e senha para continuar sua leitura.",
+    "descriptionRegister": "Configure seu perfil em três etapas rápidas para gerar seu mapa e remédio.",
+    "steps": {
+      "identity": "Identidade",
+      "birth": "Dados de nascimento",
+      "account": "Conta"
+    },
+    "stepProgress": "Etapa {current} de {total}: {label}",
+    "back": "Voltar",
+    "continue": "Continuar",
+    "birthWhyTitle": "Por que pedimos dados exatos de nascimento",
+    "birthWhyBody": "Sua data, hora e local de nascimento nos permitem calcular com precisão as posições planetárias e as casas do seu mapa. Até alguns minutos podem mudar o resultado, então use a certidão de nascimento ou um registro familiar confiável se não tiver certeza.",
+    "agreementNotice": "Ao continuar, você concorda com nossos <terms>Termos</terms> e nossa <privacy>Política de Privacidade</privacy>.",
+    "stepValidationError": "Preencha todos os campos obrigatórios antes de continuar."
   },
   "ForgotPassword": {
     "eyebrow": "Recuperação de conta",
@@ -78,13 +150,16 @@
     "submit": "Redefinir senha",
     "submitting": "Redefinindo",
     "success": "Senha atualizada. Redirecionando para o login…",
-    "invalidLink": "Este link de redefinição é inválido ou expirou. Solicite um novo na página de login."
+    "invalidLink": "Este link de redefinição é inválido ou expirou. Solicite um novo na página de login.",
+    "requestNewLink": "Solicitar um novo link de redefinição"
   },
   "UserLayout": {
     "mySession": "Minha sessão",
     "signIn": "Entrar",
     "impersonationBanner": "Você está visualizando o app do usuário como esta conta, via acesso de administrador.",
-    "exitToAdmin": "Voltar para a administração"
+    "exitToAdmin": "Voltar para a administração",
+    "signOut": "Sair",
+    "signingOut": "Saindo"
   },
   "UserApp": {
     "eyebrow": "Área do usuário",
@@ -135,7 +210,23 @@
       "chart_ready": "Mapa pronto",
       "remedy_ready": "Remédio pronto",
       "complete": "Concluída"
-    }
+    },
+    "greeting": "Bem-vindo, {name}",
+    "subtitleFirstTime": "Sua primeira leitura está pronta para começar.",
+    "subtitleInProgress": "Continue de onde parou.",
+    "subtitleChartReady": "Seu mapa astral está pronto para visualização.",
+    "subtitleRemedyReady": "Seu remédio está pronto para visualização.",
+    "subtitleReturning": "Prontos quando você quiser iniciar uma nova leitura.",
+    "journey": {
+      "profile": "Perfil",
+      "questions": "Perguntas",
+      "chart": "Mapa",
+      "remedy": "Remédio",
+      "complete": "Concluído"
+    },
+    "firstTimeExplainer": "Responda algumas perguntas guiadas e depois obtenha seu mapa astral e um remédio pessoal — cerca de três etapas.",
+    "recentReading": "Sua leitura mais recente",
+    "viewFullHistory": "Ver histórico completo"
   },
   "Chart": {
     "eyebrow": "Mapa de exemplo",
@@ -155,7 +246,40 @@
       "approximate": "Aproximado",
       "uncertain": "Incerto",
       "label": "Precisão do cálculo"
-    }
+    },
+    "chartVisualAlt": "Roda do mapa astral védico mostrando as posições planetárias nas 12 casas. Veja a tabela de posições abaixo para as posições exatas.",
+    "chartSummaryHeading": "Resumo do mapa",
+    "birthDataLabel": "Dados de nascimento",
+    "atConnector": "às",
+    "birthPlaceLabel": "Local de nascimento",
+    "coordinatesNotAvailable": "Coordenadas não disponíveis",
+    "calculationLabel": "Cálculo",
+    "zodiacSuffix": "zodíaco {zodiac}",
+    "julianDayLabel": "DJ {value}",
+    "timezoneLabel": "Fuso horário: {value}",
+    "placementsHeading": "Posições",
+    "placementsDescription": "Planeta, signo, grau, casa e movimento do mapa calculado.",
+    "columnPlanet": "Planeta",
+    "columnSign": "Signo",
+    "columnDegree": "Grau",
+    "columnHouse": "Casa",
+    "columnMotion": "Movimento",
+    "motionDirect": "direto",
+    "housesHeading": "Casas",
+    "housesFallback": "As cúspides das casas precisam de coordenadas de nascimento exatas. As posições atuais usam a alternativa baseada em signos.",
+    "interpretationHeading": "Leitura pessoal",
+    "generatedOn": "Gerado em {date}",
+    "viewRemedy": "Ver remédio",
+    "warningApproximate": "Faltam coordenadas exatas ou fuso horário, então as casas e o ascendente podem variar.",
+    "warningUncertain": "Faltam as coordenadas do local de nascimento, então o mapa usa casas alternativas baseadas em signos.",
+    "detailAscendant": "Signo ascendente pela hora e local de nascimento",
+    "detailSun": "Posição solar principal",
+    "detailMoon": "Posição lunar emocional",
+    "activeHouseDetail": "{count} posições aqui",
+    "detailNoHouseEmphasis": "Nenhuma ênfase de casa disponível",
+    "labelSun": "Sol",
+    "labelMoon": "Lua",
+    "labelActiveHouse": "Casa ativa"
   },
   "Remedy": {
     "eyebrow": "Remédio pessoal",
@@ -163,7 +287,11 @@
     "linkedLevel": "Nível vinculado: {level}",
     "practice": "Suggested practice",
     "closing": "Keep the remedy gentle and repeatable. Small consistency is more useful than intensity.",
-    "whyThisPractice": "Por que esta prática"
+    "whyThisPractice": "Por que esta prática",
+    "whyGeneric": "Selecionado como uma prática de apoio para sua categoria e leitura atual.",
+    "howToRepeat": "Como repetir",
+    "backToChart": "Voltar ao mapa",
+    "viewHistory": "Ver histórico de leituras"
   },
   "Profile": {
     "eyebrow": "Perfil salvo",
@@ -190,7 +318,19 @@
     "birthPlacePlaceholder": "Procurar uma cidade…",
     "completeProfileTitle": "Termine de configurar seu perfil",
     "completeProfileDescription": "Adicione seus dados de nascimento e consentimento para gerarmos sua leitura astrológica personalizada.",
-    "consentEditLabel": "Concordo com os Termos e a Política de Privacidade, e consinto que a Silence armazene meus dados de nascimento para gerar minha leitura."
+    "consentEditLabel": "Concordo com os Termos e a Política de Privacidade, e consinto que a Silence armazene meus dados de nascimento para gerar minha leitura.",
+    "nav": {
+      "overview": "Visão geral",
+      "birthDetails": "Dados de nascimento",
+      "security": "Segurança",
+      "privacy": "Privacidade"
+    },
+    "consentMissingNote": "Complete seus dados de nascimento para finalizar o cadastro.",
+    "birthDetailsEyebrow": "Dados de nascimento",
+    "birthDetailsTitle": "Dados de nascimento",
+    "birthDetailsDescription": "Data, hora e local de nascimento usados para calcular seu mapa.",
+    "changeImpactTitle": "Isso afetará leituras futuras",
+    "changeImpactBody": "Alterar esses dados pode afetar qualquer novo mapa que você gerar. As leituras já concluídas mantêm seu mapa original como registro histórico."
   },
   "History": {
     "eyebrow": "Suas leituras",
@@ -219,7 +359,11 @@
       "chart_ready": "Mapa pronto",
       "remedy_ready": "Remédio pronto",
       "complete": "Concluída"
-    }
+    },
+    "previousPage": "Anterior",
+    "nextPage": "Próximo",
+    "pageOf": "Página {current} de {total}",
+    "emptyExplainer": "Ao concluir uma leitura, ela é salva aqui com suas respostas, mapa e remédio para que você possa revisitá-la a qualquer momento."
   },
   "Questions": {
     "eyebrow": "Fluxo de perguntas",
@@ -241,7 +385,9 @@
     "intro": "Move through three short layers. Your final chart reading is shaped by your Level 2 reflections, so plain honest answers work best.",
     "progress": "Step {current} of {total}.",
     "stepHelp": "Save this layer to reveal the guidance written for each question.",
-    "emptyTitle": "This layer is waiting for content."
+    "emptyTitle": "This layer is waiting for content.",
+    "saving": "Salvando…",
+    "savedAnnouncement": "{level} salvo."
   },
   "Security": {
     "eyebrow": "Security",
@@ -252,6 +398,71 @@
     "confirmPassword": "Confirm new password",
     "submit": "Change password",
     "submitting": "Changing password",
-    "success": "Password changed. Please sign in again."
+    "success": "Password changed. Please sign in again.",
+    "manageCta": "Gerenciar senha"
+  },
+  "Disclaimer": {
+    "chartRemedy": "Esta leitura é para reflexão e autoconhecimento — não é aconselhamento médico, jurídico ou financeiro, e os resultados não são garantidos. Consulte nossos <terms>Termos</terms> para mais informações."
+  },
+  "Privacy": {
+    "eyebrow": "Privacidade",
+    "title": "Privacidade e seus dados",
+    "consentStatusTitle": "Seu consentimento",
+    "consentGiven": "Você consentiu em salvar seu perfil, dados de nascimento, respostas, mapa e remédio.",
+    "consentMissing": "Você ainda não concluiu o consentimento. Termine seus dados de nascimento para habilitar as leituras.",
+    "manageBirthDetails": "Gerenciar dados de nascimento",
+    "dataWeStoreTitle": "O que armazenamos",
+    "dataWeStoreBody": "Seu perfil, dados de nascimento, respostas às perguntas, mapas gerados e remédios.",
+    "aiTitle": "Processamento por IA",
+    "aiBody": "Algumas respostas, traduções e interpretações de mapa são geradas usando o modelo de IA Gemini do Google. O conteúdo revisado por administrador é rotulado separadamente no seu histórico de leituras.",
+    "legalTitle": "Legal",
+    "readTerms": "Ler Termos",
+    "readPrivacyPolicy": "Ler Política de Privacidade",
+    "requestTitle": "Solicitar ou excluir seus dados",
+    "requestBody": "Ainda não oferecemos exportação ou exclusão via autoatendimento. Entre em contato conosco e trataremos sua solicitação manualmente."
+  },
+  "Legal": {
+    "draftNotice": "Esta página é um rascunho de trabalho dos nossos termos legais e está pendente de revisão jurídica formal. Ainda não é definitiva.",
+    "translationNotice": "Esta página está atualmente disponível apenas em inglês. Uma versão traduzida será publicada após a revisão jurídica.",
+    "tableOfContents": "Nesta página",
+    "lastUpdated": "Última atualização {date}",
+    "backToTop": "Voltar ao topo"
+  },
+  "Nav": {
+    "howItWorks": "Como funciona",
+    "faq": "Perguntas frequentes",
+    "privacy": "Privacidade",
+    "terms": "Termos",
+    "home": "Início",
+    "startReading": "Iniciar leitura",
+    "adminSignIn": "Login do administrador",
+    "product": "Produto",
+    "trust": "Confiança",
+    "footerDescription": "Perguntas e respostas astrológicas reflexivas com leituras salvas, geração de mapa e um caminho de remédio pessoal.",
+    "copyright": "© {year} {appName}. Titular legal pendente de revisão.",
+    "openMenu": "Abrir menu",
+    "publicNavigationLabel": "Navegação pública",
+    "mobileNavigationLabel": "Navegação móvel",
+    "footerProductNavLabel": "Navegação de produto do rodapé",
+    "footerTrustNavLabel": "Navegação de confiança do rodapé",
+    "openProfileMenu": "Abrir menu de perfil",
+    "accountTitle": "Conta",
+    "accountDescription": "Perfil e segurança",
+    "accountNavLabel": "Navegação da conta",
+    "profileLabel": "Perfil",
+    "dashboardLabel": "Painel",
+    "historyLabel": "Histórico",
+    "language": "Idioma",
+    "userAppNavigationLabel": "Navegação do aplicativo do usuário",
+    "mobileUserAppNavigationLabel": "Navegação móvel do aplicativo do usuário",
+    "signIn": "Entrar"
+  },
+  "NotFound": {
+    "rootTitle": "Esta página não está disponível",
+    "rootDescription": "O link pode estar digitado incorretamente, expirado ou não faz mais parte do Silence.",
+    "goHome": "Ir para o início",
+    "userTitle": "Não conseguimos encontrar essa página",
+    "userDescription": "Volte ao seu painel de leituras ou use os links do rodapé para privacidade e termos.",
+    "goDashboard": "Ir para o painel"
   }
 }

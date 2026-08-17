@@ -10,12 +10,68 @@
   "Home": {
     "eyebrow": "Astrology Q&A",
     "title": "Silence",
-    "languageLabel": "Language",
-    "languageValue": "11",
-    "chartLabel": "Chart",
-    "chartValue": "Astrology",
-    "savedProfileLabel": "Saved profile",
-    "savedProfileValue": "JWT"
+    "heroSubtitle": "Answer guided astrology questions, generate a birth chart from your saved birth details, and receive a personal remedy in your preferred language.",
+    "startCta": "Start your reading",
+    "howItWorksCta": "See how it works",
+    "savedNotice": "Your profile and reading are saved to your account when you create one.",
+    "previewAlt": "Preview of a Silence reading with guided questions, a birth chart, and a remedy.",
+    "previewGuidedQuestionLabel": "Guided question",
+    "previewGuidedQuestionText": "What pattern are you ready to understand more clearly?",
+    "previewChartLabel": "Birth chart",
+    "previewChartText": "Ascendant and key placements",
+    "previewRemedyLabel": "Remedy",
+    "previewRemedyText": "A repeatable practice selected for this reading.",
+    "howItWorksEyebrow": "How it works",
+    "howItWorksTitle": "A guided reading, not a one-click horoscope",
+    "stepLabel": "Step {number}",
+    "step1Title": "Create your profile",
+    "step1Description": "Choose a language and category, then save the birth details used for chart calculation.",
+    "step2Title": "Answer guided questions",
+    "step2Description": "Move through three layers of reflections so the reading can respond to your context.",
+    "step3Title": "View your chart",
+    "step3Description": "See computed birth-chart details, accuracy context, and an interpretation when enough data exists.",
+    "step4Title": "Receive a remedy",
+    "step4Description": "Get a personal practice selected from the content model managed by the Silence admin tools.",
+    "step5Title": "Return anytime",
+    "step5Description": "Saved reading history lets you revisit responses, chart details, and remedies from your account.",
+    "whyEyebrow": "Why people use it",
+    "whyTitle": "Built around the reading journey already in the app",
+    "whyDescription": "Silence focuses on profile, questions, chart, remedy, and history. It does not use fabricated testimonials or unverifiable outcome claims.",
+    "benefit1Title": "11-language starting point",
+    "benefit1Description": "Silence supports the documented seed language set, including Arabic RTL handling.",
+    "benefit2Title": "Saved reading history",
+    "benefit2Description": "Your account can keep reading sessions, responses, chart snapshots, and remedy history.",
+    "benefit3Title": "Birth-chart calculation",
+    "benefit3Description": "Chart pages use saved birth date, time, place, coordinates, and timezone when available.",
+    "benefit4Title": "Content operations built in",
+    "benefit4Description": "Admin tools manage questions, answers, remedies, translations, imports, and review states.",
+    "trustEyebrow": "Trust and privacy",
+    "trustTitle": "Know why each detail is requested",
+    "trustDescription": "Birth date, time, and place support chart calculation. Your account can save responses, charts, remedies, and reading history so you can return later.",
+    "dataItem1Title": "Birth details",
+    "dataItem1Description": "Used for chart calculation and accuracy context.",
+    "dataItem2Title": "Reading responses",
+    "dataItem2Description": "Saved with your session so guidance and history can work.",
+    "dataItem3Title": "AI assistance",
+    "dataItem3Description": "Used in current generation and translation workflows; legal wording needs review.",
+    "startPanelEyebrow": "Start panel",
+    "startPanelTitle": "Choose how the reading begins",
+    "startPanelDescription": "Pick a language and category first. These preferences are saved locally and carried into profile creation.",
+    "startPanelCta": "Continue to profile",
+    "faqEyebrow": "FAQ",
+    "faqTitle": "Before you start",
+    "faq1Question": "What is Silence?",
+    "faq1Answer": "Silence is a guided astrology Q&A app. You create a profile, answer reflections, view a chart, and receive a personal remedy path.",
+    "faq2Question": "Why ask for birth time and place?",
+    "faq2Answer": "Birth date, time, and place are used to calculate chart details. If details are incomplete, chart accuracy can be approximate or uncertain.",
+    "faq3Question": "Can I return to previous readings?",
+    "faq3Answer": "Yes. Reading history is part of the current product flow for signed-in users.",
+    "faq4Question": "Is this medical, legal, or financial advice?",
+    "faq4Answer": "No. Silence is for reflective astrology guidance, not medical, legal, or financial advice. See the <terms>Terms</terms> for the full disclaimer.",
+    "faq5Question": "How is AI used?",
+    "faq5Answer": "Some answers, translations, and chart interpretations are generated with AI assistance. See <privacy>Privacy</privacy> for details.",
+    "finalTitle": "Ready to begin your reading?",
+    "finalDescription": "Create a profile, save your preferences, and move through the guided Silence reading path."
   },
   "SessionPicker": {
     "language": "Language",
@@ -46,7 +102,7 @@
     "contact": "Email or phone",
     "password": "Password",
     "forgotPassword": "Forgot password?",
-    "consent": "I consent to saving my profile, birth details, answers, chart, and remedy.",
+    "consent": "I agree to the <terms>Terms</terms> and <privacy>Privacy Policy</privacy>, and consent to saving my profile, birth details, answers, chart, and remedy.",
     "createSubmit": "Create profile",
     "signInSubmit": "Sign in",
     "alreadyHaveProfile": "Already have a profile?",
@@ -56,7 +112,23 @@
     "loginError": "Sign in failed. Please check your contact and password.",
     "continueWithGoogle": "Continue with Google",
     "orContinueWithEmail": "or continue with email",
-    "googleSignInError": "Google sign-in failed. Please try again."
+    "googleSignInError": "Google sign-in failed. Please try again.",
+    "eyebrowLogin": "Sign in",
+    "eyebrowRegister": "New profile",
+    "descriptionLogin": "Enter your contact and password to continue your reading.",
+    "descriptionRegister": "Set up your profile in three quick steps to generate your chart and remedy.",
+    "steps": {
+      "identity": "Identity",
+      "birth": "Birth details",
+      "account": "Account"
+    },
+    "stepProgress": "Step {current} of {total}: {label}",
+    "back": "Back",
+    "continue": "Continue",
+    "birthWhyTitle": "Why we ask for exact birth details",
+    "birthWhyBody": "Your date, time, and place of birth let us calculate accurate planetary positions and house placements for your chart. Even a few minutes can change the result, so use a birth certificate or a trusted family record if you're unsure.",
+    "agreementNotice": "By continuing, you agree to our <terms>Terms</terms> and <privacy>Privacy Policy</privacy>.",
+    "stepValidationError": "Please fill in all required fields before continuing."
   },
   "ForgotPassword": {
     "eyebrow": "Account recovery",
@@ -78,13 +150,16 @@
     "submit": "Reset password",
     "submitting": "Resetting",
     "success": "Password updated. Redirecting to sign in…",
-    "invalidLink": "This reset link is invalid or has expired. Request a new one from the sign-in page."
+    "invalidLink": "This reset link is invalid or has expired. Request a new one from the sign-in page.",
+    "requestNewLink": "Request a new reset link"
   },
   "UserLayout": {
     "mySession": "My session",
     "signIn": "Sign in",
     "impersonationBanner": "You're viewing the user app as this account, signed in via admin.",
-    "exitToAdmin": "Exit to admin"
+    "exitToAdmin": "Exit to admin",
+    "signOut": "Sign out",
+    "signingOut": "Signing out"
   },
   "UserApp": {
     "eyebrow": "Your astrology session",
@@ -135,7 +210,23 @@
       "chart_ready": "Chart ready",
       "remedy_ready": "Remedy ready",
       "complete": "Complete"
-    }
+    },
+    "greeting": "Welcome, {name}",
+    "subtitleFirstTime": "Your first reading is ready to begin.",
+    "subtitleInProgress": "Pick up where you left off.",
+    "subtitleChartReady": "Your birth chart is ready to view.",
+    "subtitleRemedyReady": "Your remedy is ready to view.",
+    "subtitleReturning": "Ready whenever you'd like to start a new reading.",
+    "journey": {
+      "profile": "Profile",
+      "questions": "Questions",
+      "chart": "Chart",
+      "remedy": "Remedy",
+      "complete": "Complete"
+    },
+    "firstTimeExplainer": "Answer a few guided questions, then get your birth chart and a personal remedy — about three steps.",
+    "recentReading": "Your most recent reading",
+    "viewFullHistory": "View full history"
   },
   "Chart": {
     "eyebrow": "Birth chart",
@@ -155,7 +246,40 @@
       "approximate": "Approximate — ascendant may be off by up to a degree",
       "uncertain": "Uncertain — birth place not recorded; houses not calculated",
       "label": "Calculation accuracy"
-    }
+    },
+    "chartVisualAlt": "Vedic birth chart wheel showing planetary placements across the 12 houses. See the placements table below for exact positions.",
+    "chartSummaryHeading": "Chart summary",
+    "birthDataLabel": "Birth data",
+    "atConnector": "at",
+    "birthPlaceLabel": "Birth place",
+    "coordinatesNotAvailable": "Coordinates not available",
+    "calculationLabel": "Calculation",
+    "zodiacSuffix": "{zodiac} zodiac",
+    "julianDayLabel": "JD {value}",
+    "timezoneLabel": "Timezone: {value}",
+    "placementsHeading": "Placements",
+    "placementsDescription": "Planet, sign, degree, house, and motion from the computed chart.",
+    "columnPlanet": "Planet",
+    "columnSign": "Sign",
+    "columnDegree": "Degree",
+    "columnHouse": "House",
+    "columnMotion": "Motion",
+    "motionDirect": "direct",
+    "housesHeading": "Houses",
+    "housesFallback": "House cusps need exact birth coordinates. Current placements use the available sign-based fallback.",
+    "interpretationHeading": "Personal reading",
+    "generatedOn": "Generated {date}",
+    "viewRemedy": "View remedy",
+    "warningApproximate": "Exact coordinates or timezone are missing, so houses and the ascendant can shift.",
+    "warningUncertain": "Birth place coordinates are missing, so the chart uses sign-based fallback houses.",
+    "detailAscendant": "Rising sign from birth time and place",
+    "detailSun": "Core solar placement",
+    "detailMoon": "Emotional lunar placement",
+    "activeHouseDetail": "{count} placements here",
+    "detailNoHouseEmphasis": "No house emphasis available",
+    "labelSun": "Sun",
+    "labelMoon": "Moon",
+    "labelActiveHouse": "Active house"
   },
   "Remedy": {
     "eyebrow": "Personal remedy",
@@ -163,7 +287,11 @@
     "linkedLevel": "Linked level: {level}",
     "practice": "Suggested practice",
     "closing": "Keep the remedy gentle and repeatable. Small consistency is more useful than intensity.",
-    "whyThisPractice": "Why this practice"
+    "whyThisPractice": "Why this practice",
+    "whyGeneric": "Selected as a supportive practice for your category and current reading.",
+    "howToRepeat": "How to repeat",
+    "backToChart": "Back to chart",
+    "viewHistory": "View reading history"
   },
   "Profile": {
     "eyebrow": "Saved profile",
@@ -190,7 +318,19 @@
     "adminPortal": "Admin portal",
     "completeProfileTitle": "Finish setting up your profile",
     "completeProfileDescription": "Add your birth details and consent so we can generate your personalized astrology reading.",
-    "consentEditLabel": "I agree to the Terms and Privacy Policy, and consent to Silence storing my birth details to generate my reading."
+    "consentEditLabel": "I agree to the Terms and Privacy Policy, and consent to Silence storing my birth details to generate my reading.",
+    "nav": {
+      "overview": "Overview",
+      "birthDetails": "Birth details",
+      "security": "Security",
+      "privacy": "Privacy"
+    },
+    "consentMissingNote": "Complete your birth details to finish onboarding.",
+    "birthDetailsEyebrow": "Birth details",
+    "birthDetailsTitle": "Birth details",
+    "birthDetailsDescription": "Date, time, and place of birth used to calculate your chart.",
+    "changeImpactTitle": "This will affect future readings",
+    "changeImpactBody": "Changing these details may affect any new chart you generate. Readings you've already completed keep their original chart as a historical record."
   },
   "History": {
     "eyebrow": "Your readings",
@@ -219,7 +359,11 @@
       "chart_ready": "Chart ready",
       "remedy_ready": "Remedy ready",
       "complete": "Complete"
-    }
+    },
+    "previousPage": "Previous",
+    "nextPage": "Next",
+    "pageOf": "Page {current} of {total}",
+    "emptyExplainer": "Once you complete a reading, it's saved here with your answers, chart, and remedy so you can revisit it anytime."
   },
   "Questions": {
     "eyebrow": "Question flow",
@@ -241,7 +385,9 @@
     "intro": "Move through three short layers. Your final chart reading is shaped by your Level 2 reflections, so plain honest answers work best.",
     "progress": "Step {current} of {total}.",
     "stepHelp": "Save this layer to reveal the guidance written for each question.",
-    "emptyTitle": "This layer is waiting for content."
+    "emptyTitle": "This layer is waiting for content.",
+    "saving": "Saving…",
+    "savedAnnouncement": "{level} saved."
   },
   "Security": {
     "eyebrow": "Security",
@@ -252,6 +398,71 @@
     "confirmPassword": "Confirm new password",
     "submit": "Change password",
     "submitting": "Changing password",
-    "success": "Password changed. Please sign in again."
+    "success": "Password changed. Please sign in again.",
+    "manageCta": "Manage password"
+  },
+  "Disclaimer": {
+    "chartRemedy": "This reading is for reflection and self-understanding — not medical, legal, or financial advice, and results aren't guaranteed. See our <terms>Terms</terms> for more."
+  },
+  "Privacy": {
+    "eyebrow": "Privacy",
+    "title": "Privacy & your data",
+    "consentStatusTitle": "Your consent",
+    "consentGiven": "You've consented to saving your profile, birth details, answers, chart, and remedy.",
+    "consentMissing": "You haven't completed consent yet. Finish your birth details to enable readings.",
+    "manageBirthDetails": "Manage birth details",
+    "dataWeStoreTitle": "What we store",
+    "dataWeStoreBody": "Your profile, birth details, question responses, generated charts, and remedies.",
+    "aiTitle": "AI processing",
+    "aiBody": "Some answers, translations, and chart interpretations are generated using Google's Gemini AI model. Admin-reviewed content is labeled separately in your reading history.",
+    "legalTitle": "Legal",
+    "readTerms": "Read Terms",
+    "readPrivacyPolicy": "Read Privacy Policy",
+    "requestTitle": "Request or delete your data",
+    "requestBody": "We don't yet offer self-serve export or deletion. Contact us and we'll handle your request manually."
+  },
+  "Legal": {
+    "draftNotice": "This page is a working draft of our legal terms and is pending formal legal review. It is not yet final.",
+    "translationNotice": "This page is currently available in English only. A translated version will follow legal review.",
+    "tableOfContents": "On this page",
+    "lastUpdated": "Last updated {date}",
+    "backToTop": "Back to top"
+  },
+  "Nav": {
+    "howItWorks": "How it works",
+    "faq": "FAQ",
+    "privacy": "Privacy",
+    "terms": "Terms",
+    "home": "Home",
+    "startReading": "Start reading",
+    "adminSignIn": "Admin sign in",
+    "product": "Product",
+    "trust": "Trust",
+    "footerDescription": "Reflective astrology Q&A with saved readings, chart generation, and a personal remedy path.",
+    "copyright": "© {year} {appName}. Legal owner pending review.",
+    "openMenu": "Open menu",
+    "publicNavigationLabel": "Public navigation",
+    "mobileNavigationLabel": "Mobile navigation",
+    "footerProductNavLabel": "Footer product navigation",
+    "footerTrustNavLabel": "Footer trust navigation",
+    "openProfileMenu": "Open profile menu",
+    "accountTitle": "Account",
+    "accountDescription": "Profile and security",
+    "accountNavLabel": "Account navigation",
+    "profileLabel": "Profile",
+    "dashboardLabel": "Dashboard",
+    "historyLabel": "History",
+    "language": "Language",
+    "userAppNavigationLabel": "User app navigation",
+    "mobileUserAppNavigationLabel": "Mobile user app navigation",
+    "signIn": "Sign in"
+  },
+  "NotFound": {
+    "rootTitle": "This page is not available",
+    "rootDescription": "The link may be mistyped, expired, or no longer part of Silence.",
+    "goHome": "Go home",
+    "userTitle": "We could not find that page",
+    "userDescription": "Return to your reading dashboard or use the footer links for privacy and terms.",
+    "goDashboard": "Go to dashboard"
   }
 }

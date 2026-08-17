@@ -14,7 +14,7 @@ import {
 import { getTranslations } from 'next-intl/server';
 import Link from 'next/link';
 import { RoxyVedicKundli } from '@/components/roxy-ui/vedic-kundli';
-import { RoxyVedicPlanetsTable } from '@/components/roxy-ui/vedic-planets-table';
+import { ReadingDisclaimer } from '@/components/shared/reading-disclaimer';
 import { Button } from '@/components/ui/button';
 import { chartToRoxyBirthChart } from '@/lib/roxy-chart-adapter';
 
@@ -78,16 +78,16 @@ const ACCURACY_STYLES = {
 
 const PLANET_ORDER = ['Sun', 'Moon', 'Mercury', 'Venus', 'Mars', 'Jupiter', 'Saturn', 'Rahu', 'Ketu'];
 
-function formatDegree(value?: number, digits = 1) {
-  return typeof value === 'number' ? `${value.toFixed(digits)}°` : 'Not available';
+function formatDegree(value: number | undefined, notAvailable: string, digits = 1) {
+  return typeof value === 'number' ? `${value.toFixed(digits)}°` : notAvailable;
 }
 
 function formatDate(value: string) {
   return new Intl.DateTimeFormat(undefined, { dateStyle: 'medium', timeStyle: 'short' }).format(new Date(value));
 }
 
-function formatCoordinate(value?: number, axis?: 'lat' | 'lng') {
-  if (typeof value !== 'number') return 'Not available';
+function formatCoordinate(value: number | undefined, notAvailable: string, axis?: 'lat' | 'lng') {
+  if (typeof value !== 'number') return notAvailable;
   const suffix = axis === 'lat' ? (value >= 0 ? 'N' : 'S') : value >= 0 ? 'E' : 'W';
   return `${Math.abs(value).toFixed(4)}° ${suffix}`;
 }
@@ -109,6 +109,7 @@ function houseCounts(placements: NonNullable<ChartGeometry['placements']>) {
 
 export async function BirthChartView({ chart }: { chart: ChartLike }) {
   const t = await getTranslations('Chart');
+  const notAvailable = t('notAvailable');
   const roxyChart = chartToRoxyBirthChart(chart);
   const geometry = (chart.data ?? {}) as ChartGeometry;
   const placements = [...(geometry.placements ?? [])].sort(byPlanetOrder);
@@ -117,44 +118,37 @@ export async function BirthChartView({ chart }: { chart: ChartLike }) {
   const accuracyStyle = ACCURACY_STYLES[accuracy] ?? ACCURACY_STYLES.uncertain;
   const AccuracyIcon = accuracyStyle.icon;
   const busiestHouse = houseCounts(placements)[0];
-  const location = [geometry.input?.city, geometry.input?.country].filter(Boolean).join(', ') || t('notAvailable');
+  const location = [geometry.input?.city, geometry.input?.country].filter(Boolean).join(', ') || notAvailable;
   const hasCoordinates = typeof geometry.input?.lat === 'number' && typeof geometry.input?.lng === 'number';
-  const hasTimezone = Boolean(geometry.input?.timezone);
   const ascendant = geometry.ascendant?.signName
     ? `${geometry.ascendant.signName}${
-        typeof geometry.ascendant.degree === 'number' ? ` ${formatDegree(geometry.ascendant.degree)}` : ''
+        typeof geometry.ascendant.degree === 'number' ? ` ${formatDegree(geometry.ascendant.degree, notAvailable)}` : ''
       }`
-    : t('notAvailable');
+    : notAvailable;
   const keyPlacements = placements
     .filter((placement) => ['Sun', 'Moon', 'Rahu', 'Ketu'].includes(placement.planet ?? ''))
     .slice(0, 4);
   const sourceWarning =
-    accuracy === 'exact'
-      ? null
-      : accuracy === 'approximate'
-        ? 'Exact coordinates or timezone are missing, so houses and the ascendant can shift.'
-        : 'Birth place coordinates are missing, so the chart uses sign-based fallback houses.';
+    accuracy === 'exact' ? null : accuracy === 'approximate' ? t('warningApproximate') : t('warningUncertain');
 
   const summary = [
-    { label: t('ascendant'), value: ascendant, detail: 'Rising sign from birth time and place', icon: Sparkles },
+    { label: t('ascendant'), value: ascendant, detail: t('detailAscendant'), icon: Sparkles },
     {
-      label: 'Sun',
-      value: placements.find((placement) => placement.planet === 'Sun')?.signName ?? t('notAvailable'),
-      detail: 'Core solar placement',
+      label: t('labelSun'),
+      value: placements.find((placement) => placement.planet === 'Sun')?.signName ?? notAvailable,
+      detail: t('detailSun'),
       icon: Sun,
     },
     {
-      label: 'Moon',
-      value: placements.find((placement) => placement.planet === 'Moon')?.signName ?? t('notAvailable'),
-      detail: 'Emotional lunar placement',
+      label: t('labelMoon'),
+      value: placements.find((placement) => placement.planet === 'Moon')?.signName ?? notAvailable,
+      detail: t('detailMoon'),
       icon: Moon,
     },
     {
-      label: 'Active house',
-      value: busiestHouse ? t('house', { house: busiestHouse[0] }) : t('notAvailable'),
-      detail: busiestHouse
-        ? `${busiestHouse[1]} placement${busiestHouse[1] === 1 ? '' : 's'} here`
-        : 'No house emphasis available',
+      label: t('labelActiveHouse'),
+      value: busiestHouse ? t('house', { house: busiestHouse[0] }) : notAvailable,
+      detail: busiestHouse ? t('activeHouseDetail', { count: busiestHouse[1] }) : t('detailNoHouseEmphasis'),
       icon: Home,
     },
   ];
@@ -174,6 +168,45 @@ export async function BirthChartView({ chart }: { chart: ChartLike }) {
         ))}
       </section>
 
+      {/* Plain-language summary + accuracy badge, ahead of the technical
+          chart/tables per docs/product-redesign/14-page-specifications.md §6
+          hierarchy ("plain-language summary -> accuracy badge -> chart
+          visual -> key placements -> interpretation -> technical table"). */}
+      <section className="rounded-md border border-border bg-card p-5 shadow-sm">
+        <div className="flex flex-col gap-3 sm:flex-row sm:items-start sm:justify-between">
+          <div>
+            <p className="text-sm font-medium text-primary">{t('interpretation')}</p>
+            <h2 className="mt-1 text-2xl font-semibold tracking-normal">{t('interpretationHeading')}</h2>
+            <p className="mt-1 text-xs text-muted-foreground">{t('interpretationHelp')}</p>
+          </div>
+          <span className="rounded-md border border-border bg-background px-2 py-1 text-xs text-muted-foreground">
+            {t('generatedOn', { date: formatDate(chart.createdAt) })}
+          </span>
+        </div>
+        <p className="mt-4 text-sm leading-6 text-muted-foreground" dir="auto">
+          {chart.interpretation ?? t('fallbackInterpretation')}
+        </p>
+        <div
+          role="status"
+          className={`mt-4 flex items-start gap-2 rounded-md border px-3 py-2 text-xs leading-5 ${accuracyStyle.className}`}
+        >
+          <AccuracyIcon className="mt-0.5 h-3.5 w-3.5 shrink-0" />
+          <span>
+            <span className="font-semibold">{t('accuracy.label')}: </span>
+            {t(`accuracy.${accuracy}`)}
+          </span>
+        </div>
+        <div className="mt-4">
+          <ReadingDisclaimer />
+        </div>
+        <Button asChild variant="outline" className="mt-5">
+          <Link href="/app/remedy">
+            <Sparkles />
+            {t('viewRemedy')}
+          </Link>
+        </Button>
+      </section>
+
       <section className="grid gap-4 xl:grid-cols-[minmax(0,1fr)_24rem]">
         <div className="rounded-md border border-border bg-card p-4 shadow-sm">
           <div className="mb-3 flex flex-wrap items-center justify-between gap-2">
@@ -185,47 +218,54 @@ export async function BirthChartView({ chart }: { chart: ChartLike }) {
               {chart.style}
             </span>
           </div>
-          <RoxyVedicKundli
-            data={roxyChart}
-            chartStyle={chart.style === 'south-indian' ? 'south' : 'north'}
-            className="block min-h-[28rem] w-full"
-            hideReadings
-          />
+          {/* The chart wheel itself is decorative for assistive tech: the same
+              data is available as the accessible text summary below and the
+              Placements table further down, so the graphic is hidden from
+              the accessibility tree rather than exposed as unlabeled shapes. */}
+          <p className="sr-only">{t('chartVisualAlt')}</p>
+          <div aria-hidden="true">
+            <RoxyVedicKundli
+              data={roxyChart}
+              chartStyle={chart.style === 'south-indian' ? 'south' : 'north'}
+              className="block min-h-[28rem] w-full"
+              hideReadings
+            />
+          </div>
         </div>
 
         <aside className="space-y-4">
           <section className="rounded-md border border-border bg-card p-4 shadow-sm">
-            <p className="text-sm font-medium text-primary">Chart summary</p>
+            <p className="text-sm font-medium text-primary">{t('chartSummaryHeading')}</p>
             <dl className="mt-4 space-y-3 text-sm">
               <div className="flex items-start gap-3">
                 <CalendarClock className="mt-0.5 size-4 shrink-0 text-primary" />
                 <div>
-                  <dt className="text-xs font-medium uppercase text-muted-foreground">Birth data</dt>
+                  <dt className="text-xs font-medium uppercase text-muted-foreground">{t('birthDataLabel')}</dt>
                   <dd className="mt-1">
-                    {geometry.input?.dob ?? t('notAvailable')} at {geometry.input?.timeOfBirth ?? t('notAvailable')}
+                    {geometry.input?.dob ?? notAvailable} {t('atConnector')} {geometry.input?.timeOfBirth ?? notAvailable}
                   </dd>
                 </div>
               </div>
               <div className="flex items-start gap-3">
                 <MapPin className="mt-0.5 size-4 shrink-0 text-primary" />
                 <div>
-                  <dt className="text-xs font-medium uppercase text-muted-foreground">Birth place</dt>
+                  <dt className="text-xs font-medium uppercase text-muted-foreground">{t('birthPlaceLabel')}</dt>
                   <dd className="mt-1">{location}</dd>
                   <dd className="mt-1 text-xs text-muted-foreground">
                     {hasCoordinates
-                      ? `${formatCoordinate(geometry.input?.lat, 'lat')}, ${formatCoordinate(geometry.input?.lng, 'lng')}`
-                      : 'Coordinates not available'}
+                      ? `${formatCoordinate(geometry.input?.lat, notAvailable, 'lat')}, ${formatCoordinate(geometry.input?.lng, notAvailable, 'lng')}`
+                      : t('coordinatesNotAvailable')}
                   </dd>
                 </div>
               </div>
               <div className="flex items-start gap-3">
                 <Orbit className="mt-0.5 size-4 shrink-0 text-primary" />
                 <div>
-                  <dt className="text-xs font-medium uppercase text-muted-foreground">Calculation</dt>
-                  <dd className="mt-1">{geometry.engine ?? t('notAvailable')}</dd>
+                  <dt className="text-xs font-medium uppercase text-muted-foreground">{t('calculationLabel')}</dt>
+                  <dd className="mt-1">{geometry.engine ?? notAvailable}</dd>
                   <dd className="mt-1 text-xs text-muted-foreground">
-                    {geometry.zodiac ?? t('notAvailable')} zodiac
-                    {typeof geometry.julianDay === 'number' ? ` | JD ${geometry.julianDay}` : ''}
+                    {t('zodiacSuffix', { zodiac: geometry.zodiac ?? notAvailable })}
+                    {typeof geometry.julianDay === 'number' ? ` | ${t('julianDayLabel', { value: geometry.julianDay })}` : ''}
                   </dd>
                 </div>
               </div>
@@ -233,24 +273,14 @@ export async function BirthChartView({ chart }: { chart: ChartLike }) {
           </section>
 
           <section className="rounded-md border border-border bg-card p-4 shadow-sm">
-            <div
-              role="status"
-              className={`flex items-start gap-2 rounded-md border px-3 py-2 text-xs leading-5 ${accuracyStyle.className}`}
-            >
-              <AccuracyIcon className="mt-0.5 h-3.5 w-3.5 shrink-0" />
-              <span>
-                <span className="font-semibold">{t('accuracy.label')}: </span>
-                {t(`accuracy.${accuracy}`)}
-              </span>
-            </div>
             {sourceWarning ? (
-              <p className="mt-3 flex items-start gap-2 text-xs leading-5 text-muted-foreground">
+              <p className="flex items-start gap-2 text-xs leading-5 text-muted-foreground">
                 <Info className="mt-0.5 size-3.5 shrink-0" />
                 {sourceWarning}
               </p>
             ) : null}
-            <p className="mt-3 text-xs text-muted-foreground">
-              Timezone: {hasTimezone ? geometry.input?.timezone : 'not available'}
+            <p className={sourceWarning ? 'mt-3 text-xs text-muted-foreground' : 'text-xs text-muted-foreground'}>
+              {t('timezoneLabel', { value: geometry.input?.timezone ?? notAvailable })}
             </p>
           </section>
         </aside>
@@ -259,41 +289,40 @@ export async function BirthChartView({ chart }: { chart: ChartLike }) {
       <section className="grid gap-4 xl:grid-cols-[minmax(0,1fr)_24rem]">
         <div className="rounded-md border border-border bg-card shadow-sm">
           <div className="border-b border-border px-4 py-3">
-            <h2 className="text-base font-semibold tracking-normal">Placements</h2>
-            <p className="mt-1 text-xs text-muted-foreground">
-              Planet, sign, degree, house, and motion from the computed chart.
-            </p>
+            <h2 className="text-base font-semibold tracking-normal">{t('placementsHeading')}</h2>
+            <p className="mt-1 text-xs text-muted-foreground">{t('placementsDescription')}</p>
           </div>
           <div className="overflow-x-auto">
             <table className="w-full text-sm">
+              <caption className="sr-only">{t('placementsDescription')}</caption>
               <thead>
                 <tr className="border-b border-border text-xs uppercase text-muted-foreground">
-                  <th className="px-4 py-2 text-start">Planet</th>
-                  <th className="px-4 py-2 text-start">Sign</th>
-                  <th className="px-4 py-2 text-start">Degree</th>
-                  <th className="px-4 py-2 text-start">House</th>
-                  <th className="px-4 py-2 text-start">Motion</th>
+                  <th scope="col" className="px-4 py-2 text-start">{t('columnPlanet')}</th>
+                  <th scope="col" className="px-4 py-2 text-start">{t('columnSign')}</th>
+                  <th scope="col" className="px-4 py-2 text-start">{t('columnDegree')}</th>
+                  <th scope="col" className="px-4 py-2 text-start">{t('columnHouse')}</th>
+                  <th scope="col" className="px-4 py-2 text-start">{t('columnMotion')}</th>
                 </tr>
               </thead>
               <tbody className="divide-y divide-border">
                 {placements.length ? (
                   placements.map((placement) => (
                     <tr key={`${placement.planet}-${placement.longitude}`}>
-                      <td className="px-4 py-3 font-medium">{placement.planet ?? t('notAvailable')}</td>
-                      <td className="px-4 py-3 text-muted-foreground">{placement.signName ?? t('notAvailable')}</td>
-                      <td className="px-4 py-3 text-muted-foreground">{formatDegree(placement.degree)}</td>
+                      <td className="px-4 py-3 font-medium">{placement.planet ?? notAvailable}</td>
+                      <td className="px-4 py-3 text-muted-foreground">{placement.signName ?? notAvailable}</td>
+                      <td className="px-4 py-3 text-muted-foreground">{formatDegree(placement.degree, notAvailable)}</td>
                       <td className="px-4 py-3 text-muted-foreground">
-                        {placement.house ? t('house', { house: placement.house }) : t('notAvailable')}
+                        {placement.house ? t('house', { house: placement.house }) : notAvailable}
                       </td>
                       <td className="px-4 py-3 text-muted-foreground">
-                        {placement.retrograde ? t('retrograde') : 'direct'}
+                        {placement.retrograde ? t('retrograde') : t('motionDirect')}
                       </td>
                     </tr>
                   ))
                 ) : (
                   <tr>
                     <td colSpan={5} className="px-4 py-6 text-muted-foreground">
-                      {t('notAvailable')}
+                      {notAvailable}
                     </td>
                   </tr>
                 )}
@@ -311,76 +340,44 @@ export async function BirthChartView({ chart }: { chart: ChartLike }) {
                   <div className="flex items-center justify-between gap-3">
                     <p className="text-sm font-semibold">{placement.planet}</p>
                     <span className="rounded-md border border-border bg-card px-2 py-1 text-xs text-muted-foreground">
-                      {placement.house ? t('house', { house: placement.house }) : t('notAvailable')}
+                      {placement.house ? t('house', { house: placement.house }) : notAvailable}
                     </span>
                   </div>
                   <p className="mt-1 text-sm text-muted-foreground">
-                    {placement.signName ?? t('notAvailable')} {formatDegree(placement.degree)}
+                    {placement.signName ?? notAvailable} {formatDegree(placement.degree, notAvailable)}
                     {placement.retrograde ? ` | ${t('retrograde')}` : ''}
                   </p>
                 </div>
               ))
             ) : (
-              <p className="text-sm text-muted-foreground">{t('notAvailable')}</p>
+              <p className="text-sm text-muted-foreground">{notAvailable}</p>
             )}
           </div>
         </section>
       </section>
 
-      <section className="grid gap-4 xl:grid-cols-[minmax(0,1fr)_24rem]">
-        <div className="rounded-md border border-border bg-card p-4 shadow-sm">
-          <div className="mb-3">
-            <h2 className="text-base font-semibold tracking-normal">Roxy planets table</h2>
-            <p className="mt-1 text-xs text-muted-foreground">The same live chart payload rendered through Roxy UI.</p>
-          </div>
-          <RoxyVedicPlanetsTable data={roxyChart} className="block min-h-80 w-full" hideReadings />
-        </div>
-
-        <section className="rounded-md border border-border bg-card p-4 shadow-sm">
-          <p className="text-sm font-medium text-primary">Houses</p>
-          <div className="mt-3 max-h-80 space-y-2 overflow-y-auto pr-1">
-            {houses.length ? (
-              houses.map((house) => (
-                <div
-                  key={house.house}
-                  className="flex items-center justify-between gap-3 rounded-md border border-border bg-background p-3 text-sm"
-                >
-                  <div>
-                    <p className="font-medium">{house.house ? t('house', { house: house.house }) : t('notAvailable')}</p>
-                    <p className="mt-1 text-xs text-muted-foreground">{house.signName ?? t('notAvailable')}</p>
-                  </div>
-                  <span className="text-xs text-muted-foreground">{formatDegree(house.degree)}</span>
+      <section className="rounded-md border border-border bg-card p-4 shadow-sm">
+        <p className="text-sm font-medium text-primary">{t('housesHeading')}</p>
+        <div className="mt-3 grid gap-2 sm:grid-cols-2 lg:grid-cols-3">
+          {houses.length ? (
+            houses.map((house) => (
+              <div
+                key={house.house}
+                className="flex items-center justify-between gap-3 rounded-md border border-border bg-background p-3 text-sm"
+              >
+                <div>
+                  <p className="font-medium">{house.house ? t('house', { house: house.house }) : notAvailable}</p>
+                  <p className="mt-1 text-xs text-muted-foreground">{house.signName ?? notAvailable}</p>
                 </div>
-              ))
-            ) : (
-              <p className="rounded-md border border-border bg-background p-3 text-sm text-muted-foreground">
-                House cusps need exact birth coordinates. Current placements use the available sign-based fallback.
-              </p>
-            )}
-          </div>
-        </section>
-      </section>
-
-      <section className="rounded-md border border-border bg-card p-5 shadow-sm">
-        <div className="flex flex-col gap-3 sm:flex-row sm:items-start sm:justify-between">
-          <div>
-            <p className="text-sm font-medium text-primary">{t('interpretation')}</p>
-            <h2 className="mt-1 text-2xl font-semibold tracking-normal">Personal reading</h2>
-            <p className="mt-1 text-xs text-muted-foreground">{t('interpretationHelp')}</p>
-          </div>
-          <span className="rounded-md border border-border bg-background px-2 py-1 text-xs text-muted-foreground">
-            Generated {formatDate(chart.createdAt)}
-          </span>
+                <span className="text-xs text-muted-foreground">{formatDegree(house.degree, notAvailable)}</span>
+              </div>
+            ))
+          ) : (
+            <p className="rounded-md border border-border bg-background p-3 text-sm text-muted-foreground sm:col-span-2 lg:col-span-3">
+              {t('housesFallback')}
+            </p>
+          )}
         </div>
-        <p className="mt-4 text-sm leading-6 text-muted-foreground" dir="auto">
-          {chart.interpretation ?? t('fallbackInterpretation')}
-        </p>
-        <Button asChild variant="outline" className="mt-5">
-          <Link href="/app/remedy">
-            <Sparkles />
-            View remedy
-          </Link>
-        </Button>
       </section>
     </div>
   );

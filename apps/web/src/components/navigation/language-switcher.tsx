@@ -1,6 +1,7 @@
 'use client';
 
 import { Languages } from 'lucide-react';
+import { useTranslations } from 'next-intl';
 import { usePathname, useRouter } from 'next/navigation';
 import { LANGUAGES, LANGUAGE_CODES } from '@/lib/i18n';
 import { LANGUAGE_COOKIE } from '@/lib/session-preferences';
@@ -12,14 +13,41 @@ function pathnameWithLocale(pathname: string, locale: string) {
   return `/${locale}${suffix ? `/${suffix}` : ''}`;
 }
 
-export function LanguageSwitcher({ className, label = 'Language' }: { className?: string; label?: string }) {
+export function LanguageSwitcher({
+  className,
+  /** Signed-in users also get their saved profile language updated (see below) so
+   *  question/chart/remedy content — not just UI chrome — follows the switch too. */
+  authenticated,
+}: {
+  className?: string;
+  authenticated?: boolean;
+}) {
+  const t = useTranslations('Nav');
   const pathname = usePathname();
   const router = useRouter();
   const [, maybeLocale] = pathname.split('/');
   const currentLocale = LANGUAGE_CODES.includes(maybeLocale) ? maybeLocale : 'en';
 
-  function changeLanguage(locale: string) {
+  async function changeLanguage(locale: string) {
     document.cookie = `${LANGUAGE_COOKIE}=${locale}; path=/; max-age=31536000; samesite=lax`;
+
+    if (authenticated) {
+      // Best-effort: the UI-chrome switch below happens regardless of
+      // whether this succeeds. Reading content (questions/chart/remedy) is
+      // fetched using the profile's saved `lang`, not the page locale, so
+      // without this the nav/labels would switch language but the actual
+      // reading content wouldn't.
+      try {
+        await fetch('/api/profile', {
+          method: 'PUT',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ lang: locale }),
+        });
+      } catch {
+        // Ignore — UI language still switches below.
+      }
+    }
+
     router.push(pathnameWithLocale(pathname, locale));
     router.refresh();
   }
@@ -32,11 +60,11 @@ export function LanguageSwitcher({ className, label = 'Language' }: { className?
       )}
     >
       <Languages className="size-4 text-muted-foreground" aria-hidden />
-      <span className="sr-only">{label}</span>
+      <span className="sr-only">{t('language')}</span>
       <select
         value={currentLocale}
-        aria-label={label}
-        onChange={(event) => changeLanguage(event.target.value)}
+        aria-label={t('language')}
+        onChange={(event) => void changeLanguage(event.target.value)}
         className="min-w-0 bg-transparent text-sm font-medium outline-none"
       >
         {LANGUAGES.map((language) => (

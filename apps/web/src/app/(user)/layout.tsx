@@ -33,14 +33,15 @@ export default async function UserLayout({ children }: { children: ReactNode }) 
             mySession: t('mySession'),
             signIn: t('signIn'),
             startReading: common('createProfile'),
-            signOut: 'Sign out',
+            signOut: t('signOut'),
+            signingOut: t('signingOut'),
             adminSignIn: common('signInAsAdmin'),
           }}
         />
         {authenticated ? <UserAppNavigation /> : null}
         <div className={authenticated ? 'pb-20 md:pb-0' : undefined}>
           <div className="min-h-[calc(100vh-4rem)]">{children}</div>
-          <SiteFooter appName={common('appName')} />
+          <SiteFooter appName={common('appName')} authenticated={authenticated} />
         </div>
       </div>
     </AuthSessionProvider>

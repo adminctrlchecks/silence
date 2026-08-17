@@ -5,6 +5,7 @@ import { Loader2, Pencil, Plus, RefreshCw, Save, Trash2, X } from 'lucide-react'
 import { useSearchParams } from 'next/navigation';
 import { useCallback, useEffect, useMemo, useState } from 'react';
 import { Button } from '@/components/ui/button';
+import { ConfirmDialog } from '@/components/ui/confirm-dialog';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 
@@ -45,25 +46,36 @@ async function parseJson<T>(response: Response): Promise<T> {
   return data as T;
 }
 
+const PAGE_SIZE = 20;
+
 export function QuestionsAdmin() {
   const searchParams = useSearchParams();
   const search = searchParams.get('q')?.trim() ?? '';
   const [levelFilter, setLevelFilter] = useState<FilterValue<Level>>('all');
   const [categoryFilter, setCategoryFilter] = useState<FilterValue<Category>>('all');
+  const [page, setPage] = useState(1);
   const [questions, setQuestions] = useState<Question[]>([]);
+  const [total, setTotal] = useState(0);
   const [form, setForm] = useState<QuestionFormState>(initialForm);
   const [loading, setLoading] = useState(true);
   const [saving, setSaving] = useState(false);
   const [deletingId, setDeletingId] = useState<string | null>(null);
+  const [confirmTarget, setConfirmTarget] = useState<Question | null>(null);
   const [error, setError] = useState<string | null>(null);
 
+  // Any filter change invalidates the current page — restart from page 1
+  // rather than risk landing on a now-empty or out-of-range page.
+  useEffect(() => {
+    setPage(1);
+  }, [search, levelFilter, categoryFilter]);
+
   const query = useMemo(() => {
-    const params = new URLSearchParams({ limit: '100' });
+    const params = new URLSearchParams({ limit: String(PAGE_SIZE), page: String(page) });
     if (search) params.set('q', search);
     if (levelFilter !== 'all') params.set('level', levelFilter);
     if (categoryFilter !== 'all') params.set('category', categoryFilter);
     return params.toString();
-  }, [categoryFilter, levelFilter, search]);
+  }, [categoryFilter, levelFilter, page, search]);
 
   const loadQuestions = useCallback(async () => {
     setLoading(true);
@@ -72,6 +84,7 @@ export function QuestionsAdmin() {
     try {
       const result = await parseJson<Paginated<Question>>(await fetch(`/api/admin/questions?${query}`));
       setQuestions(result.data);
+      setTotal(result.total);
     } catch (err) {
       setError(err instanceof Error ? err.message : 'Unable to load questions');
     } finally {
@@ -82,6 +95,8 @@ export function QuestionsAdmin() {
   useEffect(() => {
     void loadQuestions();
   }, [loadQuestions]);
+
+  const totalPages = Math.max(1, Math.ceil(total / PAGE_SIZE));
 
   function editQuestion(question: Question) {
     setForm({
@@ -126,8 +141,6 @@ export function QuestionsAdmin() {
   }
 
   async function deleteQuestion(question: Question) {
-    if (!window.confirm(`Delete "${question.text}"?`)) return;
-
     setDeletingId(question.id);
     setError(null);
 
@@ -142,6 +155,7 @@ export function QuestionsAdmin() {
       setError(err instanceof Error ? err.message : 'Unable to delete question');
     } finally {
       setDeletingId(null);
+      setConfirmTarget(null);
     }
   }
 
@@ -282,7 +296,7 @@ export function QuestionsAdmin() {
           <div className="flex items-center justify-between gap-3 border-b border-border px-4 py-3">
             <h2 className="text-base font-semibold tracking-normal">Questions</h2>
             <span className="rounded-md border border-border bg-background px-2 py-1 text-xs text-muted-foreground">
-              {questions.length} shown
+              {total} total
             </span>
           </div>
 
@@ -324,7 +338,7 @@ export function QuestionsAdmin() {
                       type="button"
                       variant="ghost"
                       size="sm"
-                      onClick={() => void deleteQuestion(question)}
+                      onClick={() => setConfirmTarget(question)}
                       disabled={deletingId === question.id}
                     >
                       {deletingId === question.id ? <Loader2 className="animate-spin" /> : <Trash2 />}
@@ -337,8 +351,39 @@ export function QuestionsAdmin() {
               <p className="p-4 text-sm text-muted-foreground">No questions match these filters.</p>
             )}
           </div>
+
+          {totalPages > 1 ? (
+            <div className="flex items-center justify-between gap-3 border-t border-border px-4 py-3">
+              <Button type="button" variant="outline" size="sm" onClick={() => setPage((p) => p - 1)} disabled={page <= 1 || loading}>
+                Previous
+              </Button>
+              <span className="text-xs text-muted-foreground">
+                Page {page} of {totalPages}
+              </span>
+              <Button
+                type="button"
+                variant="outline"
+                size="sm"
+                onClick={() => setPage((p) => p + 1)}
+                disabled={page >= totalPages || loading}
+              >
+                Next
+              </Button>
+            </div>
+          ) : null}
         </section>
       </section>
+
+      <ConfirmDialog
+        open={confirmTarget !== null}
+        onOpenChange={(next) => {
+          if (!next) setConfirmTarget(null);
+        }}
+        title="Delete question?"
+        description={confirmTarget ? `"${confirmTarget.text}" will be permanently removed.` : undefined}
+        onConfirm={() => confirmTarget && void deleteQuestion(confirmTarget)}
+        pending={deletingId !== null}
+      />
     </div>
   );
 }

@@ -29,6 +29,7 @@ const navItems = [
   { href: '/admin/languages', label: 'Languages', icon: Languages },
   { href: '/admin/users', label: 'Users', icon: Users },
   { href: '/admin/audit-log', label: 'Audit log', icon: ShieldCheck },
+  { href: '/admin/settings', label: 'Settings', icon: Settings2 },
 ];
 
 export function AdminSidebar() {

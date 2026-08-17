@@ -5,6 +5,7 @@ import { Ban, Loader2, Pencil, Plus, RefreshCw, Save, Sparkles, Trash2, X } from
 import { useSearchParams } from 'next/navigation';
 import { useCallback, useEffect, useMemo, useState } from 'react';
 import { Button } from '@/components/ui/button';
+import { ConfirmDialog } from '@/components/ui/confirm-dialog';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 
@@ -67,26 +68,38 @@ async function parseJson<T>(response: Response): Promise<T> {
   return data as T;
 }
 
+const PAGE_SIZE = 20;
+
 export function RemediesAdmin() {
   const searchParams = useSearchParams();
   const search = searchParams.get('q')?.trim() ?? '';
   const [categoryFilter, setCategoryFilter] = useState<CategoryFilter>('all');
+  const [page, setPage] = useState(1);
   const [questions, setQuestions] = useState<Question[]>([]);
   const [remedies, setRemedies] = useState<Remedy[]>([]);
+  const [total, setTotal] = useState(0);
   const [form, setForm] = useState<RemedyFormState>(initialForm);
   const [loading, setLoading] = useState(true);
   const [questionsLoading, setQuestionsLoading] = useState(true);
   const [saving, setSaving] = useState(false);
   const [deletingId, setDeletingId] = useState<string | null>(null);
+  const [confirmTarget, setConfirmTarget] = useState<Remedy | null>(null);
   const [error, setError] = useState<string | null>(null);
   const [notice, setNotice] = useState<string | null>(null);
 
+  // Any filter change invalidates the current page.
+  useEffect(() => {
+    setPage(1);
+  }, [search, categoryFilter]);
+
   const query = useMemo(() => {
-    const params = new URLSearchParams({ limit: '100' });
+    const params = new URLSearchParams({ limit: String(PAGE_SIZE), page: String(page) });
     if (search) params.set('q', search);
     if (categoryFilter !== 'all') params.set('category', categoryFilter);
     return params.toString();
-  }, [categoryFilter, search]);
+  }, [categoryFilter, page, search]);
+
+  const totalPages = Math.max(1, Math.ceil(total / PAGE_SIZE));
 
   const questionById = useMemo(() => new Map(questions.map((question) => [question.id, question])), [questions]);
   const linkedQuestions = useMemo(
@@ -118,6 +131,7 @@ export function RemediesAdmin() {
     try {
       const result = await parseJson<Paginated<Remedy>>(await fetch(`/api/admin/remedies?${query}`));
       setRemedies(result.data);
+      setTotal(result.total);
     } catch (err) {
       setError(err instanceof Error ? err.message : 'Unable to load remedies');
     } finally {
@@ -197,8 +211,6 @@ export function RemediesAdmin() {
   }
 
   async function deleteRemedy(remedy: Remedy) {
-    if (!window.confirm(`Delete "${remedy.title}"?`)) return;
-
     setDeletingId(remedy.id);
     setError(null);
     setNotice(null);
@@ -214,6 +226,7 @@ export function RemediesAdmin() {
       setError(err instanceof Error ? err.message : 'Unable to delete remedy');
     } finally {
       setDeletingId(null);
+      setConfirmTarget(null);
     }
   }
 
@@ -421,7 +434,7 @@ export function RemediesAdmin() {
           <div className="flex items-center justify-between gap-3 border-b border-border px-4 py-3">
             <h2 className="text-base font-semibold tracking-normal">Remedies</h2>
             <span className="rounded-md border border-border bg-background px-2 py-1 text-xs text-muted-foreground">
-              {remedies.length} shown
+              {total} total
             </span>
           </div>
 
@@ -500,7 +513,7 @@ export function RemediesAdmin() {
                         type="button"
                         variant="ghost"
                         size="sm"
-                        onClick={() => void deleteRemedy(remedy)}
+                        onClick={() => setConfirmTarget(remedy)}
                         disabled={deletingId === remedy.id}
                       >
                         {deletingId === remedy.id ? <Loader2 className="animate-spin" /> : <Trash2 />}
@@ -514,8 +527,39 @@ export function RemediesAdmin() {
               <p className="p-4 text-sm text-muted-foreground">No remedies match these filters.</p>
             )}
           </div>
+
+          {totalPages > 1 ? (
+            <div className="flex items-center justify-between gap-3 border-t border-border px-4 py-3">
+              <Button type="button" variant="outline" size="sm" onClick={() => setPage((p) => p - 1)} disabled={page <= 1 || loading}>
+                Previous
+              </Button>
+              <span className="text-xs text-muted-foreground">
+                Page {page} of {totalPages}
+              </span>
+              <Button
+                type="button"
+                variant="outline"
+                size="sm"
+                onClick={() => setPage((p) => p + 1)}
+                disabled={page >= totalPages || loading}
+              >
+                Next
+              </Button>
+            </div>
+          ) : null}
         </section>
       </section>
+
+      <ConfirmDialog
+        open={confirmTarget !== null}
+        onOpenChange={(next) => {
+          if (!next) setConfirmTarget(null);
+        }}
+        title="Delete remedy?"
+        description={confirmTarget ? `"${confirmTarget.title}" will be permanently removed.` : undefined}
+        onConfirm={() => confirmTarget && void deleteRemedy(confirmTarget)}
+        pending={deletingId !== null}
+      />
     </div>
   );
 }

@@ -9,10 +9,12 @@ export function SignOutButton({
   endpoint,
   redirectTo,
   label = 'Sign out',
+  pendingLabel = 'Signing out',
 }: {
   endpoint: string;
   redirectTo: string;
   label?: string;
+  pendingLabel?: string;
 }) {
   const router = useRouter();
   const [pending, setPending] = useState(false);
@@ -30,7 +32,7 @@ export function SignOutButton({
   return (
     <Button type="button" variant="outline" size="sm" onClick={signOut} disabled={pending}>
       <LogOut />
-      {pending ? 'Signing out' : label}
+      {pending ? pendingLabel : label}
     </Button>
   );
 }

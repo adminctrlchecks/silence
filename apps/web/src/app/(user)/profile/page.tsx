@@ -3,8 +3,8 @@ import { getTranslations } from 'next-intl/server';
 import { cookies } from 'next/headers';
 import Link from 'next/link';
 import { redirect } from 'next/navigation';
-import { ChangePasswordCard } from '@/components/auth/change-password-card';
-import { ProfileDetailsCard } from '@/components/profile/profile-details-card';
+import { ProfileNav } from '@/components/profile/profile-nav';
+import { ProfileOverviewCard } from '@/components/profile/profile-overview-card';
 import { Button } from '@/components/ui/button';
 import { publicApi } from '@/lib/api';
 import { ADMIN_TOKEN_COOKIE } from '@/lib/auth-routing';
@@ -20,7 +20,6 @@ export const metadata: Metadata = {
 
 export default async function ProfilePage() {
   const t = await getTranslations('Profile');
-  const security = await getTranslations('Security');
   const categories = await getTranslations('SessionPicker');
   const session = await getUserSession();
   const cookieStore = await cookies();
@@ -41,7 +40,15 @@ export default async function ProfilePage() {
           </Button>
         </div>
       ) : null}
-      <ProfileDetailsCard
+      <ProfileNav
+        labels={{
+          overview: t('nav.overview'),
+          birthDetails: t('nav.birthDetails'),
+          security: t('nav.security'),
+          privacy: t('nav.privacy'),
+        }}
+      />
+      <ProfileOverviewCard
         initialProfile={profile}
         labels={{
           eyebrow: t('eyebrow'),
@@ -54,40 +61,16 @@ export default async function ProfilePage() {
           name: t('name'),
           category: t('category'),
           language: t('language'),
-          dob: t('dob'),
-          timeOfBirth: t('timeOfBirth'),
-          placeOfBirth: t('placeOfBirth'),
-          city: t('city'),
-          country: t('country'),
           contact: t('contact'),
           consent: t('consent'),
           yes: t('yes'),
           no: t('no'),
-          birthPlace: t('birthPlace'),
-          birthPlacePlaceholder: t('birthPlacePlaceholder'),
-          completeProfileTitle: t('completeProfileTitle'),
-          completeProfileDescription: t('completeProfileDescription'),
-          consentEditLabel: t('consentEditLabel'),
+          consentMissingNote: t('consentMissingNote'),
           categories: {
             male: categories('categories.male'),
             female: categories('categories.female'),
             other: categories('categories.other'),
           },
-        }}
-      />
-      <ChangePasswordCard
-        endpoint="/api/auth/change-password"
-        redirectTo="/login"
-        copy={{
-          eyebrow: security('eyebrow'),
-          title: security('title'),
-          description: security('description'),
-          currentPassword: security('currentPassword'),
-          newPassword: security('newPassword'),
-          confirmPassword: security('confirmPassword'),
-          submit: security('submit'),
-          submitting: security('submitting'),
-          success: security('success'),
         }}
       />
     </main>

@@ -10,12 +10,68 @@
   "Home": {
     "eyebrow": "Preguntas de astrología",
     "title": "Silence",
-    "languageLabel": "Idioma",
-    "languageValue": "11",
-    "chartLabel": "Carta",
-    "chartValue": "Astrología",
-    "savedProfileLabel": "Perfil guardado",
-    "savedProfileValue": "JWT"
+    "heroSubtitle": "Responde preguntas astrológicas guiadas, genera una carta natal a partir de tus datos de nacimiento guardados y recibe un remedio personal en tu idioma preferido.",
+    "startCta": "Comienza tu lectura",
+    "howItWorksCta": "Mira cómo funciona",
+    "savedNotice": "Tu perfil y tu lectura se guardan en tu cuenta cuando creas una.",
+    "previewAlt": "Vista previa de una lectura de Silence con preguntas guiadas, una carta natal y un remedio.",
+    "previewGuidedQuestionLabel": "Pregunta guiada",
+    "previewGuidedQuestionText": "¿Qué patrón estás listo para entender más claramente?",
+    "previewChartLabel": "Carta natal",
+    "previewChartText": "Ascendente y posiciones clave",
+    "previewRemedyLabel": "Remedio",
+    "previewRemedyText": "Una práctica repetible seleccionada para esta lectura.",
+    "howItWorksEyebrow": "Cómo funciona",
+    "howItWorksTitle": "Una lectura guiada, no un horóscopo de un clic",
+    "stepLabel": "Paso {number}",
+    "step1Title": "Crea tu perfil",
+    "step1Description": "Elige un idioma y una categoría, luego guarda los datos de nacimiento usados para el cálculo de la carta.",
+    "step2Title": "Responde preguntas guiadas",
+    "step2Description": "Avanza por tres capas de reflexiones para que la lectura pueda responder a tu contexto.",
+    "step3Title": "Ve tu carta",
+    "step3Description": "Consulta los detalles calculados de la carta natal, el contexto de precisión y una interpretación cuando hay suficientes datos.",
+    "step4Title": "Recibe un remedio",
+    "step4Description": "Obtén una práctica personal seleccionada del modelo de contenido gestionado por las herramientas de administración de Silence.",
+    "step5Title": "Vuelve cuando quieras",
+    "step5Description": "El historial de lecturas guardado te permite revisar respuestas, detalles de la carta y remedios desde tu cuenta.",
+    "whyEyebrow": "Por qué la gente lo usa",
+    "whyTitle": "Construido en torno al recorrido de lectura ya presente en la app",
+    "whyDescription": "Silence se centra en perfil, preguntas, carta, remedio e historial. No utiliza testimonios fabricados ni afirmaciones de resultados no verificables.",
+    "benefit1Title": "Punto de partida de 11 idiomas",
+    "benefit1Description": "Silence admite el conjunto de idiomas semilla documentado, incluido el manejo del árabe RTL.",
+    "benefit2Title": "Historial de lecturas guardado",
+    "benefit2Description": "Tu cuenta puede conservar sesiones de lectura, respuestas, capturas de carta e historial de remedios.",
+    "benefit3Title": "Cálculo de carta natal",
+    "benefit3Description": "Las páginas de carta usan la fecha, hora, lugar de nacimiento, coordenadas y zona horaria guardadas cuando están disponibles.",
+    "benefit4Title": "Operaciones de contenido integradas",
+    "benefit4Description": "Las herramientas de administración gestionan preguntas, respuestas, remedios, traducciones, importaciones y estados de revisión.",
+    "trustEyebrow": "Confianza y privacidad",
+    "trustTitle": "Conoce por qué se solicita cada dato",
+    "trustDescription": "La fecha, hora y lugar de nacimiento respaldan el cálculo de la carta. Tu cuenta puede guardar respuestas, cartas, remedios e historial de lecturas para que puedas volver más tarde.",
+    "dataItem1Title": "Datos de nacimiento",
+    "dataItem1Description": "Se usan para el cálculo de la carta y el contexto de precisión.",
+    "dataItem2Title": "Respuestas de lectura",
+    "dataItem2Description": "Se guardan con tu sesión para que la orientación y el historial funcionen.",
+    "dataItem3Title": "Asistencia de IA",
+    "dataItem3Description": "Se usa en los flujos actuales de generación y traducción; la redacción legal necesita revisión.",
+    "startPanelEyebrow": "Panel de inicio",
+    "startPanelTitle": "Elige cómo comienza la lectura",
+    "startPanelDescription": "Elige primero un idioma y una categoría. Estas preferencias se guardan localmente y se trasladan a la creación del perfil.",
+    "startPanelCta": "Continuar al perfil",
+    "faqEyebrow": "Preguntas frecuentes",
+    "faqTitle": "Antes de comenzar",
+    "faq1Question": "¿Qué es Silence?",
+    "faq1Answer": "Silence es una app de preguntas y respuestas astrológicas guiada. Creas un perfil, respondes reflexiones, ves una carta y recibes un camino de remedio personal.",
+    "faq2Question": "¿Por qué se pide la hora y el lugar de nacimiento?",
+    "faq2Answer": "La fecha, hora y lugar de nacimiento se usan para calcular los detalles de la carta. Si los datos están incompletos, la precisión de la carta puede ser aproximada o incierta.",
+    "faq3Question": "¿Puedo volver a lecturas anteriores?",
+    "faq3Answer": "Sí. El historial de lecturas es parte del flujo actual del producto para usuarios con sesión iniciada.",
+    "faq4Question": "¿Esto es asesoramiento médico, legal o financiero?",
+    "faq4Answer": "No. Silence ofrece orientación astrológica reflexiva, no asesoramiento médico, legal ni financiero. Consulta los <terms>Términos</terms> para el descargo de responsabilidad completo.",
+    "faq5Question": "¿Cómo se usa la IA?",
+    "faq5Answer": "Algunas respuestas, traducciones e interpretaciones de la carta se generan con asistencia de IA. Consulta <privacy>Privacidad</privacy> para más detalles.",
+    "finalTitle": "¿Listo para comenzar tu lectura?",
+    "finalDescription": "Crea un perfil, guarda tus preferencias y avanza por el recorrido de lectura guiado de Silence."
   },
   "SessionPicker": {
     "language": "Idioma",
@@ -44,7 +100,7 @@
     "contact": "Correo o teléfono",
     "password": "Contraseña",
     "forgotPassword": "¿Olvidaste tu contraseña?",
-    "consent": "Acepto guardar mi perfil, datos de nacimiento, respuestas, carta y remedio.",
+    "consent": "Acepto los <terms>Términos</terms> y la <privacy>Política de Privacidad</privacy>, y consiento en guardar mi perfil, datos de nacimiento, respuestas, carta y remedio.",
     "createSubmit": "Crear perfil",
     "signInSubmit": "Iniciar sesión",
     "alreadyHaveProfile": "¿Ya tienes un perfil?",
@@ -56,7 +112,23 @@
     "birthPlacePlaceholder": "Buscar una ciudad…",
     "continueWithGoogle": "Continuar con Google",
     "orContinueWithEmail": "o continuar con correo electrónico",
-    "googleSignInError": "Error al iniciar sesión con Google. Inténtalo de nuevo."
+    "googleSignInError": "Error al iniciar sesión con Google. Inténtalo de nuevo.",
+    "eyebrowLogin": "Iniciar sesión",
+    "eyebrowRegister": "Nuevo perfil",
+    "descriptionLogin": "Introduce tu contacto y contraseña para continuar tu lectura.",
+    "descriptionRegister": "Configura tu perfil en tres pasos rápidos para generar tu carta y remedio.",
+    "steps": {
+      "identity": "Identidad",
+      "birth": "Datos de nacimiento",
+      "account": "Cuenta"
+    },
+    "stepProgress": "Paso {current} de {total}: {label}",
+    "back": "Atrás",
+    "continue": "Continuar",
+    "birthWhyTitle": "Por qué pedimos datos de nacimiento exactos",
+    "birthWhyBody": "Tu fecha, hora y lugar de nacimiento nos permiten calcular con precisión las posiciones planetarias y las casas de tu carta. Incluso unos minutos pueden cambiar el resultado, así que usa tu certificado de nacimiento o un registro familiar confiable si no estás seguro.",
+    "agreementNotice": "Al continuar, aceptas nuestros <terms>Términos</terms> y nuestra <privacy>Política de Privacidad</privacy>.",
+    "stepValidationError": "Completa todos los campos requeridos antes de continuar."
   },
   "ForgotPassword": {
     "eyebrow": "Recuperación de cuenta",
@@ -78,13 +150,16 @@
     "submit": "Restablecer contraseña",
     "submitting": "Restableciendo",
     "success": "Contraseña actualizada. Redirigiendo al inicio de sesión…",
-    "invalidLink": "Este enlace de restablecimiento no es válido o ha caducado. Solicita uno nuevo desde la página de inicio de sesión."
+    "invalidLink": "Este enlace de restablecimiento no es válido o ha caducado. Solicita uno nuevo desde la página de inicio de sesión.",
+    "requestNewLink": "Solicitar un nuevo enlace de restablecimiento"
   },
   "UserLayout": {
     "mySession": "Mi sesión",
     "signIn": "Iniciar sesión",
     "impersonationBanner": "Estás viendo la app de usuario como esta cuenta, con acceso desde el panel de administración.",
-    "exitToAdmin": "Volver al panel de administración"
+    "exitToAdmin": "Volver al panel de administración",
+    "signOut": "Cerrar sesión",
+    "signingOut": "Cerrando sesión"
   },
   "UserApp": {
     "eyebrow": "Área de usuario",
@@ -135,7 +210,23 @@
       "chart_ready": "Carta lista",
       "remedy_ready": "Remedio listo",
       "complete": "Completa"
-    }
+    },
+    "greeting": "Bienvenido, {name}",
+    "subtitleFirstTime": "Tu primera lectura está lista para comenzar.",
+    "subtitleInProgress": "Continúa donde lo dejaste.",
+    "subtitleChartReady": "Tu carta natal está lista para ver.",
+    "subtitleRemedyReady": "Tu remedio está listo para ver.",
+    "subtitleReturning": "Listos cuando quieras comenzar una nueva lectura.",
+    "journey": {
+      "profile": "Perfil",
+      "questions": "Preguntas",
+      "chart": "Carta",
+      "remedy": "Remedio",
+      "complete": "Completo"
+    },
+    "firstTimeExplainer": "Responde algunas preguntas guiadas y luego obtén tu carta natal y un remedio personal: unos tres pasos.",
+    "recentReading": "Tu lectura más reciente",
+    "viewFullHistory": "Ver historial completo"
   },
   "Chart": {
     "eyebrow": "Carta de muestra",
@@ -155,7 +246,40 @@
       "approximate": "Aproximado",
       "uncertain": "Incierto",
       "label": "Precisión del cálculo"
-    }
+    },
+    "chartVisualAlt": "Rueda de carta natal védica que muestra las posiciones planetarias en las 12 casas. Consulta la tabla de posiciones abajo para ver las posiciones exactas.",
+    "chartSummaryHeading": "Resumen de la carta",
+    "birthDataLabel": "Datos de nacimiento",
+    "atConnector": "a las",
+    "birthPlaceLabel": "Lugar de nacimiento",
+    "coordinatesNotAvailable": "Coordenadas no disponibles",
+    "calculationLabel": "Cálculo",
+    "zodiacSuffix": "zodíaco {zodiac}",
+    "julianDayLabel": "DJ {value}",
+    "timezoneLabel": "Zona horaria: {value}",
+    "placementsHeading": "Posiciones",
+    "placementsDescription": "Planeta, signo, grado, casa y movimiento de la carta calculada.",
+    "columnPlanet": "Planeta",
+    "columnSign": "Signo",
+    "columnDegree": "Grado",
+    "columnHouse": "Casa",
+    "columnMotion": "Movimiento",
+    "motionDirect": "directo",
+    "housesHeading": "Casas",
+    "housesFallback": "Las cúspides de las casas necesitan coordenadas de nacimiento exactas. Las posiciones actuales usan el alternativo basado en signos.",
+    "interpretationHeading": "Lectura personal",
+    "generatedOn": "Generado el {date}",
+    "viewRemedy": "Ver remedio",
+    "warningApproximate": "Faltan las coordenadas exactas o la zona horaria, por lo que las casas y el ascendente pueden variar.",
+    "warningUncertain": "Faltan las coordenadas del lugar de nacimiento, por lo que la carta usa casas alternativas basadas en signos.",
+    "detailAscendant": "Signo ascendente según hora y lugar de nacimiento",
+    "detailSun": "Posición solar principal",
+    "detailMoon": "Posición lunar emocional",
+    "activeHouseDetail": "{count} posiciones aquí",
+    "detailNoHouseEmphasis": "No hay énfasis de casa disponible",
+    "labelSun": "Sol",
+    "labelMoon": "Luna",
+    "labelActiveHouse": "Casa activa"
   },
   "Remedy": {
     "eyebrow": "Remedio personal",
@@ -163,7 +287,11 @@
     "linkedLevel": "Nivel vinculado: {level}",
     "practice": "Suggested practice",
     "closing": "Keep the remedy gentle and repeatable. Small consistency is more useful than intensity.",
-    "whyThisPractice": "Por qué esta práctica"
+    "whyThisPractice": "Por qué esta práctica",
+    "whyGeneric": "Seleccionado como una práctica de apoyo para tu categoría y lectura actual.",
+    "howToRepeat": "Cómo repetirlo",
+    "backToChart": "Volver a la carta",
+    "viewHistory": "Ver historial de lecturas"
   },
   "Profile": {
     "eyebrow": "Perfil guardado",
@@ -190,7 +318,19 @@
     "birthPlacePlaceholder": "Buscar una ciudad…",
     "completeProfileTitle": "Termina de configurar tu perfil",
     "completeProfileDescription": "Añade tus datos de nacimiento y tu consentimiento para generar tu lectura astrológica personalizada.",
-    "consentEditLabel": "Acepto los Términos y la Política de privacidad, y doy mi consentimiento para que Silence almacene mis datos de nacimiento para generar mi lectura."
+    "consentEditLabel": "Acepto los Términos y la Política de privacidad, y doy mi consentimiento para que Silence almacene mis datos de nacimiento para generar mi lectura.",
+    "nav": {
+      "overview": "Resumen",
+      "birthDetails": "Datos de nacimiento",
+      "security": "Seguridad",
+      "privacy": "Privacidad"
+    },
+    "consentMissingNote": "Completa tus datos de nacimiento para terminar la incorporación.",
+    "birthDetailsEyebrow": "Datos de nacimiento",
+    "birthDetailsTitle": "Datos de nacimiento",
+    "birthDetailsDescription": "Fecha, hora y lugar de nacimiento usados para calcular tu carta.",
+    "changeImpactTitle": "Esto afectará las lecturas futuras",
+    "changeImpactBody": "Cambiar estos datos puede afectar cualquier carta nueva que generes. Las lecturas que ya completaste conservan su carta original como registro histórico."
   },
   "History": {
     "eyebrow": "Tus lecturas",
@@ -219,7 +359,11 @@
       "chart_ready": "Carta lista",
       "remedy_ready": "Remedio listo",
       "complete": "Completa"
-    }
+    },
+    "previousPage": "Anterior",
+    "nextPage": "Siguiente",
+    "pageOf": "Página {current} de {total}",
+    "emptyExplainer": "Cuando completes una lectura, se guarda aquí con tus respuestas, carta y remedio para que puedas revisarla en cualquier momento."
   },
   "Questions": {
     "eyebrow": "Flujo de preguntas",
@@ -241,7 +385,9 @@
     "intro": "Move through three short layers. Your final chart reading is shaped by your Level 2 reflections, so plain honest answers work best.",
     "progress": "Step {current} of {total}.",
     "stepHelp": "Save this layer to reveal the guidance written for each question.",
-    "emptyTitle": "This layer is waiting for content."
+    "emptyTitle": "This layer is waiting for content.",
+    "saving": "Guardando…",
+    "savedAnnouncement": "{level} guardado."
   },
   "Security": {
     "eyebrow": "Security",
@@ -252,6 +398,71 @@
     "confirmPassword": "Confirm new password",
     "submit": "Change password",
     "submitting": "Changing password",
-    "success": "Password changed. Please sign in again."
+    "success": "Password changed. Please sign in again.",
+    "manageCta": "Gestionar contraseña"
+  },
+  "Disclaimer": {
+    "chartRemedy": "Esta lectura es para la reflexión y el autoconocimiento, no es asesoramiento médico, legal ni financiero, y los resultados no están garantizados. Consulta nuestros <terms>Términos</terms> para más información."
+  },
+  "Privacy": {
+    "eyebrow": "Privacidad",
+    "title": "Privacidad y tus datos",
+    "consentStatusTitle": "Tu consentimiento",
+    "consentGiven": "Has consentido guardar tu perfil, datos de nacimiento, respuestas, carta y remedio.",
+    "consentMissing": "Aún no has completado el consentimiento. Termina tus datos de nacimiento para habilitar las lecturas.",
+    "manageBirthDetails": "Gestionar datos de nacimiento",
+    "dataWeStoreTitle": "Qué almacenamos",
+    "dataWeStoreBody": "Tu perfil, datos de nacimiento, respuestas a preguntas, cartas generadas y remedios.",
+    "aiTitle": "Procesamiento con IA",
+    "aiBody": "Algunas respuestas, traducciones e interpretaciones de la carta se generan con el modelo de IA Gemini de Google. El contenido revisado por un administrador se etiqueta por separado en tu historial de lecturas.",
+    "legalTitle": "Legal",
+    "readTerms": "Leer Términos",
+    "readPrivacyPolicy": "Leer Política de Privacidad",
+    "requestTitle": "Solicita o elimina tus datos",
+    "requestBody": "Aún no ofrecemos exportación o eliminación de autoservicio. Contáctanos y gestionaremos tu solicitud manualmente."
+  },
+  "Legal": {
+    "draftNotice": "Esta página es un borrador de trabajo de nuestros términos legales y está pendiente de revisión legal formal. Aún no es definitiva.",
+    "translationNotice": "Esta página está disponible actualmente solo en inglés. Una versión traducida estará disponible tras la revisión legal.",
+    "tableOfContents": "En esta página",
+    "lastUpdated": "Última actualización {date}",
+    "backToTop": "Volver arriba"
+  },
+  "Nav": {
+    "howItWorks": "Cómo funciona",
+    "faq": "Preguntas frecuentes",
+    "privacy": "Privacidad",
+    "terms": "Términos",
+    "home": "Inicio",
+    "startReading": "Comenzar lectura",
+    "adminSignIn": "Acceso de administrador",
+    "product": "Producto",
+    "trust": "Confianza",
+    "footerDescription": "Preguntas y respuestas astrológicas reflexivas con lecturas guardadas, generación de carta y un camino de remedio personal.",
+    "copyright": "© {year} {appName}. Titular legal pendiente de revisión.",
+    "openMenu": "Abrir menú",
+    "publicNavigationLabel": "Navegación pública",
+    "mobileNavigationLabel": "Navegación móvil",
+    "footerProductNavLabel": "Navegación de producto del pie de página",
+    "footerTrustNavLabel": "Navegación de confianza del pie de página",
+    "openProfileMenu": "Abrir menú de perfil",
+    "accountTitle": "Cuenta",
+    "accountDescription": "Perfil y seguridad",
+    "accountNavLabel": "Navegación de cuenta",
+    "profileLabel": "Perfil",
+    "dashboardLabel": "Panel",
+    "historyLabel": "Historial",
+    "language": "Idioma",
+    "userAppNavigationLabel": "Navegación de la aplicación de usuario",
+    "mobileUserAppNavigationLabel": "Navegación móvil de la aplicación de usuario",
+    "signIn": "Iniciar sesión"
+  },
+  "NotFound": {
+    "rootTitle": "Esta página no está disponible",
+    "rootDescription": "El enlace puede estar mal escrito, caducado o ya no formar parte de Silence.",
+    "goHome": "Ir al inicio",
+    "userTitle": "No pudimos encontrar esa página",
+    "userDescription": "Vuelve a tu panel de lecturas o usa los enlaces del pie de página para privacidad y términos.",
+    "goDashboard": "Ir al panel"
   }
 }

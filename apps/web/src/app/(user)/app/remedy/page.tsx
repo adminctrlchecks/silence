@@ -1,7 +1,10 @@
 import type { Metadata } from 'next';
 import { getTranslations } from 'next-intl/server';
-import { Sparkles } from 'lucide-react';
+import { ClipboardList, History as HistoryIcon, MoonStar, Sparkles } from 'lucide-react';
+import Link from 'next/link';
 import { redirect } from 'next/navigation';
+import { ReadingDisclaimer } from '@/components/shared/reading-disclaimer';
+import { Button } from '@/components/ui/button';
 import { publicApi } from '@/lib/api';
 import { normalizeSessionLanguage } from '@/lib/session-preferences';
 import { getUserSession } from '@/lib/user-session';
@@ -31,8 +34,14 @@ export default async function RemedyPage() {
     activeSession.id,
   );
 
+  // Viewing the remedy snapshots it and marks the session complete
+  // server-side (SessionsService.recordRemedy) — there's no separate
+  // "finish reading" action to surface here; the natural next steps are to
+  // review history or head back to the chart.
+  const whyThisPractice = remedy.source === 'rule' && remedy.matchDetail ? remedy.matchDetail : t('whyGeneric');
+
   return (
-    <main className="mx-auto w-full max-w-4xl px-4 py-8 sm:px-6">
+    <main className="mx-auto w-full max-w-4xl space-y-4 px-4 py-8 sm:px-6">
       <section className="rounded-md border border-border bg-card p-5 shadow-sm">
         <div className="flex items-start gap-3">
           <span className="rounded-md border border-primary/20 bg-primary/10 p-2 text-primary">
@@ -43,34 +52,61 @@ export default async function RemedyPage() {
             <h1 className="mt-2 text-3xl font-semibold tracking-normal" dir="auto">
               {remedy.title}
             </h1>
+            <div className="mt-2 flex flex-wrap gap-2 text-xs text-muted-foreground">
+              <span className="rounded-md border border-border bg-background px-2 py-1">
+                {t('category', { category: remedy.category })}
+              </span>
+              {remedy.linkedLevel ? (
+                <span className="rounded-md border border-border bg-background px-2 py-1">
+                  {t('linkedLevel', { level: remedy.linkedLevel })}
+                </span>
+              ) : null}
+            </div>
           </div>
         </div>
+      </section>
 
-        <div className="mt-5 rounded-md border border-border bg-background p-4">
-          <p className="text-xs font-medium uppercase text-muted-foreground">{t('practice')}</p>
-          <p className="mt-2 text-sm leading-6 text-foreground" dir="auto">
-            {remedy.text}
-          </p>
+      {/* What to do / why / how-to-repeat as distinct sections per
+          docs/product-redesign/14-page-specifications.md §7. */}
+      <section className="rounded-md border border-border bg-card p-5 shadow-sm">
+        <div className="flex items-center gap-2">
+          <ClipboardList className="size-4 text-primary" aria-hidden />
+          <h2 className="text-sm font-semibold tracking-normal">{t('practice')}</h2>
         </div>
+        <p className="mt-3 text-sm leading-6 text-foreground" dir="auto">
+          {remedy.text}
+        </p>
+      </section>
 
-        <div className="mt-5 flex flex-wrap gap-2 text-xs text-muted-foreground">
-          <span className="rounded-md border border-border bg-background px-2 py-1">
-            {t('category', { category: remedy.category })}
-          </span>
-          {remedy.linkedLevel ? (
-            <span className="rounded-md border border-border bg-background px-2 py-1">
-              {t('linkedLevel', { level: remedy.linkedLevel })}
-            </span>
-          ) : null}
-        </div>
-
-        {remedy.source === 'rule' && remedy.matchDetail ? (
-          <p className="mt-4 text-xs text-muted-foreground">
-            {t('whyThisPractice')}: {remedy.matchDetail}
+      <div className="grid gap-4 sm:grid-cols-2">
+        <section className="rounded-md border border-border bg-card p-5 shadow-sm">
+          <h2 className="text-sm font-semibold tracking-normal">{t('whyThisPractice')}</h2>
+          <p className="mt-2 text-sm leading-6 text-muted-foreground" dir="auto">
+            {whyThisPractice}
           </p>
-        ) : null}
+        </section>
+        <section className="rounded-md border border-border bg-card p-5 shadow-sm">
+          <h2 className="text-sm font-semibold tracking-normal">{t('howToRepeat')}</h2>
+          <p className="mt-2 text-sm leading-6 text-muted-foreground">{t('closing')}</p>
+        </section>
+      </div>
 
-        <p className="mt-4 text-sm leading-6 text-muted-foreground">{t('closing')}</p>
+      <section className="rounded-md border border-border bg-card p-5 shadow-sm">
+        <ReadingDisclaimer />
+        <div className="mt-4 flex flex-wrap gap-2">
+          <Button asChild>
+            <Link href="/history">
+              <HistoryIcon />
+              {t('viewHistory')}
+            </Link>
+          </Button>
+          <Button asChild variant="outline">
+            <Link href="/app/chart">
+              <MoonStar />
+              {t('backToChart')}
+            </Link>
+          </Button>
+        </div>
       </section>
     </main>
   );
