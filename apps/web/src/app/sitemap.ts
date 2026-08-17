@@ -1,7 +1,8 @@
 import { DEFAULT_LANGUAGE, LANGUAGES } from '@silence/shared';
 import type { MetadataRoute } from 'next';
+import { siteUrl } from '@/lib/seo';
 
-const SITE_URL = (process.env.NEXT_PUBLIC_SITE_URL ?? 'http://localhost:3011').replace(/\/$/, '');
+const SITE_URL = siteUrl();
 
 // Only the routes that actually resolve without `noindex` (verified: every
 // other page.tsx in this app sets `robots: { index: false }`) — see

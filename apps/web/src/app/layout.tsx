@@ -6,11 +6,12 @@ import type { ReactNode } from 'react';
 import { ThemeProvider } from '@/components/theme-provider';
 import { ToastProvider } from '@/components/ui/toast';
 import { dirFor, normalizeLanguage } from '@/lib/i18n';
+import { siteUrl } from '@/lib/seo';
 import { LANGUAGE_COOKIE } from '@/lib/session-preferences';
 import './globals.css';
 
 export const metadata: Metadata = {
-  metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL ?? 'http://localhost:3011'),
+  metadataBase: new URL(siteUrl()),
   applicationName: 'Silence',
   title: {
     default: 'Silence - Multilingual Astrology Q&A',

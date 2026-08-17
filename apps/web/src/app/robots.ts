@@ -1,6 +1,7 @@
 import type { MetadataRoute } from 'next';
+import { siteUrl } from '@/lib/seo';
 
-const SITE_URL = (process.env.NEXT_PUBLIC_SITE_URL ?? 'http://localhost:3011').replace(/\/$/, '');
+const SITE_URL = siteUrl();
 
 // docs/product-redesign/28-seo.md §8: allow the public/indexable routes,
 // disallow authenticated app/admin/auth-utility routes (redundant with the
