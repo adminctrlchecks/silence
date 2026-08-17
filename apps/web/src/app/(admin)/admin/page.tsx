@@ -9,7 +9,6 @@ import {
   MoonStar,
   ShieldCheck,
 } from 'lucide-react';
-import { ChangePasswordCard } from '@/components/auth/change-password-card';
 import { DashboardOverview } from '@/components/admin/dashboard-overview';
 
 const modules = [
@@ -48,22 +47,6 @@ export default function AdminHome() {
           ))}
         </div>
       </section>
-
-      <ChangePasswordCard
-        endpoint="/api/auth/admin/change-password"
-        redirectTo="/admin/login"
-        copy={{
-          eyebrow: 'Security',
-          title: 'Change admin password',
-          description: 'Confirm your current password, then choose a new one. You will be signed out after it changes.',
-          currentPassword: 'Current password',
-          newPassword: 'New password',
-          confirmPassword: 'Confirm new password',
-          submit: 'Change password',
-          submitting: 'Changing password',
-          success: 'Password changed. Please sign in again.',
-        }}
-      />
     </div>
   );
 }

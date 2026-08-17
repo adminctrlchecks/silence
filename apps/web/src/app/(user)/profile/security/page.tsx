@@ -1,9 +1,8 @@
 import type { Metadata } from 'next';
-import { ChevronLeft } from 'lucide-react';
 import { getTranslations } from 'next-intl/server';
-import Link from 'next/link';
 import { redirect } from 'next/navigation';
 import { ChangePasswordCard } from '@/components/auth/change-password-card';
+import { ProfileNav } from '@/components/profile/profile-nav';
 import { getUserSession } from '@/lib/user-session';
 
 export const metadata: Metadata = {
@@ -25,10 +24,14 @@ export default async function ProfileSecurityPage() {
 
   return (
     <main className="mx-auto w-full max-w-2xl space-y-5 px-4 py-8 sm:px-6">
-      <Link href="/profile" className="inline-flex items-center gap-1 text-sm font-medium text-primary">
-        <ChevronLeft className="size-4 rtl:rotate-180" aria-hidden />
-        {profile('title')}
-      </Link>
+      <ProfileNav
+        labels={{
+          overview: profile('nav.overview'),
+          birthDetails: profile('nav.birthDetails'),
+          security: profile('nav.security'),
+          privacy: profile('nav.privacy'),
+        }}
+      />
       <ChangePasswordCard
         endpoint="/api/auth/change-password"
         redirectTo="/login"

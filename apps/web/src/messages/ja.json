@@ -260,7 +260,19 @@
     "birthPlacePlaceholder": "都市を検索…",
     "completeProfileTitle": "プロフィールの設定を完了してください",
     "completeProfileDescription": "パーソナライズされた占星術リーディングを作成するために、生年月日の情報と同意を追加してください。",
-    "consentEditLabel": "利用規約とプライバシーポリシーに同意し、Silence が私の生年月日情報を保存してリーディングを作成することに同意します。"
+    "consentEditLabel": "利用規約とプライバシーポリシーに同意し、Silence が私の生年月日情報を保存してリーディングを作成することに同意します。",
+    "nav": {
+      "overview": "概要",
+      "birthDetails": "出生情報",
+      "security": "セキュリティ",
+      "privacy": "プライバシー"
+    },
+    "consentMissingNote": "オンボーディングを完了するには出生情報を入力してください。",
+    "birthDetailsEyebrow": "出生情報",
+    "birthDetailsTitle": "出生情報",
+    "birthDetailsDescription": "チャートの計算に使用される生年月日、出生時刻、出生地。",
+    "changeImpactTitle": "今後のリーディングに影響します",
+    "changeImpactBody": "この情報を変更すると、今後生成するチャートに影響する場合があります。既に完了したリーディングは、履歴として元のチャートを保持します。"
   },
   "History": {
     "eyebrow": "あなたのリーディング",
@@ -333,5 +345,22 @@
   },
   "Disclaimer": {
     "chartRemedy": "このリーディングは内省と自己理解のためのものであり、医療・法律・財務上の助言ではなく、結果を保証するものでもありません。詳しくは<terms>利用規約</terms>をご覧ください。"
+  },
+  "Privacy": {
+    "eyebrow": "プライバシー",
+    "title": "プライバシーとあなたのデータ",
+    "consentStatusTitle": "あなたの同意",
+    "consentGiven": "プロフィール、出生情報、回答、チャート、レメディの保存に同意しています。",
+    "consentMissing": "まだ同意が完了していません。リーディングを有効にするには出生情報を完了してください。",
+    "manageBirthDetails": "出生情報を管理",
+    "dataWeStoreTitle": "保存する情報",
+    "dataWeStoreBody": "プロフィール、出生情報、質問への回答、生成されたチャート、レメディ。",
+    "aiTitle": "AI処理",
+    "aiBody": "一部の回答、翻訳、チャート解釈はGoogleのGemini AIモデルを使用して生成されます。管理者がレビューしたコンテンツはリーディング履歴で別途表示されます。",
+    "legalTitle": "法的情報",
+    "readTerms": "利用規約を読む",
+    "readPrivacyPolicy": "プライバシーポリシーを読む",
+    "requestTitle": "データのリクエストまたは削除",
+    "requestBody": "現在、セルフサービスでのエクスポートや削除は提供していません。お問い合わせいただければ、手動で対応いたします。"
   }
 }

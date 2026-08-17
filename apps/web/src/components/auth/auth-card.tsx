@@ -248,7 +248,7 @@ export function AuthCard({
                 label={t('continueWithGoogle')}
                 onSuccess={(profileComplete) => {
                   setError(null);
-                  router.push(localizedPath(pathname, profileComplete ? '/app' : '/profile?onboarding=1'));
+                  router.push(localizedPath(pathname, profileComplete ? '/app' : '/profile/birth-details?onboarding=1'));
                   router.refresh();
                 }}
                 onError={() => setError(t('googleSignInError'))}

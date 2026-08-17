@@ -260,7 +260,19 @@
     "birthPlacePlaceholder": "Buscar una ciudad…",
     "completeProfileTitle": "Termina de configurar tu perfil",
     "completeProfileDescription": "Añade tus datos de nacimiento y tu consentimiento para generar tu lectura astrológica personalizada.",
-    "consentEditLabel": "Acepto los Términos y la Política de privacidad, y doy mi consentimiento para que Silence almacene mis datos de nacimiento para generar mi lectura."
+    "consentEditLabel": "Acepto los Términos y la Política de privacidad, y doy mi consentimiento para que Silence almacene mis datos de nacimiento para generar mi lectura.",
+    "nav": {
+      "overview": "Resumen",
+      "birthDetails": "Datos de nacimiento",
+      "security": "Seguridad",
+      "privacy": "Privacidad"
+    },
+    "consentMissingNote": "Completa tus datos de nacimiento para terminar la incorporación.",
+    "birthDetailsEyebrow": "Datos de nacimiento",
+    "birthDetailsTitle": "Datos de nacimiento",
+    "birthDetailsDescription": "Fecha, hora y lugar de nacimiento usados para calcular tu carta.",
+    "changeImpactTitle": "Esto afectará las lecturas futuras",
+    "changeImpactBody": "Cambiar estos datos puede afectar cualquier carta nueva que generes. Las lecturas que ya completaste conservan su carta original como registro histórico."
   },
   "History": {
     "eyebrow": "Tus lecturas",
@@ -333,5 +345,22 @@
   },
   "Disclaimer": {
     "chartRemedy": "Esta lectura es para la reflexión y el autoconocimiento, no es asesoramiento médico, legal ni financiero, y los resultados no están garantizados. Consulta nuestros <terms>Términos</terms> para más información."
+  },
+  "Privacy": {
+    "eyebrow": "Privacidad",
+    "title": "Privacidad y tus datos",
+    "consentStatusTitle": "Tu consentimiento",
+    "consentGiven": "Has consentido guardar tu perfil, datos de nacimiento, respuestas, carta y remedio.",
+    "consentMissing": "Aún no has completado el consentimiento. Termina tus datos de nacimiento para habilitar las lecturas.",
+    "manageBirthDetails": "Gestionar datos de nacimiento",
+    "dataWeStoreTitle": "Qué almacenamos",
+    "dataWeStoreBody": "Tu perfil, datos de nacimiento, respuestas a preguntas, cartas generadas y remedios.",
+    "aiTitle": "Procesamiento con IA",
+    "aiBody": "Algunas respuestas, traducciones e interpretaciones de la carta se generan con el modelo de IA Gemini de Google. El contenido revisado por un administrador se etiqueta por separado en tu historial de lecturas.",
+    "legalTitle": "Legal",
+    "readTerms": "Leer Términos",
+    "readPrivacyPolicy": "Leer Política de Privacidad",
+    "requestTitle": "Solicita o elimina tus datos",
+    "requestBody": "Aún no ofrecemos exportación o eliminación de autoservicio. Contáctanos y gestionaremos tu solicitud manualmente."
   }
 }

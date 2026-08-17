@@ -260,7 +260,19 @@
     "birthPlacePlaceholder": "Procurar uma cidade…",
     "completeProfileTitle": "Termine de configurar seu perfil",
     "completeProfileDescription": "Adicione seus dados de nascimento e consentimento para gerarmos sua leitura astrológica personalizada.",
-    "consentEditLabel": "Concordo com os Termos e a Política de Privacidade, e consinto que a Silence armazene meus dados de nascimento para gerar minha leitura."
+    "consentEditLabel": "Concordo com os Termos e a Política de Privacidade, e consinto que a Silence armazene meus dados de nascimento para gerar minha leitura.",
+    "nav": {
+      "overview": "Visão geral",
+      "birthDetails": "Dados de nascimento",
+      "security": "Segurança",
+      "privacy": "Privacidade"
+    },
+    "consentMissingNote": "Complete seus dados de nascimento para finalizar o cadastro.",
+    "birthDetailsEyebrow": "Dados de nascimento",
+    "birthDetailsTitle": "Dados de nascimento",
+    "birthDetailsDescription": "Data, hora e local de nascimento usados para calcular seu mapa.",
+    "changeImpactTitle": "Isso afetará leituras futuras",
+    "changeImpactBody": "Alterar esses dados pode afetar qualquer novo mapa que você gerar. As leituras já concluídas mantêm seu mapa original como registro histórico."
   },
   "History": {
     "eyebrow": "Suas leituras",
@@ -333,5 +345,22 @@
   },
   "Disclaimer": {
     "chartRemedy": "Esta leitura é para reflexão e autoconhecimento — não é aconselhamento médico, jurídico ou financeiro, e os resultados não são garantidos. Consulte nossos <terms>Termos</terms> para mais informações."
+  },
+  "Privacy": {
+    "eyebrow": "Privacidade",
+    "title": "Privacidade e seus dados",
+    "consentStatusTitle": "Seu consentimento",
+    "consentGiven": "Você consentiu em salvar seu perfil, dados de nascimento, respostas, mapa e remédio.",
+    "consentMissing": "Você ainda não concluiu o consentimento. Termine seus dados de nascimento para habilitar as leituras.",
+    "manageBirthDetails": "Gerenciar dados de nascimento",
+    "dataWeStoreTitle": "O que armazenamos",
+    "dataWeStoreBody": "Seu perfil, dados de nascimento, respostas às perguntas, mapas gerados e remédios.",
+    "aiTitle": "Processamento por IA",
+    "aiBody": "Algumas respostas, traduções e interpretações de mapa são geradas usando o modelo de IA Gemini do Google. O conteúdo revisado por administrador é rotulado separadamente no seu histórico de leituras.",
+    "legalTitle": "Legal",
+    "readTerms": "Ler Termos",
+    "readPrivacyPolicy": "Ler Política de Privacidade",
+    "requestTitle": "Solicitar ou excluir seus dados",
+    "requestBody": "Ainda não oferecemos exportação ou exclusão via autoatendimento. Entre em contato conosco e trataremos sua solicitação manualmente."
   }
 }

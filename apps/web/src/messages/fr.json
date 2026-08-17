@@ -260,7 +260,19 @@
     "birthPlacePlaceholder": "Chercher une ville…",
     "completeProfileTitle": "Terminez de configurer votre profil",
     "completeProfileDescription": "Ajoutez vos données de naissance et votre consentement pour générer votre lecture astrologique personnalisée.",
-    "consentEditLabel": "J'accepte les Conditions d'utilisation et la Politique de confidentialité, et je consens à ce que Silence conserve mes données de naissance pour générer ma lecture."
+    "consentEditLabel": "J'accepte les Conditions d'utilisation et la Politique de confidentialité, et je consens à ce que Silence conserve mes données de naissance pour générer ma lecture.",
+    "nav": {
+      "overview": "Aperçu",
+      "birthDetails": "Détails de naissance",
+      "security": "Sécurité",
+      "privacy": "Confidentialité"
+    },
+    "consentMissingNote": "Complétez vos détails de naissance pour terminer l'intégration.",
+    "birthDetailsEyebrow": "Détails de naissance",
+    "birthDetailsTitle": "Détails de naissance",
+    "birthDetailsDescription": "Date, heure et lieu de naissance utilisés pour calculer votre carte.",
+    "changeImpactTitle": "Cela affectera les lectures futures",
+    "changeImpactBody": "Modifier ces détails peut affecter toute nouvelle carte que vous générez. Les lectures déjà terminées conservent leur carte d'origine comme archive historique."
   },
   "History": {
     "eyebrow": "Vos lectures",
@@ -333,5 +345,22 @@
   },
   "Disclaimer": {
     "chartRemedy": "Cette lecture est destinée à la réflexion et à la connaissance de soi — ce n'est pas un conseil médical, juridique ou financier, et les résultats ne sont pas garantis. Consultez nos <terms>Conditions</terms> pour en savoir plus."
+  },
+  "Privacy": {
+    "eyebrow": "Confidentialité",
+    "title": "Confidentialité et vos données",
+    "consentStatusTitle": "Votre consentement",
+    "consentGiven": "Vous avez consenti à l'enregistrement de votre profil, vos détails de naissance, vos réponses, votre carte et votre remède.",
+    "consentMissing": "Vous n'avez pas encore terminé le consentement. Complétez vos détails de naissance pour activer les lectures.",
+    "manageBirthDetails": "Gérer les détails de naissance",
+    "dataWeStoreTitle": "Ce que nous stockons",
+    "dataWeStoreBody": "Votre profil, vos détails de naissance, vos réponses aux questions, les cartes générées et les remèdes.",
+    "aiTitle": "Traitement par IA",
+    "aiBody": "Certaines réponses, traductions et interprétations de carte sont générées à l'aide du modèle d'IA Gemini de Google. Le contenu révisé par un administrateur est étiqueté séparément dans votre historique de lectures.",
+    "legalTitle": "Mentions légales",
+    "readTerms": "Lire les Conditions",
+    "readPrivacyPolicy": "Lire la Politique de confidentialité",
+    "requestTitle": "Demander ou supprimer vos données",
+    "requestBody": "Nous ne proposons pas encore d'export ou de suppression en libre-service. Contactez-nous et nous traiterons votre demande manuellement."
   }
 }

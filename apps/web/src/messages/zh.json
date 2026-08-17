@@ -258,7 +258,19 @@
     "birthPlacePlaceholder": "搜索城市…",
     "completeProfileTitle": "完成个人资料设置",
     "completeProfileDescription": "请添加您的出生信息并同意条款，以便我们为您生成个性化占星解读。",
-    "consentEditLabel": "我同意服务条款和隐私政策，并同意 Silence 存储我的出生信息以生成我的解读。"
+    "consentEditLabel": "我同意服务条款和隐私政策，并同意 Silence 存储我的出生信息以生成我的解读。",
+    "nav": {
+      "overview": "概览",
+      "birthDetails": "出生信息",
+      "security": "安全",
+      "privacy": "隐私"
+    },
+    "consentMissingNote": "请完善您的出生信息以完成引导流程。",
+    "birthDetailsEyebrow": "出生信息",
+    "birthDetailsTitle": "出生信息",
+    "birthDetailsDescription": "用于计算您星盘的出生日期、时间和地点。",
+    "changeImpactTitle": "这将影响未来的解读",
+    "changeImpactBody": "更改这些信息可能会影响您生成的任何新星盘。您已完成的解读会保留其原始星盘作为历史记录。"
   },
   "History": {
     "eyebrow": "你的解读",
@@ -331,5 +343,22 @@
   },
   "Disclaimer": {
     "chartRemedy": "此解读仅供反思与自我认识之用，并非医疗、法律或财务建议，结果不作任何保证。详情请见我们的<terms>服务条款</terms>。"
+  },
+  "Privacy": {
+    "eyebrow": "隐私",
+    "title": "隐私与您的数据",
+    "consentStatusTitle": "您的同意",
+    "consentGiven": "您已同意保存您的档案、出生信息、答案、星盘和补救建议。",
+    "consentMissing": "您尚未完成同意。请完善出生信息以启用解读。",
+    "manageBirthDetails": "管理出生信息",
+    "dataWeStoreTitle": "我们存储的内容",
+    "dataWeStoreBody": "您的档案、出生信息、问题答案、生成的星盘和补救建议。",
+    "aiTitle": "AI 处理",
+    "aiBody": "部分答案、翻译和星盘解读是使用 Google 的 Gemini AI 模型生成的。经管理员审核的内容会在您的解读历史中单独标注。",
+    "legalTitle": "法律信息",
+    "readTerms": "阅读服务条款",
+    "readPrivacyPolicy": "阅读隐私政策",
+    "requestTitle": "请求或删除您的数据",
+    "requestBody": "我们目前尚未提供自助导出或删除功能。请联系我们，我们将手动处理您的请求。"
   }
 }

@@ -260,7 +260,19 @@
     "adminPortal": "Admin portal",
     "completeProfileTitle": "Finish setting up your profile",
     "completeProfileDescription": "Add your birth details and consent so we can generate your personalized astrology reading.",
-    "consentEditLabel": "I agree to the Terms and Privacy Policy, and consent to Silence storing my birth details to generate my reading."
+    "consentEditLabel": "I agree to the Terms and Privacy Policy, and consent to Silence storing my birth details to generate my reading.",
+    "nav": {
+      "overview": "Overview",
+      "birthDetails": "Birth details",
+      "security": "Security",
+      "privacy": "Privacy"
+    },
+    "consentMissingNote": "Complete your birth details to finish onboarding.",
+    "birthDetailsEyebrow": "Birth details",
+    "birthDetailsTitle": "Birth details",
+    "birthDetailsDescription": "Date, time, and place of birth used to calculate your chart.",
+    "changeImpactTitle": "This will affect future readings",
+    "changeImpactBody": "Changing these details may affect any new chart you generate. Readings you've already completed keep their original chart as a historical record."
   },
   "History": {
     "eyebrow": "Your readings",
@@ -333,5 +345,22 @@
   },
   "Disclaimer": {
     "chartRemedy": "This reading is for reflection and self-understanding — not medical, legal, or financial advice, and results aren't guaranteed. See our <terms>Terms</terms> for more."
+  },
+  "Privacy": {
+    "eyebrow": "Privacy",
+    "title": "Privacy & your data",
+    "consentStatusTitle": "Your consent",
+    "consentGiven": "You've consented to saving your profile, birth details, answers, chart, and remedy.",
+    "consentMissing": "You haven't completed consent yet. Finish your birth details to enable readings.",
+    "manageBirthDetails": "Manage birth details",
+    "dataWeStoreTitle": "What we store",
+    "dataWeStoreBody": "Your profile, birth details, question responses, generated charts, and remedies.",
+    "aiTitle": "AI processing",
+    "aiBody": "Some answers, translations, and chart interpretations are generated using Google's Gemini AI model. Admin-reviewed content is labeled separately in your reading history.",
+    "legalTitle": "Legal",
+    "readTerms": "Read Terms",
+    "readPrivacyPolicy": "Read Privacy Policy",
+    "requestTitle": "Request or delete your data",
+    "requestBody": "We don't yet offer self-serve export or deletion. Contact us and we'll handle your request manually."
   }
 }
