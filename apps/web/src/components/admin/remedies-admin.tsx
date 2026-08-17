@@ -9,6 +9,7 @@ import { ConfirmDialog } from '@/components/ui/confirm-dialog';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Select } from '@/components/ui/select';
+import { ErrorState } from '@/components/ui/screen-state';
 
 type CategoryFilter = Category | 'all';
 type LinkLevel = Level | 'none';
@@ -441,9 +442,9 @@ export function RemediesAdmin() {
             </p>
           ) : null}
           {error ? (
-            <p role="alert" className="m-4 rounded-md border border-destructive/30 bg-destructive/10 px-3 py-2 text-sm text-destructive">
-              {error}
-            </p>
+            <div className="m-4">
+              <ErrorState title="Unable to load remedies" message={error} action={{ label: 'Retry', onClick: loadRemedies }} />
+            </div>
           ) : null}
 
           <div className="divide-y divide-border">

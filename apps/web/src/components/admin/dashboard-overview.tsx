@@ -2,9 +2,10 @@
 
 import type { AdminDashboardMetrics, Category, ContentMatrix, Level } from '@silence/shared';
 import Link from 'next/link';
-import { AlertTriangle, Bot, Loader2, RefreshCw, Sparkles, Users } from 'lucide-react';
+import { AlertTriangle, Bot, RefreshCw, Sparkles, Users } from 'lucide-react';
 import { useCallback, useEffect, useState } from 'react';
 import { Button } from '@/components/ui/button';
+import { ErrorState, LoadingState } from '@/components/ui/screen-state';
 
 async function parseJson<T>(response: Response): Promise<T> {
   const data = await response.json().catch(() => null);
@@ -57,26 +58,11 @@ export function DashboardOverview() {
   }, [load]);
 
   if (loading && !metrics) {
-    return (
-      <div className="flex items-center gap-2 rounded-md border border-border bg-card p-4 text-sm text-muted-foreground shadow-sm">
-        <Loader2 className="animate-spin" />
-        Loading live metrics
-      </div>
-    );
+    return <LoadingState title="Loading live metrics" />;
   }
 
   if (error || !metrics || !matrix) {
-    return (
-      <div className="space-y-3">
-        <p role="alert" className="rounded-md border border-destructive/30 bg-destructive/10 px-3 py-2 text-sm text-destructive">
-          {error ?? 'Unable to load dashboard'}
-        </p>
-        <Button type="button" variant="outline" onClick={load}>
-          <RefreshCw />
-          Retry
-        </Button>
-      </div>
-    );
+    return <ErrorState title="Unable to load dashboard" message={error ?? undefined} action={{ label: 'Retry', onClick: load }} />;
   }
 
   const missingRemedyCategories = metrics.remedies.categoriesMissingRemedy;
