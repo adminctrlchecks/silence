@@ -3,6 +3,7 @@ import { getTranslations } from 'next-intl/server';
 import { ArrowLeft, MoonStar, Sparkles } from 'lucide-react';
 import Link from 'next/link';
 import { redirect } from 'next/navigation';
+import { PageContainer } from '@/components/layout/page-container';
 import { BirthChartView } from '@/components/chart/birth-chart-view';
 import { Button } from '@/components/ui/button';
 import { publicApi } from '@/lib/api';
@@ -38,7 +39,7 @@ export default async function HistorySessionPage({ params }: { params: Promise<{
   const detail = await publicApi.sessionDetail(profile.id, sessionId, session.token);
 
   return (
-    <main className="mx-auto w-full max-w-5xl px-4 py-8 sm:px-6">
+    <PageContainer as="main" size="reading" className="py-8">
       <Button asChild variant="ghost" size="sm" className="mb-4">
         <Link href="/history">
           <ArrowLeft className="size-4" />
@@ -136,6 +137,6 @@ export default async function HistorySessionPage({ params }: { params: Promise<{
           </div>
         )}
       </section>
-    </main>
+    </PageContainer>
   );
 }

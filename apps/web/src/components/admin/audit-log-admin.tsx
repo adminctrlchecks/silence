@@ -5,6 +5,8 @@ import { ChevronLeft, ChevronRight, Loader2, RefreshCw, ShieldCheck } from 'luci
 import { useCallback, useEffect, useMemo, useState } from 'react';
 import { Button } from '@/components/ui/button';
 import { Label } from '@/components/ui/label';
+import { Select } from '@/components/ui/select';
+import { ErrorState } from '@/components/ui/screen-state';
 
 type ActionFilter = AdminAuditAction | 'all';
 
@@ -94,9 +96,8 @@ export function AuditLogAdmin() {
             <Label htmlFor="auditActionFilter" className="sr-only">
               Action
             </Label>
-            <select
+            <Select
               id="auditActionFilter"
-              className="h-10 rounded-md border border-border bg-background px-3 text-sm outline-none focus-visible:ring-2 focus-visible:ring-ring"
               value={action}
               onChange={(event) => {
                 setPage(1);
@@ -109,17 +110,13 @@ export function AuditLogAdmin() {
                   {label}
                 </option>
               ))}
-            </select>
+            </Select>
           </div>
           <span className="text-xs text-muted-foreground">{total} matching events</span>
         </div>
       </section>
 
-      {error ? (
-        <p role="alert" className="rounded-md border border-destructive/30 bg-destructive/10 px-3 py-2 text-sm text-destructive">
-          {error}
-        </p>
-      ) : null}
+      {error ? <ErrorState title="Unable to load the audit log" message={error} action={{ label: 'Retry', onClick: loadEntries }} /> : null}
 
       <section className="rounded-md border border-border bg-card shadow-sm">
         <div className="flex items-center justify-between border-b border-border px-4 py-3">

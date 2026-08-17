@@ -3,6 +3,7 @@ import { getTranslations } from 'next-intl/server';
 import { ClipboardList, History as HistoryIcon, MoonStar, Sparkles } from 'lucide-react';
 import Link from 'next/link';
 import { redirect } from 'next/navigation';
+import { PageContainer } from '@/components/layout/page-container';
 import { ReadingDisclaimer } from '@/components/shared/reading-disclaimer';
 import { Button } from '@/components/ui/button';
 import { publicApi } from '@/lib/api';
@@ -41,7 +42,7 @@ export default async function RemedyPage() {
   const whyThisPractice = remedy.source === 'rule' && remedy.matchDetail ? remedy.matchDetail : t('whyGeneric');
 
   return (
-    <main className="mx-auto w-full max-w-4xl space-y-4 px-4 py-8 sm:px-6">
+    <PageContainer as="main" size="reading" className="py-8 space-y-4">
       <section className="rounded-md border border-border bg-card p-5 shadow-sm">
         <div className="flex items-start gap-3">
           <span className="rounded-md border border-primary/20 bg-primary/10 p-2 text-primary">
@@ -108,6 +109,6 @@ export default async function RemedyPage() {
           </Button>
         </div>
       </section>
-    </main>
+    </PageContainer>
   );
 }

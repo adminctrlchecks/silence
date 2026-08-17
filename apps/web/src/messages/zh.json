@@ -103,6 +103,8 @@
     "consent": "我同意<terms>服务条款</terms>和<privacy>隐私政策</privacy>，并同意保存我的档案、出生信息、答案、星盘和补救建议。",
     "createSubmit": "创建档案",
     "signInSubmit": "登录",
+    "toggleUser": "用户",
+    "toggleAdmin": "管理员",
     "alreadyHaveProfile": "已有档案？",
     "newToSilence": "第一次使用 Silence？",
     "createOne": "创建一个",

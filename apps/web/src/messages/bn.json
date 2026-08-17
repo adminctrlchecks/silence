@@ -103,6 +103,8 @@
     "consent": "আমি <terms>শর্তাবলী</terms> এবং <privacy>গোপনীয়তা নীতি</privacy>-তে সম্মত, এবং আমার প্রোফাইল, জন্মতথ্য, উত্তর, ছক ও প্রতিকার সংরক্ষণে সম্মতি দিচ্ছি।",
     "createSubmit": "প্রোফাইল তৈরি করুন",
     "signInSubmit": "সাইন ইন",
+    "toggleUser": "ব্যবহারকারী",
+    "toggleAdmin": "অ্যাডমিন",
     "alreadyHaveProfile": "ইতিমধ্যে প্রোফাইল আছে?",
     "newToSilence": "Silence-এ নতুন?",
     "createOne": "একটি তৈরি করুন",

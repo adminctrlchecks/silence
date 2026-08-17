@@ -1,5 +1,6 @@
 'use client';
 
+import { PageContainer } from '@/components/layout/page-container';
 import { ErrorState } from '@/components/ui/screen-state';
 
 export default function HistoryError({
@@ -10,12 +11,12 @@ export default function HistoryError({
   reset: () => void;
 }) {
   return (
-    <main className="mx-auto w-full max-w-5xl px-4 py-8 sm:px-6">
+    <PageContainer as="main" size="reading" className="py-8">
       <ErrorState
         title="History could not load"
         message={error.message}
         action={{ label: 'Try again', onClick: reset }}
       />
-    </main>
+    </PageContainer>
   );
 }

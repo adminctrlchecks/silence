@@ -6,6 +6,8 @@ import { useTranslations } from 'next-intl';
 import Link from 'next/link';
 import { useEffect, useMemo, useRef, useState } from 'react';
 import { Button } from '@/components/ui/button';
+import { Input } from '@/components/ui/input';
+import { Textarea } from '@/components/ui/textarea';
 import { cn } from '@/lib/utils';
 
 type QuestionsByLevel = Record<Level, Question[]>;
@@ -269,9 +271,9 @@ export function QuestionFlow({
                 </span>
               ) : null}
               {question.inputType === 'text' ? (
-                <input
+                <Input
                   type="text"
-                  className="mt-3 h-10 w-full rounded-md border border-border bg-card px-3 text-sm outline-none focus-visible:ring-2 focus-visible:ring-ring"
+                  className="mt-3"
                   value={answers[question.id] ?? ''}
                   onChange={(event) => updateAnswer(question.id, event.target.value)}
                   placeholder={t('answerPlaceholder')}
@@ -280,8 +282,8 @@ export function QuestionFlow({
                   dir="auto"
                 />
               ) : (
-                <textarea
-                  className="mt-3 min-h-24 w-full resize-y rounded-md border border-border bg-card px-3 py-2 text-sm outline-none focus-visible:ring-2 focus-visible:ring-ring"
+                <Textarea
+                  className="mt-3 resize-y"
                   value={answers[question.id] ?? ''}
                   onChange={(event) => updateAnswer(question.id, event.target.value)}
                   placeholder={t('answerPlaceholder')}

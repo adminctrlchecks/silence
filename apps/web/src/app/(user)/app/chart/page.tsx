@@ -1,6 +1,7 @@
 import type { Metadata } from 'next';
 import { getTranslations } from 'next-intl/server';
 import { redirect } from 'next/navigation';
+import { PageContainer } from '@/components/layout/page-container';
 import { BirthChartView } from '@/components/chart/birth-chart-view';
 import { publicApi } from '@/lib/api';
 import { normalizeSessionLanguage } from '@/lib/session-preferences';
@@ -32,12 +33,12 @@ export default async function ChartPage() {
   );
 
   return (
-    <main className="mx-auto w-full max-w-7xl px-4 py-8 sm:px-6">
+    <PageContainer as="main" size="wide" className="py-8">
       <div className="mb-5">
         <p className="text-sm font-medium text-primary">{t('eyebrow')}</p>
         <h1 className="mt-2 text-3xl font-semibold tracking-normal">{t('title')}</h1>
       </div>
       <BirthChartView chart={chart} />
-    </main>
+    </PageContainer>
   );
 }

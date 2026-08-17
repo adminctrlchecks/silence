@@ -103,6 +103,8 @@
     "consent": "أوافق على <terms>الشروط</terms> و<privacy>سياسة الخصوصية</privacy>، وأوافق على حفظ ملفي وتفاصيل ميلادي وإجاباتي وخريطتي والعلاج المقترح.",
     "createSubmit": "إنشاء ملف",
     "signInSubmit": "تسجيل الدخول",
+    "toggleUser": "مستخدم",
+    "toggleAdmin": "مسؤول",
     "alreadyHaveProfile": "هل لديك ملف بالفعل؟",
     "newToSilence": "هل أنت جديد في Silence؟",
     "createOne": "أنشئ واحدًا",

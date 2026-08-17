@@ -103,6 +103,8 @@
     "consent": "Concordo com os <terms>Termos</terms> e a <privacy>Política de Privacidade</privacy>, e consinto em salvar meu perfil, dados de nascimento, respostas, mapa e remédio.",
     "createSubmit": "Criar perfil",
     "signInSubmit": "Entrar",
+    "toggleUser": "Usuário",
+    "toggleAdmin": "Admin",
     "alreadyHaveProfile": "Já tem um perfil?",
     "newToSilence": "Novo no Silence?",
     "createOne": "Criar um",

@@ -17,6 +17,8 @@ import { useCallback, useEffect, useMemo, useState } from 'react';
 import { Button } from '@/components/ui/button';
 import { ConfirmDialog } from '@/components/ui/confirm-dialog';
 import { Label } from '@/components/ui/label';
+import { Select } from '@/components/ui/select';
+import { ErrorState } from '@/components/ui/screen-state';
 
 type FilterValue<T extends string> = T | 'all';
 type ReviewedFilter = 'all' | 'true' | 'false';
@@ -308,9 +310,8 @@ export function AnswersAdmin() {
         <div className="mt-4 grid gap-3 md:grid-cols-4">
           <div className="space-y-2">
             <Label htmlFor="levelFilter">Level</Label>
-            <select
+            <Select
               id="levelFilter"
-              className="h-10 w-full rounded-md border border-border bg-background px-3 text-sm outline-none focus-visible:ring-2 focus-visible:ring-ring"
               value={levelFilter}
               onChange={(event) => setLevelFilter(event.target.value as FilterValue<Level>)}
             >
@@ -320,13 +321,12 @@ export function AnswersAdmin() {
                   {levelLabels[level]}
                 </option>
               ))}
-            </select>
+            </Select>
           </div>
           <div className="space-y-2">
             <Label htmlFor="categoryFilter">Category</Label>
-            <select
+            <Select
               id="categoryFilter"
-              className="h-10 w-full rounded-md border border-border bg-background px-3 text-sm outline-none focus-visible:ring-2 focus-visible:ring-ring"
               value={categoryFilter}
               onChange={(event) => setCategoryFilter(event.target.value as FilterValue<Category>)}
             >
@@ -336,13 +336,12 @@ export function AnswersAdmin() {
                   {categoryLabels[category]}
                 </option>
               ))}
-            </select>
+            </Select>
           </div>
           <div className="space-y-2">
             <Label htmlFor="sourceFilter">Source</Label>
-            <select
+            <Select
               id="sourceFilter"
-              className="h-10 w-full rounded-md border border-border bg-background px-3 text-sm outline-none focus-visible:ring-2 focus-visible:ring-ring"
               value={sourceFilter}
               onChange={(event) => setSourceFilter(event.target.value as FilterValue<AnswerSource>)}
             >
@@ -352,20 +351,19 @@ export function AnswersAdmin() {
                   {source === 'ai' ? 'AI' : 'Admin'}
                 </option>
               ))}
-            </select>
+            </Select>
           </div>
           <div className="space-y-2">
             <Label htmlFor="reviewedFilter">Review</Label>
-            <select
+            <Select
               id="reviewedFilter"
-              className="h-10 w-full rounded-md border border-border bg-background px-3 text-sm outline-none focus-visible:ring-2 focus-visible:ring-ring"
               value={reviewedFilter}
               onChange={(event) => setReviewedFilter(event.target.value as ReviewedFilter)}
             >
               <option value="all">All states</option>
               <option value="true">Reviewed</option>
               <option value="false">Unreviewed</option>
-            </select>
+            </Select>
           </div>
         </div>
       </section>
@@ -392,9 +390,8 @@ export function AnswersAdmin() {
             <div className="mt-4 space-y-4">
               <div className="space-y-2">
                 <Label htmlFor="answerQuestion">Question</Label>
-                <select
+                <Select
                   id="answerQuestion"
-                  className="h-10 w-full rounded-md border border-border bg-background px-3 text-sm outline-none focus-visible:ring-2 focus-visible:ring-ring"
                   value={form.questionId}
                   onChange={(event) => setForm((current) => ({ ...current, questionId: event.target.value }))}
                   disabled={questionsLoading}
@@ -406,14 +403,13 @@ export function AnswersAdmin() {
                       {levelLabels[question.level]} / {categoryLabels[question.category]} / {question.text}
                     </option>
                   ))}
-                </select>
+                </Select>
               </div>
               <div className="grid gap-3 sm:grid-cols-2 xl:grid-cols-1 2xl:grid-cols-2">
                 <div className="space-y-2">
                   <Label htmlFor="answerLevel">Level</Label>
-                  <select
+                  <Select
                     id="answerLevel"
-                    className="h-10 w-full rounded-md border border-border bg-background px-3 text-sm outline-none focus-visible:ring-2 focus-visible:ring-ring"
                     value={form.level}
                     onChange={(event) => setForm((current) => ({ ...current, level: event.target.value as Level }))}
                     required
@@ -423,13 +419,12 @@ export function AnswersAdmin() {
                         {levelLabels[level]}
                       </option>
                     ))}
-                  </select>
+                  </Select>
                 </div>
                 <div className="space-y-2">
                   <Label htmlFor="answerCategory">Category</Label>
-                  <select
+                  <Select
                     id="answerCategory"
-                    className="h-10 w-full rounded-md border border-border bg-background px-3 text-sm outline-none focus-visible:ring-2 focus-visible:ring-ring"
                     value={form.category}
                     onChange={(event) => setForm((current) => ({ ...current, category: event.target.value as Category }))}
                     required
@@ -439,15 +434,14 @@ export function AnswersAdmin() {
                         {categoryLabels[category]}
                       </option>
                     ))}
-                  </select>
+                  </Select>
                 </div>
               </div>
               <div className="grid gap-3 sm:grid-cols-2 xl:grid-cols-1 2xl:grid-cols-2">
                 <div className="space-y-2">
                   <Label htmlFor="answerSource">Source</Label>
-                  <select
+                  <Select
                     id="answerSource"
-                    className="h-10 w-full rounded-md border border-border bg-background px-3 text-sm outline-none focus-visible:ring-2 focus-visible:ring-ring"
                     value={form.source}
                     onChange={(event) => setForm((current) => ({ ...current, source: event.target.value as AnswerSource }))}
                     required
@@ -457,7 +451,7 @@ export function AnswersAdmin() {
                         {source === 'ai' ? 'AI' : 'Admin'}
                       </option>
                     ))}
-                  </select>
+                  </Select>
                 </div>
                 <label className="flex items-center gap-2 pt-7 text-sm text-muted-foreground">
                   <input
@@ -500,9 +494,8 @@ export function AnswersAdmin() {
             <div className="mt-4 space-y-4">
               <div className="space-y-2">
                 <Label htmlFor="aiQuestion">Question</Label>
-                <select
+                <Select
                   id="aiQuestion"
-                  className="h-10 w-full rounded-md border border-border bg-background px-3 text-sm outline-none focus-visible:ring-2 focus-visible:ring-ring"
                   value={aiForm.questionId}
                   onChange={(event) => setAiForm((current) => ({ ...current, questionId: event.target.value }))}
                   disabled={questionsLoading}
@@ -514,14 +507,13 @@ export function AnswersAdmin() {
                       {levelLabels[question.level]} / {categoryLabels[question.category]} / {question.text}
                     </option>
                   ))}
-                </select>
+                </Select>
               </div>
               <div className="grid gap-3 sm:grid-cols-2 xl:grid-cols-1 2xl:grid-cols-2">
                 <div className="space-y-2">
                   <Label htmlFor="aiLevel">Level</Label>
-                  <select
+                  <Select
                     id="aiLevel"
-                    className="h-10 w-full rounded-md border border-border bg-background px-3 text-sm outline-none focus-visible:ring-2 focus-visible:ring-ring"
                     value={aiForm.level}
                     onChange={(event) => setAiForm((current) => ({ ...current, level: event.target.value as Level }))}
                   >
@@ -530,13 +522,12 @@ export function AnswersAdmin() {
                         {levelLabels[level]}
                       </option>
                     ))}
-                  </select>
+                  </Select>
                 </div>
                 <div className="space-y-2">
                   <Label htmlFor="aiCategory">Category</Label>
-                  <select
+                  <Select
                     id="aiCategory"
-                    className="h-10 w-full rounded-md border border-border bg-background px-3 text-sm outline-none focus-visible:ring-2 focus-visible:ring-ring"
                     value={aiForm.category}
                     onChange={(event) => setAiForm((current) => ({ ...current, category: event.target.value as Category }))}
                   >
@@ -545,14 +536,13 @@ export function AnswersAdmin() {
                         {categoryLabels[category]}
                       </option>
                     ))}
-                  </select>
+                  </Select>
                 </div>
               </div>
               <div className="space-y-2">
                 <Label htmlFor="aiLang">Language</Label>
-                <select
+                <Select
                   id="aiLang"
-                  className="h-10 w-full rounded-md border border-border bg-background px-3 text-sm outline-none focus-visible:ring-2 focus-visible:ring-ring"
                   value={aiForm.lang}
                   onChange={(event) => setAiForm((current) => ({ ...current, lang: event.target.value }))}
                 >
@@ -561,7 +551,7 @@ export function AnswersAdmin() {
                       {language.name}
                     </option>
                   ))}
-                </select>
+                </Select>
               </div>
               <Button type="submit" className="w-full" disabled={generating || !aiForm.questionId}>
                 {generating ? <Loader2 className="animate-spin" /> : <Bot />}
@@ -592,9 +582,9 @@ export function AnswersAdmin() {
             </p>
           ) : null}
           {error ? (
-            <p role="alert" className="m-4 rounded-md border border-destructive/30 bg-destructive/10 px-3 py-2 text-sm text-destructive">
-              {error}
-            </p>
+            <div className="m-4">
+              <ErrorState title="Unable to load answers" message={error} action={{ label: 'Retry', onClick: loadAnswers }} />
+            </div>
           ) : null}
 
           <div className="divide-y divide-border">

@@ -103,6 +103,8 @@
     "consent": "मैं <terms>शर्तों</terms> और <privacy>गोपनीयता नीति</privacy> से सहमत हूं, और अपनी प्रोफाइल, जन्म विवरण, उत्तर, कुंडली और उपाय सहेजने की सहमति देता/देती हूं।",
     "createSubmit": "प्रोफाइल बनाएं",
     "signInSubmit": "साइन इन",
+    "toggleUser": "उपयोगकर्ता",
+    "toggleAdmin": "एडमिन",
     "alreadyHaveProfile": "पहले से प्रोफाइल है?",
     "newToSilence": "Silence पर नए हैं?",
     "createOne": "एक बनाएं",

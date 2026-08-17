@@ -103,6 +103,8 @@
     "consent": "J'accepte les <terms>Conditions</terms> et la <privacy>Politique de confidentialité</privacy>, et je consens à l'enregistrement de mon profil, mes détails de naissance, mes réponses, ma carte et mon remède.",
     "createSubmit": "Créer un profil",
     "signInSubmit": "Se connecter",
+    "toggleUser": "Utilisateur",
+    "toggleAdmin": "Admin",
     "alreadyHaveProfile": "Vous avez déjà un profil ?",
     "newToSilence": "Nouveau sur Silence ?",
     "createOne": "En créer un",

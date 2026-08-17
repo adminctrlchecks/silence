@@ -1,5 +1,6 @@
 'use client';
 
+import { PageContainer } from '@/components/layout/page-container';
 import { ErrorState } from '@/components/ui/screen-state';
 
 export default function ChartError({
@@ -10,12 +11,12 @@ export default function ChartError({
   reset: () => void;
 }) {
   return (
-    <main className="mx-auto w-full max-w-7xl px-4 py-8 sm:px-6">
+    <PageContainer as="main" size="wide" className="py-8">
       <ErrorState
         title="Your chart could not load"
         message={error.message}
         action={{ label: 'Retry chart', onClick: reset }}
       />
-    </main>
+    </PageContainer>
   );
 }

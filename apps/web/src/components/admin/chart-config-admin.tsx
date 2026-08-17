@@ -5,6 +5,7 @@ import { Loader2, RefreshCw, Save } from 'lucide-react';
 import { useCallback, useEffect, useState } from 'react';
 import { Button } from '@/components/ui/button';
 import { Label } from '@/components/ui/label';
+import { Select } from '@/components/ui/select';
 
 const categoryLabels: Record<Category, string> = {
   male: 'Male',
@@ -158,9 +159,8 @@ export function ChartConfigAdmin() {
 
             <div className="space-y-2">
               <Label htmlFor="style">Chart style</Label>
-              <select
+              <Select
                 id="style"
-                className="h-10 w-full rounded-md border border-border bg-background px-3 text-sm outline-none focus-visible:ring-2 focus-visible:ring-ring"
                 value={config.style}
                 onChange={(event) =>
                   setConfig((current) =>
@@ -173,7 +173,7 @@ export function ChartConfigAdmin() {
                     {styleLabels[style]}
                   </option>
                 ))}
-              </select>
+              </Select>
             </div>
 
             <div className="space-y-3">
