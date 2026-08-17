@@ -18,12 +18,14 @@ interface GoogleIdConfiguration {
   use_fedcm_for_prompt?: boolean;
 }
 
-interface GooglePromptMomentNotification {
-  isDisplayMoment: () => boolean;
-  isDisplayed: () => boolean;
-  isNotDisplayed: () => boolean;
-  isSkippedMoment: () => boolean;
-  isDismissedMoment: () => boolean;
+interface GoogleButtonConfiguration {
+  type?: 'standard' | 'icon';
+  theme?: 'outline' | 'filled_blue' | 'filled_black';
+  size?: 'large' | 'medium' | 'small';
+  text?: 'signin_with' | 'signup_with' | 'continue_with' | 'signin';
+  shape?: 'rectangular' | 'pill' | 'circle' | 'square';
+  logo_alignment?: 'left' | 'center';
+  width?: number;
 }
 
 declare global {
@@ -32,7 +34,7 @@ declare global {
       accounts: {
         id: {
           initialize: (config: GoogleIdConfiguration) => void;
-          prompt: (momentListener?: (notification: GooglePromptMomentNotification) => void) => void;
+          renderButton: (parent: HTMLElement, options: GoogleButtonConfiguration) => void;
           cancel: () => void;
         };
       };
