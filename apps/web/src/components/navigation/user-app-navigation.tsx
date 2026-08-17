@@ -1,19 +1,12 @@
 'use client';
 
 import { History, LayoutDashboard, MessageSquareText, MoonStar, Sparkles } from 'lucide-react';
+import { useTranslations } from 'next-intl';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { PageContainer } from '@/components/layout/page-container';
 import { cn } from '@/lib/utils';
 import { isActivePath, localizeHref } from './nav-links';
-
-const appLinks = [
-  { href: '/app', label: 'Dashboard', icon: LayoutDashboard },
-  { href: '/app/questions', label: 'Questions', icon: MessageSquareText },
-  { href: '/app/chart', label: 'Chart', icon: MoonStar },
-  { href: '/app/remedy', label: 'Remedy', icon: Sparkles },
-  { href: '/history', label: 'History', icon: History },
-];
 
 function isActiveAppLink(href: string, pathname: string) {
   if (href !== '/app') return isActivePath(href, pathname);
@@ -27,10 +20,20 @@ function isActiveAppLink(href: string, pathname: string) {
 
 export function UserAppNavigation() {
   const pathname = usePathname();
+  const nav = useTranslations('Nav');
+  const journey = useTranslations('UserApp');
+
+  const appLinks = [
+    { href: '/app', label: nav('dashboardLabel'), icon: LayoutDashboard },
+    { href: '/app/questions', label: journey('journey.questions'), icon: MessageSquareText },
+    { href: '/app/chart', label: journey('journey.chart'), icon: MoonStar },
+    { href: '/app/remedy', label: journey('journey.remedy'), icon: Sparkles },
+    { href: '/history', label: nav('historyLabel'), icon: History },
+  ];
 
   return (
     <>
-      <nav className="hidden border-b border-border bg-card md:block" aria-label="User app navigation">
+      <nav className="hidden border-b border-border bg-card md:block" aria-label={nav('userAppNavigationLabel')}>
         <PageContainer size="wide" className="flex h-12 items-center gap-1">
           {appLinks.map((item) => {
             const active = isActiveAppLink(item.href, pathname);
@@ -54,7 +57,7 @@ export function UserAppNavigation() {
       </nav>
       <nav
         className="fixed inset-x-0 bottom-0 z-header border-t border-border bg-card/95 px-2 pb-[max(0.75rem,env(safe-area-inset-bottom))] pt-2 shadow-popover backdrop-blur md:hidden"
-        aria-label="Mobile user app navigation"
+        aria-label={nav('mobileUserAppNavigationLabel')}
       >
         <div className="grid grid-cols-5 gap-1">
           {appLinks.map((item) => {

@@ -1,23 +1,27 @@
 import type { Metadata } from 'next';
+import { getTranslations } from 'next-intl/server';
 import { NotFoundContent } from '@/components/not-found-content';
 
 export const metadata: Metadata = {
-  title: 'Page not found | Silence',
+  title: { absolute: 'Page not found | Silence' },
   robots: {
     index: false,
     follow: false,
   },
 };
 
-export default function UserNotFound() {
+export default async function UserNotFound() {
+  const t = await getTranslations('NotFound');
+  const nav = await getTranslations('Nav');
+
   return (
     <NotFoundContent
-      title="We could not find that page"
-      description="Return to your reading dashboard or use the footer links for privacy and terms."
+      title={t('userTitle')}
+      description={t('userDescription')}
       primaryHref="/app"
-      primaryLabel="Go to dashboard"
+      primaryLabel={t('goDashboard')}
       secondaryHref="/"
-      secondaryLabel="Home"
+      secondaryLabel={nav('home')}
     />
   );
 }

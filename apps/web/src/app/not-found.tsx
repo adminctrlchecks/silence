@@ -1,23 +1,27 @@
 import type { Metadata } from 'next';
+import { getTranslations } from 'next-intl/server';
 import { NotFoundContent } from '@/components/not-found-content';
 
 export const metadata: Metadata = {
-  title: 'Page not found | Silence',
+  title: { absolute: 'Page not found | Silence' },
   robots: {
     index: false,
     follow: false,
   },
 };
 
-export default function NotFound() {
+export default async function NotFound() {
+  const t = await getTranslations('NotFound');
+  const nav = await getTranslations('Nav');
+
   return (
     <NotFoundContent
-      title="This page is not available"
-      description="The link may be mistyped, expired, or no longer part of Silence."
+      title={t('rootTitle')}
+      description={t('rootDescription')}
       primaryHref="/"
-      primaryLabel="Go home"
+      primaryLabel={t('goHome')}
       secondaryHref="/privacy"
-      secondaryLabel="Privacy"
+      secondaryLabel={nav('privacy')}
     />
   );
 }

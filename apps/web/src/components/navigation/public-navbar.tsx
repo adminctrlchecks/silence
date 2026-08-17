@@ -1,6 +1,7 @@
 'use client';
 
 import { Menu, MoonStar } from 'lucide-react';
+import { useTranslations } from 'next-intl';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { useState } from 'react';
@@ -13,12 +14,6 @@ import { LanguageSwitcher } from './language-switcher';
 import { isActivePath, localizeHref } from './nav-links';
 import { ProfileMenu } from './profile-menu';
 
-const publicLinks = [
-  { href: '/#how-it-works', label: 'How it works' },
-  { href: '/#faq', label: 'FAQ' },
-  { href: '/privacy', label: 'Privacy' },
-];
-
 export function PublicNavbar({
   authenticated,
   labels,
@@ -30,15 +25,23 @@ export function PublicNavbar({
     signIn: string;
     startReading: string;
     signOut: string;
+    signingOut?: string;
     adminSignIn: string;
   };
 }) {
   const pathname = usePathname();
+  const nav = useTranslations('Nav');
   const [drawerOpen, setDrawerOpen] = useState(false);
   const homeHref = localizeHref('/', pathname);
   const appHref = localizeHref('/app', pathname);
   const loginHref = localizeHref('/login', pathname);
   const registerHref = localizeHref('/register', pathname);
+
+  const publicLinks = [
+    { href: '/#how-it-works', label: nav('howItWorks') },
+    { href: '/#faq', label: nav('faq') },
+    { href: '/privacy', label: nav('privacy') },
+  ];
 
   return (
     <header className="sticky top-0 z-header border-b border-border bg-card/90 backdrop-blur">
@@ -50,7 +53,7 @@ export function PublicNavbar({
           <span className="text-base tracking-normal">{labels.appName}</span>
         </Link>
 
-        <nav className="hidden items-center gap-1 md:flex" aria-label="Public navigation">
+        <nav className="hidden items-center gap-1 md:flex" aria-label={nav('publicNavigationLabel')}>
           {publicLinks.map((link) => {
             const href = localizeHref(link.href, pathname);
             const active = isActivePath(link.href, pathname);
@@ -65,14 +68,14 @@ export function PublicNavbar({
         </nav>
 
         <div className="hidden items-center gap-2 md:flex">
-          <LanguageSwitcher />
+          <LanguageSwitcher authenticated={authenticated} />
           <ThemeToggle />
           {authenticated ? (
             <>
               <Button asChild variant="outline" size="sm">
                 <Link href={appHref}>{labels.mySession}</Link>
               </Button>
-              <ProfileMenu signOutLabel={labels.signOut} />
+              <ProfileMenu signOutLabel={labels.signOut} signOutPendingLabel={labels.signingOut} />
             </>
           ) : (
             <>
@@ -86,7 +89,14 @@ export function PublicNavbar({
           )}
         </div>
 
-        <Button type="button" variant="ghost" size="icon" className="md:hidden" aria-label="Open menu" onClick={() => setDrawerOpen(true)}>
+        <Button
+          type="button"
+          variant="ghost"
+          size="icon"
+          className="md:hidden"
+          aria-label={nav('openMenu')}
+          onClick={() => setDrawerOpen(true)}
+        >
           <Menu aria-hidden />
         </Button>
       </PageContainer>
@@ -95,7 +105,7 @@ export function PublicNavbar({
         open={drawerOpen}
         onOpenChange={setDrawerOpen}
         title={labels.appName}
-        description="Navigation"
+        description={nav('publicNavigationLabel')}
         side="end"
         footer={
           <div className="space-y-2">
@@ -109,8 +119,8 @@ export function PublicNavbar({
         }
       >
         <div className="space-y-5">
-          <LanguageSwitcher className="w-full justify-start" />
-          <nav className="grid gap-2" aria-label="Mobile public navigation">
+          <LanguageSwitcher authenticated={authenticated} className="w-full justify-start" />
+          <nav className="grid gap-2" aria-label={nav('mobileNavigationLabel')}>
             {publicLinks.map((link) => (
               <Button key={link.href} asChild variant="ghost" className="justify-start">
                 <Link href={localizeHref(link.href, pathname)} onClick={() => setDrawerOpen(false)}>
@@ -129,10 +139,10 @@ export function PublicNavbar({
                 </Button>
                 <Button asChild variant="outline">
                   <Link href={localizeHref('/profile', pathname)} onClick={() => setDrawerOpen(false)}>
-                    Profile
+                    {nav('profileLabel')}
                   </Link>
                 </Button>
-                <SignOutButton endpoint="/api/auth/logout" redirectTo={loginHref} label={labels.signOut} />
+                <SignOutButton endpoint="/api/auth/logout" redirectTo={loginHref} label={labels.signOut} pendingLabel={labels.signingOut} />
               </>
             ) : (
               <>
