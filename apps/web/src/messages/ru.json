@@ -103,6 +103,8 @@
     "consent": "Я соглашаюсь с <terms>Условиями</terms> и <privacy>Политикой конфиденциальности</privacy>, а также даю согласие на сохранение профиля, данных рождения, ответов, карты и рекомендаций.",
     "createSubmit": "Создать профиль",
     "signInSubmit": "Войти",
+    "toggleUser": "Пользователь",
+    "toggleAdmin": "Админ",
     "alreadyHaveProfile": "Уже есть профиль?",
     "newToSilence": "Впервые в Silence?",
     "createOne": "Создать",

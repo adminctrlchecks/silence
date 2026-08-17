@@ -105,6 +105,8 @@
     "consent": "I agree to the <terms>Terms</terms> and <privacy>Privacy Policy</privacy>, and consent to saving my profile, birth details, answers, chart, and remedy.",
     "createSubmit": "Create profile",
     "signInSubmit": "Sign in",
+    "toggleUser": "User",
+    "toggleAdmin": "Admin",
     "alreadyHaveProfile": "Already have a profile?",
     "newToSilence": "New to Silence?",
     "createOne": "Create one",

@@ -103,6 +103,8 @@
     "consent": "<terms>利用規約</terms>および<privacy>プライバシーポリシー</privacy>に同意し、プロフィール、出生情報、回答、チャート、レメディの保存に同意します。",
     "createSubmit": "プロフィール作成",
     "signInSubmit": "サインイン",
+    "toggleUser": "ユーザー",
+    "toggleAdmin": "管理者",
     "alreadyHaveProfile": "すでにプロフィールがありますか？",
     "newToSilence": "Silenceは初めてですか？",
     "createOne": "作成する",
