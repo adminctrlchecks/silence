@@ -1,6 +1,6 @@
 import type { Metadata } from 'next';
 import { getTranslations } from 'next-intl/server';
-import { ArrowLeft, Sparkles } from 'lucide-react';
+import { ArrowLeft, MoonStar, Sparkles } from 'lucide-react';
 import Link from 'next/link';
 import { redirect } from 'next/navigation';
 import { BirthChartView } from '@/components/chart/birth-chart-view';
@@ -112,7 +112,10 @@ export default async function HistorySessionPage({ params }: { params: Promise<{
               ) : null}
             </div>
           ) : (
-            <p className="mt-4 text-sm text-muted-foreground">{t('noRemedy')}</p>
+            <div className="mt-4 flex flex-col items-center gap-2 rounded-md border border-dashed border-border bg-background p-5 text-center">
+              <Sparkles className="size-5 text-muted-foreground" aria-hidden />
+              <p className="text-sm text-muted-foreground">{t('noRemedy')}</p>
+            </div>
           )}
         </section>
       </div>
@@ -122,7 +125,10 @@ export default async function HistorySessionPage({ params }: { params: Promise<{
         {detail.chart ? (
           <BirthChartView chart={detail.chart} />
         ) : (
-          <p className="text-sm text-muted-foreground">{t('noChart')}</p>
+          <div className="flex flex-col items-center gap-2 rounded-md border border-dashed border-border bg-background p-5 text-center">
+            <MoonStar className="size-5 text-muted-foreground" aria-hidden />
+            <p className="text-sm text-muted-foreground">{t('noChart')}</p>
+          </div>
         )}
       </section>
     </main>

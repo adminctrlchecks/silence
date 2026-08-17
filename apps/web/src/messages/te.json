@@ -186,7 +186,40 @@
       "approximate": "అంచనా",
       "uncertain": "అనిశ్చితం",
       "label": "గణన ఖచ్చితత"
-    }
+    },
+    "chartVisualAlt": "12 భావాలలో గ్రహాల స్థానాలను చూపే వేద జాతక చార్ట్ చక్రం. ఖచ్చితమైన స్థానాల కోసం దిగువ స్థానాల పట్టికను చూడండి.",
+    "chartSummaryHeading": "చార్ట్ సారాంశం",
+    "birthDataLabel": "జనన వివరాలు",
+    "atConnector": "వద్ద",
+    "birthPlaceLabel": "జన్మస్థలం",
+    "coordinatesNotAvailable": "నిర్దేశాంకాలు అందుబాటులో లేవు",
+    "calculationLabel": "గణన",
+    "zodiacSuffix": "{zodiac} రాశిచక్రం",
+    "julianDayLabel": "జూలియన్ దినం {value}",
+    "timezoneLabel": "సమయ మండలం: {value}",
+    "placementsHeading": "స్థానాలు",
+    "placementsDescription": "గణించిన చార్ట్ నుండి గ్రహం, రాశి, డిగ్రీ, భావం మరియు గమనం.",
+    "columnPlanet": "గ్రహం",
+    "columnSign": "రాశి",
+    "columnDegree": "డిగ్రీ",
+    "columnHouse": "భావం",
+    "columnMotion": "గమనం",
+    "motionDirect": "సరళ",
+    "housesHeading": "భావాలు",
+    "housesFallback": "భావ కస్పులకు ఖచ్చితమైన జనన నిర్దేశాంకాలు అవసరం. ప్రస్తుత స్థానాలు రాశి-ఆధారిత ప్రత్యామ్నాయాన్ని ఉపయోగిస్తున్నాయి.",
+    "interpretationHeading": "వ్యక్తిగత పఠనం",
+    "generatedOn": "{date} న రూపొందించబడింది",
+    "viewRemedy": "పరిహారం చూడండి",
+    "warningApproximate": "ఖచ్చితమైన నిర్దేశాంకాలు లేదా సమయ మండలం లేవు, కాబట్టి భావాలు మరియు లగ్నం మారవచ్చు.",
+    "warningUncertain": "జన్మస్థల నిర్దేశాంకాలు లేవు, కాబట్టి చార్ట్ రాశి-ఆధారిత ప్రత్యామ్నాయ భావాలను ఉపయోగిస్తుంది.",
+    "detailAscendant": "జనన సమయం మరియు స్థలం నుండి లగ్న రాశి",
+    "detailSun": "ప్రధాన సౌర స్థానం",
+    "detailMoon": "భావోద్వేగ చంద్ర స్థానం",
+    "activeHouseDetail": "ఇక్కడ {count} స్థానాలు",
+    "detailNoHouseEmphasis": "భావ ప్రాధాన్యత అందుబాటులో లేదు",
+    "labelSun": "సూర్యుడు",
+    "labelMoon": "చంద్రుడు",
+    "labelActiveHouse": "క్రియాశీల భావం"
   },
   "Remedy": {
     "eyebrow": "వ్యక్తిగత పరిహారం",
@@ -194,7 +227,11 @@
     "linkedLevel": "లింక్ స్థాయి: {level}",
     "practice": "Suggested practice",
     "closing": "Keep the remedy gentle and repeatable. Small consistency is more useful than intensity.",
-    "whyThisPractice": "ఈ అభ్యాసం ఎందుకు"
+    "whyThisPractice": "ఈ అభ్యాసం ఎందుకు",
+    "whyGeneric": "మీ వర్గం మరియు ప్రస్తుత రీడింగ్ కోసం మద్దతు ఇచ్చే అభ్యాసంగా ఎంపిక చేయబడింది.",
+    "howToRepeat": "ఎలా పునరావృతం చేయాలి",
+    "backToChart": "చార్ట్‌కు తిరిగి వెళ్ళండి",
+    "viewHistory": "రీడింగ్ చరిత్రను వీక్షించండి"
   },
   "Profile": {
     "eyebrow": "సేవ్ చేసిన ప్రొఫైల్",
@@ -250,7 +287,11 @@
       "chart_ready": "చార్ట్ సిద్ధం",
       "remedy_ready": "పరిహారం సిద్ధం",
       "complete": "పూర్తయింది"
-    }
+    },
+    "previousPage": "మునుపటి",
+    "nextPage": "తదుపరి",
+    "pageOf": "పేజీ {current} / {total}",
+    "emptyExplainer": "మీరు రీడింగ్ పూర్తి చేసిన తర్వాత, మీరు దీన్ని ఎప్పుడైనా మళ్లీ చూడగలిగేలా మీ సమాధానాలు, చార్ట్ మరియు పరిహారంతో ఇక్కడ సేవ్ చేయబడుతుంది."
   },
   "Questions": {
     "eyebrow": "ప్రశ్నల ప్రవాహం",
@@ -272,7 +313,9 @@
     "intro": "Move through three short layers. Your final chart reading is shaped by your Level 2 reflections, so plain honest answers work best.",
     "progress": "Step {current} of {total}.",
     "stepHelp": "Save this layer to reveal the guidance written for each question.",
-    "emptyTitle": "This layer is waiting for content."
+    "emptyTitle": "This layer is waiting for content.",
+    "saving": "సేవ్ చేస్తోంది…",
+    "savedAnnouncement": "{level} సేవ్ చేయబడింది."
   },
   "Security": {
     "eyebrow": "Security",
@@ -285,5 +328,8 @@
     "submitting": "Changing password",
     "success": "Password changed. Please sign in again.",
     "manageCta": "పాస్‌వర్డ్ నిర్వహించండి"
+  },
+  "Disclaimer": {
+    "chartRemedy": "ఈ రీడింగ్ ప్రతిబింబం మరియు ఆత్మ-అవగాహన కోసం - ఇది వైద్య, న్యాయ లేదా ఆర్థిక సలహా కాదు, మరియు ఫలితాలు హామీ ఇవ్వబడవు. మరింత సమాచారం కోసం మా <terms>నిబంధనలు</terms> చూడండి."
   }
 }

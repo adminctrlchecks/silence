@@ -4,8 +4,9 @@ import type { Answer, Category, Level, Question } from '@silence/shared';
 import { ArrowRight, Check, Loader2 } from 'lucide-react';
 import { useTranslations } from 'next-intl';
 import Link from 'next/link';
-import { useMemo, useState } from 'react';
+import { useEffect, useMemo, useRef, useState } from 'react';
 import { Button } from '@/components/ui/button';
+import { cn } from '@/lib/utils';
 
 type QuestionsByLevel = Record<Level, Question[]>;
 type AnswersByQuestion = Record<string, string>;
@@ -74,6 +75,21 @@ export function QuestionFlow({
   );
   const [displayAnswers, setDisplayAnswers] = useState<DisplayAnswersByQuestion>(initialDisplayAnswers);
   const [error, setError] = useState<string | null>(null);
+  const [announcement, setAnnouncement] = useState('');
+
+  const headingRef = useRef<HTMLHeadingElement>(null);
+  const isFirstRender = useRef(true);
+
+  // Move focus to this layer's heading whenever it changes (but not on
+  // first mount) — keyboard/screen-reader users otherwise stay on whatever
+  // control triggered the change (a now-possibly-hidden tab/button).
+  useEffect(() => {
+    if (isFirstRender.current) {
+      isFirstRender.current = false;
+      return;
+    }
+    headingRef.current?.focus();
+  }, [step]);
 
   const currentQuestions = filteredQuestions[step];
   const currentComplete = currentQuestions.every((question) => {
@@ -169,6 +185,7 @@ export function QuestionFlow({
       await saveCurrentStep();
       await loadCurrentAnswers();
       setSaved((current) => ({ ...current, [step]: true }));
+      setAnnouncement(t('savedAnnouncement', { level: t(`levels.${step}`) }));
 
       // Clear local drafts for this step
       if (typeof window !== 'undefined') {
@@ -207,14 +224,16 @@ export function QuestionFlow({
             {t('answered', { count: answeredCount, total: totalCount })}
           </p>
         </div>
-        <div className="flex gap-2">
+        <div className="flex gap-2 overflow-x-auto pb-1 sm:pb-0">
           {levels.map((level) => (
             <Button
               key={level}
               type="button"
               variant={level === step ? 'default' : 'outline'}
               size="sm"
+              className="shrink-0"
               onClick={() => setStep(level)}
+              disabled={pending}
               aria-pressed={level === step}
             >
               {saved[level] ? <Check className="size-4" /> : null}
@@ -225,11 +244,14 @@ export function QuestionFlow({
       </div>
 
       <div className="mt-5 rounded-md border border-primary/20 bg-primary/5 px-4 py-3 text-sm text-muted-foreground">
-        <span className="font-medium text-foreground">
+        <h2 ref={headingRef} tabIndex={-1} className="inline font-medium text-foreground outline-none">
           {t('progress', { current: currentIndex + 1, total: levels.length })}
-        </span>{' '}
+        </h2>{' '}
         {t('stepHelp')}
       </div>
+      <p role="status" aria-live="polite" className="sr-only">
+        {announcement}
+      </p>
 
       <div className="mt-6 space-y-4">
         {currentQuestions.length ? (
@@ -292,10 +314,15 @@ export function QuestionFlow({
         </p>
       ) : null}
 
-      <div className="mt-5 flex flex-wrap items-center gap-3">
+      <div
+        className={cn(
+          'sticky bottom-20 z-10 mt-5 flex flex-wrap items-center gap-3 rounded-md border border-border bg-card/95 p-3 shadow-popover backdrop-blur',
+          'md:static md:bottom-auto md:border-0 md:bg-transparent md:p-0 md:shadow-none md:backdrop-blur-none',
+        )}
+      >
         <Button type="button" disabled={!currentQuestions.length || !currentComplete || pending} onClick={continueFlow}>
           {pending ? <Loader2 className="animate-spin" /> : isFinalStep ? <Check /> : <ArrowRight />}
-          {isFinalStep ? t('finish') : t('continue')}
+          {pending ? t('saving') : isFinalStep ? t('finish') : t('continue')}
         </Button>
         {saved.level2 ? (
           <Button asChild variant="outline">

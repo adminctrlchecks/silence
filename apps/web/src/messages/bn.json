@@ -188,7 +188,40 @@
       "approximate": "আনুমানিক",
       "uncertain": "অনিশ্চিত",
       "label": "গণনার নির্ভুলতা"
-    }
+    },
+    "chartVisualAlt": "বৈদিক জন্ম ছক চক্র ১২টি ভাবে গ্রহের অবস্থান দেখাচ্ছে। সঠিক অবস্থানের জন্য নিচের অবস্থান সারণী দেখুন।",
+    "chartSummaryHeading": "ছক সারাংশ",
+    "birthDataLabel": "জন্ম তথ্য",
+    "atConnector": "সময়",
+    "birthPlaceLabel": "জন্মস্থান",
+    "coordinatesNotAvailable": "স্থানাঙ্ক উপলব্ধ নেই",
+    "calculationLabel": "গণনা",
+    "zodiacSuffix": "{zodiac} রাশিচক্র",
+    "julianDayLabel": "জুলিয়ান দিবস {value}",
+    "timezoneLabel": "সময় অঞ্চল: {value}",
+    "placementsHeading": "অবস্থান",
+    "placementsDescription": "গণনাকৃত ছক থেকে গ্রহ, রাশি, ডিগ্রি, ভাব এবং গতি।",
+    "columnPlanet": "গ্রহ",
+    "columnSign": "রাশি",
+    "columnDegree": "ডিগ্রি",
+    "columnHouse": "ভাব",
+    "columnMotion": "গতি",
+    "motionDirect": "সরাসরি",
+    "housesHeading": "ভাব",
+    "housesFallback": "ভাবের কাস্পের জন্য সঠিক জন্ম স্থানাঙ্ক প্রয়োজন। বর্তমান অবস্থানগুলো রাশি-ভিত্তিক বিকল্প ব্যবহার করছে।",
+    "interpretationHeading": "ব্যক্তিগত পাঠ",
+    "generatedOn": "{date} এ তৈরি",
+    "viewRemedy": "প্রতিকার দেখুন",
+    "warningApproximate": "সঠিক স্থানাঙ্ক বা সময় অঞ্চল অনুপস্থিত, তাই ভাব ও লগ্ন পরিবর্তিত হতে পারে।",
+    "warningUncertain": "জন্মস্থানের স্থানাঙ্ক অনুপস্থিত, তাই ছক রাশি-ভিত্তিক বিকল্প ভাব ব্যবহার করে।",
+    "detailAscendant": "জন্ম সময় ও স্থান থেকে লগ্ন রাশি",
+    "detailSun": "মূল সৌর অবস্থান",
+    "detailMoon": "আবেগগত চন্দ্র অবস্থান",
+    "activeHouseDetail": "এখানে {count}টি অবস্থান",
+    "detailNoHouseEmphasis": "কোনো ভাব প্রাধান্য উপলব্ধ নেই",
+    "labelSun": "সূর্য",
+    "labelMoon": "চন্দ্র",
+    "labelActiveHouse": "সক্রিয় ভাব"
   },
   "Remedy": {
     "eyebrow": "ব্যক্তিগত প্রতিকার",
@@ -196,7 +229,11 @@
     "linkedLevel": "সংযুক্ত স্তর: {level}",
     "practice": "Suggested practice",
     "closing": "Keep the remedy gentle and repeatable. Small consistency is more useful than intensity.",
-    "whyThisPractice": "কেন এই অনুশীলন"
+    "whyThisPractice": "কেন এই অনুশীলন",
+    "whyGeneric": "আপনার বিভাগ এবং বর্তমান রিডিংয়ের জন্য একটি সহায়ক অনুশীলন হিসেবে নির্বাচিত।",
+    "howToRepeat": "কীভাবে পুনরাবৃত্তি করবেন",
+    "backToChart": "ছকে ফিরে যান",
+    "viewHistory": "রিডিং ইতিহাস দেখুন"
   },
   "Profile": {
     "eyebrow": "সংরক্ষিত প্রোফাইল",
@@ -252,7 +289,11 @@
       "chart_ready": "ছক প্রস্তুত",
       "remedy_ready": "প্রতিকার প্রস্তুত",
       "complete": "সম্পন্ন"
-    }
+    },
+    "previousPage": "পূর্ববর্তী",
+    "nextPage": "পরবর্তী",
+    "pageOf": "পৃষ্ঠা {current} এর {total}",
+    "emptyExplainer": "একটি রিডিং সম্পূর্ণ হলে, এটি আপনার উত্তর, ছক এবং প্রতিকারসহ এখানে সংরক্ষিত হয় যাতে আপনি যেকোনো সময় পুনরায় দেখতে পারেন।"
   },
   "Questions": {
     "eyebrow": "প্রশ্ন প্রবাহ",
@@ -274,7 +315,9 @@
     "intro": "Move through three short layers. Your final chart reading is shaped by your Level 2 reflections, so plain honest answers work best.",
     "progress": "Step {current} of {total}.",
     "stepHelp": "Save this layer to reveal the guidance written for each question.",
-    "emptyTitle": "This layer is waiting for content."
+    "emptyTitle": "This layer is waiting for content.",
+    "saving": "সংরক্ষণ করা হচ্ছে…",
+    "savedAnnouncement": "{level} সংরক্ষিত হয়েছে।"
   },
   "Security": {
     "eyebrow": "Security",
@@ -287,5 +330,8 @@
     "submitting": "Changing password",
     "success": "Password changed. Please sign in again.",
     "manageCta": "পাসওয়ার্ড পরিচালনা করুন"
+  },
+  "Disclaimer": {
+    "chartRemedy": "এই রিডিং প্রতিফলন ও আত্ম-উপলব্ধির জন্য - এটি চিকিৎসা, আইনি বা আর্থিক পরামর্শ নয়, এবং ফলাফলের নিশ্চয়তা নেই। আরও জানতে আমাদের <terms>শর্তাবলী</terms> দেখুন।"
   }
 }

@@ -188,7 +188,40 @@
       "approximate": "Approximatif",
       "uncertain": "Incertain",
       "label": "Précision du calcul"
-    }
+    },
+    "chartVisualAlt": "Roue de la carte natale védique montrant les positions planétaires dans les 12 maisons. Consultez le tableau des positions ci-dessous pour les positions exactes.",
+    "chartSummaryHeading": "Résumé de la carte",
+    "birthDataLabel": "Données de naissance",
+    "atConnector": "à",
+    "birthPlaceLabel": "Lieu de naissance",
+    "coordinatesNotAvailable": "Coordonnées non disponibles",
+    "calculationLabel": "Calcul",
+    "zodiacSuffix": "zodiaque {zodiac}",
+    "julianDayLabel": "JJ {value}",
+    "timezoneLabel": "Fuseau horaire : {value}",
+    "placementsHeading": "Positions",
+    "placementsDescription": "Planète, signe, degré, maison et mouvement de la carte calculée.",
+    "columnPlanet": "Planète",
+    "columnSign": "Signe",
+    "columnDegree": "Degré",
+    "columnHouse": "Maison",
+    "columnMotion": "Mouvement",
+    "motionDirect": "direct",
+    "housesHeading": "Maisons",
+    "housesFallback": "Les cuspides des maisons nécessitent des coordonnées de naissance exactes. Les positions actuelles utilisent l'alternative basée sur les signes.",
+    "interpretationHeading": "Lecture personnelle",
+    "generatedOn": "Généré le {date}",
+    "viewRemedy": "Voir le remède",
+    "warningApproximate": "Les coordonnées exactes ou le fuseau horaire manquent, donc les maisons et l'ascendant peuvent varier.",
+    "warningUncertain": "Les coordonnées du lieu de naissance manquent, donc la carte utilise des maisons alternatives basées sur les signes.",
+    "detailAscendant": "Signe ascendant selon l'heure et le lieu de naissance",
+    "detailSun": "Position solaire principale",
+    "detailMoon": "Position lunaire émotionnelle",
+    "activeHouseDetail": "{count} positions ici",
+    "detailNoHouseEmphasis": "Aucune emphase de maison disponible",
+    "labelSun": "Soleil",
+    "labelMoon": "Lune",
+    "labelActiveHouse": "Maison active"
   },
   "Remedy": {
     "eyebrow": "Remède personnel",
@@ -196,7 +229,11 @@
     "linkedLevel": "Niveau lié : {level}",
     "practice": "Suggested practice",
     "closing": "Keep the remedy gentle and repeatable. Small consistency is more useful than intensity.",
-    "whyThisPractice": "Pourquoi cette pratique"
+    "whyThisPractice": "Pourquoi cette pratique",
+    "whyGeneric": "Sélectionné comme pratique de soutien pour votre catégorie et votre lecture actuelle.",
+    "howToRepeat": "Comment répéter",
+    "backToChart": "Retour à la carte",
+    "viewHistory": "Voir l'historique des lectures"
   },
   "Profile": {
     "eyebrow": "Profil enregistré",
@@ -252,7 +289,11 @@
       "chart_ready": "Carte prête",
       "remedy_ready": "Remède prêt",
       "complete": "Terminée"
-    }
+    },
+    "previousPage": "Précédent",
+    "nextPage": "Suivant",
+    "pageOf": "Page {current} sur {total}",
+    "emptyExplainer": "Une fois une lecture terminée, elle est enregistrée ici avec vos réponses, votre carte et votre remède afin que vous puissiez la consulter à tout moment."
   },
   "Questions": {
     "eyebrow": "Parcours de questions",
@@ -274,7 +315,9 @@
     "intro": "Move through three short layers. Your final chart reading is shaped by your Level 2 reflections, so plain honest answers work best.",
     "progress": "Step {current} of {total}.",
     "stepHelp": "Save this layer to reveal the guidance written for each question.",
-    "emptyTitle": "This layer is waiting for content."
+    "emptyTitle": "This layer is waiting for content.",
+    "saving": "Enregistrement…",
+    "savedAnnouncement": "{level} enregistré."
   },
   "Security": {
     "eyebrow": "Security",
@@ -287,5 +330,8 @@
     "submitting": "Changing password",
     "success": "Password changed. Please sign in again.",
     "manageCta": "Gérer le mot de passe"
+  },
+  "Disclaimer": {
+    "chartRemedy": "Cette lecture est destinée à la réflexion et à la connaissance de soi — ce n'est pas un conseil médical, juridique ou financier, et les résultats ne sont pas garantis. Consultez nos <terms>Conditions</terms> pour en savoir plus."
   }
 }

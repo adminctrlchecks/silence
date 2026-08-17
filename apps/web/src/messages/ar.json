@@ -188,7 +188,40 @@
       "approximate": "تقريبي",
       "uncertain": "غير مؤكد",
       "label": "دقة الحساب"
-    }
+    },
+    "chartVisualAlt": "عجلة الخريطة الفلكية الفيدية توضح مواقع الكواكب عبر البيوت الاثني عشر. راجع جدول المواقع أدناه للحصول على المواضع الدقيقة.",
+    "chartSummaryHeading": "ملخص الخريطة",
+    "birthDataLabel": "بيانات الميلاد",
+    "atConnector": "في",
+    "birthPlaceLabel": "مكان الميلاد",
+    "coordinatesNotAvailable": "الإحداثيات غير متوفرة",
+    "calculationLabel": "الحساب",
+    "zodiacSuffix": "نظام {zodiac}",
+    "julianDayLabel": "اليوم اليولياني {value}",
+    "timezoneLabel": "المنطقة الزمنية: {value}",
+    "placementsHeading": "المواقع",
+    "placementsDescription": "الكوكب والبرج والدرجة والبيت والحركة من الخريطة المحسوبة.",
+    "columnPlanet": "الكوكب",
+    "columnSign": "البرج",
+    "columnDegree": "الدرجة",
+    "columnHouse": "البيت",
+    "columnMotion": "الحركة",
+    "motionDirect": "مباشر",
+    "housesHeading": "البيوت",
+    "housesFallback": "تحتاج زوايا البيوت إلى إحداثيات ميلاد دقيقة. تستخدم المواقع الحالية البديل القائم على البرج.",
+    "interpretationHeading": "القراءة الشخصية",
+    "generatedOn": "أُنشئت في {date}",
+    "viewRemedy": "عرض العلاج",
+    "warningApproximate": "الإحداثيات الدقيقة أو المنطقة الزمنية غير متوفرة، لذا قد تتغير البيوت والطالع.",
+    "warningUncertain": "إحداثيات مكان الميلاد غير متوفرة، لذا تستخدم الخريطة بيوتًا بديلة قائمة على البرج.",
+    "detailAscendant": "البرج الطالع من وقت ومكان الميلاد",
+    "detailSun": "الموقع الشمسي الأساسي",
+    "detailMoon": "الموقع القمري العاطفي",
+    "activeHouseDetail": "{count} مواقع هنا",
+    "detailNoHouseEmphasis": "لا يوجد تركيز على بيت معين",
+    "labelSun": "الشمس",
+    "labelMoon": "القمر",
+    "labelActiveHouse": "البيت الأنشط"
   },
   "Remedy": {
     "eyebrow": "العلاج الشخصي",
@@ -196,7 +229,11 @@
     "linkedLevel": "المستوى المرتبط: {level}",
     "practice": "Suggested practice",
     "closing": "Keep the remedy gentle and repeatable. Small consistency is more useful than intensity.",
-    "whyThisPractice": "لماذا هذه الممارسة"
+    "whyThisPractice": "لماذا هذه الممارسة",
+    "whyGeneric": "تم اختياره كممارسة داعمة لفئتك وقراءتك الحالية.",
+    "howToRepeat": "كيفية التكرار",
+    "backToChart": "العودة إلى الخريطة",
+    "viewHistory": "عرض سجل القراءات"
   },
   "Profile": {
     "eyebrow": "الملف المحفوظ",
@@ -252,7 +289,11 @@
       "chart_ready": "الخريطة جاهزة",
       "remedy_ready": "العلاج جاهز",
       "complete": "مكتملة"
-    }
+    },
+    "previousPage": "السابق",
+    "nextPage": "التالي",
+    "pageOf": "صفحة {current} من {total}",
+    "emptyExplainer": "بمجرد إكمال قراءة، تُحفظ هنا مع إجاباتك وخريطتك وعلاجك لتتمكن من مراجعتها في أي وقت."
   },
   "Questions": {
     "eyebrow": "مسار الأسئلة",
@@ -274,7 +315,9 @@
     "intro": "Move through three short layers. Your final chart reading is shaped by your Level 2 reflections, so plain honest answers work best.",
     "progress": "Step {current} of {total}.",
     "stepHelp": "Save this layer to reveal the guidance written for each question.",
-    "emptyTitle": "This layer is waiting for content."
+    "emptyTitle": "This layer is waiting for content.",
+    "saving": "جارٍ الحفظ…",
+    "savedAnnouncement": "تم حفظ {level}."
   },
   "Security": {
     "eyebrow": "Security",
@@ -287,5 +330,8 @@
     "submitting": "Changing password",
     "success": "Password changed. Please sign in again.",
     "manageCta": "إدارة كلمة المرور"
+  },
+  "Disclaimer": {
+    "chartRemedy": "هذه القراءة للتأمل وفهم الذات - وليست نصيحة طبية أو قانونية أو مالية، والنتائج غير مضمونة. راجع <terms>الشروط</terms> لمزيد من التفاصيل."
   }
 }

@@ -186,7 +186,40 @@
       "approximate": "近似",
       "uncertain": "不确定",
       "label": "计算精度"
-    }
+    },
+    "chartVisualAlt": "吠陀出生图轮盘，显示行星在12宫中的位置。请查看下方位置表以获取精确位置。",
+    "chartSummaryHeading": "星盘概要",
+    "birthDataLabel": "出生数据",
+    "atConnector": "",
+    "birthPlaceLabel": "出生地",
+    "coordinatesNotAvailable": "坐标不可用",
+    "calculationLabel": "计算方式",
+    "zodiacSuffix": "{zodiac}黄道",
+    "julianDayLabel": "儒略日 {value}",
+    "timezoneLabel": "时区：{value}",
+    "placementsHeading": "行星位置",
+    "placementsDescription": "来自计算星盘的行星、星座、度数、宫位和运行状态。",
+    "columnPlanet": "行星",
+    "columnSign": "星座",
+    "columnDegree": "度数",
+    "columnHouse": "宫位",
+    "columnMotion": "运行",
+    "motionDirect": "顺行",
+    "housesHeading": "宫位",
+    "housesFallback": "宫位分界需要精确的出生坐标。当前位置使用基于星座的备用方案。",
+    "interpretationHeading": "个人解读",
+    "generatedOn": "生成于 {date}",
+    "viewRemedy": "查看补救建议",
+    "warningApproximate": "缺少精确坐标或时区，因此宫位和上升点可能会有偏差。",
+    "warningUncertain": "缺少出生地坐标，因此星盘使用基于星座的备用宫位。",
+    "detailAscendant": "根据出生时间和地点得出的上升星座",
+    "detailSun": "主要太阳位置",
+    "detailMoon": "情感层面的月亮位置",
+    "activeHouseDetail": "此处有{count}个位置",
+    "detailNoHouseEmphasis": "没有明显的宫位侧重",
+    "labelSun": "太阳",
+    "labelMoon": "月亮",
+    "labelActiveHouse": "活跃宫位"
   },
   "Remedy": {
     "eyebrow": "个人补救建议",
@@ -194,7 +227,11 @@
     "linkedLevel": "关联级别：{level}",
     "practice": "Suggested practice",
     "closing": "Keep the remedy gentle and repeatable. Small consistency is more useful than intensity.",
-    "whyThisPractice": "为什么推荐这个练习"
+    "whyThisPractice": "为什么推荐这个练习",
+    "whyGeneric": "作为适合您类别和本次解读的辅助练习而选定。",
+    "howToRepeat": "如何重复练习",
+    "backToChart": "返回星盘",
+    "viewHistory": "查看解读历史"
   },
   "Profile": {
     "eyebrow": "已保存资料",
@@ -250,7 +287,11 @@
       "chart_ready": "星盘已就绪",
       "remedy_ready": "补救建议已就绪",
       "complete": "已完成"
-    }
+    },
+    "previousPage": "上一页",
+    "nextPage": "下一页",
+    "pageOf": "第 {current} 页，共 {total} 页",
+    "emptyExplainer": "完成一次解读后，它会连同您的答案、星盘和补救建议一起保存在这里，方便您随时查看。"
   },
   "Questions": {
     "eyebrow": "问题流程",
@@ -272,7 +313,9 @@
     "intro": "Move through three short layers. Your final chart reading is shaped by your Level 2 reflections, so plain honest answers work best.",
     "progress": "Step {current} of {total}.",
     "stepHelp": "Save this layer to reveal the guidance written for each question.",
-    "emptyTitle": "This layer is waiting for content."
+    "emptyTitle": "This layer is waiting for content.",
+    "saving": "保存中…",
+    "savedAnnouncement": "{level} 已保存。"
   },
   "Security": {
     "eyebrow": "Security",
@@ -285,5 +328,8 @@
     "submitting": "Changing password",
     "success": "Password changed. Please sign in again.",
     "manageCta": "管理密码"
+  },
+  "Disclaimer": {
+    "chartRemedy": "此解读仅供反思与自我认识之用，并非医疗、法律或财务建议，结果不作任何保证。详情请见我们的<terms>服务条款</terms>。"
   }
 }

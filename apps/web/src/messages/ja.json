@@ -188,7 +188,40 @@
       "approximate": "近似値",
       "uncertain": "不確か",
       "label": "計算精度"
-    }
+    },
+    "chartVisualAlt": "12ハウスにわたる惑星配置を示すヴェーダ出生図ホイール。正確な位置については下の配置表をご覧ください。",
+    "chartSummaryHeading": "チャート概要",
+    "birthDataLabel": "出生データ",
+    "atConnector": "",
+    "birthPlaceLabel": "出生地",
+    "coordinatesNotAvailable": "座標が利用できません",
+    "calculationLabel": "計算方式",
+    "zodiacSuffix": "{zodiac}黄道",
+    "julianDayLabel": "ユリウス日 {value}",
+    "timezoneLabel": "タイムゾーン: {value}",
+    "placementsHeading": "配置",
+    "placementsDescription": "計算されたチャートからの惑星、サイン、度数、ハウス、順行/逆行。",
+    "columnPlanet": "惑星",
+    "columnSign": "サイン",
+    "columnDegree": "度数",
+    "columnHouse": "ハウス",
+    "columnMotion": "動き",
+    "motionDirect": "順行",
+    "housesHeading": "ハウス",
+    "housesFallback": "ハウスカスプには正確な出生座標が必要です。現在の配置はサインベースの代替を使用しています。",
+    "interpretationHeading": "個人のリーディング",
+    "generatedOn": "{date}に生成",
+    "viewRemedy": "レメディを見る",
+    "warningApproximate": "正確な座標またはタイムゾーンが不足しているため、ハウスとアセンダントが変わる可能性があります。",
+    "warningUncertain": "出生地の座標が不足しているため、チャートはサインベースの代替ハウスを使用しています。",
+    "detailAscendant": "出生時刻と場所によるアセンダントサイン",
+    "detailSun": "太陽の主要配置",
+    "detailMoon": "感情面の月の配置",
+    "activeHouseDetail": "ここに{count}件の配置",
+    "detailNoHouseEmphasis": "特に強調されたハウスはありません",
+    "labelSun": "太陽",
+    "labelMoon": "月",
+    "labelActiveHouse": "活発なハウス"
   },
   "Remedy": {
     "eyebrow": "個人レメディ",
@@ -196,7 +229,11 @@
     "linkedLevel": "関連レベル: {level}",
     "practice": "Suggested practice",
     "closing": "Keep the remedy gentle and repeatable. Small consistency is more useful than intensity.",
-    "whyThisPractice": "この習慣をすすめる理由"
+    "whyThisPractice": "この習慣をすすめる理由",
+    "whyGeneric": "あなたのカテゴリーと今回のリーディングのためのサポート的な実践として選ばれました。",
+    "howToRepeat": "繰り返し方",
+    "backToChart": "チャートに戻る",
+    "viewHistory": "リーディング履歴を見る"
   },
   "Profile": {
     "eyebrow": "保存済みプロフィール",
@@ -252,7 +289,11 @@
       "chart_ready": "チャート準備完了",
       "remedy_ready": "レメディ準備完了",
       "complete": "完了"
-    }
+    },
+    "previousPage": "前へ",
+    "nextPage": "次へ",
+    "pageOf": "{total}ページ中{current}ページ目",
+    "emptyExplainer": "リーディングを完了すると、回答・チャート・レメディとともにここに保存され、いつでも見返すことができます。"
   },
   "Questions": {
     "eyebrow": "質問フロー",
@@ -274,7 +315,9 @@
     "intro": "Move through three short layers. Your final chart reading is shaped by your Level 2 reflections, so plain honest answers work best.",
     "progress": "Step {current} of {total}.",
     "stepHelp": "Save this layer to reveal the guidance written for each question.",
-    "emptyTitle": "This layer is waiting for content."
+    "emptyTitle": "This layer is waiting for content.",
+    "saving": "保存中…",
+    "savedAnnouncement": "{level}を保存しました。"
   },
   "Security": {
     "eyebrow": "Security",
@@ -287,5 +330,8 @@
     "submitting": "Changing password",
     "success": "Password changed. Please sign in again.",
     "manageCta": "パスワードを管理"
+  },
+  "Disclaimer": {
+    "chartRemedy": "このリーディングは内省と自己理解のためのものであり、医療・法律・財務上の助言ではなく、結果を保証するものでもありません。詳しくは<terms>利用規約</terms>をご覧ください。"
   }
 }

@@ -188,7 +188,40 @@
       "approximate": "लगभग",
       "uncertain": "अनिश्चित",
       "label": "गणना की सटीकता"
-    }
+    },
+    "chartVisualAlt": "वैदिक जन्म कुंडली चक्र, 12 भावों में ग्रहों की स्थिति दिखा रहा है। सटीक स्थितियों के लिए नीचे दी गई स्थिति तालिका देखें।",
+    "chartSummaryHeading": "कुंडली सारांश",
+    "birthDataLabel": "जन्म विवरण",
+    "atConnector": "समय",
+    "birthPlaceLabel": "जन्म स्थान",
+    "coordinatesNotAvailable": "निर्देशांक उपलब्ध नहीं",
+    "calculationLabel": "गणना",
+    "zodiacSuffix": "{zodiac} राशिचक्र",
+    "julianDayLabel": "जूलियन दिवस {value}",
+    "timezoneLabel": "समय क्षेत्र: {value}",
+    "placementsHeading": "स्थितियां",
+    "placementsDescription": "गणना की गई कुंडली से ग्रह, राशि, अंश, भाव और गति।",
+    "columnPlanet": "ग्रह",
+    "columnSign": "राशि",
+    "columnDegree": "अंश",
+    "columnHouse": "भाव",
+    "columnMotion": "गति",
+    "motionDirect": "सीधी",
+    "housesHeading": "भाव",
+    "housesFallback": "भाव कस्प के लिए सटीक जन्म निर्देशांक आवश्यक हैं। वर्तमान स्थितियां राशि-आधारित विकल्प का उपयोग करती हैं।",
+    "interpretationHeading": "व्यक्तिगत पठन",
+    "generatedOn": "{date} को तैयार",
+    "viewRemedy": "उपाय देखें",
+    "warningApproximate": "सटीक निर्देशांक या समय क्षेत्र गुम है, इसलिए भाव और लग्न बदल सकते हैं।",
+    "warningUncertain": "जन्म स्थान के निर्देशांक गुम हैं, इसलिए कुंडली राशि-आधारित वैकल्पिक भावों का उपयोग करती है।",
+    "detailAscendant": "जन्म समय और स्थान से लग्न राशि",
+    "detailSun": "मुख्य सौर स्थिति",
+    "detailMoon": "भावनात्मक चंद्र स्थिति",
+    "activeHouseDetail": "यहां {count} स्थितियां",
+    "detailNoHouseEmphasis": "कोई भाव प्रधानता उपलब्ध नहीं",
+    "labelSun": "सूर्य",
+    "labelMoon": "चंद्र",
+    "labelActiveHouse": "सक्रिय भाव"
   },
   "Remedy": {
     "eyebrow": "व्यक्तिगत उपाय",
@@ -196,7 +229,11 @@
     "linkedLevel": "लिंक स्तर: {level}",
     "practice": "Suggested practice",
     "closing": "Keep the remedy gentle and repeatable. Small consistency is more useful than intensity.",
-    "whyThisPractice": "यह अभ्यास क्यों"
+    "whyThisPractice": "यह अभ्यास क्यों",
+    "whyGeneric": "आपकी श्रेणी और वर्तमान रीडिंग के लिए एक सहायक अभ्यास के रूप में चुना गया।",
+    "howToRepeat": "कैसे दोहराएं",
+    "backToChart": "कुंडली पर वापस जाएं",
+    "viewHistory": "रीडिंग इतिहास देखें"
   },
   "Profile": {
     "eyebrow": "सहेजी गई प्रोफ़ाइल",
@@ -252,7 +289,11 @@
       "chart_ready": "कुंडली तैयार",
       "remedy_ready": "उपाय तैयार",
       "complete": "पूर्ण"
-    }
+    },
+    "previousPage": "पिछला",
+    "nextPage": "अगला",
+    "pageOf": "पृष्ठ {current} / {total}",
+    "emptyExplainer": "जब आप एक रीडिंग पूरी करते हैं, तो यह आपके उत्तर, कुंडली और उपाय के साथ यहां सहेजी जाती है ताकि आप इसे कभी भी देख सकें।"
   },
   "Questions": {
     "eyebrow": "प्रश्न प्रवाह",
@@ -274,7 +315,9 @@
     "intro": "Move through three short layers. Your final chart reading is shaped by your Level 2 reflections, so plain honest answers work best.",
     "progress": "Step {current} of {total}.",
     "stepHelp": "Save this layer to reveal the guidance written for each question.",
-    "emptyTitle": "This layer is waiting for content."
+    "emptyTitle": "This layer is waiting for content.",
+    "saving": "सहेजा जा रहा है…",
+    "savedAnnouncement": "{level} सहेजा गया।"
   },
   "Security": {
     "eyebrow": "Security",
@@ -287,5 +330,8 @@
     "submitting": "Changing password",
     "success": "Password changed. Please sign in again.",
     "manageCta": "पासवर्ड प्रबंधित करें"
+  },
+  "Disclaimer": {
+    "chartRemedy": "यह रीडिंग चिंतन और आत्म-समझ के लिए है - यह चिकित्सा, कानूनी या वित्तीय सलाह नहीं है, और परिणामों की गारंटी नहीं है। अधिक जानकारी के लिए हमारी <terms>शर्तें</terms> देखें।"
   }
 }

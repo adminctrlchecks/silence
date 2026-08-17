@@ -188,7 +188,40 @@
       "approximate": "Aproximado",
       "uncertain": "Incierto",
       "label": "Precisión del cálculo"
-    }
+    },
+    "chartVisualAlt": "Rueda de carta natal védica que muestra las posiciones planetarias en las 12 casas. Consulta la tabla de posiciones abajo para ver las posiciones exactas.",
+    "chartSummaryHeading": "Resumen de la carta",
+    "birthDataLabel": "Datos de nacimiento",
+    "atConnector": "a las",
+    "birthPlaceLabel": "Lugar de nacimiento",
+    "coordinatesNotAvailable": "Coordenadas no disponibles",
+    "calculationLabel": "Cálculo",
+    "zodiacSuffix": "zodíaco {zodiac}",
+    "julianDayLabel": "DJ {value}",
+    "timezoneLabel": "Zona horaria: {value}",
+    "placementsHeading": "Posiciones",
+    "placementsDescription": "Planeta, signo, grado, casa y movimiento de la carta calculada.",
+    "columnPlanet": "Planeta",
+    "columnSign": "Signo",
+    "columnDegree": "Grado",
+    "columnHouse": "Casa",
+    "columnMotion": "Movimiento",
+    "motionDirect": "directo",
+    "housesHeading": "Casas",
+    "housesFallback": "Las cúspides de las casas necesitan coordenadas de nacimiento exactas. Las posiciones actuales usan el alternativo basado en signos.",
+    "interpretationHeading": "Lectura personal",
+    "generatedOn": "Generado el {date}",
+    "viewRemedy": "Ver remedio",
+    "warningApproximate": "Faltan las coordenadas exactas o la zona horaria, por lo que las casas y el ascendente pueden variar.",
+    "warningUncertain": "Faltan las coordenadas del lugar de nacimiento, por lo que la carta usa casas alternativas basadas en signos.",
+    "detailAscendant": "Signo ascendente según hora y lugar de nacimiento",
+    "detailSun": "Posición solar principal",
+    "detailMoon": "Posición lunar emocional",
+    "activeHouseDetail": "{count} posiciones aquí",
+    "detailNoHouseEmphasis": "No hay énfasis de casa disponible",
+    "labelSun": "Sol",
+    "labelMoon": "Luna",
+    "labelActiveHouse": "Casa activa"
   },
   "Remedy": {
     "eyebrow": "Remedio personal",
@@ -196,7 +229,11 @@
     "linkedLevel": "Nivel vinculado: {level}",
     "practice": "Suggested practice",
     "closing": "Keep the remedy gentle and repeatable. Small consistency is more useful than intensity.",
-    "whyThisPractice": "Por qué esta práctica"
+    "whyThisPractice": "Por qué esta práctica",
+    "whyGeneric": "Seleccionado como una práctica de apoyo para tu categoría y lectura actual.",
+    "howToRepeat": "Cómo repetirlo",
+    "backToChart": "Volver a la carta",
+    "viewHistory": "Ver historial de lecturas"
   },
   "Profile": {
     "eyebrow": "Perfil guardado",
@@ -252,7 +289,11 @@
       "chart_ready": "Carta lista",
       "remedy_ready": "Remedio listo",
       "complete": "Completa"
-    }
+    },
+    "previousPage": "Anterior",
+    "nextPage": "Siguiente",
+    "pageOf": "Página {current} de {total}",
+    "emptyExplainer": "Cuando completes una lectura, se guarda aquí con tus respuestas, carta y remedio para que puedas revisarla en cualquier momento."
   },
   "Questions": {
     "eyebrow": "Flujo de preguntas",
@@ -274,7 +315,9 @@
     "intro": "Move through three short layers. Your final chart reading is shaped by your Level 2 reflections, so plain honest answers work best.",
     "progress": "Step {current} of {total}.",
     "stepHelp": "Save this layer to reveal the guidance written for each question.",
-    "emptyTitle": "This layer is waiting for content."
+    "emptyTitle": "This layer is waiting for content.",
+    "saving": "Guardando…",
+    "savedAnnouncement": "{level} guardado."
   },
   "Security": {
     "eyebrow": "Security",
@@ -287,5 +330,8 @@
     "submitting": "Changing password",
     "success": "Password changed. Please sign in again.",
     "manageCta": "Gestionar contraseña"
+  },
+  "Disclaimer": {
+    "chartRemedy": "Esta lectura es para la reflexión y el autoconocimiento, no es asesoramiento médico, legal ni financiero, y los resultados no están garantizados. Consulta nuestros <terms>Términos</terms> para más información."
   }
 }

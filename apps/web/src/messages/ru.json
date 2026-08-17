@@ -188,7 +188,40 @@
       "approximate": "Приблизительно",
       "uncertain": "Неизвестно",
       "label": "Точность расчёта"
-    }
+    },
+    "chartVisualAlt": "Колесо ведической натальной карты, показывающее расположение планет по 12 домам. Точные положения смотрите в таблице ниже.",
+    "chartSummaryHeading": "Сводка карты",
+    "birthDataLabel": "Данные рождения",
+    "atConnector": "в",
+    "birthPlaceLabel": "Место рождения",
+    "coordinatesNotAvailable": "Координаты недоступны",
+    "calculationLabel": "Расчёт",
+    "zodiacSuffix": "зодиак {zodiac}",
+    "julianDayLabel": "ЮД {value}",
+    "timezoneLabel": "Часовой пояс: {value}",
+    "placementsHeading": "Положения",
+    "placementsDescription": "Планета, знак, градус, дом и движение из рассчитанной карты.",
+    "columnPlanet": "Планета",
+    "columnSign": "Знак",
+    "columnDegree": "Градус",
+    "columnHouse": "Дом",
+    "columnMotion": "Движение",
+    "motionDirect": "прямое",
+    "housesHeading": "Дома",
+    "housesFallback": "Для куспидов домов нужны точные координаты рождения. Текущие положения используют запасной вариант на основе знаков.",
+    "interpretationHeading": "Личное толкование",
+    "generatedOn": "Создано {date}",
+    "viewRemedy": "Посмотреть рекомендации",
+    "warningApproximate": "Точные координаты или часовой пояс отсутствуют, поэтому дома и асцендент могут смещаться.",
+    "warningUncertain": "Координаты места рождения отсутствуют, поэтому карта использует запасные дома на основе знаков.",
+    "detailAscendant": "Восходящий знак по времени и месту рождения",
+    "detailSun": "Основное положение Солнца",
+    "detailMoon": "Эмоциональное положение Луны",
+    "activeHouseDetail": "{count} положений здесь",
+    "detailNoHouseEmphasis": "Нет выраженного акцента дома",
+    "labelSun": "Солнце",
+    "labelMoon": "Луна",
+    "labelActiveHouse": "Активный дом"
   },
   "Remedy": {
     "eyebrow": "Личная рекомендация",
@@ -196,7 +229,11 @@
     "linkedLevel": "Связанный уровень: {level}",
     "practice": "Suggested practice",
     "closing": "Keep the remedy gentle and repeatable. Small consistency is more useful than intensity.",
-    "whyThisPractice": "Почему эта практика"
+    "whyThisPractice": "Почему эта практика",
+    "whyGeneric": "Выбрано как поддерживающая практика для вашей категории и текущего чтения.",
+    "howToRepeat": "Как повторять",
+    "backToChart": "Назад к карте",
+    "viewHistory": "Посмотреть историю чтений"
   },
   "Profile": {
     "eyebrow": "Сохраненный профиль",
@@ -252,7 +289,11 @@
       "chart_ready": "Карта готова",
       "remedy_ready": "Рекомендации готовы",
       "complete": "Завершено"
-    }
+    },
+    "previousPage": "Назад",
+    "nextPage": "Далее",
+    "pageOf": "Страница {current} из {total}",
+    "emptyExplainer": "Как только вы завершите чтение, оно сохранится здесь вместе с вашими ответами, картой и рекомендациями, чтобы вы могли вернуться к нему в любое время."
   },
   "Questions": {
     "eyebrow": "Вопросы",
@@ -274,7 +315,9 @@
     "intro": "Move through three short layers. Your final chart reading is shaped by your Level 2 reflections, so plain honest answers work best.",
     "progress": "Step {current} of {total}.",
     "stepHelp": "Save this layer to reveal the guidance written for each question.",
-    "emptyTitle": "This layer is waiting for content."
+    "emptyTitle": "This layer is waiting for content.",
+    "saving": "Сохранение…",
+    "savedAnnouncement": "{level} сохранено."
   },
   "Security": {
     "eyebrow": "Security",
@@ -287,5 +330,8 @@
     "submitting": "Changing password",
     "success": "Password changed. Please sign in again.",
     "manageCta": "Управление паролем"
+  },
+  "Disclaimer": {
+    "chartRemedy": "Это чтение предназначено для размышления и самопознания — это не медицинская, юридическая или финансовая консультация, и результаты не гарантированы. Подробнее в наших <terms>Условиях</terms>."
   }
 }

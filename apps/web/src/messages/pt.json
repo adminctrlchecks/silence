@@ -188,7 +188,40 @@
       "approximate": "Aproximado",
       "uncertain": "Incerto",
       "label": "Precisão do cálculo"
-    }
+    },
+    "chartVisualAlt": "Roda do mapa astral védico mostrando as posições planetárias nas 12 casas. Veja a tabela de posições abaixo para as posições exatas.",
+    "chartSummaryHeading": "Resumo do mapa",
+    "birthDataLabel": "Dados de nascimento",
+    "atConnector": "às",
+    "birthPlaceLabel": "Local de nascimento",
+    "coordinatesNotAvailable": "Coordenadas não disponíveis",
+    "calculationLabel": "Cálculo",
+    "zodiacSuffix": "zodíaco {zodiac}",
+    "julianDayLabel": "DJ {value}",
+    "timezoneLabel": "Fuso horário: {value}",
+    "placementsHeading": "Posições",
+    "placementsDescription": "Planeta, signo, grau, casa e movimento do mapa calculado.",
+    "columnPlanet": "Planeta",
+    "columnSign": "Signo",
+    "columnDegree": "Grau",
+    "columnHouse": "Casa",
+    "columnMotion": "Movimento",
+    "motionDirect": "direto",
+    "housesHeading": "Casas",
+    "housesFallback": "As cúspides das casas precisam de coordenadas de nascimento exatas. As posições atuais usam a alternativa baseada em signos.",
+    "interpretationHeading": "Leitura pessoal",
+    "generatedOn": "Gerado em {date}",
+    "viewRemedy": "Ver remédio",
+    "warningApproximate": "Faltam coordenadas exatas ou fuso horário, então as casas e o ascendente podem variar.",
+    "warningUncertain": "Faltam as coordenadas do local de nascimento, então o mapa usa casas alternativas baseadas em signos.",
+    "detailAscendant": "Signo ascendente pela hora e local de nascimento",
+    "detailSun": "Posição solar principal",
+    "detailMoon": "Posição lunar emocional",
+    "activeHouseDetail": "{count} posições aqui",
+    "detailNoHouseEmphasis": "Nenhuma ênfase de casa disponível",
+    "labelSun": "Sol",
+    "labelMoon": "Lua",
+    "labelActiveHouse": "Casa ativa"
   },
   "Remedy": {
     "eyebrow": "Remédio pessoal",
@@ -196,7 +229,11 @@
     "linkedLevel": "Nível vinculado: {level}",
     "practice": "Suggested practice",
     "closing": "Keep the remedy gentle and repeatable. Small consistency is more useful than intensity.",
-    "whyThisPractice": "Por que esta prática"
+    "whyThisPractice": "Por que esta prática",
+    "whyGeneric": "Selecionado como uma prática de apoio para sua categoria e leitura atual.",
+    "howToRepeat": "Como repetir",
+    "backToChart": "Voltar ao mapa",
+    "viewHistory": "Ver histórico de leituras"
   },
   "Profile": {
     "eyebrow": "Perfil salvo",
@@ -252,7 +289,11 @@
       "chart_ready": "Mapa pronto",
       "remedy_ready": "Remédio pronto",
       "complete": "Concluída"
-    }
+    },
+    "previousPage": "Anterior",
+    "nextPage": "Próximo",
+    "pageOf": "Página {current} de {total}",
+    "emptyExplainer": "Ao concluir uma leitura, ela é salva aqui com suas respostas, mapa e remédio para que você possa revisitá-la a qualquer momento."
   },
   "Questions": {
     "eyebrow": "Fluxo de perguntas",
@@ -274,7 +315,9 @@
     "intro": "Move through three short layers. Your final chart reading is shaped by your Level 2 reflections, so plain honest answers work best.",
     "progress": "Step {current} of {total}.",
     "stepHelp": "Save this layer to reveal the guidance written for each question.",
-    "emptyTitle": "This layer is waiting for content."
+    "emptyTitle": "This layer is waiting for content.",
+    "saving": "Salvando…",
+    "savedAnnouncement": "{level} salvo."
   },
   "Security": {
     "eyebrow": "Security",
@@ -287,5 +330,8 @@
     "submitting": "Changing password",
     "success": "Password changed. Please sign in again.",
     "manageCta": "Gerenciar senha"
+  },
+  "Disclaimer": {
+    "chartRemedy": "Esta leitura é para reflexão e autoconhecimento — não é aconselhamento médico, jurídico ou financeiro, e os resultados não são garantidos. Consulte nossos <terms>Termos</terms> para mais informações."
   }
 }

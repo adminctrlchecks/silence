@@ -188,7 +188,40 @@
       "approximate": "Approximate — ascendant may be off by up to a degree",
       "uncertain": "Uncertain — birth place not recorded; houses not calculated",
       "label": "Calculation accuracy"
-    }
+    },
+    "chartVisualAlt": "Vedic birth chart wheel showing planetary placements across the 12 houses. See the placements table below for exact positions.",
+    "chartSummaryHeading": "Chart summary",
+    "birthDataLabel": "Birth data",
+    "atConnector": "at",
+    "birthPlaceLabel": "Birth place",
+    "coordinatesNotAvailable": "Coordinates not available",
+    "calculationLabel": "Calculation",
+    "zodiacSuffix": "{zodiac} zodiac",
+    "julianDayLabel": "JD {value}",
+    "timezoneLabel": "Timezone: {value}",
+    "placementsHeading": "Placements",
+    "placementsDescription": "Planet, sign, degree, house, and motion from the computed chart.",
+    "columnPlanet": "Planet",
+    "columnSign": "Sign",
+    "columnDegree": "Degree",
+    "columnHouse": "House",
+    "columnMotion": "Motion",
+    "motionDirect": "direct",
+    "housesHeading": "Houses",
+    "housesFallback": "House cusps need exact birth coordinates. Current placements use the available sign-based fallback.",
+    "interpretationHeading": "Personal reading",
+    "generatedOn": "Generated {date}",
+    "viewRemedy": "View remedy",
+    "warningApproximate": "Exact coordinates or timezone are missing, so houses and the ascendant can shift.",
+    "warningUncertain": "Birth place coordinates are missing, so the chart uses sign-based fallback houses.",
+    "detailAscendant": "Rising sign from birth time and place",
+    "detailSun": "Core solar placement",
+    "detailMoon": "Emotional lunar placement",
+    "activeHouseDetail": "{count} placements here",
+    "detailNoHouseEmphasis": "No house emphasis available",
+    "labelSun": "Sun",
+    "labelMoon": "Moon",
+    "labelActiveHouse": "Active house"
   },
   "Remedy": {
     "eyebrow": "Personal remedy",
@@ -196,7 +229,11 @@
     "linkedLevel": "Linked level: {level}",
     "practice": "Suggested practice",
     "closing": "Keep the remedy gentle and repeatable. Small consistency is more useful than intensity.",
-    "whyThisPractice": "Why this practice"
+    "whyThisPractice": "Why this practice",
+    "whyGeneric": "Selected as a supportive practice for your category and current reading.",
+    "howToRepeat": "How to repeat",
+    "backToChart": "Back to chart",
+    "viewHistory": "View reading history"
   },
   "Profile": {
     "eyebrow": "Saved profile",
@@ -252,7 +289,11 @@
       "chart_ready": "Chart ready",
       "remedy_ready": "Remedy ready",
       "complete": "Complete"
-    }
+    },
+    "previousPage": "Previous",
+    "nextPage": "Next",
+    "pageOf": "Page {current} of {total}",
+    "emptyExplainer": "Once you complete a reading, it's saved here with your answers, chart, and remedy so you can revisit it anytime."
   },
   "Questions": {
     "eyebrow": "Question flow",
@@ -274,7 +315,9 @@
     "intro": "Move through three short layers. Your final chart reading is shaped by your Level 2 reflections, so plain honest answers work best.",
     "progress": "Step {current} of {total}.",
     "stepHelp": "Save this layer to reveal the guidance written for each question.",
-    "emptyTitle": "This layer is waiting for content."
+    "emptyTitle": "This layer is waiting for content.",
+    "saving": "Saving…",
+    "savedAnnouncement": "{level} saved."
   },
   "Security": {
     "eyebrow": "Security",
@@ -287,5 +330,8 @@
     "submitting": "Changing password",
     "success": "Password changed. Please sign in again.",
     "manageCta": "Manage password"
+  },
+  "Disclaimer": {
+    "chartRemedy": "This reading is for reflection and self-understanding — not medical, legal, or financial advice, and results aren't guaranteed. See our <terms>Terms</terms> for more."
   }
 }
