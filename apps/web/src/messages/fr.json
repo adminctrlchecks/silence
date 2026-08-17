@@ -362,5 +362,12 @@
     "readPrivacyPolicy": "Lire la Politique de confidentialité",
     "requestTitle": "Demander ou supprimer vos données",
     "requestBody": "Nous ne proposons pas encore d'export ou de suppression en libre-service. Contactez-nous et nous traiterons votre demande manuellement."
+  },
+  "Legal": {
+    "draftNotice": "Cette page est une version provisoire de nos conditions légales, en attente d'une révision juridique formelle. Elle n'est pas encore définitive.",
+    "translationNotice": "Cette page est actuellement disponible uniquement en anglais. Une version traduite suivra la révision juridique.",
+    "tableOfContents": "Sur cette page",
+    "lastUpdated": "Dernière mise à jour {date}",
+    "backToTop": "Retour en haut"
   }
 }

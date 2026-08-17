@@ -360,5 +360,12 @@
     "readPrivacyPolicy": "阅读隐私政策",
     "requestTitle": "请求或删除您的数据",
     "requestBody": "我们目前尚未提供自助导出或删除功能。请联系我们，我们将手动处理您的请求。"
+  },
+  "Legal": {
+    "draftNotice": "本页是我们法律条款的工作草案，正等待正式法律审查，尚未定稿。",
+    "translationNotice": "本页目前仅提供英文版本。法律审查完成后将提供翻译版本。",
+    "tableOfContents": "本页内容",
+    "lastUpdated": "最后更新于 {date}",
+    "backToTop": "返回顶部"
   }
 }

@@ -109,13 +109,27 @@ const faqs = [
   },
   {
     question: 'Is this medical, legal, or financial advice?',
-    answer:
-      'No. Silence is for reflective astrology guidance. Final legal disclaimer wording still needs legal review before production.',
+    answer: (
+      <>
+        No. Silence is for reflective astrology guidance, not medical, legal, or financial advice. See the{' '}
+        <Link href="/terms#disclaimer" className="text-primary underline underline-offset-2">
+          Terms
+        </Link>{' '}
+        for the full disclaimer.
+      </>
+    ),
   },
   {
     question: 'How is AI used?',
-    answer:
-      'The current system can use AI assistance for answer generation, translation, and chart interpretation. Privacy wording needs legal review.',
+    answer: (
+      <>
+        Some answers, translations, and chart interpretations are generated with AI assistance. See{' '}
+        <Link href="/privacy#ai-processing" className="text-primary underline underline-offset-2">
+          Privacy
+        </Link>{' '}
+        for details.
+      </>
+    ),
   },
 ];
 

@@ -362,5 +362,12 @@
     "readPrivacyPolicy": "Read Privacy Policy",
     "requestTitle": "Request or delete your data",
     "requestBody": "We don't yet offer self-serve export or deletion. Contact us and we'll handle your request manually."
+  },
+  "Legal": {
+    "draftNotice": "This page is a working draft of our legal terms and is pending formal legal review. It is not yet final.",
+    "translationNotice": "This page is currently available in English only. A translated version will follow legal review.",
+    "tableOfContents": "On this page",
+    "lastUpdated": "Last updated {date}",
+    "backToTop": "Back to top"
   }
 }

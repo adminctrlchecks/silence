@@ -19,7 +19,7 @@ export async function ReadingDisclaimer() {
       <span>
         {t.rich('chartRemedy', {
           terms: (chunks: ReactNode) => (
-            <Link href="/terms" className="font-medium underline underline-offset-2">
+            <Link href="/terms#disclaimer" className="font-medium underline underline-offset-2">
               {chunks}
             </Link>
           ),

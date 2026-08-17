@@ -362,5 +362,12 @@
     "readPrivacyPolicy": "Ler Política de Privacidade",
     "requestTitle": "Solicitar ou excluir seus dados",
     "requestBody": "Ainda não oferecemos exportação ou exclusão via autoatendimento. Entre em contato conosco e trataremos sua solicitação manualmente."
+  },
+  "Legal": {
+    "draftNotice": "Esta página é um rascunho de trabalho dos nossos termos legais e está pendente de revisão jurídica formal. Ainda não é definitiva.",
+    "translationNotice": "Esta página está atualmente disponível apenas em inglês. Uma versão traduzida será publicada após a revisão jurídica.",
+    "tableOfContents": "Nesta página",
+    "lastUpdated": "Última atualização {date}",
+    "backToTop": "Voltar ao topo"
   }
 }

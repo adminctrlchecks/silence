@@ -362,5 +362,12 @@
     "readPrivacyPolicy": "Leer Política de Privacidad",
     "requestTitle": "Solicita o elimina tus datos",
     "requestBody": "Aún no ofrecemos exportación o eliminación de autoservicio. Contáctanos y gestionaremos tu solicitud manualmente."
+  },
+  "Legal": {
+    "draftNotice": "Esta página es un borrador de trabajo de nuestros términos legales y está pendiente de revisión legal formal. Aún no es definitiva.",
+    "translationNotice": "Esta página está disponible actualmente solo en inglés. Una versión traducida estará disponible tras la revisión legal.",
+    "tableOfContents": "En esta página",
+    "lastUpdated": "Última actualización {date}",
+    "backToTop": "Volver arriba"
   }
 }
