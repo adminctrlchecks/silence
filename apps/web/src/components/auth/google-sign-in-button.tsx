@@ -14,6 +14,16 @@ const GOOGLE_CLIENT_ID = process.env.NEXT_PUBLIC_GOOGLE_CLIENT_ID;
 // this window, treat it as failed. Long enough that it never fires while a
 // real account-chooser is genuinely still on screen waiting on the user.
 const PROMPT_TIMEOUT_MS = 12_000;
+// Separate, earlier safety net for the *script load* phase itself — the bug
+// above only covered a click that had already started. If Google's script
+// never loads at all (blocked by an extension/firewall, or a request that
+// hangs instead of firing either `onLoad` or `onError`), the button used to
+// have no time limit on that either and would just sit there disabled with a
+// spinner forever, every time, for anyone it happened to. If it hasn't
+// loaded within this window, stop waiting and quietly drop the button —
+// email sign-in is right below it either way, so a missing Google option
+// beats a permanently broken-looking one.
+const SCRIPT_LOAD_TIMEOUT_MS = 8_000;
 
 // Google's official multi-color "G" glyph, unaltered, per their Sign In With
 // Google branding guidelines for custom buttons.
@@ -56,6 +66,14 @@ function GoogleGlyph() {
  * display anything (browser/privacy settings), it surfaces a clear message
  * instead of leaving a silently broken control, since email sign-in is right
  * below it either way.
+ *
+ * Two things can still get "stuck" without an explicit way out — both have a
+ * timeout-based safety net (see SCRIPT_LOAD_TIMEOUT_MS / PROMPT_TIMEOUT_MS):
+ * the initial script load itself (blocked or hung, before any click — the
+ * button quietly disappears if this never resolves), and the post-click
+ * prompt() call (some FedCM failure modes never invoke its own callback —
+ * confirmed live: a NetworkError from FedCM's get() with no Google session
+ * in the browser at all).
  */
 export function GoogleSignInButton({
   lang,
@@ -74,6 +92,7 @@ export function GoogleSignInButton({
   label: string;
 }) {
   const [scriptReady, setScriptReady] = useState(false);
+  const [scriptUnavailable, setScriptUnavailable] = useState(false);
   const [pending, setPending] = useState(false);
   const initializedRef = useRef(false);
   // Guards against the safety timeout, the moment listener, and the real
@@ -90,6 +109,14 @@ export function GoogleSignInButton({
   }, []);
 
   useEffect(() => clearSafetyTimeout, [clearSafetyTimeout]);
+
+  // The script-load safety net: give up waiting after SCRIPT_LOAD_TIMEOUT_MS
+  // and drop the button rather than leave it spinning indefinitely.
+  useEffect(() => {
+    if (scriptReady || scriptUnavailable) return;
+    const timeout = setTimeout(() => setScriptUnavailable(true), SCRIPT_LOAD_TIMEOUT_MS);
+    return () => clearTimeout(timeout);
+  }, [scriptReady, scriptUnavailable]);
 
   const fail = useCallback(() => {
     if (!inFlightRef.current) return;
@@ -157,7 +184,29 @@ export function GoogleSignInButton({
     });
   }
 
-  if (!GOOGLE_CLIENT_ID) return null;
+  function handleScriptLoad() {
+    // The load event has occasionally been observed firing a tick before
+    // window.google is fully attached (network/timing-dependent) — retry
+    // briefly instead of treating that race as a real failure.
+    if (window.google?.accounts?.id) {
+      setScriptReady(true);
+      return;
+    }
+    let attempts = 0;
+    const retry = setInterval(() => {
+      attempts += 1;
+      if (window.google?.accounts?.id) {
+        setScriptReady(true);
+        clearInterval(retry);
+      } else if (attempts >= 5) {
+        clearInterval(retry);
+        // Falls through to the SCRIPT_LOAD_TIMEOUT_MS effect above, which
+        // will mark this unavailable shortly after.
+      }
+    }, 200);
+  }
+
+  if (!GOOGLE_CLIENT_ID || scriptUnavailable) return null;
 
   return (
     <div className="w-full">
@@ -166,8 +215,8 @@ export function GoogleSignInButton({
         // flow — there's no separate option for it on prompt()/initialize().
         src={`https://accounts.google.com/gsi/client?hl=${encodeURIComponent(lang)}`}
         strategy="afterInteractive"
-        onLoad={() => setScriptReady(true)}
-        onError={() => onError()}
+        onLoad={handleScriptLoad}
+        onError={() => setScriptUnavailable(true)}
       />
       <Button type="button" variant="outline" className="w-full" disabled={disabled || pending || !scriptReady} onClick={handleClick}>
         {pending || !scriptReady ? <Loader2 className="animate-spin" /> : <GoogleGlyph />}
