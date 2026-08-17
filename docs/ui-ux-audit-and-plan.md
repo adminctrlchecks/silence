@@ -98,9 +98,27 @@ Effect: page content's left edge doesn't line up with the nav/logo above it at c
 
 **Phase F — Update this doc's summary against §16's checklist; commit in small reviewable chunks per sub-phase.**
 
-## 5. Open decisions
+## 5. Open decisions — resolved
 
-1. Auth unification: two routes rendering one shared toggle card with different default tabs (recommended — no middleware changes) vs. collapsing to one canonical URL (bigger change, touches `lib/auth-routing.ts`).
-2. Container-tier mapping for Finding 2 — proposed above; open to adjustment.
-3. Branch name — proposing `feat/uiux-audit-fixes`.
-4. `admin-login-card.tsx` — delete outright once folded in, or keep as a thin wrapper (will grep for other importers before deciding either way).
+1. Auth unification: two routes, one shared toggle card, different default tabs. Confirmed and implemented.
+2. Container-tier mapping: applied as proposed. Confirmed and implemented.
+3. Branch: `feat/uiux-audit-fixes`. Confirmed.
+4. `admin-login-card.tsx`: deleted outright — no other importers (confirmed via grep before removal).
+
+## 6. Implementation summary (post-fix)
+
+All five findings implemented on `feat/uiux-audit-fixes`, verified with `typecheck`/`lint`/`build` after each phase plus a live dev-server pass (both locales, mobile viewport, redirect-when-signed-out regression checks). Not merged or pushed — that, and the VPS deploy, remain the user's call per this repo's established hard constraints.
+
+| Finding | Commit | What changed |
+|---|---|---|
+| 3 — raw `<select>` | `61b6cd9` | ~30 hand-rolled selects across `auth-card.tsx`, `profile-overview-card.tsx`, and 8 admin components swapped for the shared `Select` |
+| 4 — raw input/textarea | `a35cbb8` | `question-flow.tsx`'s drifted hand-rolled input/textarea swapped for `Input`/`Textarea` |
+| 5 — ad-hoc error/loading states | `a35cbb8` | Page/section-level fetch-error banners in the admin dashboard overview and 5 admin list views, plus the dashboard's loading block, swapped for `ErrorState`/`LoadingState` (with retry actions). Compact, action-adjacent inline errors left as-is — a different, correctly-scoped pattern |
+| 1 — split User/Admin auth | `4900228` | `AuthCard` gained a `[User][Admin]` toggle (default User); `/admin/login` now renders the same card defaulting to the Admin tab. `AdminLoginCard` retired. `Auth.toggleUser`/`toggleAdmin` added to all 11 locales |
+| 2 — inconsistent app-shell containers | `7ab3f7c` | 18 pages (dashboard, chart, questions, remedy, history ×2, profile ×4, + loading/error twins) moved from 7 arbitrary `max-w-*` values onto 3 `PageContainer` tiers (`wide`/`reading`/`narrow`) |
+
+**Verified, not just implemented:** live dev-server checks confirmed the auth toggle swaps fields/copy/Google-button/footer correctly in both directions, in Arabic (RTL) and English, with no horizontal overflow at 375px in either tab; `/admin/login` opens on the Admin tab; `/register` is unaffected (no toggle ever renders there); all protected app-shell routes still redirect to `/login` when signed out after the container swap; homepage/terms/privacy render with no console errors.
+
+**Not independently re-verified (no live Postgres+API stack in this sandbox — same constraint noted throughout `product-redesign/IMPLEMENTATION_PROGRESS.md`):** the authenticated *content* of the 18 container-normalized pages (dashboard cards, chart, remedy, history entries, profile forms) — only their layout wrapper changed, and that wrapper is the same `PageContainer` component already proven correct elsewhere in the app (navbar, footer, homepage, legal pages, admin shell), but a real authenticated click-through at the new widths is worth doing before merge, same recommendation as prior phases.
+
+**Deliberately left alone (out of scope, per the audit's own scoping):** `language-switcher.tsx`'s compact inline `<select>` (a different, intentionally minimal nav-chip control, not a form field); action-adjacent inline error banners right before a single form's submit button (import/chart-config/languages admin) — converting those to the larger `ErrorState` card would visually clutter a tight form-submit flow for no benefit.
