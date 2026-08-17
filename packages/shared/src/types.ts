@@ -113,6 +113,8 @@ export interface SavedUserResponse {
   id: string;
   userId: string;
   questionId: string;
+  /** The question's text (in the session's language, falling back to base text) — only populated on session-detail reads. */
+  questionText?: string;
   level: Level;
   category: Category;
   value: string;

@@ -69,7 +69,12 @@ export default async function HistorySessionPage({ params }: { params: Promise<{
                     <span>{levels(`levels.${response.level}`)}</span>
                     <span>{formatDate(response.createdAt, lang)}</span>
                   </div>
-                  <p className="mt-2 break-words text-sm leading-6" dir="auto">
+                  {response.questionText ? (
+                    <p className="mt-2 break-words text-sm font-medium" dir="auto">
+                      {response.questionText}
+                    </p>
+                  ) : null}
+                  <p className="mt-1 break-words text-sm leading-6 text-muted-foreground" dir="auto">
                     {response.value}
                   </p>
                   {response.answerTextShown ? (

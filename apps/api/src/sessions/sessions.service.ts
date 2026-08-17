@@ -102,6 +102,10 @@ export class SessionsService {
     const session = await this.findOwned(userId, sessionId);
     const chart = session.charts.at(-1) ?? null;
     const summary = this.toSummary(session, await this.levelTotals(session.category as Category));
+    const questionTextById = await this.questionTextByLang(
+      session.responses.map((r) => r.questionId),
+      session.lang,
+    );
     return {
       ...summary,
       responses: [...session.responses]
@@ -110,6 +114,7 @@ export class SessionsService {
           id: r.id,
           userId: r.userId,
           questionId: r.questionId,
+          questionText: questionTextById.get(r.questionId),
           level: r.level,
           category: r.category,
           value: r.value,
@@ -253,6 +258,24 @@ export class SessionsService {
     const totals = { common: 0, level1: 0, level2: 0 } as LevelTotals;
     for (const row of rows) totals[row.level as Level] = row._count._all;
     return totals;
+  }
+
+  /**
+   * Resolves each question's display text (in `lang`, falling back to the
+   * base text) for a session's responses, so a reading's saved answers can
+   * be shown alongside the question that was actually asked — previously
+   * only the level name was shown, not which question within that level.
+   */
+  private async questionTextByLang(questionIds: string[], lang: string): Promise<Map<string, string>> {
+    const uniqueIds = [...new Set(questionIds)];
+    if (uniqueIds.length === 0) return new Map();
+
+    const questions = await this.prisma.question.findMany({
+      where: { id: { in: uniqueIds } },
+      include: { translations: { where: { lang } } },
+    });
+
+    return new Map(questions.map((q) => [q.id, q.translations[0]?.text ?? q.text]));
   }
 
   private toSummary(session: SessionWithRelations, totals: LevelTotals): ReadingSessionSummary {

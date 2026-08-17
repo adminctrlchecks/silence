@@ -15,6 +15,7 @@ import { Bot, Check, Loader2, Pencil, Plus, RefreshCw, Save, Trash2, X } from 'l
 import { useSearchParams } from 'next/navigation';
 import { useCallback, useEffect, useMemo, useState } from 'react';
 import { Button } from '@/components/ui/button';
+import { ConfirmDialog } from '@/components/ui/confirm-dialog';
 import { Label } from '@/components/ui/label';
 
 type FilterValue<T extends string> = T | 'all';
@@ -83,6 +84,8 @@ function validReviewed(value: string | null): ReviewedFilter {
   return value === 'true' || value === 'false' ? value : 'all';
 }
 
+const PAGE_SIZE = 20;
+
 export function AnswersAdmin() {
   const searchParams = useSearchParams();
   const search = searchParams.get('q')?.trim() ?? '';
@@ -90,8 +93,10 @@ export function AnswersAdmin() {
   const [categoryFilter, setCategoryFilter] = useState<FilterValue<Category>>('all');
   const [sourceFilter, setSourceFilter] = useState<FilterValue<AnswerSource>>(() => validSource(searchParams.get('source')));
   const [reviewedFilter, setReviewedFilter] = useState<ReviewedFilter>(() => validReviewed(searchParams.get('reviewed')));
+  const [page, setPage] = useState(1);
   const [questions, setQuestions] = useState<Question[]>([]);
   const [answers, setAnswers] = useState<Answer[]>([]);
+  const [total, setTotal] = useState(0);
   const [form, setForm] = useState<AnswerFormState>(initialForm);
   const [aiForm, setAiForm] = useState<AiFormState>(initialAiForm);
   const [loading, setLoading] = useState(true);
@@ -99,20 +104,28 @@ export function AnswersAdmin() {
   const [saving, setSaving] = useState(false);
   const [generating, setGenerating] = useState(false);
   const [deletingId, setDeletingId] = useState<string | null>(null);
+  const [confirmTarget, setConfirmTarget] = useState<Answer | null>(null);
   const [error, setError] = useState<string | null>(null);
   const [notice, setNotice] = useState<string | null>(null);
 
   const questionById = useMemo(() => new Map(questions.map((question) => [question.id, question])), [questions]);
 
+  // Any filter change invalidates the current page.
+  useEffect(() => {
+    setPage(1);
+  }, [search, levelFilter, categoryFilter, sourceFilter, reviewedFilter]);
+
   const answerQuery = useMemo(() => {
-    const params = new URLSearchParams({ limit: '100' });
+    const params = new URLSearchParams({ limit: String(PAGE_SIZE), page: String(page) });
     if (search) params.set('q', search);
     if (levelFilter !== 'all') params.set('level', levelFilter);
     if (categoryFilter !== 'all') params.set('category', categoryFilter);
     if (sourceFilter !== 'all') params.set('source', sourceFilter);
     if (reviewedFilter !== 'all') params.set('reviewed', reviewedFilter);
     return params.toString();
-  }, [categoryFilter, levelFilter, reviewedFilter, search, sourceFilter]);
+  }, [categoryFilter, levelFilter, page, reviewedFilter, search, sourceFilter]);
+
+  const totalPages = Math.max(1, Math.ceil(total / PAGE_SIZE));
 
   const loadQuestions = useCallback(async () => {
     setQuestionsLoading(true);
@@ -133,6 +146,7 @@ export function AnswersAdmin() {
     try {
       const result = await parseJson<Paginated<Answer>>(await fetch(`/api/admin/answers?${answerQuery}`));
       setAnswers(result.data);
+      setTotal(result.total);
     } catch (err) {
       setError(err instanceof Error ? err.message : 'Unable to load answers');
     } finally {
@@ -258,8 +272,6 @@ export function AnswersAdmin() {
   }
 
   async function deleteAnswer(answer: Answer) {
-    if (!window.confirm(`Delete this ${answer.source} answer?`)) return;
-
     setDeletingId(answer.id);
     setError(null);
     setNotice(null);
@@ -275,6 +287,7 @@ export function AnswersAdmin() {
       setError(err instanceof Error ? err.message : 'Unable to delete answer');
     } finally {
       setDeletingId(null);
+      setConfirmTarget(null);
     }
   }
 
@@ -561,9 +574,16 @@ export function AnswersAdmin() {
         <section className="rounded-md border border-border bg-card shadow-sm">
           <div className="flex items-center justify-between gap-3 border-b border-border px-4 py-3">
             <h2 className="text-base font-semibold tracking-normal">Answers</h2>
-            <span className="rounded-md border border-border bg-background px-2 py-1 text-xs text-muted-foreground">
-              {answers.length} shown
-            </span>
+            <div className="flex items-center gap-2">
+              {reviewedFilter === 'false' ? (
+                <span className="rounded-md border border-warning/30 bg-warning-background px-2 py-1 text-xs font-medium text-warning">
+                  {total} awaiting review
+                </span>
+              ) : null}
+              <span className="rounded-md border border-border bg-background px-2 py-1 text-xs text-muted-foreground">
+                {total} total
+              </span>
+            </div>
           </div>
 
           {notice ? (
@@ -623,7 +643,7 @@ export function AnswersAdmin() {
                         type="button"
                         variant="ghost"
                         size="sm"
-                        onClick={() => void deleteAnswer(answer)}
+                        onClick={() => setConfirmTarget(answer)}
                         disabled={deletingId === answer.id}
                       >
                         {deletingId === answer.id ? <Loader2 className="animate-spin" /> : <Trash2 />}
@@ -637,8 +657,39 @@ export function AnswersAdmin() {
               <p className="p-4 text-sm text-muted-foreground">No answers match these filters.</p>
             )}
           </div>
+
+          {totalPages > 1 ? (
+            <div className="flex items-center justify-between gap-3 border-t border-border px-4 py-3">
+              <Button type="button" variant="outline" size="sm" onClick={() => setPage((p) => p - 1)} disabled={page <= 1 || loading}>
+                Previous
+              </Button>
+              <span className="text-xs text-muted-foreground">
+                Page {page} of {totalPages}
+              </span>
+              <Button
+                type="button"
+                variant="outline"
+                size="sm"
+                onClick={() => setPage((p) => p + 1)}
+                disabled={page >= totalPages || loading}
+              >
+                Next
+              </Button>
+            </div>
+          ) : null}
         </section>
       </section>
+
+      <ConfirmDialog
+        open={confirmTarget !== null}
+        onOpenChange={(next) => {
+          if (!next) setConfirmTarget(null);
+        }}
+        title="Delete answer?"
+        description={confirmTarget ? `This ${confirmTarget.source} answer will be permanently removed.` : undefined}
+        onConfirm={() => confirmTarget && void deleteAnswer(confirmTarget)}
+        pending={deletingId !== null}
+      />
     </div>
   );
 }
