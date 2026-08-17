@@ -2,6 +2,7 @@ import type { Metadata } from 'next';
 import { getTranslations } from 'next-intl/server';
 import Link from 'next/link';
 import { redirect } from 'next/navigation';
+import { PageContainer } from '@/components/layout/page-container';
 import { Button } from '@/components/ui/button';
 import { publicApi } from '@/lib/api';
 import { normalizeSessionLanguage } from '@/lib/session-preferences';
@@ -44,7 +45,7 @@ export default async function HistoryPage({
   const totalPages = Math.max(1, Math.ceil(sessions.total / sessions.limit));
 
   return (
-    <main className="mx-auto w-full max-w-4xl px-4 py-8 sm:px-6">
+    <PageContainer as="main" size="reading" className="py-8">
       <div className="mb-5 flex flex-wrap items-center justify-between gap-3">
         <div>
           <p className="text-sm font-medium text-primary">{t('eyebrow')}</p>
@@ -137,6 +138,6 @@ export default async function HistoryPage({
           </Button>
         </div>
       )}
-    </main>
+    </PageContainer>
   );
 }

@@ -4,6 +4,7 @@ import { CheckCircle2, Circle, History as HistoryIcon } from 'lucide-react';
 import { getTranslations } from 'next-intl/server';
 import Link from 'next/link';
 import { redirect } from 'next/navigation';
+import { PageContainer } from '@/components/layout/page-container';
 import { Button } from '@/components/ui/button';
 import { JourneyTracker, type JourneyStage, type JourneyStageStatus } from '@/components/dashboard/journey-tracker';
 import { publicApi } from '@/lib/api';
@@ -97,7 +98,7 @@ export default async function UserAppPage() {
   ];
 
   return (
-    <main className="mx-auto w-full max-w-6xl px-4 py-8 sm:px-6">
+    <PageContainer as="main" size="wide" className="py-8">
       <section className="rounded-md border border-border bg-card p-5 shadow-sm sm:p-6">
         <p className="text-sm font-medium text-primary">{t('eyebrow')}</p>
         <h1 className="mt-2 text-3xl font-semibold tracking-normal">{t('greeting', { name: profile.name })}</h1>
@@ -216,6 +217,6 @@ export default async function UserAppPage() {
           </section>
         )}
       </div>
-    </main>
+    </PageContainer>
   );
 }

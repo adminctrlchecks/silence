@@ -1,6 +1,7 @@
 import type { Metadata } from 'next';
 import { getTranslations } from 'next-intl/server';
 import { redirect } from 'next/navigation';
+import { PageContainer } from '@/components/layout/page-container';
 import { ChangePasswordCard } from '@/components/auth/change-password-card';
 import { ProfileNav } from '@/components/profile/profile-nav';
 import { getUserSession } from '@/lib/user-session';
@@ -23,7 +24,7 @@ export default async function ProfileSecurityPage() {
   }
 
   return (
-    <main className="mx-auto w-full max-w-2xl space-y-5 px-4 py-8 sm:px-6">
+    <PageContainer as="main" size="narrow" className="py-8 space-y-5">
       <ProfileNav
         labels={{
           overview: profile('nav.overview'),
@@ -47,6 +48,6 @@ export default async function ProfileSecurityPage() {
           success: security('success'),
         }}
       />
-    </main>
+    </PageContainer>
   );
 }

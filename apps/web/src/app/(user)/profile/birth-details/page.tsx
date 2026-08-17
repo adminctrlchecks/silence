@@ -1,6 +1,7 @@
 import type { Metadata } from 'next';
 import { getTranslations } from 'next-intl/server';
 import { redirect } from 'next/navigation';
+import { PageContainer } from '@/components/layout/page-container';
 import { BirthDetailsCard } from '@/components/profile/birth-details-card';
 import { ProfileNav } from '@/components/profile/profile-nav';
 import { publicApi } from '@/lib/api';
@@ -32,7 +33,7 @@ export default async function ProfileBirthDetailsPage({
   const profile = await publicApi.profile(session.userId, session.token);
 
   return (
-    <main className="mx-auto w-full max-w-4xl space-y-5 px-4 py-8 sm:px-6">
+    <PageContainer as="main" size="reading" className="py-8 space-y-5">
       <ProfileNav
         labels={{
           overview: t('nav.overview'),
@@ -71,6 +72,6 @@ export default async function ProfileBirthDetailsPage({
           accuracyUncertain: chart('accuracy.uncertain'),
         }}
       />
-    </main>
+    </PageContainer>
   );
 }

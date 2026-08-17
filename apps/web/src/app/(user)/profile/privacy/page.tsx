@@ -3,6 +3,7 @@ import { CheckCircle2, Circle, Database, ScrollText, Sparkles } from 'lucide-rea
 import { getTranslations } from 'next-intl/server';
 import Link from 'next/link';
 import { redirect } from 'next/navigation';
+import { PageContainer } from '@/components/layout/page-container';
 import { ProfileNav } from '@/components/profile/profile-nav';
 import { Alert } from '@/components/ui/alert';
 import { Button } from '@/components/ui/button';
@@ -29,7 +30,7 @@ export default async function ProfilePrivacyPage() {
   const profile = await publicApi.profile(session.userId, session.token);
 
   return (
-    <main className="mx-auto w-full max-w-3xl space-y-4 px-4 py-8 sm:px-6">
+    <PageContainer as="main" size="reading" className="py-8 space-y-4">
       <ProfileNav
         labels={{
           overview: t('nav.overview'),
@@ -108,6 +109,6 @@ export default async function ProfilePrivacyPage() {
       <Alert variant="info" title={p('requestTitle')}>
         {p('requestBody')}
       </Alert>
-    </main>
+    </PageContainer>
   );
 }

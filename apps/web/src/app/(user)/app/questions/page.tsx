@@ -1,6 +1,7 @@
 import type { Category, Level } from '@silence/shared';
 import type { Metadata } from 'next';
 import { redirect } from 'next/navigation';
+import { PageContainer } from '@/components/layout/page-container';
 import { QuestionFlow } from '@/components/questions/question-flow';
 import { publicApi } from '@/lib/api';
 import { normalizeSessionLanguage } from '@/lib/session-preferences';
@@ -50,7 +51,7 @@ export default async function QuestionsPage() {
   }
 
   return (
-    <main className="mx-auto w-full max-w-5xl px-4 py-8 sm:px-6">
+    <PageContainer as="main" size="reading" className="py-8">
       <QuestionFlow
         userId={profile.id}
         sessionId={activeSession.id}
@@ -64,6 +65,6 @@ export default async function QuestionsPage() {
         savedAnswers={Object.fromEntries(existingResponses.responses.map((r) => [r.questionId, r.value]))}
         initialDisplayAnswers={initialDisplayAnswers}
       />
-    </main>
+    </PageContainer>
   );
 }

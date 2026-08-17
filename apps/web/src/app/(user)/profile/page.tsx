@@ -3,6 +3,7 @@ import { getTranslations } from 'next-intl/server';
 import { cookies } from 'next/headers';
 import Link from 'next/link';
 import { redirect } from 'next/navigation';
+import { PageContainer } from '@/components/layout/page-container';
 import { ProfileNav } from '@/components/profile/profile-nav';
 import { ProfileOverviewCard } from '@/components/profile/profile-overview-card';
 import { Button } from '@/components/ui/button';
@@ -32,7 +33,7 @@ export default async function ProfilePage() {
   const profile = await publicApi.profile(session.userId, session.token);
 
   return (
-    <main className="mx-auto w-full max-w-4xl space-y-5 px-4 py-8 sm:px-6">
+    <PageContainer as="main" size="reading" className="py-8 space-y-5">
       {hasAdminSession ? (
         <div className="flex justify-end">
           <Button asChild variant="outline">
@@ -73,6 +74,6 @@ export default async function ProfilePage() {
           },
         }}
       />
-    </main>
+    </PageContainer>
   );
 }
