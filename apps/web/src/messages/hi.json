@@ -152,7 +152,23 @@
       "chart_ready": "कुंडली तैयार",
       "remedy_ready": "उपाय तैयार",
       "complete": "पूर्ण"
-    }
+    },
+    "greeting": "स्वागत है, {name}",
+    "subtitleFirstTime": "आपकी पहली रीडिंग शुरू करने के लिए तैयार है।",
+    "subtitleInProgress": "जहाँ आपने छोड़ा था वहीं से जारी रखें।",
+    "subtitleChartReady": "आपकी कुंडली देखने के लिए तैयार है।",
+    "subtitleRemedyReady": "आपका उपाय देखने के लिए तैयार है।",
+    "subtitleReturning": "जब भी आप नई रीडिंग शुरू करना चाहें, हम तैयार हैं।",
+    "journey": {
+      "profile": "प्रोफाइल",
+      "questions": "प्रश्न",
+      "chart": "कुंडली",
+      "remedy": "उपाय",
+      "complete": "पूर्ण"
+    },
+    "firstTimeExplainer": "कुछ निर्देशित प्रश्नों के उत्तर दें, फिर अपनी कुंडली और एक व्यक्तिगत उपाय पाएं — लगभग तीन चरण।",
+    "recentReading": "आपकी सबसे हाल की रीडिंग",
+    "viewFullHistory": "पूरा इतिहास देखें"
   },
   "Chart": {
     "eyebrow": "नमूना कुंडली",

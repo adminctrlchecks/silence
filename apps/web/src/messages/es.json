@@ -152,7 +152,23 @@
       "chart_ready": "Carta lista",
       "remedy_ready": "Remedio listo",
       "complete": "Completa"
-    }
+    },
+    "greeting": "Bienvenido, {name}",
+    "subtitleFirstTime": "Tu primera lectura está lista para comenzar.",
+    "subtitleInProgress": "Continúa donde lo dejaste.",
+    "subtitleChartReady": "Tu carta natal está lista para ver.",
+    "subtitleRemedyReady": "Tu remedio está listo para ver.",
+    "subtitleReturning": "Listos cuando quieras comenzar una nueva lectura.",
+    "journey": {
+      "profile": "Perfil",
+      "questions": "Preguntas",
+      "chart": "Carta",
+      "remedy": "Remedio",
+      "complete": "Completo"
+    },
+    "firstTimeExplainer": "Responde algunas preguntas guiadas y luego obtén tu carta natal y un remedio personal: unos tres pasos.",
+    "recentReading": "Tu lectura más reciente",
+    "viewFullHistory": "Ver historial completo"
   },
   "Chart": {
     "eyebrow": "Carta de muestra",

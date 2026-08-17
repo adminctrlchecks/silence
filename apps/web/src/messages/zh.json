@@ -150,7 +150,23 @@
       "chart_ready": "星盘已就绪",
       "remedy_ready": "补救建议已就绪",
       "complete": "已完成"
-    }
+    },
+    "greeting": "欢迎，{name}",
+    "subtitleFirstTime": "您的第一次解读已准备就绪。",
+    "subtitleInProgress": "从上次中断的地方继续。",
+    "subtitleChartReady": "您的星盘已可查看。",
+    "subtitleRemedyReady": "您的补救建议已可查看。",
+    "subtitleReturning": "随时准备好开始新的解读。",
+    "journey": {
+      "profile": "档案",
+      "questions": "问题",
+      "chart": "星盘",
+      "remedy": "补救建议",
+      "complete": "已完成"
+    },
+    "firstTimeExplainer": "回答几个引导性问题，然后获取您的星盘和个人补救建议——大约三个步骤。",
+    "recentReading": "您最近的一次解读",
+    "viewFullHistory": "查看完整历史记录"
   },
   "Chart": {
     "eyebrow": "示例星盘",

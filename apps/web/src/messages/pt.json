@@ -152,7 +152,23 @@
       "chart_ready": "Mapa pronto",
       "remedy_ready": "Remédio pronto",
       "complete": "Concluída"
-    }
+    },
+    "greeting": "Bem-vindo, {name}",
+    "subtitleFirstTime": "Sua primeira leitura está pronta para começar.",
+    "subtitleInProgress": "Continue de onde parou.",
+    "subtitleChartReady": "Seu mapa astral está pronto para visualização.",
+    "subtitleRemedyReady": "Seu remédio está pronto para visualização.",
+    "subtitleReturning": "Prontos quando você quiser iniciar uma nova leitura.",
+    "journey": {
+      "profile": "Perfil",
+      "questions": "Perguntas",
+      "chart": "Mapa",
+      "remedy": "Remédio",
+      "complete": "Concluído"
+    },
+    "firstTimeExplainer": "Responda algumas perguntas guiadas e depois obtenha seu mapa astral e um remédio pessoal — cerca de três etapas.",
+    "recentReading": "Sua leitura mais recente",
+    "viewFullHistory": "Ver histórico completo"
   },
   "Chart": {
     "eyebrow": "Mapa de exemplo",

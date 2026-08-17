@@ -152,7 +152,23 @@
       "chart_ready": "الخريطة جاهزة",
       "remedy_ready": "العلاج جاهز",
       "complete": "مكتملة"
-    }
+    },
+    "greeting": "مرحبًا، {name}",
+    "subtitleFirstTime": "قراءتك الأولى جاهزة لتبدأ.",
+    "subtitleInProgress": "أكمل من حيث توقفت.",
+    "subtitleChartReady": "خريطتك الفلكية جاهزة للعرض.",
+    "subtitleRemedyReady": "علاجك جاهز للعرض.",
+    "subtitleReturning": "جاهزون متى أردت بدء قراءة جديدة.",
+    "journey": {
+      "profile": "الملف الشخصي",
+      "questions": "الأسئلة",
+      "chart": "الخريطة",
+      "remedy": "العلاج",
+      "complete": "مكتمل"
+    },
+    "firstTimeExplainer": "أجب عن بعض الأسئلة الموجهة، ثم احصل على خريطتك الفلكية وعلاج شخصي - نحو ثلاث خطوات.",
+    "recentReading": "أحدث قراءة لك",
+    "viewFullHistory": "عرض السجل الكامل"
   },
   "Chart": {
     "eyebrow": "خريطة تجريبية",

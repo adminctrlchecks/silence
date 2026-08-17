@@ -152,7 +152,23 @@
       "chart_ready": "チャート準備完了",
       "remedy_ready": "レメディ準備完了",
       "complete": "完了"
-    }
+    },
+    "greeting": "ようこそ、{name}さん",
+    "subtitleFirstTime": "最初のリーディングを始める準備ができています。",
+    "subtitleInProgress": "中断したところから再開しましょう。",
+    "subtitleChartReady": "出生図の閲覧準備ができました。",
+    "subtitleRemedyReady": "レメディの閲覧準備ができました。",
+    "subtitleReturning": "新しいリーディングを始めたいときにいつでもどうぞ。",
+    "journey": {
+      "profile": "プロフィール",
+      "questions": "質問",
+      "chart": "チャート",
+      "remedy": "レメディ",
+      "complete": "完了"
+    },
+    "firstTimeExplainer": "いくつかの質問に答えると、出生図と個別のレメディが得られます —約3ステップです。",
+    "recentReading": "最近のリーディング",
+    "viewFullHistory": "全履歴を見る"
   },
   "Chart": {
     "eyebrow": "サンプルチャート",

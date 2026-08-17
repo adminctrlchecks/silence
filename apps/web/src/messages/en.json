@@ -152,7 +152,23 @@
       "chart_ready": "Chart ready",
       "remedy_ready": "Remedy ready",
       "complete": "Complete"
-    }
+    },
+    "greeting": "Welcome, {name}",
+    "subtitleFirstTime": "Your first reading is ready to begin.",
+    "subtitleInProgress": "Pick up where you left off.",
+    "subtitleChartReady": "Your birth chart is ready to view.",
+    "subtitleRemedyReady": "Your remedy is ready to view.",
+    "subtitleReturning": "Ready whenever you'd like to start a new reading.",
+    "journey": {
+      "profile": "Profile",
+      "questions": "Questions",
+      "chart": "Chart",
+      "remedy": "Remedy",
+      "complete": "Complete"
+    },
+    "firstTimeExplainer": "Answer a few guided questions, then get your birth chart and a personal remedy — about three steps.",
+    "recentReading": "Your most recent reading",
+    "viewFullHistory": "View full history"
   },
   "Chart": {
     "eyebrow": "Birth chart",

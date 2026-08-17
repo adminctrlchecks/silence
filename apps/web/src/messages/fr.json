@@ -152,7 +152,23 @@
       "chart_ready": "Carte prête",
       "remedy_ready": "Remède prêt",
       "complete": "Terminée"
-    }
+    },
+    "greeting": "Bienvenue, {name}",
+    "subtitleFirstTime": "Votre première lecture est prête à commencer.",
+    "subtitleInProgress": "Reprenez là où vous vous étiez arrêté.",
+    "subtitleChartReady": "Votre carte natale est prête à consulter.",
+    "subtitleRemedyReady": "Votre remède est prêt à consulter.",
+    "subtitleReturning": "Prêts quand vous voudrez commencer une nouvelle lecture.",
+    "journey": {
+      "profile": "Profil",
+      "questions": "Questions",
+      "chart": "Carte",
+      "remedy": "Remède",
+      "complete": "Terminé"
+    },
+    "firstTimeExplainer": "Répondez à quelques questions guidées, puis obtenez votre carte natale et un remède personnel — environ trois étapes.",
+    "recentReading": "Votre lecture la plus récente",
+    "viewFullHistory": "Voir l'historique complet"
   },
   "Chart": {
     "eyebrow": "Carte exemple",
