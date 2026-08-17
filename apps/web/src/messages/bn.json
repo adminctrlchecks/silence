@@ -44,7 +44,7 @@
     "contact": "ইমেল বা ফোন",
     "password": "পাসওয়ার্ড",
     "forgotPassword": "পাসওয়ার্ড ভুলে গেছেন?",
-    "consent": "আমি আমার প্রোফাইল, জন্মতথ্য, উত্তর, ছক এবং প্রতিকার সংরক্ষণে সম্মতি দিচ্ছি।",
+    "consent": "আমি <terms>শর্তাবলী</terms> এবং <privacy>গোপনীয়তা নীতি</privacy>-তে সম্মত, এবং আমার প্রোফাইল, জন্মতথ্য, উত্তর, ছক ও প্রতিকার সংরক্ষণে সম্মতি দিচ্ছি।",
     "createSubmit": "প্রোফাইল তৈরি করুন",
     "signInSubmit": "সাইন ইন",
     "alreadyHaveProfile": "ইতিমধ্যে প্রোফাইল আছে?",
@@ -56,7 +56,23 @@
     "birthPlacePlaceholder": "একটি শহর খুঁজুন…",
     "continueWithGoogle": "Google দিয়ে চালিয়ে যান",
     "orContinueWithEmail": "অথবা ইমেইল দিয়ে চালিয়ে যান",
-    "googleSignInError": "Google সাইন-ইন ব্যর্থ হয়েছে। আবার চেষ্টা করুন।"
+    "googleSignInError": "Google সাইন-ইন ব্যর্থ হয়েছে। আবার চেষ্টা করুন।",
+    "eyebrowLogin": "সাইন ইন",
+    "eyebrowRegister": "নতুন প্রোফাইল",
+    "descriptionLogin": "আপনার পাঠ চালিয়ে যেতে যোগাযোগের তথ্য ও পাসওয়ার্ড দিন।",
+    "descriptionRegister": "আপনার চার্ট ও প্রতিকার তৈরি করতে তিনটি সহজ ধাপে প্রোফাইল সেট আপ করুন।",
+    "steps": {
+      "identity": "পরিচিতি",
+      "birth": "জন্ম বিবরণ",
+      "account": "অ্যাকাউন্ট"
+    },
+    "stepProgress": "ধাপ {current} এর {total}: {label}",
+    "back": "পেছনে",
+    "continue": "চালিয়ে যান",
+    "birthWhyTitle": "কেন আমরা সঠিক জন্ম বিবরণ চাই",
+    "birthWhyBody": "আপনার জন্ম তারিখ, সময় এবং স্থান আমাদের সঠিক গ্রহের অবস্থান ও ভাব গণনা করতে সাহায্য করে। কয়েক মিনিটের পার্থক্যও ফলাফল পরিবর্তন করতে পারে, তাই নিশ্চিত না হলে জন্ম সনদ বা নির্ভরযোগ্য পারিবারিক রেকর্ড ব্যবহার করুন।",
+    "agreementNotice": "চালিয়ে গেলে, আপনি আমাদের <terms>শর্তাবলী</terms> এবং <privacy>গোপনীয়তা নীতি</privacy>-তে সম্মত হচ্ছেন।",
+    "stepValidationError": "চালিয়ে যাওয়ার আগে অনুগ্রহ করে সব প্রয়োজনীয় ঘর পূরণ করুন।"
   },
   "ForgotPassword": {
     "eyebrow": "অ্যাকাউন্ট পুনরুদ্ধার",
@@ -78,7 +94,8 @@
     "submit": "পাসওয়ার্ড রিসেট করুন",
     "submitting": "রিসেট করা হচ্ছে",
     "success": "পাসওয়ার্ড আপডেট হয়েছে। সাইন ইনে পুনঃনির্দেশিত হচ্ছে…",
-    "invalidLink": "এই রিসেট লিঙ্কটি অবৈধ বা মেয়াদোত্তীর্ণ। সাইন-ইন পৃষ্ঠা থেকে একটি নতুন লিঙ্কের জন্য অনুরোধ করুন।"
+    "invalidLink": "এই রিসেট লিঙ্কটি অবৈধ বা মেয়াদোত্তীর্ণ। সাইন-ইন পৃষ্ঠা থেকে একটি নতুন লিঙ্কের জন্য অনুরোধ করুন।",
+    "requestNewLink": "নতুন রিসেট লিঙ্ক অনুরোধ করুন"
   },
   "UserLayout": {
     "mySession": "আমার সেশন",
@@ -252,6 +269,7 @@
     "confirmPassword": "Confirm new password",
     "submit": "Change password",
     "submitting": "Changing password",
-    "success": "Password changed. Please sign in again."
+    "success": "Password changed. Please sign in again.",
+    "manageCta": "পাসওয়ার্ড পরিচালনা করুন"
   }
 }

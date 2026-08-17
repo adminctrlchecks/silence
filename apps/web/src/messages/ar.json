@@ -44,7 +44,7 @@
     "contact": "البريد أو الهاتف",
     "password": "كلمة المرور",
     "forgotPassword": "هل نسيت كلمة المرور؟",
-    "consent": "أوافق على حفظ ملفي وتفاصيل ميلادي وإجاباتي وخريطتي والعلاج المقترح.",
+    "consent": "أوافق على <terms>الشروط</terms> و<privacy>سياسة الخصوصية</privacy>، وأوافق على حفظ ملفي وتفاصيل ميلادي وإجاباتي وخريطتي والعلاج المقترح.",
     "createSubmit": "إنشاء ملف",
     "signInSubmit": "تسجيل الدخول",
     "alreadyHaveProfile": "هل لديك ملف بالفعل؟",
@@ -56,7 +56,23 @@
     "birthPlacePlaceholder": "ابحث عن مدينة…",
     "continueWithGoogle": "المتابعة باستخدام Google",
     "orContinueWithEmail": "أو المتابعة بالبريد الإلكتروني",
-    "googleSignInError": "فشل تسجيل الدخول عبر Google. حاول مرة أخرى."
+    "googleSignInError": "فشل تسجيل الدخول عبر Google. حاول مرة أخرى.",
+    "eyebrowLogin": "تسجيل الدخول",
+    "eyebrowRegister": "ملف جديد",
+    "descriptionLogin": "أدخل بيانات التواصل وكلمة المرور لمتابعة قراءتك.",
+    "descriptionRegister": "أنشئ ملفك الشخصي في ثلاث خطوات سريعة لإصدار خريطتك والعلاج المقترح.",
+    "steps": {
+      "identity": "الهوية",
+      "birth": "تفاصيل الميلاد",
+      "account": "الحساب"
+    },
+    "stepProgress": "الخطوة {current} من {total}: {label}",
+    "back": "رجوع",
+    "continue": "متابعة",
+    "birthWhyTitle": "لماذا نطلب تفاصيل ميلاد دقيقة",
+    "birthWhyBody": "يتيح لنا تاريخ ووقت ومكان ميلادك حساب مواقع الكواكب والبيوت الفلكية بدقة لخريطتك. حتى فرق دقائق قليلة قد يغيّر النتيجة، لذا استخدم شهادة الميلاد أو سجلاً عائليًا موثوقًا إذا لم تكن متأكدًا.",
+    "agreementNotice": "بالمتابعة، أنت توافق على <terms>الشروط</terms> و<privacy>سياسة الخصوصية</privacy>.",
+    "stepValidationError": "يرجى تعبئة جميع الحقول المطلوبة قبل المتابعة."
   },
   "ForgotPassword": {
     "eyebrow": "استعادة الحساب",
@@ -78,7 +94,8 @@
     "submit": "إعادة تعيين كلمة المرور",
     "submitting": "جارٍ إعادة التعيين",
     "success": "تم تحديث كلمة المرور. جارٍ التحويل لتسجيل الدخول…",
-    "invalidLink": "رابط إعادة التعيين هذا غير صالح أو منتهي الصلاحية. اطلب رابطًا جديدًا من صفحة تسجيل الدخول."
+    "invalidLink": "رابط إعادة التعيين هذا غير صالح أو منتهي الصلاحية. اطلب رابطًا جديدًا من صفحة تسجيل الدخول.",
+    "requestNewLink": "طلب رابط إعادة تعيين جديد"
   },
   "UserLayout": {
     "mySession": "جلستي",
@@ -252,6 +269,7 @@
     "confirmPassword": "Confirm new password",
     "submit": "Change password",
     "submitting": "Changing password",
-    "success": "Password changed. Please sign in again."
+    "success": "Password changed. Please sign in again.",
+    "manageCta": "إدارة كلمة المرور"
   }
 }

@@ -44,7 +44,7 @@
     "contact": "E-mail ou téléphone",
     "password": "Mot de passe",
     "forgotPassword": "Mot de passe oublié ?",
-    "consent": "J'accepte d'enregistrer mon profil, mes détails de naissance, mes réponses, ma carte et mon remède.",
+    "consent": "J'accepte les <terms>Conditions</terms> et la <privacy>Politique de confidentialité</privacy>, et je consens à l'enregistrement de mon profil, mes détails de naissance, mes réponses, ma carte et mon remède.",
     "createSubmit": "Créer un profil",
     "signInSubmit": "Se connecter",
     "alreadyHaveProfile": "Vous avez déjà un profil ?",
@@ -56,7 +56,23 @@
     "birthPlacePlaceholder": "Chercher une ville…",
     "continueWithGoogle": "Continuer avec Google",
     "orContinueWithEmail": "ou continuer avec l'e-mail",
-    "googleSignInError": "Échec de la connexion avec Google. Veuillez réessayer."
+    "googleSignInError": "Échec de la connexion avec Google. Veuillez réessayer.",
+    "eyebrowLogin": "Connexion",
+    "eyebrowRegister": "Nouveau profil",
+    "descriptionLogin": "Saisissez votre contact et votre mot de passe pour continuer votre lecture.",
+    "descriptionRegister": "Configurez votre profil en trois étapes rapides pour générer votre carte et votre remède.",
+    "steps": {
+      "identity": "Identité",
+      "birth": "Détails de naissance",
+      "account": "Compte"
+    },
+    "stepProgress": "Étape {current} sur {total} : {label}",
+    "back": "Retour",
+    "continue": "Continuer",
+    "birthWhyTitle": "Pourquoi nous demandons des détails de naissance précis",
+    "birthWhyBody": "Votre date, heure et lieu de naissance nous permettent de calculer avec précision les positions planétaires et les maisons de votre carte. Même quelques minutes peuvent changer le résultat ; utilisez un certificat de naissance ou un registre familial fiable en cas de doute.",
+    "agreementNotice": "En continuant, vous acceptez nos <terms>Conditions</terms> et notre <privacy>Politique de confidentialité</privacy>.",
+    "stepValidationError": "Veuillez remplir tous les champs requis avant de continuer."
   },
   "ForgotPassword": {
     "eyebrow": "Récupération de compte",
@@ -78,7 +94,8 @@
     "submit": "Réinitialiser le mot de passe",
     "submitting": "Réinitialisation",
     "success": "Mot de passe mis à jour. Redirection vers la connexion…",
-    "invalidLink": "Ce lien de réinitialisation est invalide ou a expiré. Demandez-en un nouveau depuis la page de connexion."
+    "invalidLink": "Ce lien de réinitialisation est invalide ou a expiré. Demandez-en un nouveau depuis la page de connexion.",
+    "requestNewLink": "Demander un nouveau lien de réinitialisation"
   },
   "UserLayout": {
     "mySession": "Ma session",
@@ -252,6 +269,7 @@
     "confirmPassword": "Confirm new password",
     "submit": "Change password",
     "submitting": "Changing password",
-    "success": "Password changed. Please sign in again."
+    "success": "Password changed. Please sign in again.",
+    "manageCta": "Gérer le mot de passe"
   }
 }

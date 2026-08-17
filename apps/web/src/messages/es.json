@@ -44,7 +44,7 @@
     "contact": "Correo o teléfono",
     "password": "Contraseña",
     "forgotPassword": "¿Olvidaste tu contraseña?",
-    "consent": "Acepto guardar mi perfil, datos de nacimiento, respuestas, carta y remedio.",
+    "consent": "Acepto los <terms>Términos</terms> y la <privacy>Política de Privacidad</privacy>, y consiento en guardar mi perfil, datos de nacimiento, respuestas, carta y remedio.",
     "createSubmit": "Crear perfil",
     "signInSubmit": "Iniciar sesión",
     "alreadyHaveProfile": "¿Ya tienes un perfil?",
@@ -56,7 +56,23 @@
     "birthPlacePlaceholder": "Buscar una ciudad…",
     "continueWithGoogle": "Continuar con Google",
     "orContinueWithEmail": "o continuar con correo electrónico",
-    "googleSignInError": "Error al iniciar sesión con Google. Inténtalo de nuevo."
+    "googleSignInError": "Error al iniciar sesión con Google. Inténtalo de nuevo.",
+    "eyebrowLogin": "Iniciar sesión",
+    "eyebrowRegister": "Nuevo perfil",
+    "descriptionLogin": "Introduce tu contacto y contraseña para continuar tu lectura.",
+    "descriptionRegister": "Configura tu perfil en tres pasos rápidos para generar tu carta y remedio.",
+    "steps": {
+      "identity": "Identidad",
+      "birth": "Datos de nacimiento",
+      "account": "Cuenta"
+    },
+    "stepProgress": "Paso {current} de {total}: {label}",
+    "back": "Atrás",
+    "continue": "Continuar",
+    "birthWhyTitle": "Por qué pedimos datos de nacimiento exactos",
+    "birthWhyBody": "Tu fecha, hora y lugar de nacimiento nos permiten calcular con precisión las posiciones planetarias y las casas de tu carta. Incluso unos minutos pueden cambiar el resultado, así que usa tu certificado de nacimiento o un registro familiar confiable si no estás seguro.",
+    "agreementNotice": "Al continuar, aceptas nuestros <terms>Términos</terms> y nuestra <privacy>Política de Privacidad</privacy>.",
+    "stepValidationError": "Completa todos los campos requeridos antes de continuar."
   },
   "ForgotPassword": {
     "eyebrow": "Recuperación de cuenta",
@@ -78,7 +94,8 @@
     "submit": "Restablecer contraseña",
     "submitting": "Restableciendo",
     "success": "Contraseña actualizada. Redirigiendo al inicio de sesión…",
-    "invalidLink": "Este enlace de restablecimiento no es válido o ha caducado. Solicita uno nuevo desde la página de inicio de sesión."
+    "invalidLink": "Este enlace de restablecimiento no es válido o ha caducado. Solicita uno nuevo desde la página de inicio de sesión.",
+    "requestNewLink": "Solicitar un nuevo enlace de restablecimiento"
   },
   "UserLayout": {
     "mySession": "Mi sesión",
@@ -252,6 +269,7 @@
     "confirmPassword": "Confirm new password",
     "submit": "Change password",
     "submitting": "Changing password",
-    "success": "Password changed. Please sign in again."
+    "success": "Password changed. Please sign in again.",
+    "manageCta": "Gestionar contraseña"
   }
 }

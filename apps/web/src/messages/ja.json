@@ -44,7 +44,7 @@
     "contact": "メールまたは電話",
     "password": "パスワード",
     "forgotPassword": "パスワードをお忘れですか?",
-    "consent": "プロフィール、出生情報、回答、チャート、レメディの保存に同意します。",
+    "consent": "<terms>利用規約</terms>および<privacy>プライバシーポリシー</privacy>に同意し、プロフィール、出生情報、回答、チャート、レメディの保存に同意します。",
     "createSubmit": "プロフィール作成",
     "signInSubmit": "サインイン",
     "alreadyHaveProfile": "すでにプロフィールがありますか？",
@@ -56,7 +56,23 @@
     "birthPlacePlaceholder": "都市を検索…",
     "continueWithGoogle": "Google で続ける",
     "orContinueWithEmail": "またはメールで続ける",
-    "googleSignInError": "Google サインインに失敗しました。もう一度お試しください。"
+    "googleSignInError": "Google サインインに失敗しました。もう一度お試しください。",
+    "eyebrowLogin": "サインイン",
+    "eyebrowRegister": "新規プロフィール",
+    "descriptionLogin": "連絡先とパスワードを入力して、リーディングを続けましょう。",
+    "descriptionRegister": "チャートとレメディを作成するために、3つの簡単なステップでプロフィールを設定します。",
+    "steps": {
+      "identity": "基本情報",
+      "birth": "出生情報",
+      "account": "アカウント"
+    },
+    "stepProgress": "ステップ {current} / {total}：{label}",
+    "back": "戻る",
+    "continue": "次へ",
+    "birthWhyTitle": "正確な出生情報をお伺いする理由",
+    "birthWhyBody": "生年月日、出生時刻、出生地により、惑星の位置とハウスを正確に計算できます。数分の違いでも結果が変わることがあるため、不確かな場合は出生証明書や信頼できる家族の記録をご利用ください。",
+    "agreementNotice": "続行することで、<terms>利用規約</terms>および<privacy>プライバシーポリシー</privacy>に同意したものとみなされます。",
+    "stepValidationError": "続行する前に、必須項目をすべて入力してください。"
   },
   "ForgotPassword": {
     "eyebrow": "アカウント復旧",
@@ -78,7 +94,8 @@
     "submit": "パスワードをリセット",
     "submitting": "リセット中",
     "success": "パスワードが更新されました。サインインへ移動しています…",
-    "invalidLink": "このリセットリンクは無効か期限切れです。サインインページから新しいリンクをリクエストしてください。"
+    "invalidLink": "このリセットリンクは無効か期限切れです。サインインページから新しいリンクをリクエストしてください。",
+    "requestNewLink": "新しいリセットリンクをリクエスト"
   },
   "UserLayout": {
     "mySession": "マイセッション",
@@ -252,6 +269,7 @@
     "confirmPassword": "Confirm new password",
     "submit": "Change password",
     "submitting": "Changing password",
-    "success": "Password changed. Please sign in again."
+    "success": "Password changed. Please sign in again.",
+    "manageCta": "パスワードを管理"
   }
 }

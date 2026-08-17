@@ -16,6 +16,7 @@ export default function AdminResetPasswordPage() {
       <ResetPasswordCard
         endpoint="/api/auth/admin/reset-password"
         redirectTo="/admin/login"
+        forgotPasswordHref="/admin/forgot-password"
         copy={{
           eyebrow: 'Admin account recovery',
           title: 'Choose a new password',
@@ -26,6 +27,7 @@ export default function AdminResetPasswordPage() {
           submitting: 'Resetting',
           success: 'Password updated. Redirecting to sign in…',
           invalidLink: 'This reset link is invalid or has expired. Request a new one from the sign-in page.',
+          requestNewLink: 'Request a new reset link',
         }}
       />
     </Suspense>

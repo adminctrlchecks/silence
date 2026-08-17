@@ -23,11 +23,17 @@ export default async function ResetPasswordPage() {
     submitting: t('submitting'),
     success: t('success'),
     invalidLink: t('invalidLink'),
+    requestNewLink: t('requestNewLink'),
   };
 
   return (
     <Suspense>
-      <ResetPasswordCard endpoint="/api/auth/reset-password" redirectTo="/login" copy={copy} />
+      <ResetPasswordCard
+        endpoint="/api/auth/reset-password"
+        redirectTo="/login"
+        forgotPasswordHref="/forgot-password"
+        copy={copy}
+      />
     </Suspense>
   );
 }

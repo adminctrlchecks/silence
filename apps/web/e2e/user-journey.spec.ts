@@ -104,17 +104,27 @@ test('full reading journey: register, start reading, answer partial, refresh/res
   await page.getByRole('button', { name: new RegExp(seed.category, 'i') }).click();
   await page.getByRole('button', { name: 'English', exact: true }).click();
 
-  // 2. Register — form fields are targeted by their stable id/name attributes.
+  // 2. Register — a progressive 3-step form (identity / birth details /
+  // account & consent); each step's fields are targeted by their stable
+  // id/name attributes, advancing with "Continue" between steps.
   await page.getByRole('link', { name: 'Create profile' }).click();
   await expect(page).toHaveURL(/\/register$/);
+
+  // Step 1: identity.
   await page.locator('#name').fill('E2E Asha');
   await page.locator('#category').selectOption(seed.category);
   await page.locator('#lang').selectOption('en');
+  await page.getByRole('button', { name: 'Continue' }).click();
+
+  // Step 2: birth details.
   await page.locator('#dob').fill('1998-04-21');
   await page.locator('#timeOfBirth').fill('07:35');
   await page.locator('#city').fill('Chennai');
   await page.locator('[role="listbox"]').waitFor({ state: 'visible' });
   await page.locator('[role="listbox"] li').first().click();
+  await page.getByRole('button', { name: 'Continue' }).click();
+
+  // Step 3: account & consent.
   await page.locator('#contact').fill(contact);
   await page.locator('#password').fill('password123');
   await page.locator('input[name="consent"]').check();

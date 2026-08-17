@@ -1,9 +1,9 @@
 import type { Metadata } from 'next';
+import { KeyRound } from 'lucide-react';
 import { getTranslations } from 'next-intl/server';
 import { cookies } from 'next/headers';
 import Link from 'next/link';
 import { redirect } from 'next/navigation';
-import { ChangePasswordCard } from '@/components/auth/change-password-card';
 import { ProfileDetailsCard } from '@/components/profile/profile-details-card';
 import { Button } from '@/components/ui/button';
 import { publicApi } from '@/lib/api';
@@ -75,21 +75,21 @@ export default async function ProfilePage() {
           },
         }}
       />
-      <ChangePasswordCard
-        endpoint="/api/auth/change-password"
-        redirectTo="/login"
-        copy={{
-          eyebrow: security('eyebrow'),
-          title: security('title'),
-          description: security('description'),
-          currentPassword: security('currentPassword'),
-          newPassword: security('newPassword'),
-          confirmPassword: security('confirmPassword'),
-          submit: security('submit'),
-          submitting: security('submitting'),
-          success: security('success'),
-        }}
-      />
+      <section className="rounded-md border border-border bg-card p-5 shadow-sm">
+        <div className="flex items-start gap-3">
+          <span className="rounded-md border border-primary/20 bg-primary/10 p-2 text-primary">
+            <KeyRound className="size-5" aria-hidden />
+          </span>
+          <div className="min-w-0 flex-1">
+            <p className="text-sm font-medium text-primary">{security('eyebrow')}</p>
+            <h2 className="mt-1 text-xl font-semibold tracking-normal">{security('title')}</h2>
+            <p className="mt-1 text-sm leading-6 text-muted-foreground">{security('description')}</p>
+          </div>
+          <Button asChild variant="outline" className="shrink-0">
+            <Link href="/profile/security">{security('manageCta')}</Link>
+          </Button>
+        </div>
+      </section>
     </main>
   );
 }

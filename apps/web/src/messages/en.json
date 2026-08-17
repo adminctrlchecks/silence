@@ -46,7 +46,7 @@
     "contact": "Email or phone",
     "password": "Password",
     "forgotPassword": "Forgot password?",
-    "consent": "I consent to saving my profile, birth details, answers, chart, and remedy.",
+    "consent": "I agree to the <terms>Terms</terms> and <privacy>Privacy Policy</privacy>, and consent to saving my profile, birth details, answers, chart, and remedy.",
     "createSubmit": "Create profile",
     "signInSubmit": "Sign in",
     "alreadyHaveProfile": "Already have a profile?",
@@ -56,7 +56,23 @@
     "loginError": "Sign in failed. Please check your contact and password.",
     "continueWithGoogle": "Continue with Google",
     "orContinueWithEmail": "or continue with email",
-    "googleSignInError": "Google sign-in failed. Please try again."
+    "googleSignInError": "Google sign-in failed. Please try again.",
+    "eyebrowLogin": "Sign in",
+    "eyebrowRegister": "New profile",
+    "descriptionLogin": "Enter your contact and password to continue your reading.",
+    "descriptionRegister": "Set up your profile in three quick steps to generate your chart and remedy.",
+    "steps": {
+      "identity": "Identity",
+      "birth": "Birth details",
+      "account": "Account"
+    },
+    "stepProgress": "Step {current} of {total}: {label}",
+    "back": "Back",
+    "continue": "Continue",
+    "birthWhyTitle": "Why we ask for exact birth details",
+    "birthWhyBody": "Your date, time, and place of birth let us calculate accurate planetary positions and house placements for your chart. Even a few minutes can change the result, so use a birth certificate or a trusted family record if you're unsure.",
+    "agreementNotice": "By continuing, you agree to our <terms>Terms</terms> and <privacy>Privacy Policy</privacy>.",
+    "stepValidationError": "Please fill in all required fields before continuing."
   },
   "ForgotPassword": {
     "eyebrow": "Account recovery",
@@ -78,7 +94,8 @@
     "submit": "Reset password",
     "submitting": "Resetting",
     "success": "Password updated. Redirecting to sign in…",
-    "invalidLink": "This reset link is invalid or has expired. Request a new one from the sign-in page."
+    "invalidLink": "This reset link is invalid or has expired. Request a new one from the sign-in page.",
+    "requestNewLink": "Request a new reset link"
   },
   "UserLayout": {
     "mySession": "My session",
@@ -252,6 +269,7 @@
     "confirmPassword": "Confirm new password",
     "submit": "Change password",
     "submitting": "Changing password",
-    "success": "Password changed. Please sign in again."
+    "success": "Password changed. Please sign in again.",
+    "manageCta": "Manage password"
   }
 }

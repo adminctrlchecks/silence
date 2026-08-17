@@ -1,6 +1,7 @@
 'use client';
 
 import { KeyRound, Loader2 } from 'lucide-react';
+import Link from 'next/link';
 import { useRouter, useSearchParams } from 'next/navigation';
 import type { FormEvent } from 'react';
 import { useState } from 'react';
@@ -17,15 +18,19 @@ type Copy = {
   submitting: string;
   success: string;
   invalidLink: string;
+  requestNewLink: string;
 };
 
 export function ResetPasswordCard({
   endpoint,
   redirectTo,
+  forgotPasswordHref,
   copy,
 }: {
   endpoint: string;
   redirectTo: string;
+  /** Where "request a new link" goes — differs for the user vs admin flow. */
+  forgotPasswordHref: string;
   copy: Copy;
 }) {
   const router = useRouter();
@@ -82,12 +87,17 @@ export function ResetPasswordCard({
         </div>
 
         {!token ? (
-          <p
-            role="alert"
-            className="mt-5 rounded-md border border-destructive/30 bg-destructive/10 px-3 py-2 text-sm text-destructive"
-          >
-            {copy.invalidLink}
-          </p>
+          <div className="mt-5 space-y-3">
+            <p
+              role="alert"
+              className="rounded-md border border-destructive/30 bg-destructive/10 px-3 py-2 text-sm text-destructive"
+            >
+              {copy.invalidLink}
+            </p>
+            <Button asChild className="w-full">
+              <Link href={forgotPasswordHref}>{copy.requestNewLink}</Link>
+            </Button>
+          </div>
         ) : (
           <form className="mt-5 space-y-4" onSubmit={submit}>
             <PasswordField
@@ -106,12 +116,17 @@ export function ResetPasswordCard({
             />
 
             {error ? (
-              <p
-                role="alert"
-                className="rounded-md border border-destructive/30 bg-destructive/10 px-3 py-2 text-sm text-destructive"
-              >
-                {error}
-              </p>
+              <div className="space-y-2">
+                <p
+                  role="alert"
+                  className="rounded-md border border-destructive/30 bg-destructive/10 px-3 py-2 text-sm text-destructive"
+                >
+                  {error}
+                </p>
+                <Link href={forgotPasswordHref} className="inline-block text-sm font-medium text-primary">
+                  {copy.requestNewLink}
+                </Link>
+              </div>
             ) : null}
             {message ? (
               <p

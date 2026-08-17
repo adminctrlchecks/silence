@@ -44,7 +44,7 @@
     "contact": "电子邮件或电话",
     "password": "密码",
     "forgotPassword": "忘记密码了吗?",
-    "consent": "我同意保存我的档案、出生信息、答案、星盘和补救建议。",
+    "consent": "我同意<terms>服务条款</terms>和<privacy>隐私政策</privacy>，并同意保存我的档案、出生信息、答案、星盘和补救建议。",
     "createSubmit": "创建档案",
     "signInSubmit": "登录",
     "alreadyHaveProfile": "已有档案？",
@@ -56,7 +56,23 @@
     "birthPlacePlaceholder": "搜索城市…",
     "continueWithGoogle": "使用 Google 继续",
     "orContinueWithEmail": "或使用邮箱继续",
-    "googleSignInError": "Google 登录失败，请重试。"
+    "googleSignInError": "Google 登录失败，请重试。",
+    "eyebrowLogin": "登录",
+    "eyebrowRegister": "新建档案",
+    "descriptionLogin": "输入联系方式和密码以继续您的解读。",
+    "descriptionRegister": "通过三个简单步骤设置您的档案，以生成星盘和补救建议。",
+    "steps": {
+      "identity": "基本信息",
+      "birth": "出生信息",
+      "account": "账户"
+    },
+    "stepProgress": "第 {current} 步，共 {total} 步：{label}",
+    "back": "返回",
+    "continue": "继续",
+    "birthWhyTitle": "为什么我们需要精确的出生信息",
+    "birthWhyBody": "您的出生日期、时间和地点使我们能够准确计算行星位置和宫位，以生成您的星盘。即使几分钟的误差也可能改变结果，如果不确定，请使用出生证明或可靠的家庭记录。",
+    "agreementNotice": "继续操作即表示您同意我们的<terms>服务条款</terms>和<privacy>隐私政策</privacy>。",
+    "stepValidationError": "请在继续之前填写所有必填字段。"
   },
   "ForgotPassword": {
     "eyebrow": "账户找回",
@@ -78,7 +94,8 @@
     "submit": "重置密码",
     "submitting": "重置中",
     "success": "密码已更新。正在跳转到登录…",
-    "invalidLink": "此重置链接无效或已过期。请在登录页面重新申请。"
+    "invalidLink": "此重置链接无效或已过期。请在登录页面重新申请。",
+    "requestNewLink": "申请新的重置链接"
   },
   "UserLayout": {
     "mySession": "我的会话",
@@ -250,6 +267,7 @@
     "confirmPassword": "Confirm new password",
     "submit": "Change password",
     "submitting": "Changing password",
-    "success": "Password changed. Please sign in again."
+    "success": "Password changed. Please sign in again.",
+    "manageCta": "管理密码"
   }
 }

@@ -44,7 +44,7 @@
     "contact": "Email или телефон",
     "password": "Пароль",
     "forgotPassword": "Забыли пароль?",
-    "consent": "Я согласен сохранить профиль, данные рождения, ответы, карту и рекомендации.",
+    "consent": "Я соглашаюсь с <terms>Условиями</terms> и <privacy>Политикой конфиденциальности</privacy>, а также даю согласие на сохранение профиля, данных рождения, ответов, карты и рекомендаций.",
     "createSubmit": "Создать профиль",
     "signInSubmit": "Войти",
     "alreadyHaveProfile": "Уже есть профиль?",
@@ -56,7 +56,23 @@
     "birthPlacePlaceholder": "Искать город…",
     "continueWithGoogle": "Продолжить с Google",
     "orContinueWithEmail": "или продолжить с email",
-    "googleSignInError": "Не удалось войти через Google. Попробуйте снова."
+    "googleSignInError": "Не удалось войти через Google. Попробуйте снова.",
+    "eyebrowLogin": "Вход",
+    "eyebrowRegister": "Новый профиль",
+    "descriptionLogin": "Введите контакт и пароль, чтобы продолжить чтение.",
+    "descriptionRegister": "Настройте профиль за три коротких шага, чтобы получить карту и рекомендации.",
+    "steps": {
+      "identity": "Личные данные",
+      "birth": "Данные рождения",
+      "account": "Аккаунт"
+    },
+    "stepProgress": "Шаг {current} из {total}: {label}",
+    "back": "Назад",
+    "continue": "Продолжить",
+    "birthWhyTitle": "Зачем нам точные данные о рождении",
+    "birthWhyBody": "Дата, время и место рождения позволяют точно рассчитать положение планет и домов для вашей карты. Даже несколько минут разницы могут изменить результат, поэтому используйте свидетельство о рождении или надёжную семейную запись, если не уверены.",
+    "agreementNotice": "Продолжая, вы соглашаетесь с нашими <terms>Условиями</terms> и <privacy>Политикой конфиденциальности</privacy>.",
+    "stepValidationError": "Пожалуйста, заполните все обязательные поля, прежде чем продолжить."
   },
   "ForgotPassword": {
     "eyebrow": "Восстановление аккаунта",
@@ -78,7 +94,8 @@
     "submit": "Сбросить пароль",
     "submitting": "Сброс",
     "success": "Пароль обновлён. Перенаправление на вход…",
-    "invalidLink": "Эта ссылка для сброса недействительна или истекла. Запросите новую на странице входа."
+    "invalidLink": "Эта ссылка для сброса недействительна или истекла. Запросите новую на странице входа.",
+    "requestNewLink": "Запросить новую ссылку для сброса"
   },
   "UserLayout": {
     "mySession": "Моя сессия",
@@ -252,6 +269,7 @@
     "confirmPassword": "Confirm new password",
     "submit": "Change password",
     "submitting": "Changing password",
-    "success": "Password changed. Please sign in again."
+    "success": "Password changed. Please sign in again.",
+    "manageCta": "Управление паролем"
   }
 }

@@ -44,7 +44,7 @@
     "contact": "E-mail ou telefone",
     "password": "Senha",
     "forgotPassword": "Esqueceu sua senha?",
-    "consent": "Concordo em salvar meu perfil, dados de nascimento, respostas, mapa e remédio.",
+    "consent": "Concordo com os <terms>Termos</terms> e a <privacy>Política de Privacidade</privacy>, e consinto em salvar meu perfil, dados de nascimento, respostas, mapa e remédio.",
     "createSubmit": "Criar perfil",
     "signInSubmit": "Entrar",
     "alreadyHaveProfile": "Já tem um perfil?",
@@ -56,7 +56,23 @@
     "birthPlacePlaceholder": "Procurar uma cidade…",
     "continueWithGoogle": "Continuar com o Google",
     "orContinueWithEmail": "ou continuar com e-mail",
-    "googleSignInError": "Falha ao entrar com o Google. Tente novamente."
+    "googleSignInError": "Falha ao entrar com o Google. Tente novamente.",
+    "eyebrowLogin": "Entrar",
+    "eyebrowRegister": "Novo perfil",
+    "descriptionLogin": "Informe seu contato e senha para continuar sua leitura.",
+    "descriptionRegister": "Configure seu perfil em três etapas rápidas para gerar seu mapa e remédio.",
+    "steps": {
+      "identity": "Identidade",
+      "birth": "Dados de nascimento",
+      "account": "Conta"
+    },
+    "stepProgress": "Etapa {current} de {total}: {label}",
+    "back": "Voltar",
+    "continue": "Continuar",
+    "birthWhyTitle": "Por que pedimos dados exatos de nascimento",
+    "birthWhyBody": "Sua data, hora e local de nascimento nos permitem calcular com precisão as posições planetárias e as casas do seu mapa. Até alguns minutos podem mudar o resultado, então use a certidão de nascimento ou um registro familiar confiável se não tiver certeza.",
+    "agreementNotice": "Ao continuar, você concorda com nossos <terms>Termos</terms> e nossa <privacy>Política de Privacidade</privacy>.",
+    "stepValidationError": "Preencha todos os campos obrigatórios antes de continuar."
   },
   "ForgotPassword": {
     "eyebrow": "Recuperação de conta",
@@ -78,7 +94,8 @@
     "submit": "Redefinir senha",
     "submitting": "Redefinindo",
     "success": "Senha atualizada. Redirecionando para o login…",
-    "invalidLink": "Este link de redefinição é inválido ou expirou. Solicite um novo na página de login."
+    "invalidLink": "Este link de redefinição é inválido ou expirou. Solicite um novo na página de login.",
+    "requestNewLink": "Solicitar um novo link de redefinição"
   },
   "UserLayout": {
     "mySession": "Minha sessão",
@@ -252,6 +269,7 @@
     "confirmPassword": "Confirm new password",
     "submit": "Change password",
     "submitting": "Changing password",
-    "success": "Password changed. Please sign in again."
+    "success": "Password changed. Please sign in again.",
+    "manageCta": "Gerenciar senha"
   }
 }
