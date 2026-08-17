@@ -53,7 +53,10 @@
     "registerError": "Регистрация не удалась. Проверьте данные и попробуйте снова.",
     "loginError": "Войти не удалось. Проверьте контакт и пароль.",
     "birthPlace": "Место рождения",
-    "birthPlacePlaceholder": "Искать город…"
+    "birthPlacePlaceholder": "Искать город…",
+    "continueWithGoogle": "Продолжить с Google",
+    "orContinueWithEmail": "или продолжить с email",
+    "googleSignInError": "Не удалось войти через Google. Попробуйте снова."
   },
   "ForgotPassword": {
     "eyebrow": "Восстановление аккаунта",
@@ -184,7 +187,10 @@
     "country": "Birth country",
     "adminPortal": "Admin portal",
     "birthPlace": "Место рождения",
-    "birthPlacePlaceholder": "Искать город…"
+    "birthPlacePlaceholder": "Искать город…",
+    "completeProfileTitle": "Завершите настройку профиля",
+    "completeProfileDescription": "Добавьте данные о рождении и согласие, чтобы мы могли создать вашу персональную астрологическую консультацию.",
+    "consentEditLabel": "Я принимаю Условия использования и Политику конфиденциальности и даю согласие на хранение Silence моих данных о рождении для создания моего прогноза."
   },
   "History": {
     "eyebrow": "Ваши чтения",

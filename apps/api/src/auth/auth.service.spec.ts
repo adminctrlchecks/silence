@@ -24,7 +24,9 @@ function makeFakePrisma() {
     },
     user: {
       findUnique: async ({ where }: any) =>
-        users.find((u) => (where.contact ? u.contact === where.contact : u.id === where.id)) ?? null,
+        users.find((u) =>
+          where.contact ? u.contact === where.contact : where.googleId ? u.googleId === where.googleId : u.id === where.id,
+        ) ?? null,
       create: async ({ data }: any) => {
         const u = { id: `u_${++seq}`, ...data };
         users.push(u);
@@ -71,6 +73,19 @@ function makeFakeAudit() {
   return { record: jest.fn().mockResolvedValue(undefined) };
 }
 
+/** Fake GoogleAuthService — verifyIdToken defaults to a stable "verified" profile. */
+function makeFakeGoogleAuth(profile?: Partial<{ sub: string; email: string; emailVerified: boolean; name: string }>) {
+  return {
+    verifyIdToken: jest.fn().mockResolvedValue({
+      sub: 'google-sub-1',
+      email: 'asha@example.com',
+      emailVerified: true,
+      name: 'Asha',
+      ...profile,
+    }),
+  };
+}
+
 const REGISTER = {
   name: 'Asha',
   category: 'female' as const,
@@ -98,7 +113,8 @@ describe('AuthService', () => {
       name: 'Admin',
       passwordHash: await bcrypt.hash('admin-secret', 10),
     });
-    const auth = new AuthService(prisma as never, jwt, email as never, audit as never);
+    const googleAuth = makeFakeGoogleAuth();
+    const auth = new AuthService(prisma as never, jwt, email as never, audit as never, googleAuth as never);
 
     const res = await auth.adminLogin({ email: 'admin@example.com', password: 'admin-secret' });
 
@@ -119,7 +135,8 @@ describe('AuthService', () => {
       name: 'Admin',
       passwordHash: await bcrypt.hash('admin-secret', 10),
     });
-    const auth = new AuthService(prisma as never, jwt, email as never, audit as never);
+    const googleAuth = makeFakeGoogleAuth();
+    const auth = new AuthService(prisma as never, jwt, email as never, audit as never, googleAuth as never);
 
     await expect(
       auth.adminLogin({ email: 'admin@example.com', password: 'wrong-password' }),
@@ -130,7 +147,8 @@ describe('AuthService', () => {
     const prisma = makeFakePrisma();
     const email = makeFakeEmail();
     const audit = makeFakeAudit();
-    const auth = new AuthService(prisma as never, jwt, email as never, audit as never);
+    const googleAuth = makeFakeGoogleAuth();
+    const auth = new AuthService(prisma as never, jwt, email as never, audit as never, googleAuth as never);
     const res = await auth.userRegister(REGISTER);
     expect(res.token).toBeTruthy();
     expect(res.refreshToken).toBeTruthy();
@@ -144,7 +162,8 @@ describe('AuthService', () => {
     const prisma = makeFakePrisma();
     const email = makeFakeEmail();
     const audit = makeFakeAudit();
-    const auth = new AuthService(prisma as never, jwt, email as never, audit as never);
+    const googleAuth = makeFakeGoogleAuth();
+    const auth = new AuthService(prisma as never, jwt, email as never, audit as never, googleAuth as never);
     await auth.userRegister(REGISTER);
     await expect(
       auth.userLogin({ contact: REGISTER.contact, password: 'wrong-password' }),
@@ -155,7 +174,8 @@ describe('AuthService', () => {
     const prisma = makeFakePrisma();
     const email = makeFakeEmail();
     const audit = makeFakeAudit();
-    const auth = new AuthService(prisma as never, jwt, email as never, audit as never);
+    const googleAuth = makeFakeGoogleAuth();
+    const auth = new AuthService(prisma as never, jwt, email as never, audit as never, googleAuth as never);
     await auth.userRegister(REGISTER);
     const res = await auth.userLogin({ contact: REGISTER.contact, password: REGISTER.password });
     expect(res.token).toBeTruthy();
@@ -169,7 +189,8 @@ describe('AuthService', () => {
     const prisma = makeFakePrisma();
     const email = makeFakeEmail();
     const audit = makeFakeAudit();
-    const auth = new AuthService(prisma as never, jwt, email as never, audit as never);
+    const googleAuth = makeFakeGoogleAuth();
+    const auth = new AuthService(prisma as never, jwt, email as never, audit as never, googleAuth as never);
     await auth.userRegister(REGISTER);
     await expect(auth.userRegister(REGISTER)).rejects.toBeInstanceOf(ConflictException);
   });
@@ -178,7 +199,8 @@ describe('AuthService', () => {
     const prisma = makeFakePrisma();
     const email = makeFakeEmail();
     const audit = makeFakeAudit();
-    const auth = new AuthService(prisma as never, jwt, email as never, audit as never);
+    const googleAuth = makeFakeGoogleAuth();
+    const auth = new AuthService(prisma as never, jwt, email as never, audit as never, googleAuth as never);
     const { refreshToken } = await auth.userRegister(REGISTER);
     const refreshed = await auth.refresh('user', refreshToken);
     expect(refreshed.token).toBeTruthy();
@@ -190,16 +212,81 @@ describe('AuthService', () => {
     const prisma = makeFakePrisma();
     const email = makeFakeEmail();
     const audit = makeFakeAudit();
-    const auth = new AuthService(prisma as never, jwt, email as never, audit as never);
+    const googleAuth = makeFakeGoogleAuth();
+    const auth = new AuthService(prisma as never, jwt, email as never, audit as never, googleAuth as never);
     const { token } = await auth.userRegister(REGISTER);
     await expect(auth.refresh('user', token)).rejects.toBeInstanceOf(UnauthorizedException);
+  });
+
+  it('creates a new user on first Google sign-in, with a blank/incomplete profile', async () => {
+    const prisma = makeFakePrisma();
+    const email = makeFakeEmail();
+    const audit = makeFakeAudit();
+    const googleAuth = makeFakeGoogleAuth();
+    const auth = new AuthService(prisma as never, jwt, email as never, audit as never, googleAuth as never);
+
+    const res = await auth.userGoogleAuth('fake-id-token', 'hi');
+
+    expect(googleAuth.verifyIdToken).toHaveBeenCalledWith('fake-id-token');
+    expect(res.token).toBeTruthy();
+    expect(res.profileComplete).toBe(false);
+    const stored = prisma._users[0];
+    expect(stored.contact).toBe('asha@example.com');
+    expect(stored.googleId).toBe('google-sub-1');
+    expect(stored.passwordHash).toBeNull();
+    expect(stored.consent).toBe(false);
+    expect(stored.dob).toBe('');
+    expect(stored.lang).toBe('hi');
+  });
+
+  it('reuses the same user on a second Google sign-in for the same account', async () => {
+    const prisma = makeFakePrisma();
+    const email = makeFakeEmail();
+    const audit = makeFakeAudit();
+    const googleAuth = makeFakeGoogleAuth();
+    const auth = new AuthService(prisma as never, jwt, email as never, audit as never, googleAuth as never);
+
+    const first = await auth.userGoogleAuth('token-1');
+    const second = await auth.userGoogleAuth('token-2');
+
+    expect(second.user.id).toBe(first.user.id);
+    expect(prisma._users).toHaveLength(1);
+  });
+
+  it('links Google sign-in to an existing password account with the same email', async () => {
+    const prisma = makeFakePrisma();
+    const email = makeFakeEmail();
+    const audit = makeFakeAudit();
+    const googleAuth = makeFakeGoogleAuth();
+    const auth = new AuthService(prisma as never, jwt, email as never, audit as never, googleAuth as never);
+
+    const registered = await auth.userRegister(REGISTER);
+    const res = await auth.userGoogleAuth('fake-id-token');
+
+    expect(res.user.id).toBe(registered.user.id);
+    expect(prisma._users).toHaveLength(1);
+    expect(prisma._users[0].googleId).toBe('google-sub-1');
+    // A complete, registered profile stays complete after linking Google.
+    expect(res.profileComplete).toBe(true);
+  });
+
+  it('rejects a Google account with an unverified email', async () => {
+    const prisma = makeFakePrisma();
+    const email = makeFakeEmail();
+    const audit = makeFakeAudit();
+    const googleAuth = makeFakeGoogleAuth({ emailVerified: false });
+    const auth = new AuthService(prisma as never, jwt, email as never, audit as never, googleAuth as never);
+
+    await expect(auth.userGoogleAuth('fake-id-token')).rejects.toBeInstanceOf(UnauthorizedException);
+    expect(prisma._users).toHaveLength(0);
   });
 
   it('changes a user password after verifying the current password', async () => {
     const prisma = makeFakePrisma();
     const email = makeFakeEmail();
     const audit = makeFakeAudit();
-    const auth = new AuthService(prisma as never, jwt, email as never, audit as never);
+    const googleAuth = makeFakeGoogleAuth();
+    const auth = new AuthService(prisma as never, jwt, email as never, audit as never, googleAuth as never);
     const registered = await auth.userRegister(REGISTER);
     const payload: any = jwt.verify(registered.token, { secret: process.env.JWT_USER_SECRET });
 
@@ -236,7 +323,8 @@ describe('AuthService', () => {
       name: 'Admin',
       passwordHash: await bcrypt.hash('admin-secret', 10),
     });
-    const auth = new AuthService(prisma as never, jwt, email as never, audit as never);
+    const googleAuth = makeFakeGoogleAuth();
+    const auth = new AuthService(prisma as never, jwt, email as never, audit as never, googleAuth as never);
 
     await expect(
       auth.changeAdminPassword('admin_1', {
@@ -271,7 +359,8 @@ describe('AuthService', () => {
       name: 'Admin',
       passwordHash: await bcrypt.hash('admin-secret', 10),
     });
-    const auth = new AuthService(prisma as never, jwt, email as never, audit as never);
+    const googleAuth = makeFakeGoogleAuth();
+    const auth = new AuthService(prisma as never, jwt, email as never, audit as never, googleAuth as never);
 
     const firstLogin = await auth.userLogin({ contact: 'admin@example.com', password: 'admin-secret' });
     expect(firstLogin.user).toMatchObject({ name: 'Admin', category: 'other' });
@@ -297,7 +386,8 @@ describe('AuthService', () => {
       name: 'Admin',
       passwordHash: await bcrypt.hash('admin-secret', 10),
     });
-    const auth = new AuthService(prisma as never, jwt, email as never, audit as never);
+    const googleAuth = makeFakeGoogleAuth();
+    const auth = new AuthService(prisma as never, jwt, email as never, audit as never, googleAuth as never);
 
     await auth.adminLogin({ email: 'admin@example.com', password: 'admin-secret' });
     expect(audit.record).toHaveBeenCalledWith(
@@ -318,7 +408,8 @@ describe('AuthService', () => {
       const prisma = makeFakePrisma();
       const email = makeFakeEmail();
       const audit = makeFakeAudit();
-      const auth = new AuthService(prisma as never, jwt, email as never, audit as never);
+      const googleAuth = makeFakeGoogleAuth();
+      const auth = new AuthService(prisma as never, jwt, email as never, audit as never, googleAuth as never);
       await auth.userRegister(REGISTER);
 
       await expect(auth.userForgotPassword(REGISTER.contact)).resolves.toEqual({ sent: true });
@@ -336,7 +427,8 @@ describe('AuthService', () => {
       const prisma = makeFakePrisma();
       const email = makeFakeEmail();
       const audit = makeFakeAudit();
-      const auth = new AuthService(prisma as never, jwt, email as never, audit as never);
+      const googleAuth = makeFakeGoogleAuth();
+      const auth = new AuthService(prisma as never, jwt, email as never, audit as never, googleAuth as never);
       await auth.userRegister(REGISTER);
 
       await auth.userForgotPassword(REGISTER.contact);
@@ -365,7 +457,8 @@ describe('AuthService', () => {
       const prisma = makeFakePrisma();
       const email = makeFakeEmail();
       const audit = makeFakeAudit();
-      const auth = new AuthService(prisma as never, jwt, email as never, audit as never);
+      const googleAuth = makeFakeGoogleAuth();
+      const auth = new AuthService(prisma as never, jwt, email as never, audit as never, googleAuth as never);
 
       await expect(
         auth.userResetPassword({ token: 'not-a-real-token', newPassword: 'whatever1', confirmPassword: 'whatever1' }),
@@ -376,7 +469,8 @@ describe('AuthService', () => {
       const prisma = makeFakePrisma();
       const email = makeFakeEmail();
       const audit = makeFakeAudit();
-      const auth = new AuthService(prisma as never, jwt, email as never, audit as never);
+      const googleAuth = makeFakeGoogleAuth();
+      const auth = new AuthService(prisma as never, jwt, email as never, audit as never, googleAuth as never);
       prisma._admins.push({
         id: 'admin_1',
         email: 'admin@example.com',
@@ -397,7 +491,8 @@ describe('AuthService', () => {
       const prisma = makeFakePrisma();
       const email = makeFakeEmail();
       const audit = makeFakeAudit();
-      const auth = new AuthService(prisma as never, jwt, email as never, audit as never);
+      const googleAuth = makeFakeGoogleAuth();
+      const auth = new AuthService(prisma as never, jwt, email as never, audit as never, googleAuth as never);
       prisma._admins.push({
         id: 'admin_1',
         email: 'admin@example.com',

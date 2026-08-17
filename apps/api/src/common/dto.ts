@@ -9,6 +9,7 @@ import {
   adminLoginSchema,
   userRegisterSchema,
   userLoginSchema,
+  googleAuthSchema,
   refreshTokenSchema,
   changePasswordSchema,
   userForgotPasswordSchema,
@@ -30,6 +31,7 @@ import {
 export class AdminLoginDto extends createZodDto(adminLoginSchema) {}
 export class UserRegisterDto extends createZodDto(userRegisterSchema) {}
 export class UserLoginDto extends createZodDto(userLoginSchema) {}
+export class GoogleAuthDto extends createZodDto(googleAuthSchema) {}
 export class RefreshTokenDto extends createZodDto(refreshTokenSchema) {}
 export class ChangePasswordDto extends createZodDto(changePasswordSchema) {}
 export class UserForgotPasswordDto extends createZodDto(userForgotPasswordSchema) {}

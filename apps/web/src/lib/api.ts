@@ -150,6 +150,13 @@ export const authApi = {
       '/auth/user/login',
       { method: 'POST', body },
     ),
+  userGoogleAuth: (body: { idToken: string; lang?: string }) =>
+    request<{
+      token: string;
+      refreshToken: string;
+      user: { id: string; name: string; category: Category };
+      profileComplete: boolean;
+    }>('/auth/user/google', { method: 'POST', body }),
   userChangePassword: (token: string, body: unknown) =>
     request<{ changed: boolean }>('/auth/user/change-password', { method: 'POST', token, body }),
   userForgotPassword: (body: { contact: string }) =>

@@ -53,7 +53,10 @@
     "registerError": "فشل التسجيل. تحقق من التفاصيل وحاول مرة أخرى.",
     "loginError": "فشل تسجيل الدخول. تحقق من وسيلة التواصل وكلمة المرور.",
     "birthPlace": "مكان الولادة",
-    "birthPlacePlaceholder": "ابحث عن مدينة…"
+    "birthPlacePlaceholder": "ابحث عن مدينة…",
+    "continueWithGoogle": "المتابعة باستخدام Google",
+    "orContinueWithEmail": "أو المتابعة بالبريد الإلكتروني",
+    "googleSignInError": "فشل تسجيل الدخول عبر Google. حاول مرة أخرى."
   },
   "ForgotPassword": {
     "eyebrow": "استعادة الحساب",
@@ -184,7 +187,10 @@
     "country": "Birth country",
     "adminPortal": "Admin portal",
     "birthPlace": "مكان الولادة",
-    "birthPlacePlaceholder": "ابحث عن مدينة…"
+    "birthPlacePlaceholder": "ابحث عن مدينة…",
+    "completeProfileTitle": "أكمل إعداد ملفك الشخصي",
+    "completeProfileDescription": "أضف بيانات ميلادك ووافق على الشروط حتى نتمكن من إنشاء قراءتك الفلكية الشخصية.",
+    "consentEditLabel": "أوافق على الشروط وسياسة الخصوصية، وأوافق على تخزين Silence لبيانات ميلادي لإنشاء قراءتي."
   },
   "History": {
     "eyebrow": "قراءاتك",

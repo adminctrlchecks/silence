@@ -53,7 +53,10 @@
     "registerError": "登録に失敗しました。内容を確認してもう一度お試しください。",
     "loginError": "サインインに失敗しました。連絡先とパスワードを確認してください。",
     "birthPlace": "出生地",
-    "birthPlacePlaceholder": "都市を検索…"
+    "birthPlacePlaceholder": "都市を検索…",
+    "continueWithGoogle": "Google で続ける",
+    "orContinueWithEmail": "またはメールで続ける",
+    "googleSignInError": "Google サインインに失敗しました。もう一度お試しください。"
   },
   "ForgotPassword": {
     "eyebrow": "アカウント復旧",
@@ -184,7 +187,10 @@
     "country": "Birth country",
     "adminPortal": "Admin portal",
     "birthPlace": "出生地",
-    "birthPlacePlaceholder": "都市を検索…"
+    "birthPlacePlaceholder": "都市を検索…",
+    "completeProfileTitle": "プロフィールの設定を完了してください",
+    "completeProfileDescription": "パーソナライズされた占星術リーディングを作成するために、生年月日の情報と同意を追加してください。",
+    "consentEditLabel": "利用規約とプライバシーポリシーに同意し、Silence が私の生年月日情報を保存してリーディングを作成することに同意します。"
   },
   "History": {
     "eyebrow": "あなたのリーディング",

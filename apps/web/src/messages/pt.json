@@ -53,7 +53,10 @@
     "registerError": "Falha no cadastro. Verifique os dados e tente novamente.",
     "loginError": "Falha ao entrar. Verifique o contato e a senha.",
     "birthPlace": "Local de nascimento",
-    "birthPlacePlaceholder": "Procurar uma cidade…"
+    "birthPlacePlaceholder": "Procurar uma cidade…",
+    "continueWithGoogle": "Continuar com o Google",
+    "orContinueWithEmail": "ou continuar com e-mail",
+    "googleSignInError": "Falha ao entrar com o Google. Tente novamente."
   },
   "ForgotPassword": {
     "eyebrow": "Recuperação de conta",
@@ -184,7 +187,10 @@
     "country": "Birth country",
     "adminPortal": "Admin portal",
     "birthPlace": "Local de nascimento",
-    "birthPlacePlaceholder": "Procurar uma cidade…"
+    "birthPlacePlaceholder": "Procurar uma cidade…",
+    "completeProfileTitle": "Termine de configurar seu perfil",
+    "completeProfileDescription": "Adicione seus dados de nascimento e consentimento para gerarmos sua leitura astrológica personalizada.",
+    "consentEditLabel": "Concordo com os Termos e a Política de Privacidade, e consinto que a Silence armazene meus dados de nascimento para gerar minha leitura."
   },
   "History": {
     "eyebrow": "Suas leituras",

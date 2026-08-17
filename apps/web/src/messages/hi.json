@@ -53,7 +53,10 @@
     "registerError": "पंजीकरण विफल रहा। कृपया विवरण जांचें और फिर प्रयास करें।",
     "loginError": "साइन इन विफल रहा। कृपया संपर्क और पासवर्ड जांचें।",
     "birthPlace": "जन्म स्थान",
-    "birthPlacePlaceholder": "शहर खोजें…"
+    "birthPlacePlaceholder": "शहर खोजें…",
+    "continueWithGoogle": "Google से जारी रखें",
+    "orContinueWithEmail": "या ईमेल से जारी रखें",
+    "googleSignInError": "Google साइन-इन विफल रहा। कृपया पुनः प्रयास करें।"
   },
   "ForgotPassword": {
     "eyebrow": "खाता पुनर्प्राप्ति",
@@ -184,7 +187,10 @@
     "country": "Birth country",
     "adminPortal": "Admin portal",
     "birthPlace": "जन्म स्थान",
-    "birthPlacePlaceholder": "शहर खोजें…"
+    "birthPlacePlaceholder": "शहर खोजें…",
+    "completeProfileTitle": "अपनी प्रोफ़ाइल पूरी करें",
+    "completeProfileDescription": "अपनी व्यक्तिगत ज्योतिष रीडिंग पाने के लिए जन्म विवरण जोड़ें और सहमति दें।",
+    "consentEditLabel": "मैं नियम एवं शर्तों और गोपनीयता नीति से सहमत हूं, और अपनी रीडिंग तैयार करने के लिए Silence द्वारा मेरे जन्म विवरण संग्रहीत करने की सहमति देता/देती हूं।"
   },
   "History": {
     "eyebrow": "आपकी रीडिंग",

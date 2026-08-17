@@ -52,6 +52,9 @@ export class UsersService {
         placeLng: patch.placeOfBirth?.lng,
         placeTimezone: patch.placeOfBirth?.timezone,
         lang: patch.lang,
+        // Schema only allows `true` here (see updateUserProfileSchema) — this
+        // can complete onboarding consent, never silently revoke it.
+        consent: patch.consent === true ? true : undefined,
       },
     });
 

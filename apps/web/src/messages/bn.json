@@ -53,7 +53,10 @@
     "registerError": "নিবন্ধন ব্যর্থ হয়েছে। তথ্য যাচাই করে আবার চেষ্টা করুন।",
     "loginError": "সাইন ইন ব্যর্থ হয়েছে। যোগাযোগ এবং পাসওয়ার্ড যাচাই করুন।",
     "birthPlace": "জন্মস্থান",
-    "birthPlacePlaceholder": "একটি শহর খুঁজুন…"
+    "birthPlacePlaceholder": "একটি শহর খুঁজুন…",
+    "continueWithGoogle": "Google দিয়ে চালিয়ে যান",
+    "orContinueWithEmail": "অথবা ইমেইল দিয়ে চালিয়ে যান",
+    "googleSignInError": "Google সাইন-ইন ব্যর্থ হয়েছে। আবার চেষ্টা করুন।"
   },
   "ForgotPassword": {
     "eyebrow": "অ্যাকাউন্ট পুনরুদ্ধার",
@@ -184,7 +187,10 @@
     "country": "Birth country",
     "adminPortal": "Admin portal",
     "birthPlace": "জন্মস্থান",
-    "birthPlacePlaceholder": "একটি শহর খুঁজুন…"
+    "birthPlacePlaceholder": "একটি শহর খুঁজুন…",
+    "completeProfileTitle": "আপনার প্রোফাইল সম্পূর্ণ করুন",
+    "completeProfileDescription": "আপনার ব্যক্তিগত জ্যোতিষ রিডিং পেতে জন্ম বিবরণ যোগ করুন এবং সম্মতি দিন।",
+    "consentEditLabel": "আমি শর্তাবলী এবং গোপনীয়তা নীতিতে সম্মত, এবং আমার রিডিং তৈরি করতে Silence-কে আমার জন্ম বিবরণ সংরক্ষণের সম্মতি দিচ্ছি।"
   },
   "History": {
     "eyebrow": "আপনার রিডিংসমূহ",

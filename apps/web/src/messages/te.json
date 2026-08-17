@@ -53,7 +53,10 @@
     "registerError": "నమోదు విఫలమైంది. వివరాలు తనిఖీ చేసి మళ్లీ ప్రయత్నించండి.",
     "loginError": "సైన్ ఇన్ విఫలమైంది. మీ సంప్రదింపు వివరాలు మరియు పాస్‌వర్డ్ తనిఖీ చేయండి.",
     "birthPlace": "జన్మ స్థలం",
-    "birthPlacePlaceholder": "నగరాన్ని వెతకండి…"
+    "birthPlacePlaceholder": "నగరాన్ని వెతకండి…",
+    "continueWithGoogle": "Google తో కొనసాగించండి",
+    "orContinueWithEmail": "లేదా ఇమెయిల్‌తో కొనసాగించండి",
+    "googleSignInError": "Google సైన్-ఇన్ విఫలమైంది. దయచేసి మళ్లీ ప్రయత్నించండి."
   },
   "ForgotPassword": {
     "eyebrow": "ఖాతా పునరుద్ధరణ",
@@ -182,7 +185,10 @@
     "country": "Birth country",
     "adminPortal": "Admin portal",
     "birthPlace": "జన్మ స్థలం",
-    "birthPlacePlaceholder": "నగరాన్ని వెతకండి…"
+    "birthPlacePlaceholder": "నగరాన్ని వెతకండి…",
+    "completeProfileTitle": "మీ ప్రొఫైల్‌ను పూర్తి చేయండి",
+    "completeProfileDescription": "మీ వ్యక్తిగత జ్యోతిష్య రీడింగ్ కోసం జనన వివరాలను జోడించి సమ్మతి తెలపండి.",
+    "consentEditLabel": "నేను నిబంధనలు మరియు గోప్యతా విధానానికి అంగీకరిస్తున్నాను, నా రీడింగ్ తయారు చేయడానికి Silence నా జనన వివరాలను నిల్వ చేయడానికి సమ్మతిస్తున్నాను."
   },
   "History": {
     "eyebrow": "మీ రీడింగ్‌లు",

@@ -65,6 +65,9 @@ export default async function ProfilePage() {
           no: t('no'),
           birthPlace: t('birthPlace'),
           birthPlacePlaceholder: t('birthPlacePlaceholder'),
+          completeProfileTitle: t('completeProfileTitle'),
+          completeProfileDescription: t('completeProfileDescription'),
+          consentEditLabel: t('consentEditLabel'),
           categories: {
             male: categories('categories.male'),
             female: categories('categories.female'),

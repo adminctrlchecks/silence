@@ -12,8 +12,24 @@ import type {
 import { PrismaService } from '../prisma/prisma.service';
 import { EmailService } from '../integrations/email/email.service';
 import { AdminAuditService } from '../admin-audit/admin-audit.service';
+import { GoogleAuthService } from '../integrations/google/google-auth.service';
+import type { User } from '@prisma/client';
 
 type Role = 'admin' | 'user';
+
+/**
+ * Birth details + category are required for a reading, but Google gives us
+ * none of that — a fresh Google sign-up is created with these left blank
+ * (SessionsService.profileCompleteness already treats blank/untrimmed
+ * strings as "missing", and ChartService now guards against generating a
+ * chart from them) and the frontend routes the user to /profile to finish
+ * onboarding before /app instead of into the reading flow.
+ */
+function isProfileComplete(user: User): boolean {
+  return Boolean(
+    user.dob?.trim() && user.timeOfBirth?.trim() && user.placeCity?.trim() && user.placeCountry?.trim() && user.consent,
+  );
+}
 
 /** Reset links are valid for 1 hour. */
 const RESET_TOKEN_TTL_MS = 60 * 60 * 1000;
@@ -25,6 +41,7 @@ export class AuthService {
     private readonly jwt: JwtService,
     private readonly email: EmailService,
     private readonly audit: AdminAuditService,
+    private readonly googleAuth: GoogleAuthService,
   ) {}
 
   async adminLogin(input: AdminLoginInput) {
@@ -87,6 +104,53 @@ export class AuthService {
 
     // Same generic message whether the contact or the password is wrong (no user enumeration).
     throw new UnauthorizedException('Invalid credentials');
+  }
+
+  /**
+   * Google sign-in/sign-up: verifies the ID token, then finds-or-creates the
+   * user. Matches an existing `googleId` first, then falls back to linking
+   * an existing password account with the same email (so someone who
+   * registered with email+password and later clicks "Continue with Google"
+   * lands on the same account instead of a duplicate).
+   */
+  async userGoogleAuth(idToken: string, lang?: string) {
+    const profile = await this.googleAuth.verifyIdToken(idToken);
+    if (!profile.emailVerified) {
+      throw new UnauthorizedException('Google account email is not verified');
+    }
+
+    let user = await this.prisma.user.findUnique({ where: { googleId: profile.sub } });
+
+    if (!user) {
+      const existingByEmail = await this.prisma.user.findUnique({ where: { contact: profile.email } });
+      user = existingByEmail
+        ? await this.prisma.user.update({ where: { id: existingByEmail.id }, data: { googleId: profile.sub } })
+        : await this.prisma.user.create({
+            data: {
+              name: profile.name ?? profile.email.split('@')[0],
+              // A real category/birth details aren't known yet — 'other' is a
+              // neutral placeholder the user corrects during onboarding, not a
+              // real demographic claim (isProfileComplete() ignores category
+              // and gates on birth details + consent instead).
+              category: 'other',
+              dob: '',
+              timeOfBirth: '',
+              placeCity: '',
+              placeCountry: '',
+              contact: profile.email,
+              passwordHash: null,
+              googleId: profile.sub,
+              lang: lang ?? 'en',
+              consent: false,
+            },
+          });
+    }
+
+    return {
+      ...(await this.issueTokens('user', user.id)),
+      user: { id: user.id, name: user.name, category: user.category },
+      profileComplete: isProfileComplete(user),
+    };
   }
 
   async changeAdminPassword(adminId: string, input: ChangePasswordInput) {

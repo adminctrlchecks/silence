@@ -11,6 +11,7 @@ import {
   userForgotPasswordSchema,
   adminForgotPasswordSchema,
   resetPasswordSchema,
+  googleAuthSchema,
 } from '@silence/shared';
 import { ZodValidationPipe } from '../common/zod-validation.pipe';
 import {
@@ -22,6 +23,7 @@ import {
   UserForgotPasswordDto,
   AdminForgotPasswordDto,
   ResetPasswordDto,
+  GoogleAuthDto,
 } from '../common/dto';
 import { AuthService } from './auth.service';
 import { AdminJwtGuard } from './guards/admin-jwt.guard';
@@ -95,6 +97,13 @@ export class AuthController {
   @ApiOperation({ summary: 'User login → access + refresh tokens' })
   userLogin(@Body(new ZodValidationPipe(userLoginSchema)) body: UserLoginDto) {
     return this.auth.userLogin(body);
+  }
+
+  @Post('user/google')
+  @Throttle(AUTH_THROTTLE)
+  @ApiOperation({ summary: 'Google sign-in/sign-up — verifies a Google Identity Services ID token' })
+  userGoogleAuth(@Body(new ZodValidationPipe(googleAuthSchema)) body: GoogleAuthDto) {
+    return this.auth.userGoogleAuth(body.idToken, body.lang);
   }
 
   @Post('user/refresh')

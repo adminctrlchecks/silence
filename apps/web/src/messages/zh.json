@@ -53,7 +53,10 @@
     "registerError": "注册失败。请检查信息后重试。",
     "loginError": "登录失败。请检查联系方式和密码。",
     "birthPlace": "出生地",
-    "birthPlacePlaceholder": "搜索城市…"
+    "birthPlacePlaceholder": "搜索城市…",
+    "continueWithGoogle": "使用 Google 继续",
+    "orContinueWithEmail": "或使用邮箱继续",
+    "googleSignInError": "Google 登录失败，请重试。"
   },
   "ForgotPassword": {
     "eyebrow": "账户找回",
@@ -182,7 +185,10 @@
     "country": "Birth country",
     "adminPortal": "Admin portal",
     "birthPlace": "出生地",
-    "birthPlacePlaceholder": "搜索城市…"
+    "birthPlacePlaceholder": "搜索城市…",
+    "completeProfileTitle": "完成个人资料设置",
+    "completeProfileDescription": "请添加您的出生信息并同意条款，以便我们为您生成个性化占星解读。",
+    "consentEditLabel": "我同意服务条款和隐私政策，并同意 Silence 存储我的出生信息以生成我的解读。"
   },
   "History": {
     "eyebrow": "你的解读",

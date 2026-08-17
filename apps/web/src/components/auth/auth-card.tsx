@@ -3,7 +3,7 @@
 import Link from 'next/link';
 import { CATEGORIES, type Category } from '@silence/shared';
 import { Loader2, MoonStar } from 'lucide-react';
-import { useTranslations } from 'next-intl';
+import { useLocale, useTranslations } from 'next-intl';
 import { usePathname, useRouter } from 'next/navigation';
 import { useState } from 'react';
 import { Button } from '@/components/ui/button';
@@ -12,6 +12,7 @@ import { Label } from '@/components/ui/label';
 import { DEFAULT_LANGUAGE, LANGUAGES } from '@/lib/i18n';
 import { DEFAULT_CATEGORY } from '@/lib/session-preferences';
 import { PlacesAutocomplete } from '@/components/shared/places-autocomplete';
+import { GoogleSignInButton } from '@/components/auth/google-sign-in-button';
 
 type Mode = 'login' | 'register';
 
@@ -23,9 +24,9 @@ type PlaceState = {
   timezone?: string;
 };
 
-function localizedAppPath(pathname: string) {
+function localizedPath(pathname: string, path: string) {
   const [, maybeLocale] = pathname.split('/');
-  return maybeLocale && maybeLocale.length === 2 ? `/${maybeLocale}/app` : '/app';
+  return maybeLocale && maybeLocale.length === 2 ? `/${maybeLocale}${path}` : path;
 }
 
 export function AuthCard({
@@ -40,6 +41,11 @@ export function AuthCard({
   const router = useRouter();
   const pathname = usePathname();
   const t = useTranslations('Auth');
+  // The page's actual rendered locale (from the URL/next-intl), not
+  // initialLanguage — that's only the register form's language <select>
+  // default and isn't even passed on /login. Google's button text (via the
+  // gsi/client script's `hl` param) should match what the page is in.
+  const locale = useLocale();
   const [pending, setPending] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [place, setPlace] = useState<PlaceState>({ city: '', country: '' });
@@ -96,8 +102,27 @@ export function AuthCard({
           </div>
         </div>
 
+        <div className="mt-6">
+          <GoogleSignInButton
+            mode={mode}
+            lang={locale}
+            label={t('continueWithGoogle')}
+            onSuccess={(profileComplete) => {
+              setError(null);
+              router.push(localizedPath(pathname, profileComplete ? '/app' : '/profile?onboarding=1'));
+              router.refresh();
+            }}
+            onError={() => setError(t('googleSignInError'))}
+          />
+          <div className="my-5 flex items-center gap-3 text-xs font-medium uppercase text-muted-foreground">
+            <span className="h-px flex-1 bg-border" />
+            {t('orContinueWithEmail')}
+            <span className="h-px flex-1 bg-border" />
+          </div>
+        </div>
+
         <form
-          className="mt-6 space-y-4"
+          className="space-y-4"
           onSubmit={async (event) => {
             event.preventDefault();
             setPending(true);
@@ -105,7 +130,7 @@ export function AuthCard({
 
             try {
               await submitAuth(new FormData(event.currentTarget));
-              router.push(localizedAppPath(pathname));
+              router.push(localizedPath(pathname, '/app'));
               router.refresh();
             } catch (err) {
               setError(err instanceof Error ? err.message : t(registering ? 'registerError' : 'loginError'));

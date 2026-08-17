@@ -50,6 +50,17 @@ export const userLoginSchema = z.object({
   password: z.string().min(1),
 });
 
+/**
+ * Google Sign-In: the frontend verifies the user via Google Identity Services
+ * client-side (renderButton/One Tap) and forwards the resulting ID token here.
+ * The API verifies the token's signature/audience itself — never trust the
+ * client for identity, only for delivering the token.
+ */
+export const googleAuthSchema = z.object({
+  idToken: z.string().min(1),
+  lang: langSchema.optional(),
+});
+
 /** Exchange a refresh token for a fresh access token (admin or user). */
 export const refreshTokenSchema = z.object({
   refreshToken: z.string().min(1),
@@ -178,6 +189,10 @@ export const updateUserProfileSchema = z.object({
   timeOfBirth: z.string().regex(/^\d{2}:\d{2}$/, 'Expected HH:MM').optional(),
   placeOfBirth: placeOfBirthSchema.optional(),
   lang: langSchema.optional(),
+  // Only ever moves false -> true here (e.g. completing a Google sign-up
+  // profile). Consent withdrawal is a support/privacy-request path, not a
+  // field a generic profile PATCH can flip off.
+  consent: z.literal(true).optional(),
 });
 
 // ── Inferred request types ───────────────────────────────────────────────────
@@ -201,3 +216,4 @@ export type AutoTranslateInput = z.infer<typeof autoTranslateSchema>;
 export type SubmitResponsesInput = z.infer<typeof submitResponsesSchema>;
 export type UpdateUserProfileInput = z.infer<typeof updateUserProfileSchema>;
 export type PlaceOfBirth = z.infer<typeof placeOfBirthSchema>;
+export type GoogleAuthInput = z.infer<typeof googleAuthSchema>;

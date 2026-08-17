@@ -1,7 +1,7 @@
 'use client';
 
 import { CATEGORIES, LANGUAGES, type Category, type UserProfile } from '@silence/shared';
-import { Loader2, Pencil, Save, X } from 'lucide-react';
+import { Loader2, Pencil, Save, Sparkles, X } from 'lucide-react';
 import { useState } from 'react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
@@ -31,6 +31,9 @@ type Labels = {
   categories: Record<Category, string>;
   birthPlace: string;
   birthPlacePlaceholder: string;
+  completeProfileTitle: string;
+  completeProfileDescription: string;
+  consentEditLabel: string;
 };
 
 type FormState = {
@@ -44,6 +47,7 @@ type FormState = {
   lat?: number;
   lng?: number;
   timezone?: string;
+  consent: boolean;
 };
 
 function formFromProfile(profile: UserProfile): FormState {
@@ -58,16 +62,29 @@ function formFromProfile(profile: UserProfile): FormState {
     lat: profile.placeOfBirth.lat,
     lng: profile.placeOfBirth.lng,
     timezone: (profile.placeOfBirth as { timezone?: string }).timezone,
+    consent: profile.consent,
   };
+}
+
+/** True for a profile still missing the birth details needed for a reading — e.g. a fresh Google sign-up (see AuthService.userGoogleAuth). */
+function isIncomplete(profile: UserProfile): boolean {
+  return (
+    !profile.dob?.trim() ||
+    !profile.timeOfBirth?.trim() ||
+    !profile.placeOfBirth.city?.trim() ||
+    !profile.placeOfBirth.country?.trim() ||
+    !profile.consent
+  );
 }
 
 export function ProfileDetailsCard({ initialProfile, labels }: { initialProfile: UserProfile; labels: Labels }) {
   const [profile, setProfile] = useState(initialProfile);
-  const [editing, setEditing] = useState(false);
+  const [editing, setEditing] = useState(() => isIncomplete(initialProfile));
   const [form, setForm] = useState<FormState>(() => formFromProfile(initialProfile));
   const [pending, setPending] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [message, setMessage] = useState<string | null>(null);
+  const incomplete = isIncomplete(profile);
 
   const details = [
     { label: labels.name, value: profile.name },
@@ -102,6 +119,9 @@ export function ProfileDetailsCard({ initialProfile, labels }: { initialProfile:
             lng: form.lng,
             timezone: form.timezone,
           },
+          // The API only ever accepts `consent: true` (completing onboarding) —
+          // omit the field entirely rather than send `false` and fail validation.
+          ...(form.consent ? { consent: true } : {}),
         }),
       });
       const data = await response.json().catch(() => null);
@@ -148,6 +168,16 @@ export function ProfileDetailsCard({ initialProfile, labels }: { initialProfile:
           </Button>
         )}
       </div>
+
+      {incomplete ? (
+        <div className="mt-5 flex items-start gap-3 rounded-md border border-primary/30 bg-primary/5 p-4">
+          <Sparkles className="mt-0.5 size-5 shrink-0 text-primary" aria-hidden="true" />
+          <div>
+            <p className="text-sm font-semibold text-foreground">{labels.completeProfileTitle}</p>
+            <p className="mt-1 text-sm text-muted-foreground">{labels.completeProfileDescription}</p>
+          </div>
+        </div>
+      ) : null}
 
       {editing ? (
         <form
@@ -240,6 +270,18 @@ export function ProfileDetailsCard({ initialProfile, labels }: { initialProfile:
               {profile.contact}
             </div>
           </div>
+
+          {!profile.consent ? (
+            <label className="flex items-start gap-2 text-sm text-muted-foreground sm:col-span-2">
+              <input
+                type="checkbox"
+                checked={form.consent}
+                onChange={(event) => setForm((current) => ({ ...current, consent: event.target.checked }))}
+                className="mt-1 size-4 rounded border-border"
+              />
+              <span>{labels.consentEditLabel}</span>
+            </label>
+          ) : null}
 
           {error ? (
             <p role="alert" className="rounded-md border border-destructive/30 bg-destructive/10 px-3 py-2 text-sm text-destructive sm:col-span-2">

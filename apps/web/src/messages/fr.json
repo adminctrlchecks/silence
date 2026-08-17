@@ -53,7 +53,10 @@
     "registerError": "L'inscription a échoué. Vérifiez les informations puis réessayez.",
     "loginError": "La connexion a échoué. Vérifiez votre contact et votre mot de passe.",
     "birthPlace": "Lieu de naissance",
-    "birthPlacePlaceholder": "Chercher une ville…"
+    "birthPlacePlaceholder": "Chercher une ville…",
+    "continueWithGoogle": "Continuer avec Google",
+    "orContinueWithEmail": "ou continuer avec l'e-mail",
+    "googleSignInError": "Échec de la connexion avec Google. Veuillez réessayer."
   },
   "ForgotPassword": {
     "eyebrow": "Récupération de compte",
@@ -184,7 +187,10 @@
     "country": "Birth country",
     "adminPortal": "Admin portal",
     "birthPlace": "Lieu de naissance",
-    "birthPlacePlaceholder": "Chercher une ville…"
+    "birthPlacePlaceholder": "Chercher une ville…",
+    "completeProfileTitle": "Terminez de configurer votre profil",
+    "completeProfileDescription": "Ajoutez vos données de naissance et votre consentement pour générer votre lecture astrologique personnalisée.",
+    "consentEditLabel": "J'accepte les Conditions d'utilisation et la Politique de confidentialité, et je consens à ce que Silence conserve mes données de naissance pour générer ma lecture."
   },
   "History": {
     "eyebrow": "Vos lectures",

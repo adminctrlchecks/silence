@@ -15,6 +15,7 @@ const USER = {
   placeTimezone: 'Asia/Kolkata',
   contact: 'asha@example.com',
   passwordHash: 'hash',
+  googleId: null,
   lang: 'en',
   consent: true,
   createdAt: new Date(),

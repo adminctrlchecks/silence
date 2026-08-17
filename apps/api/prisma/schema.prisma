@@ -192,6 +192,7 @@ model User {
   placeTimezone String?
   contact      String           @unique
   passwordHash String?
+  googleId     String?          @unique
   lang         String           @default("en")
   consent      Boolean          @default(false)
   createdAt    DateTime         @default(now())

@@ -21,6 +21,7 @@ import { PlacesModule } from './places/places.module';
 import { AdminDashboardModule } from './admin-dashboard/admin-dashboard.module';
 import { EmailModule } from './integrations/email/email.module';
 import { AdminAuditModule } from './admin-audit/admin-audit.module';
+import { GoogleAuthModule } from './integrations/google/google-auth.module';
 
 @Module({
   imports: [
@@ -46,6 +47,7 @@ import { AdminAuditModule } from './admin-audit/admin-audit.module';
     AdminDashboardModule,
     EmailModule,
     AdminAuditModule,
+    GoogleAuthModule,
   ],
   providers: [
     // Apply rate limiting globally.

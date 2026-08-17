@@ -53,7 +53,10 @@
     "newToSilence": "New to Silence?",
     "createOne": "Create one",
     "registerError": "Registration failed. Please check the details and try again.",
-    "loginError": "Sign in failed. Please check your contact and password."
+    "loginError": "Sign in failed. Please check your contact and password.",
+    "continueWithGoogle": "Continue with Google",
+    "orContinueWithEmail": "or continue with email",
+    "googleSignInError": "Google sign-in failed. Please try again."
   },
   "ForgotPassword": {
     "eyebrow": "Account recovery",
@@ -184,7 +187,10 @@
     "country": "Birth country",
     "birthPlace": "Place of birth",
     "birthPlacePlaceholder": "Search for a city…",
-    "adminPortal": "Admin portal"
+    "adminPortal": "Admin portal",
+    "completeProfileTitle": "Finish setting up your profile",
+    "completeProfileDescription": "Add your birth details and consent so we can generate your personalized astrology reading.",
+    "consentEditLabel": "I agree to the Terms and Privacy Policy, and consent to Silence storing my birth details to generate my reading."
   },
   "History": {
     "eyebrow": "Your readings",

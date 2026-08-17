@@ -1,4 +1,4 @@
-import { Injectable, NotFoundException } from '@nestjs/common';
+import { BadRequestException, Injectable, NotFoundException } from '@nestjs/common';
 import type { Category, ChartConfigInput } from '@silence/shared';
 import { PrismaService } from '../prisma/prisma.service';
 import { AstrologyService } from '../integrations/astrology/astrology.service';
@@ -60,6 +60,13 @@ export class ChartService {
 
     const user = await this.prisma.user.findUnique({ where: { id: userId } });
     if (!user) throw new NotFoundException('User not found');
+
+    // Google sign-ups start with blank birth details (see AuthService.userGoogleAuth) —
+    // the frontend routes them to /profile before they can reach this endpoint, but
+    // guard here too rather than hand the ephemeris engine an empty date string.
+    if (!user.dob?.trim() || !user.timeOfBirth?.trim() || !user.placeCity?.trim() || !user.placeCountry?.trim()) {
+      throw new BadRequestException('Complete your birth details before generating a chart');
+    }
 
     const cfg = await this.getConfig(user.category as Category);
     const geometry = this.astrology.compute(
