@@ -8,6 +8,7 @@ import { Button } from '@/components/ui/button';
 import { ConfirmDialog } from '@/components/ui/confirm-dialog';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
+import { Select } from '@/components/ui/select';
 
 type CategoryFilter = Category | 'all';
 type LinkLevel = Level | 'none';
@@ -246,9 +247,8 @@ export function RemediesAdmin() {
 
         <div className="mt-4 max-w-sm space-y-2">
           <Label htmlFor="categoryFilter">Category</Label>
-          <select
+          <Select
             id="categoryFilter"
-            className="h-10 w-full rounded-md border border-border bg-background px-3 text-sm outline-none focus-visible:ring-2 focus-visible:ring-ring"
             value={categoryFilter}
             onChange={(event) => setCategoryFilter(event.target.value as CategoryFilter)}
           >
@@ -258,7 +258,7 @@ export function RemediesAdmin() {
                 {categoryLabels[category]}
               </option>
             ))}
-          </select>
+          </Select>
         </div>
       </section>
 
@@ -283,9 +283,8 @@ export function RemediesAdmin() {
           <div className="mt-4 space-y-4">
             <div className="space-y-2">
               <Label htmlFor="category">Category</Label>
-              <select
+              <Select
                 id="category"
-                className="h-10 w-full rounded-md border border-border bg-background px-3 text-sm outline-none focus-visible:ring-2 focus-visible:ring-ring"
                 value={form.category}
                 onChange={(event) =>
                   setForm((current) => ({ ...current, category: event.target.value as Category, linkedQuestionId: '' }))
@@ -297,7 +296,7 @@ export function RemediesAdmin() {
                     {categoryLabels[category]}
                   </option>
                 ))}
-              </select>
+              </Select>
             </div>
             <div className="space-y-2">
               <Label htmlFor="title">Title</Label>
@@ -320,9 +319,8 @@ export function RemediesAdmin() {
             </div>
             <div className="space-y-2">
               <Label htmlFor="linkedLevel">Linked level</Label>
-              <select
+              <Select
                 id="linkedLevel"
-                className="h-10 w-full rounded-md border border-border bg-background px-3 text-sm outline-none focus-visible:ring-2 focus-visible:ring-ring"
                 value={form.linkedLevel}
                 onChange={(event) =>
                   setForm((current) => ({ ...current, linkedLevel: event.target.value as LinkLevel, linkedQuestionId: '' }))
@@ -334,13 +332,12 @@ export function RemediesAdmin() {
                     {levelLabels[level]}
                   </option>
                 ))}
-              </select>
+              </Select>
             </div>
             <div className="space-y-2">
               <Label htmlFor="linkedQuestion">Linked question</Label>
-              <select
+              <Select
                 id="linkedQuestion"
-                className="h-10 w-full rounded-md border border-border bg-background px-3 text-sm outline-none focus-visible:ring-2 focus-visible:ring-ring"
                 value={form.linkedQuestionId}
                 onChange={(event) => setForm((current) => ({ ...current, linkedQuestionId: event.target.value }))}
                 disabled={form.linkedLevel === 'none' || questionsLoading}
@@ -351,7 +348,7 @@ export function RemediesAdmin() {
                     {levelLabels[question.level]} / {question.text}
                   </option>
                 ))}
-              </select>
+              </Select>
             </div>
 
             <div className="space-y-3 rounded-md border border-dashed border-border p-3">

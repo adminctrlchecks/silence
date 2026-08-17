@@ -9,6 +9,7 @@ import { type ReactNode, useEffect, useRef, useState } from 'react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
+import { Select } from '@/components/ui/select';
 import { Alert } from '@/components/ui/alert';
 import { DEFAULT_LANGUAGE, LANGUAGES } from '@/lib/i18n';
 import { DEFAULT_CATEGORY } from '@/lib/session-preferences';
@@ -303,34 +304,23 @@ export function AuthCard({
               <div className="grid gap-4 sm:grid-cols-2">
                 <div className="space-y-2">
                   <Label htmlFor="category">{t('category')}</Label>
-                  <select
-                    id="category"
-                    name="category"
-                    className="h-10 w-full rounded-md border border-border bg-background px-3 text-sm capitalize outline-none focus-visible:ring-2 focus-visible:ring-ring"
-                    defaultValue={initialCategory}
-                    required
-                  >
+                  <Select id="category" name="category" className="capitalize" defaultValue={initialCategory} required>
                     {CATEGORIES.map((category) => (
                       <option key={category} value={category}>
                         {t(`categories.${category}`)}
                       </option>
                     ))}
-                  </select>
+                  </Select>
                 </div>
                 <div className="space-y-2">
                   <Label htmlFor="lang">{t('language')}</Label>
-                  <select
-                    id="lang"
-                    name="lang"
-                    className="h-10 w-full rounded-md border border-border bg-background px-3 text-sm outline-none focus-visible:ring-2 focus-visible:ring-ring"
-                    defaultValue={initialLanguage}
-                  >
+                  <Select id="lang" name="lang" defaultValue={initialLanguage}>
                     {LANGUAGES.map((language) => (
                       <option key={language.code} value={language.code}>
                         {language.name}
                       </option>
                     ))}
-                  </select>
+                  </Select>
                 </div>
               </div>
             </div>

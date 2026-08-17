@@ -5,6 +5,7 @@ import { ChevronLeft, ChevronRight, Loader2, RefreshCw, ShieldCheck } from 'luci
 import { useCallback, useEffect, useMemo, useState } from 'react';
 import { Button } from '@/components/ui/button';
 import { Label } from '@/components/ui/label';
+import { Select } from '@/components/ui/select';
 
 type ActionFilter = AdminAuditAction | 'all';
 
@@ -94,9 +95,8 @@ export function AuditLogAdmin() {
             <Label htmlFor="auditActionFilter" className="sr-only">
               Action
             </Label>
-            <select
+            <Select
               id="auditActionFilter"
-              className="h-10 rounded-md border border-border bg-background px-3 text-sm outline-none focus-visible:ring-2 focus-visible:ring-ring"
               value={action}
               onChange={(event) => {
                 setPage(1);
@@ -109,7 +109,7 @@ export function AuditLogAdmin() {
                   {label}
                 </option>
               ))}
-            </select>
+            </Select>
           </div>
           <span className="text-xs text-muted-foreground">{total} matching events</span>
         </div>

@@ -8,6 +8,7 @@ import { Button } from '@/components/ui/button';
 import { ConfirmDialog } from '@/components/ui/confirm-dialog';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
+import { Select } from '@/components/ui/select';
 
 type FilterValue<T extends string> = T | 'all';
 
@@ -176,9 +177,8 @@ export function QuestionsAdmin() {
         <div className="mt-4 grid gap-3 sm:grid-cols-2">
           <div className="space-y-2">
             <Label htmlFor="levelFilter">Level</Label>
-            <select
+            <Select
               id="levelFilter"
-              className="h-10 w-full rounded-md border border-border bg-background px-3 text-sm outline-none focus-visible:ring-2 focus-visible:ring-ring"
               value={levelFilter}
               onChange={(event) => setLevelFilter(event.target.value as FilterValue<Level>)}
             >
@@ -188,13 +188,12 @@ export function QuestionsAdmin() {
                   {levelLabels[level]}
                 </option>
               ))}
-            </select>
+            </Select>
           </div>
           <div className="space-y-2">
             <Label htmlFor="categoryFilter">Category</Label>
-            <select
+            <Select
               id="categoryFilter"
-              className="h-10 w-full rounded-md border border-border bg-background px-3 text-sm outline-none focus-visible:ring-2 focus-visible:ring-ring"
               value={categoryFilter}
               onChange={(event) => setCategoryFilter(event.target.value as FilterValue<Category>)}
             >
@@ -204,7 +203,7 @@ export function QuestionsAdmin() {
                   {categoryLabels[category]}
                 </option>
               ))}
-            </select>
+            </Select>
           </div>
         </div>
       </section>
@@ -233,9 +232,8 @@ export function QuestionsAdmin() {
             <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-1 xl:grid-cols-2">
               <div className="space-y-2">
                 <Label htmlFor="level">Level</Label>
-                <select
+                <Select
                   id="level"
-                  className="h-10 w-full rounded-md border border-border bg-background px-3 text-sm outline-none focus-visible:ring-2 focus-visible:ring-ring"
                   value={form.level}
                   onChange={(event) => setForm((current) => ({ ...current, level: event.target.value as Level }))}
                   required
@@ -245,13 +243,12 @@ export function QuestionsAdmin() {
                       {levelLabels[level]}
                     </option>
                   ))}
-                </select>
+                </Select>
               </div>
               <div className="space-y-2">
                 <Label htmlFor="category">Category</Label>
-                <select
+                <Select
                   id="category"
-                  className="h-10 w-full rounded-md border border-border bg-background px-3 text-sm outline-none focus-visible:ring-2 focus-visible:ring-ring"
                   value={form.category}
                   onChange={(event) => setForm((current) => ({ ...current, category: event.target.value as Category }))}
                   required
@@ -261,7 +258,7 @@ export function QuestionsAdmin() {
                       {categoryLabels[category]}
                     </option>
                   ))}
-                </select>
+                </Select>
               </div>
             </div>
             <div className="space-y-2">

@@ -6,6 +6,7 @@ import { useState } from 'react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
+import { Select } from '@/components/ui/select';
 
 type Labels = {
   eyebrow: string;
@@ -123,9 +124,8 @@ export function ProfileOverviewCard({ initialProfile, labels }: { initialProfile
           </div>
           <div className="space-y-2">
             <Label htmlFor="profile-category">{labels.category}</Label>
-            <select
+            <Select
               id="profile-category"
-              className="h-10 w-full rounded-md border border-border bg-background px-3 text-sm outline-none focus-visible:ring-2 focus-visible:ring-ring"
               value={form.category}
               onChange={(event) => setForm((current) => ({ ...current, category: event.target.value as Category }))}
             >
@@ -134,13 +134,12 @@ export function ProfileOverviewCard({ initialProfile, labels }: { initialProfile
                   {labels.categories[category]}
                 </option>
               ))}
-            </select>
+            </Select>
           </div>
           <div className="space-y-2">
             <Label htmlFor="profile-lang">{labels.language}</Label>
-            <select
+            <Select
               id="profile-lang"
-              className="h-10 w-full rounded-md border border-border bg-background px-3 text-sm outline-none focus-visible:ring-2 focus-visible:ring-ring"
               value={form.lang}
               onChange={(event) => setForm((current) => ({ ...current, lang: event.target.value }))}
             >
@@ -149,7 +148,7 @@ export function ProfileOverviewCard({ initialProfile, labels }: { initialProfile
                   {language.name}
                 </option>
               ))}
-            </select>
+            </Select>
           </div>
           <div className="space-y-2">
             <Label>{labels.contact}</Label>

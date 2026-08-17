@@ -6,6 +6,7 @@ import { useCallback, useEffect, useMemo, useState } from 'react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
+import { Select } from '@/components/ui/select';
 
 type LanguageRow = {
   code: string;
@@ -261,22 +262,20 @@ export function LanguagesAdmin() {
           <div className="mt-4 grid gap-4 lg:grid-cols-3">
             <div className="space-y-2">
               <Label htmlFor="entity">Entity</Label>
-              <select
+              <Select
                 id="entity"
-                className="h-10 w-full rounded-md border border-border bg-background px-3 text-sm outline-none focus-visible:ring-2 focus-visible:ring-ring"
                 value={entity}
                 onChange={(event) => setEntity(event.target.value as Entity)}
               >
                 <option value="question">Question</option>
                 <option value="answer">Answer</option>
                 <option value="remedy">Remedy</option>
-              </select>
+              </Select>
             </div>
             <div className="space-y-2 lg:col-span-2">
               <Label htmlFor="item">Item</Label>
-              <select
+              <Select
                 id="item"
-                className="h-10 w-full rounded-md border border-border bg-background px-3 text-sm outline-none focus-visible:ring-2 focus-visible:ring-ring"
                 value={selectedId}
                 onChange={(event) => setSelectedId(event.target.value)}
                 disabled={loadingItems}
@@ -287,7 +286,7 @@ export function LanguagesAdmin() {
                     {item.label}
                   </option>
                 ))}
-              </select>
+              </Select>
             </div>
           </div>
 
