@@ -10,6 +10,14 @@ import {
 
 const intlMiddleware = createIntlMiddleware(routing);
 
+// Next's generated metadata image routes (favicon/apple-icon/OG-image/manifest
+// icons — see apps/web/src/app/icon.tsx, apple-icon.tsx, opengraph-image.tsx,
+// manifest-icon/[size]/route.tsx) live at the app root and have no file
+// extension in their URL, so they aren't caught by the matcher's `.*\..*`
+// exclusion below. Without this bypass the intl middleware treats them as
+// localizable pages and serves HTML instead of the actual image.
+const METADATA_ROUTE_PREFIXES = ['/icon', '/apple-icon', '/opengraph-image', '/manifest-icon'];
+
 function splitLocale(pathname: string) {
   const [, maybeLocale, ...rest] = pathname.split('/');
   const hasLocale = routing.locales.includes(maybeLocale);
@@ -34,6 +42,10 @@ export function proxy(request: NextRequest) {
   }
 
   if (pathname === '/admin' || pathname.startsWith('/admin/')) {
+    return NextResponse.next();
+  }
+
+  if (METADATA_ROUTE_PREFIXES.some((prefix) => pathname === prefix || pathname.startsWith(`${prefix}/`))) {
     return NextResponse.next();
   }
 

@@ -34,11 +34,11 @@ export const metadata: Metadata = {
   alternates: {
     canonical: '/',
   },
-  openGraph: {
-    title: 'Silence - Multilingual Astrology Q&A',
-    description:
-      'Create a profile, answer guided astrology questions, view a birth chart, and receive a personal remedy in your preferred language.',
-  },
+  // No page-local `openGraph` override here: the root layout already sets an
+  // identical openGraph title/description, and only the root layout's
+  // (fully-resolved, includes the generated og:image) object gets inherited
+  // — a page-level `openGraph` field replaces the parent's wholesale rather
+  // than merging, which would silently drop og:type/og:site_name/og:image.
 };
 
 const journeySteps = [
