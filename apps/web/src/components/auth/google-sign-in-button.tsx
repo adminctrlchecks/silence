@@ -27,6 +27,7 @@ export function GoogleSignInButton({
   const { resolvedTheme } = useTheme();
   const containerRef = useRef<HTMLDivElement>(null);
   const initializedRef = useRef(false);
+  const retryTimeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
   const [scriptReady, setScriptReady] = useState(false);
   const [pending, setPending] = useState(false);
 
@@ -53,33 +54,56 @@ export function GoogleSignInButton({
   );
 
   const render = useCallback(() => {
-    if (!scriptReady || !window.google || !containerRef.current || !GOOGLE_CLIENT_ID) return;
+    if (retryTimeoutRef.current) {
+      clearTimeout(retryTimeoutRef.current);
+      retryTimeoutRef.current = null;
+    }
+    if (!scriptReady || !containerRef.current || !GOOGLE_CLIENT_ID) return;
 
-    if (!initializedRef.current) {
-      window.google.accounts.id.initialize({
-        client_id: GOOGLE_CLIENT_ID,
-        callback: (response) => {
-          void handleCredential(response.credential);
-        },
-        use_fedcm_for_prompt: true,
-      });
-      initializedRef.current = true;
+    if (!window.google?.accounts?.id) {
+      // The script's load event has occasionally been observed firing a tick
+      // before window.google is fully attached (network/timing-dependent) —
+      // rather than leave the skeleton stuck forever, retry briefly. Self-heals
+      // instead of requiring a manual refresh.
+      retryTimeoutRef.current = setTimeout(render, 100);
+      return;
     }
 
-    containerRef.current.innerHTML = '';
-    window.google.accounts.id.renderButton(containerRef.current, {
-      type: 'standard',
-      theme: resolvedTheme === 'dark' ? 'filled_black' : 'outline',
-      size: 'large',
-      shape: 'rectangular',
-      text: mode === 'register' ? 'signup_with' : 'signin_with',
-      logo_alignment: 'left',
-      width: Math.round(containerRef.current.clientWidth) || 336,
-    });
-  }, [scriptReady, resolvedTheme, mode, lang, handleCredential]);
+    try {
+      if (!initializedRef.current) {
+        window.google.accounts.id.initialize({
+          client_id: GOOGLE_CLIENT_ID,
+          callback: (response) => {
+            void handleCredential(response.credential);
+          },
+          use_fedcm_for_prompt: true,
+        });
+        initializedRef.current = true;
+      }
+
+      containerRef.current.innerHTML = '';
+      window.google.accounts.id.renderButton(containerRef.current, {
+        type: 'standard',
+        theme: resolvedTheme === 'dark' ? 'filled_black' : 'outline',
+        size: 'large',
+        shape: 'rectangular',
+        text: mode === 'register' ? 'signup_with' : 'signin_with',
+        logo_alignment: 'left',
+        width: Math.round(containerRef.current.clientWidth) || 336,
+      });
+    } catch {
+      // A thrown initialize()/renderButton() call would otherwise leave the
+      // skeleton stuck with no visible feedback — surface it like any other
+      // sign-in failure instead.
+      onError(label);
+    }
+  }, [scriptReady, resolvedTheme, mode, lang, handleCredential, onError, label]);
 
   useEffect(() => {
     render();
+    return () => {
+      if (retryTimeoutRef.current) clearTimeout(retryTimeoutRef.current);
+    };
   }, [render]);
 
   useEffect(() => {
